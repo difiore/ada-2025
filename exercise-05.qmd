@@ -1,0 +1,114 @@
+# Exercise 05 {.unnumbered}
+
+# Generate Sampling Distributions and CIs {.unnumbered}
+
+## Learning Objectives {.unnumbered}
+
+- Generating sampling distributions by simulation
+- Calculating standard errors
+- Plotting with {ggplot2}
+- Examining the distributions of variables
+- Bootstrapping to derive a CI
+
+### Preliminaries {.unnumbered}
+
+- Set up a new ***GitHub*** repo in your ***GitHub*** workspace named "exercise-05" and clone that down to your computer as a new ***RStudio*** project. The instructions outlined as **Method 1** in [**Module 6**](#module-06) will be helpful.
+
+## Challenge 1 {.unnumbered}
+
+### Step 1 {.unnumbered}
+- Using the {tidyverse} `read_csv()` function, load the "IMDB-movies.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/IMDB-movies.csv) as a "tibble" named **d**
+
+### Step 2 {.unnumbered}
+- Use a one-line statement to filter the dataset to include just movies from 1920 to 1979 and movies that are between 1 and 3 hours long (**runtimeMinutes** >= 60 and **runtimeMinutes** <= 180), and add a new column that codes the **startYear** into a new variable, **decade** ("20s", "30s", ..."70s"). If you do this correctly, there should be 5651 movies remaining in the dataset.
+
+> **HINT:** Use {dplyr} functions and the pipe operator!
+
+### Step 3 {.unnumbered}
+
+- Use {ggplot2} (which is part of {tidyverse}) to plot histograms of the distribution of **runtimeMinutes** for each decade.
+
+> **HINT:** Try using `facet_wrap()` to do this!
+
+### Step 4 {.unnumbered}
+
+- Use a one-line statement to calculate the population mean and population standard deviation in **runtimeMinutes** for each decade and save the results in a new dataframe called **results**.
+
+### Step 5 {.unnumbered}
+
+- Draw a single sample of 100 movies, without replacement, from each decade and calculate the single sample mean and single sample standard deviation in **runtimeMinutes** for each decades. Recall that your single sample mean for each decade is an *estimate* of the population mean for each decade.
+
+> **HINT**: The {dplyr} functions, `sample_n()` (which is being deprecated) and its replacement, `slice_sample()`, lets you randomly sample rows from tabular data the same way that `sample()` lets you sample items from a vector.
+
+### Step 6 {.unnumbered}
+
+- Calculate for each decade the standard error around your estimate of the population mean **runtimeMinutes** based on the standard deviation and sample size (n=100 movies) of your single sample.
+
+### Step 7 {.unnumbered}
+
+- Compare these estimates to the actual population mean **runtimeMinutes** for each decade and to the calculated SE in the population mean for samples of size 100 based on the population standard deviation for each decade.
+
+### Step 8 {.unnumbered}
+
+- Generate a *sampling distribution* of mean **runtimeMinutes** for each decade by [a] drawing 1000 random samples of 100 movies from each decade, without replacement, and, for each sample, [b] calculating the mean **runtimeMinutes** and the standard deviation in **runtimeMinutes** for each decade. Use either a standard `for( ){ }` loop, the `do(reps) *` formulation from {mosaic}, the `rerun()` function from {purrr}, or the `rep_sample_n()` workflow from {infer} to generate your these sampling distributions (see [**Module 16**](#module-16)).
+
+### Step 9 {.unnumbered}
+
+- Then, calculate the **mean** and the **standard deviation** of the sampling distribution of sample means for each decade (the former should be a very good estimate of the population mean, while the latter is another estimate of the standard error in our estimate of the population mean for a particular sample size) and plot a histogram of the sampling distribution for each decade. What shape does it have?
+
+### Step 10 {.unnumbered}
+
+- Finally, compare the standard error in **runtimeMinutes** for samples of size 100 from each decade [1] as estimated from your **first** sample of 100 movies, [2] as calculated from the known *population* standard deviations for each decade, and [3] as estimated from the sampling distribution of sample means for each decade.
+
+## Challenge 2 {.unnumbered}
+
+<img src="img/pvz-hand.png" align="right" width="100px"/>
+
+### Step 1 {.unnumbered}
+
+- Using the {tidyverse} `read_csv()` function, load the "zombies.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/zombies.csv) as a "tibble" named **z**. This dataset includes the first and last name and gender of the **entire** population of 1000 people who have survived the zombie apocalypse and are now ekeing out an existence somewhere on the Gulf Coast, along with several other variables (height, weight, age, number of years of education, number of zombies they have killed, and college major). [See here for info on important post-zombie apocalypse majors!](http://www.thebestschools.org/magazine/best-majors-surviving-zombie-apocalypse/)
+
+### Step 2 {.unnumbered}
+
+- Calculate the *population* mean and standard deviation for each quantitative random variable in the dataset (height, weight, age, number of zombies killed, and years of education).
+
+> **NOTE:** You will **not** want to use the built in `var()` and `sd()` commands as those are for *samples*.
+
+### Step 3 {.unnumbered}
+
+- Use {ggplot} and make boxplots of each of these variables by gender.
+
+### Step 4 {.unnumbered}
+
+- Use {ggplot} and make scatterplots of height and weight in relation to age (i.e., use age as the $x$ variable), using different colored points for males versus females. Do these variables seem to be related? In what way?
+
+### Step 5 {.unnumbered}
+
+- Using histograms and Q-Q plots, check whether each of the quantitative variables seem to be drawn from a normal distribution. Which seem to be and which do not?
+
+> **HINT:** Not all are drawn from a normal distribution! For those that are not, can you determine what common distribution they are drawn from?
+
+### Step 6 {.unnumbered}
+
+- Now use the `sample_n()` or `slice_sample()` function from {dplyr} to sample ONE subset of 50 zombie apocalypse survivors (without replacement) from this population and calculate the mean and sample standard deviation for each variable. Also estimate the standard error for each variable based on this one sample and use that to construct a theoretical 95% confidence interval for each mean. You can use either the standard normal *or* a Student's t distribution to derive the critical values needed to calculate the lower and upper limits of the CI.
+
+### Step 7 {.unnumbered}
+
+- Then draw another 199 random samples of 50 zombie apocalypse survivors out of the population and calculate the mean for each of the these samples. Together with the first sample you drew out, you now have a set of 200 means for each variable (each of which is based on 50 observations), which constitutes a sampling distribution for each variable. What are the means and standard deviations of the **sampling distribution** for each variable? How do the standard deviations of the sampling distribution for each variable compare to the standard errors estimated from your first sample of size 50?
+
+### Step 8 {.unnumbered}
+
+- Plot the sampling distributions for each variable mean. What do they look like? Are they normally distributed? What about for those variables that you concluded were not originally drawn from a normal distribution?
+
+### Step 9 {.unnumbered}
+- Construct a 95% confidence interval for each mean **directly from the sampling distribution** of sample means using the central 95% that distribution (i.e., by setting the lower and upper CI bounds to 2.5% and 97.5% of the way through that distribution).
+
+> **HINT**: You will want to use the `quantile()` function for this!
+
+How do the various 95% CIs you estimated compare to one another (i.e., the CI based on one sample and the corresponding sample standard deviation versus the CI based on simulation where you created a sampling distribution across 200 samples)?
+
+> **NOTE:** Remember, too, that the standard deviation of the sampling distribution is the standard error. You *could* use this value to derive yet another estimate for the 95% CI as the shape of the sampling distribution should be normal.
+
+### Step 10 {.unnumbered}
+
+- Finally, use bootstrapping to generate a 95% confidence interval for each variable mean **by resampling 1000 samples, with replacement, from your original sample** (i.e., by setting the lower and upper CI bounds to 2.5% and 97.5% of the way through the sampling distribution generated by bootstrapping). How does this compare to the CIs generated in Step 9?

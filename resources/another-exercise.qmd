@@ -1,0 +1,15 @@
+---
+title: "Another Exercise"
+---
+
+In the ADA datasets repository, there are two new datafiles... [data9b_w.txt](https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/data9b_m.txt) and [data9b_m.txt](https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/data9b_m.txt).
+
+Each row in both files contains, for one person (women in "data9b_w.txt", men in "data9b_m.txt9") the *number of steps* that this person took on a particular day (**steps**) and their body mass index (**bmi**).
+
+Assume that both traits are normally distributed for both men and women. Men and women are presumed to be different in aspects of their physiology that could influence how their bodies use energy. Thus, it seems plausible that they may differ in how **bmi** varies in relationship to the exercise they do. Examine the dataset and the data to evaluate the following predictions:
+
+- There is a difference in the mean number of steps taken daily between women and men.
+- The correlation coefficient between **steps** and **bmi** is negative for women.
+- The correlation coefficient between **steps** and **bmi** is positive for men.
+
+> **HINT**: These are tab-separated value files, thus you will want to use the `read_tsv()` function rather than `read_csv()` to load them.

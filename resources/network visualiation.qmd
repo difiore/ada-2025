@@ -1,0 +1,421 @@
+---
+title: "Module 23"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    keep_md: true
+editor_options: 
+  chunk_output_type: console
+---
+
+``` {r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  fig.path = "img/",
+  warning = FALSE,
+  comment = "##",
+  prompt = FALSE,
+  tidy = TRUE,
+  tidy.opts = list(width.cutoff = 75)
+  )
+```
+
+# Network Visualization and Statistics
+
+### Nitin Verma and Nandini Sharma
+
+	[with modifications from Anthony Di Fiore]
+
+## Preliminaries
+
+Load the following packages: {curl}, {dplyr}, {visNetwork}, {igraph}, {stringr}
+
+## Introduction to Graph Thinking
+
+If we look around, we will find that almost everything is part of a **network** and that we do not look closely enough to appreciate that. Especially given the social media mania that we are all part of today, it does not hurt to know a better way to see what surrounds us and to be more aware and informed about our networks. Fortuantely, it is really simple to do this in ***R***. In this module we will explain some of the graph/network visualization tools to interact with graph visualizations and study some network statistics.
+
+## Basic Graph Visualization in ***R***
+### Reading Data
+
+For the purposes of this document, we downloaded a Twitter dataset from the web and will use it for demonstrating the graph visualization capabilities of ***R***.
+
+But before we go ahead and deal with the real world data, we will demonstrate ***R***'s graphing powers on dummy and small datasets. 
+
+
+### Preparing Nodes and Edges
+
+We are exploring the package {visNetwork}, which is based on the visualization java script library ***vis.js***, to generate some interesting interactive graph visuals. But before that, we need to generate some data that we will feed to this pacakage.
+
+The package {visNetwork} requires data representing both **nodes** and **edges** to be input as separate dataframes. Let's create a dummy dataset split across two dataframes. Just as a primer, we would like to highlight what nodes and edges mean in relation to a graph. 
+
+**Nodes** are entities and **edges** are relationships between those entities. Now these nodes can be, literally, anything, e.g., humans, planets, ants, flora, emotions, tangible things, intangible things, etc. Nodes are like nouns! Edges on the other hand are relationships between those nouns.
+
+``` {r}
+# Generating a set of 10 nodes
+nodes <- data.frame(id = 1:10)
+# Assigning random relationship between those nodes. 
+# e.g. edges depict that there is a "directed" relationship from node 2 to node 1, from node 4 to node 2 and so no. This relationship in context of twitter can be "follws" i.e. 2 follows 1, 4 follows 2 and so on. 
+edges <- data.frame(from = c(2,4,2,5,1,6,7,8,9,4,7), to = c(1,2,9,4,6,1,2,7,10,3,1))
+```
+
+### Visualising Network Data
+As seen below, we provide the nodes and edges to the `visNetwork()` function, and also specify the size of the graphic that it will output.
+
+``` {r}
+library(visNetwork, quietly = TRUE)
+visNetwork(nodes, edges, height = "500px", width = "100%")
+```
+
+### Adding Directionality to Edges
+But the visual we see above does not take into account the directions of the edges.
+
+The function `visEdges()` is used here to add arrows (i.e., direction info) to all the edges.
+
+``` {r}
+visNetwork(nodes, edges, width = "100%") %>% 
+  visEdges(shadow = TRUE, arrows = "to") %>%
+  visLayout(randomSeed = 12) # to have always the same network         
+```
+
+The call to `visLayout()` with a particular randomSeed forces the graph to be displayed in the same way each time. The value assigned to randomSeed is arbitrary, but needs to be specified as a fixed value to obtain a fixed graph layout.
+
+### Adding Node Labels and Tool Tips
+To make the visualization more informative, we can add more information about the nodes i.e. label/title etc.
+
+The function `visNodes()` is used here to tailor the look of each node on the graph.
+
+Prior to that, we modify the `nodes` dataframe, and create columns for `label`, and `title` which contain the name of each node.
+
+``` {r}
+nodes<-data.frame(id=nodes$id,
+           label = paste("Node", 1:nrow(nodes)), 
+           title = paste0("<p><br>Node <b>", 1:nrow(nodes),"</b></p>"))
+
+visNetwork(nodes, edges, width = "100%") %>% 
+  visNodes(shape = "circle" ) %>%
+  visLayout(randomSeed = 12) # to have always the same network 
+```
+
+### Adding Edge Labels
+This section adds labels to the edges, via the function `visEdges()`
+
+``` {r}
+visNetwork(nodes, edges, width = "100%") %>% 
+  visNodes(shape = "circle" ) %>%
+  visEdges(arrows = "to", label = "follows") %>%
+  visLayout(randomSeed = 12) # to have always the same network 
+```
+
+### Adding Groups and Legends
+
+Lets say you have a huge graph with many different nodes but you only want to visualize a subset of those nodes, i.e. you want to look at one particular group at a time. For example, suppose there is a web of your social network data on Twitter that you have visualized but you want to look at nodes by their follower counts, i.e., we want to make groups of node with a certain number of follower counts. So here you need to make groups of nodes. The following piece of code make such groups and visualizes them separately.
+
+``` {r}
+nodes <- data.frame(id = nodes$id, 
+                    label = paste("Node", 1:nrow(nodes)), 
+                    title = paste0("<p><br>Node <b>", 1:nrow(nodes),"</b></p>"),
+                    group = rep(c("B", "A"),nrow(nodes)/2))
+visNetwork(nodes, edges, width = "100%") %>%
+  visNodes(shape = "circle" ) %>%
+  visEdges(arrows = "to", label = "follows") %>%
+  visGroups(groupname = "A", color = "grey") %>%
+  visGroups(groupname = "B", color = "lightblue") %>%
+  visLegend(width = 0.1, position = "right", main = "Group") %>%
+  visLayout(randomSeed = 12) # to have always the same network 
+```
+
+### Highlight Nearest
+This section demonstrates the `visOptions()` function that is used to tailor the final output and also to add some more interactivity. In this case, with the `highlightNearest` parameter set, we output a graph where hovering over a node *dims* the nodes that are not connected to itself. This is a very useful feature that helps highlight only the most adjacent nodes and edges of a web while hiding the rest of the network.
+
+``` {r}
+visNetwork(nodes, edges, width = "100%") %>%
+  visNodes(shape = "circle" ) %>%
+  visEdges(arrows = "to", label = "follows") %>%
+  visGroups(groupname = "A", color = "grey") %>%
+  visGroups(groupname = "B", color = "lightblue") %>%
+  visLegend(width = 0.1, position = "right", main = "Group") %>%
+  visOptions(highlightNearest = list(enabled = T, degree = 2, hover = T)) %>%
+  visLayout(randomSeed = 12) # to have always the same network 
+```
+
+### Select NodeID
+Again, `visOptions()` is used to add more interactivity. The `nodeIdSelection` parameter when set to `TRUE` displays a drop-down menu wherein one can select which node to investigate or focus on.
+
+``` {r}
+visNetwork(nodes, edges, width = "100%") %>%
+  visNodes(shape = "circle" ) %>%
+  visEdges(arrows = "to", label = "follows") %>%
+  visGroups(groupname = "A", color = "grey") %>%
+  visGroups(groupname = "B", color = "lightblue") %>%
+  visLegend(width = 0.1, position = "right", main = "Group") %>%
+  visOptions(highlightNearest = list(enabled = T, degree = 2, hover = T),
+             nodesIdSelection = TRUE) %>%
+  visLayout(randomSeed = 12) # to have always the same network 
+```
+
+### Data Manipulation
+More interactivity via `visOptions()`! The `manipulation` parameter enables one to add and edit nodes/edges 'on the go'.
+
+``` {r}
+visNetwork(nodes, edges, width = "100%") %>%
+  visNodes(shape = "circle" ) %>%
+  visEdges(arrows = "to", label = "follows") %>%
+  visGroups(groupname = "A", color = "grey") %>%
+  visGroups(groupname = "B", color = "lightblue") %>%
+  visLegend(width = 0.1, position = "right", main = "Group") %>%
+  visOptions(highlightNearest = list(enabled = T, degree = 2, hover = T),
+             nodesIdSelection = TRUE) %>%
+  visOptions(manipulation = TRUE) %>%
+  visLayout(randomSeed = 12) # to have always the same network 
+```
+## Twitter DataSet
+Now that we've seen some of the capabilities of the {visNetwork} package, let's put its capabilities to use for a real dataset of Twitter data. We downloaded this dataset from Stanford University's [Social Network Analysis Project (SNAP)](http://snap.stanford.edu/index.html) website. The dataset we used can be downloaded from [here](http://snap.stanford.edu/data/egonets-Twitter.html) by choosing the ["twitter.tar.gz"](http://snap.stanford.edu/data/twitter.tar.gz) file from the download section. After uncompressing the tar.gz file, we used the file `22915745.edges` for the following analysis.
+
+``` {r}
+library(curl)
+f <- curl("https://raw.githubusercontent.com/difiore/ADA2016/master/module-23-data/22915745.edges")
+d <- read.table(f, header=FALSE, sep="")
+head(d)
+edges <- data.frame(from=as.vector(factor(d$V1)), to=as.vector(factor(d$V2)))
+head(edges)
+# NOTE: The data downloaded from the SNAP website just had Twitter IDs of users. The following code fetches the screen names, and status counts of those Twitter IDs and then assigns those status counts to four different categories/groups based on their status counts. All Twitter IDs that were not found were assigned a screen name / status count  'NA'.
+# nodes <-c(d$V1,d$V2)
+# head(nodes)
+# nodes<-as.vector(unique(nodes))
+# nodes<-data.frame(id = nodes)
+# head(nodes)
+# nrow(nodes)
+# nrow(edges)
+# 
+# library(twitteR)
+# 
+# consumer_key <- ""
+# consumer_secret <- ""
+# access_token <- ""
+# access_secret <- ""
+# setup_twitter_oauth(consumer_key, consumer_secret, access_token, access_secret)
+# users<-NULL
+# statCount<-NULL
+# group<-NULL
+# for (i in c(1:nrow(nodes))){
+#   tryCatch(
+#     {users[i]<-getUser(nodes[i,"id"])$screenName},
+#     warning = function(w) {},
+#     error = function(e) {users[i]=NA},
+#     finally = {}
+#   )
+#   }
+# length(users)
+# nodes["name"]<-users
+# for (i in c(1:nrow(nodes))){
+#   tryCatch(
+#     {statCount[i]<-getUser(nodes[i,"id"])$getStatusesCount()},
+#            warning = function(w) {},
+#            error = function(e) {statCount[i]=NA},
+#            finally = {}
+#   )
+#   if(is.na(statCount[i])) {group[i] = "NA"}
+#   else if (statCount[i]<5000){group[i] = "<5K"}
+#   else if (statCount[i]<10000) {group[i] = "<10K"}
+#   else if (statCount[i]<20000) {group[i] = "<20K"}
+#   else {group[i] = ">20K"}
+#   }
+# nodes["statcount"]<-statCount
+# nodes["group"]<-group
+# nodes["label"]<-nodes$name
+# write.table(nodes, file = "users.csv", sep = ",")
+# u <- read.csv("users.csv",header=TRUE, stringsAsFactors=FALSE)
+f <- curl("https://raw.githubusercontent.com/difiore/ADA2016/master/module-23-data/users.csv")
+u <- read.csv(f,header=TRUE, stringsAsFactors=FALSE)
+nodes <- as.data.frame(u)
+head(nodes)
+```
+### Select NodeID
+
+``` {r}
+library(stringr)
+library(dplyr)
+library(visNetwork)
+nodes["label"]<-substr(nodes$name,1,10)
+nodes["title"]<-nodes$name
+
+visNetwork(nodes, edges[c(1:300),], width = "100%") %>%
+  visNodes(shape = "circle" ) %>%
+  visEdges(arrows = "to", label = "follows") %>%
+  visGroups(groupname = "<5K", color = "pink") %>%
+  visGroups(groupname = "<10K", color = "grey") %>%
+  visGroups(groupname = "<20K", color = "orange") %>%
+  visGroups(groupname = ">20K", color = "lightblue") %>%
+  visGroups(groupname = "NA", color = "turquoise") %>%
+  visLegend(width = 0.1, position = "left", main = "Group") %>%
+  visOptions(highlightNearest = TRUE,
+             nodesIdSelection = TRUE,
+             selectedBy = "group") %>%
+  visLayout(randomSeed = 12) # to have always the same network 
+```
+
+### Layout
+
+``` {r message=FALSE}
+library(igraph)
+lnodes <- data.frame(label = c("<5K", "<10K", "<20K",">20K","NA"),
+                     color = c("pink","grey","orange","lightblue","turquoise"),
+                     shape = "ellipse")
+
+# edges data.frame for legend
+ledges <- data.frame(label = "follows", arrows = "to")
+ 
+visNetwork(nodes, edges[c(1:50),], width = "100%") %>%
+  visNodes(shape = "circle" ) %>%
+  visEdges(arrows = "to", label = "follows") %>%
+  visGroups(groupname = "<5K", color = "pink") %>%
+  visGroups(groupname = "<10K", color = "grey") %>%
+  visGroups(groupname = "<20K", color = "orange") %>%
+  visGroups(groupname = ">20K", color = "lightblue") %>%
+  visGroups(groupname = "NA", color = "turquoise") %>%
+  visLegend(width = 0.1, position = "left", addEdges = ledges, addNodes = lnodes, 
+            useGroups = FALSE, main="statusCount") %>%
+  visIgraphLayout(layout = "layout_in_circle") %>%
+  visNodes(size = 20) %>%
+  visOptions(highlightNearest = TRUE,
+             nodesIdSelection = TRUE,
+             selectedBy = "group") %>%
+  visLayout(randomSeed = 12) # to have always the same network 
+```
+
+## Graph Analysis: Descriptive Statistics
+Let's create a dummy network dataset for this section via the `sample_gnp()` function. The first argument specifies the number of nodes in the network, and the second argument specifies the probability of there being an edge connecting any two nodes.
+
+``` {r}
+grph <- sample_gnp(10, 7/10, directed = TRUE)
+```
+
+Let's visualize what this network looks like.
+
+``` {r}
+grph.edges <- as_data_frame(grph, what = c("edges"))
+grph.vertices <- data.frame(id = unique(grph.edges[, c("from")]))
+visNetwork(nodes=grph.vertices, edges=grph.edges, width="100%") %>% visNodes(shape="dot", size=10) %>% visEdges(arrows="to")
+```
+
+### Degree
+
+#### In-degree
+The "in degree" of a node (or vertex) represents the number of edges coming "in" to it.
+
+``` {r}
+in.degrees <- degree(grph, v=V(grph), mode=c("in")) #gets the in-degree for all vertices in the graph
+
+head(in.degrees)
+range(in.degrees)
+hist(in.degrees)
+```
+
+#### Out-degree
+Similarly, the "out degree" is defined as the number of edges going out of a node/vertex.
+
+``` {r}
+out.degrees <- degree(grph, v=V(grph), mode=c("out")) #gets the in-degree for all vertices in the graph
+
+head(out.degrees)
+range(out.degrees)
+hist(out.degrees)
+```
+
+### Centrality
+Measures of centrality of a node/vertex give us an idea of the importance of the vertex in the graph. We may use it to determine, for example, which gene is the most vital to the production of a specific protein in a regulatory network of genes.
+
+In a similar vein, centrality could also be measured for edges. 
+
+Here are a few measures of centrality.
+
+#### Node/Vertex Closeness
+Closeness attempts to provide a measure of how close a node/vertex is to all the other nodes/vertices, in order to determine its centrality.
+
+``` {r}
+grph.closeness <- closeness(grph)
+head(grph.closeness)
+range(grph.closeness)
+hist(grph.closeness)
+```
+
+Basically, the closeness of a node/vertex varies inversely with its total distance from all other (connected) nodes/vertices
+
+#### Node/Vertex Betweenness
+Betweenness measures the extent to which a node/vertex is 'between' other nodes. In exact terms, the betweenness of a node/vertex is defined as the ratio of all shortest paths (between other nodes/vertices) that pass through it, and all the shortest paths betwen nodes/vertices (whether they pass through the node/vertex of interest or not).
+
+``` {r}
+grph.betweenness <- betweenness(grph, v=V(grph), directed = TRUE)
+head(grph.betweenness)
+range(grph.betweenness)
+hist(grph.betweenness)
+```
+
+#### Edge Betweenness
+Similar to nodes/vertices, edges too can be 'between' two nodes. A good example of this could be a toll-road (edge) between two major cities (nodes/vertices) that is also used by people whose origin and destination lie beyond the two cities connected by the toll road.
+
+``` {r}
+grph.eb <- edge.betweenness(grph, e=E(grph), directed = TRUE)
+head(grph.eb)
+range(grph.eb)
+hist(grph.eb)
+```
+
+### Network Cohesion
+Network Cohesion is defined as the extent to which the subsets of nodes/vertices are stuck together. Such a measure could help answer questions about what collections or clusters in a network could be 'working together'.
+
+#### Cliques
+Cohesion could be present at the subgraph level within a network. Closely 'cooperating' nodes/vertices in a given region of a network could form cliques. Again the {igraph} package helps us determine the cliques within a network.
+
+``` {r}
+grph.cliques <- cliques(grph)
+length(grph.cliques)
+```
+
+As we see, even for a directed graph with 10 vertices, we have `r length(grph.cliques)` cliques. (This will vary with each presentation of this document, since the original `grph` object will be different each time).
+
+We can tabulate the various cliques by clique size and the number of cliques with that many members.
+
+``` {r}
+table(sapply(grph.cliques, length))
+```
+
+The top row above is the clique size, and the bottom row is number of cliques of that size.
+
+#### Density
+The density of a graph is defined as the ratio of the actual number of edges and the total number of edges between nodes/vertices there could have been.
+
+``` {r}
+density <- edge_density(grph)
+```
+
+#### Coefficient of Clustering/Transitivity
+The *Coefficient of Clustering/Transitivity* is a measure of global clustering that gives us the relative frequency with which connected *triples* (groups of 3 nodes/vertices connected by edges) tend to form closed triangles.
+
+``` {r}
+grph.trans <- transitivity(grph)
+grph.trans
+```
+#### Reciprocity
+Reciprocity is a characteristic specific to directed graphs, and provides a measure of how frequently do nodes/vertices *reciprocate* an incoming edge with an outgoing one to the same node/vertex.
+
+``` {r}
+grph.reciproc <- reciprocity(grph)
+grph.reciproc
+```
+
+## References:
+
+**Graph Statistics**
+
+Book: "Statistical Analysis of Network Data with R", by Eric D. Kolaczyk, Gábor Csárdi 
+
+**R Documentation for visnetwork**
+
+https://datastorm-open.github.io/visNetwork/legend.html
+
+**Visjs javascript library documentation - controlling physics**
+
+http://visjs.org/examples/network/physics/physicsConfiguration.html

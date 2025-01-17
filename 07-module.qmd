@@ -1,0 +1,661 @@
+# Additional Data Structures in ***R*** {#module-07}
+
+## Objectives
+
+> The objective of this module is to introduce additional fundamental data structures in ***R*** (matrices, arrays, lists, data frames, and the like) and to learn how to extract, filter, and subset data from them.
+
+## Preliminaries
+
+- GO TO: <https://github.com/difiore/ada-2024-datasets>, select the "random-people.csv" file, then press the "Download" button and save the file to your local computer (e.g., on your desktop).
+
+```{r}
+#| echo: false
+#| out-width: "80%"
+knitr::include_graphics("img/download-file.png")
+```
+
+Alternatively, you can press the "Raw" button, highlight, and copy the text to a text editor, and save it. ***RStudio***, as we have seen, has a powerful built-in text editor. There are also a number of other excellent text editors that you download for FREE (e.g., [***BBEdit***](https://www.barebones.com/products/bbedit/) for MacOS, [***Notepad++***](https://notepad-plus-plus.org/) for Windows, or [***Visual Studio Code***](https://code.visualstudio.com/) for either operating system).
+- Install and load these packages in ***R***: [{tidyverse}](https://cran.r-project.org/web/packages/tidyverse/tidyverse.pdf) (which includes {ggplot2}, {dplyr}, {readr}, {tibble}, and {tidyr}, plus others, so they do not need to be installed separately) and [{data.table}](https://cran.r-project.org/web/packages/data.table/data.table.pdf)
+
+```{r}
+#| include: false
+#| message: false
+library(tidyverse)
+library(data.table)
+```
+
+## Matrices and Arrays
+
+So far, we have seen several way of creating **vectors**, which are the most fundamental data structures in ***R***. Today, we will explore and learn how to manipulate other fundamental data structures, including **matrices**, **arrays**, **lists**, and **data frames**, as well as variants on data frames (e.g., **data tables** and **"tibbles"**.)
+
+> **NOTE:** The kind of vectors we have been talking about so far are also sometimes referred to as *atomic vectors*, and all of the elements of a vector have to have the same data type. We can think of **lists** (see below) as a different kind of vector, where the elements can have different types, but I prefer to consider lists as a different kind of data structure. Wickham (2019) *Advanced R, Second Edition* discusses the nuances of various ***R*** data structures in more detail.
+
+Matrices and arrays are extensions of the basic vector data structure, and like vectors, all of the elements in an array or matrix have to be of the same atomic type.
+
+We can think of a **matrix** as a *two-dimensional* structure consisting of several atomic vectors stored together, but, more accurately, a matrix is essentially a single atomic vector that is split either into multiple columns or multiple rows of the same length. Matrices are useful constructs for performing many mathematical and statistical operations. Again, like 1-dimensional atomic vectors, matrices can only store data of one atomic class (e.g., *numerical* or *character*). Matrices are created using the `matrix()` function.
+
+```{r}
+m <- matrix(data = c(1, 2, 3, 4),
+            nrow = 2,
+            ncol = 2)
+m
+```
+
+Matrices are typically filled column-wise, with the argument, `byrow=`, set to FALSE by default (note that FALSE is not in quotation marks). This means that the first column of the matrix will be filled first, the second column second, etc.
+
+```{r}
+m <- matrix(
+  data = c(1, 2, 3, 4, 5, 6),
+  nrow = 2,
+  ncol = 3,
+  byrow = FALSE
+)
+m
+```
+
+This pattern can be changed by specifying the `byrow=` argument as TRUE.
+
+```{r}
+m <- matrix(
+  data = c(1, 2, 3, 4, 5, 6),
+  nrow = 2,
+  ncol = 3,
+  byrow = TRUE
+)
+m
+```
+
+You can also create matrices by *binding* vectors of the same length together either row-wise (with the function `rbind()`) or column-wise (with the function `cbind()`).
+
+```{r}
+v1 <- c(1, 2, 3, 4)
+v2 <- c(6, 7, 8, 9)
+m1 <- rbind(v1, v2)
+m1
+```
+
+```{r}
+m2 <- cbind(v1, v2)
+m2
+```
+
+Standard metadata about a matrix can be extracted using the `class()`, `dim()`, `names()`, `rownames()`, `colnames()` and other commands. The `dim()` command returns an vector containing the number of rows at index position 1 and the number of columns at index position 2.
+
+```{r}
+class(m1)
+class(m2)
+```
+
+```{r}
+dim(m1)
+dim(m2)
+```
+
+```{r}
+colnames(m1)
+rownames(m1)
+```
+
+> **NOTE:** In this example, `colnames` are not defined for **m1** since `rbind()` was used to create the matrix.
+
+```{r}
+colnames(m2)
+rownames(m2)
+```
+
+> **NOTE:** Similarly, in this example, `rownames` are not defined for **m2**, since `cbind()` was used to create the matrix.
+
+As we saw with vectors, the *structure* (`str()`) and *glimpse* (`dplyr::glimpse()`) commands can be applied to any data structure to provide details about that object. These are incredibly useful functions that you will find yourself using over and over again.
+
+```{r}
+str(m1)
+str(m2)
+```
+
+The *attributes* (`attributes()`) command can be used to list the attributes of a data structure.
+
+```{r}
+attributes(m1)
+attr(m1,which="dim")
+attr(m1,which="dimnames")[[1]]
+attr(m1,which="dimnames")[[2]]
+```
+
+An **array** is a more general atomic data structure, of which a vector (with 1 implicit dimension) and a matrix (with 2 defined dimensions) are but examples. Arrays can include additional dimensions, but (like vectors and matrices) they can only include elements that are all of the same atomic data class (e.g., `numeric`, `character`). The example below shows the construction of a 3 dimensional array with 5 rows, 6 columns, and 3 "levels"). Visualizing higher and higher dimension arrays, obviously, becomes challenging!
+
+```{r}
+a <- array(data=1:90, dim=c(5, 6, 3))
+a
+```
+
+### Subsetting {.unnumbered}
+
+You can reference or extract select elements from vectors, matrices, and arrays by *subsetting* them using their index position(s) in what is knows as **bracket notation** (`[ ]`). For vectors, you would specify an index value in one dimension. For matrices, you would give the index values in two dimensions. For arrays generally, you would give index values for each dimension in the array.
+
+For example, suppose you have the following vector:
+
+```{r}
+v <- 1:100
+v
+```
+
+You can select the first 15 elements using bracket notation as follows:
+
+```{r}
+v[1:15]
+```
+
+You can also supply a vector of index values as the argument to `[ ]` to use for subsetting:
+
+```{r}
+v[c(2, 4, 6, 8, 10)]
+```
+
+Similarly, you can also use a function or a calculation to subset a vector. What does the following return?
+
+```{r}
+v <- 101:200
+v[seq(from = 1, to = 100, by = 2)]
+```
+
+As an example for a matrix, suppose you have the following:
+
+```{r}
+m <- matrix(data=1:80, nrow=8, ncol=10, byrow=FALSE)
+m
+```
+
+You can extract the element in row 4, column 5 and assign it to a new variable, **x**, as follows:
+
+```{r}
+x <- m[4, 5]
+x
+```
+
+You can also extract an entire row or an entire column (or set of rows or set of columns) from a matrix by specifying the desired row or column number(s) and leaving the other value blank.
+
+```{r}
+x <- m[4, ] # extracts 4th row
+x
+```
+
+### CHALLENGE {.unnumbered}
+
+- Given the matrix, **m**, above, extract the 2nd, 3rd, and 6th columns and assign them to the variable **x**
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+#| attr.output: '.details summary="Show Output"'
+x <- m[, c(2, 3, 6)]
+x
+```
+
+- Given the matrix, **m**, above, extract the 6th to 8th row and assign them to the variable **x**
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+#| attr.output: '.details summary="Show Output"'
+x <- m[6:8, ]
+x
+```
+
+- Given the matrix, **m**, above, extract the elements from row 2, column 2 to row 6, column 9 and assign them to the variable **x**
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+#| attr.output: '.details summary="Show Output"'
+x <- m[2:6, 2:9]
+x
+```
+
+### Overwriting Elements {.unnumbered}
+
+You can replace elements in a vector or matrix, or even entire rows or columns, by identifying the elements to be replaced and then assigning them new values.
+
+Starting with the matrix, **m**, defined above, explore what will be the effects of operations below. Pay careful attention to row and column index values, vector recycling, and automated conversion/recasting among data classes.
+
+```{r}
+m[7, 1] <- 564
+m[ ,8] <- 2
+m[2:5, 4:8] <- 1
+m[2:5, 4:8] <- c(20, 19, 18, 17)
+m[2:5, 4:8] <- matrix(
+  data = c(20:1),
+  nrow = 4,
+  ncol = 5,
+  byrow = TRUE
+)
+m[ ,8] <- c("a", "b")
+```
+
+## Lists and Data Frames
+
+Unlike vectors, matrices, and arrays, two other data structures - **lists** and **data frames** - can be used to group together a heterogeneous mix of ***R*** structures and objects. A single list, for example, could contain a matrix, vector of character strings, vector of factors, an array, even another list.
+
+**Lists** are created using the `list()` function where the elements to add to the list are given as arguments to the function, separated by commas. Type in the following example:
+
+```{r}
+s <- c("this", "is", "a", "vector", "of", "strings")
+# this is a vector of character strings
+m <- matrix(data=1:40, nrow=5, ncol=8) # this is a matrix
+b <- FALSE # this is a boolean variable
+l <- list(s, m, b)
+l
+```
+
+### Subsetting Lists {.unnumbered}
+
+You can reference or extract elements from a list similarly to how you would from other data structure, except that you use **double brackets** (`[[ ]]`) to reference a single element in the list.
+
+```{r}
+l[[2]]
+```
+
+An extension of this notation can be used to access elements contained *within* an element in the list. For example:
+
+```{r}
+l[[2]][2, 6]
+l[[2]][2, ]
+l[[2]][ ,6]
+```
+
+To reference or extract multiple elements from a list, you would use **single bracket** (`[ ]`) notation, which would itself return a list. This is called "list slicing".
+
+```{r}
+l[2:3]
+```
+
+```{r}
+l[c(1,3)]
+```
+
+Using `class()` and `str()` (or `dplyr::glimpse()`) provides details about the our list and its three elements:
+
+```{r}
+class(l)
+str(l)
+dplyr::glimpse(l)
+```
+
+You can *name* the elements in a list using the `names()` function, which adds a name attribute to each list item.
+
+```{r}
+names(l) <- c("string", "matrix", "logical")
+names(l)
+```
+
+You can also use the name of an item in the list to refer to it using the shortcut `$` notation. This is the equivalent of using `[[ ]]` with either the column number or the name of the column in quotation marks as the argument inside of the double bracket.
+
+```{r}
+# all of the following are equivalent!
+l$string
+l[[1]]
+l[["string"]]
+```
+
+```{r}
+# all of the following are equivalent
+l$matrix[3, 5]
+l[[2]][3, 5]
+l[["matrix"]][3, 5]
+```
+
+The **data frame** is the perhaps the most useful (and most familiar) data structure that we can operate with in ***R*** as it most closely aligns with how we tend to represent tabular data, with rows as *cases* or *observations* and columns as *variables* describing those observations (e.g., a measurement of a particular type). Variables tend to be measured using the same units and thus fall into the same data class and can be thought of as analogous to vectors, so a data frame is essentially a list of atomic vectors that all have the same length.
+
+The `data.frame()` command can be used to create data frames from scratch.
+
+```{r}
+df <-
+  data.frame(
+    firstName = c("Rick", "Negan", "Dwight", "Maggie", "Michonne"),
+    community = c("Alexandria", "Saviors", "Saviors", "Hiltop", "Alexandria"),
+    sex = c("M", "M", "M", "F", "F"),
+    age = c(42, 40, 33, 28, 31)
+  )
+df
+```
+
+More commonly we read tabular data into ***R*** from some external data source (see [**Module 08**](#module-08), which typically results in the table being represented as a data frame. The following code, for example, will read from the file "random-people.csv" stored in a folder called "data" (a `data/` directory) located inside a user's working directory.
+
+```{r}
+df <-
+  read.csv(
+    file = "data/random-people.csv",
+    sep = ",",
+    header = TRUE,
+    stringsAsFactors = FALSE
+  )
+# only print select columns of this data frame
+# head() means we will also only print the first several rows
+head(df[, c(1, 3, 4, 11, 12)])
+```
+
+> **NOTE:** To run the example code above, you may need to replace the string in `file="<string>"` with the path to where you stored the file on your local computer.
+
+```{r}
+str(df)
+dplyr::glimpse(df)
+```
+
+As for other data structures, you can select and subset data frames using **single bracket notation** (`[ ]`). You can also select named columns from a data frame using the `$` operator or the equivalent **double bracket notation** (`[[ ]]`).
+
+```{r}
+# single bracket notation
+df[, 4]
+str(df[, 4])
+# returns the vector of data stored in column 4
+```
+
+The following are all equivalent...
+
+```{r}
+# using the $ operator with the column name
+df$name.last
+str(df$name.last)
+# returns the vector of data stored in column `name.last`
+```
+
+```{r}
+# using double bracket notation and a column index
+df[[4]]
+str(df[[4]])
+# returns the vector of data stored in column 4
+```
+
+```{r}
+# using double bracket notation with the column name
+df[["name.last"]]
+str(df[["name.last"]])
+# returns the vector of data stored in column `name.last`
+```
+
+Note that the following return data structures that are *not quite the same* as those returned above. Instead, these return **data frames** rather than **vectors**!
+
+```{r}
+# using single bracket notation with a column index and no row index
+head(df[4])
+str(df[4])
+# returns a data frame of the data from column 4
+```
+
+```{r}
+# using single bracket notation with a column name
+head(df["name.last"])
+str(df["name.last"])
+# returns a data frame of the data from column `name.last`
+```
+
+As with matrixes, you can add rows (additional cases) or columns (additional variables) to a data frame using `rbind()` and `cbind()`.
+
+```{r}
+df <- cbind(df, id=c(1:20))
+df <- cbind(df, school=c("UT", "UT", "A&M", "A&M", "UT", "Rice", "Texas Tech", "UT", "UT", "Texas State", "A&M", "UT", "Rice", "UT", "A&M", "Texas Tech", "A&M", "UT", "Texas State", "A&M"))
+head(df)
+```
+
+Alternatively, you can extend a data frame by adding a new variable directly using the `$` operator, like this:
+
+```{r}
+df$school <- c("UT", "UT", "A&M", "A&M", "UT", "Rice", "Texas Tech", "UT", "UT", "Texas State", "A&M", "UT", "Rice", "UT", "A&M", "Texas Tech", "A&M", "UT", "Texas State", "A&M")
+head(df)
+```
+
+Using the `[[ ]]` operator with a new variable name in quotation marks works, too:
+
+```{r}
+df[["school"]] <- c("UT", "UT", "A&M", "A&M", "UT", "Rice", "Texas Tech", "UT", "UT", "Texas State", "A&M", "UT", "Rice", "UT", "A&M", "Texas Tech", "A&M", "UT",  "Texas State", "A&M")
+head(df)
+```
+
+> **NOTE:** In the above examples, `cbind()` results in **school** being added as a *factor* while using the **\$** operator results in **school** being added as a *character* vector. You can see this by using the `str()` command.
+
+A *factor* is another atomic data class for ***R*** for dealing efficiently with nominal variables, usually character strings. Internally, ***R*** assigns integer values to each unique string (e.g., 1 for "female", 2 for "male", etc.).
+
+### Filtering Rows of a Data Frame {.unnumbered}
+
+An expression that evaluates to a logical vector also be used to subset data frames. Here, we filter the data frame for only those rows where the variable **school** is "UT".
+
+```{r}
+new_df <- df[df$school == "UT", ]
+new_df
+```
+
+In this case, ***R*** evaluates the expression `df$school == "UT"` and returns a logical vector equal in length to the number of rows in **df**.
+
+```{r}
+df$school == "UT"
+```
+
+It then subsets the original **df** based on that vector, returning only rows that evaluate to "TRUE".
+
+The Boolean operators `&` (for "AND") and `|` (for "OR") can be used to create more complex filtering criteria. Here, we filter the data frame for only those rows where the variable **school** is "UT" *AND* the variable **gender** is "female".
+
+```{r}
+new_df <- df[df$school == "UT" & df$gender == "female", ]
+new_df
+```
+
+Here, we filter the data frame for only rows where either the **school** is "UT" *OR* the variable **gender** is "female", using the `|` operator. We also select only the columns **gender**, **name.first**, and **name.last** by passing a vector to the second argument of the `[ ]` function.
+
+```{r}
+new_df <- df[df$school == "UT" | df$gender == "female", c("gender", "name.first", "name.last")]
+new_df
+```
+
+### Selecting Columns of a Data Frame {.unnumbered}
+
+We can also select to only return particular columns when we filter. Here, we return only the columns **name.last**, **name.first**, and **school**.
+
+```{r}
+new_df <- df[df$school == "UT", c("name.last", "name.first", "school")]
+new_df
+```
+
+Here, we return all rows from the data frame, but only the "name.last", "name.first", and "school" columns.
+
+```{r}
+new_df <- df[ , c("name.last", "name.first", "school")]
+new_df
+```
+
+We can also refer to columns by their positions and return them in a select order, thereby restructuring the data frame. Here, we return all rows from the data frame, but include only columns 1, 3, and 4, flipping the order of the latter two columns:
+
+```{r}
+new_df <- df[ , c(1, 4, 3)]
+new_df
+```
+
+We can use a minus sign `-` in front of a vector of indices to instead indicate columns we do not want to return:
+
+```{r}
+new_df <- df[ , -c(1, 2, 5:18)]
+new_df
+```
+
+## Factors
+
+We were introduced to the *factor* data class above. Again, factors are numeric codes that ***R*** can use internally that correspond to character value "levels".
+
+When we load in data from an external source (as we do in [**Module 08**](#module-08)), {base} ***R*** tends to import character string data as factors, assigning to each unique string to an integer numeric code and assigning the string as a "label" for that code. Using factors can make some code run much more quickly (e.g., ANOVA, ANCOVA, and other forms of regression using categorical variables).
+
+## Variable Conversion and Coercion
+
+You can convert *factor* to *character* data (and vice versa) using the `as.character()` or `as.factor()` commands. You can also convert/coerce any vector to a different class using similar constructs (e.g., `as.numeric()`), although not all such conversions are really meaningful. Converting *factor* data to *numeric* results in the the converted data having the value of ***R***'s internal numeric code for the factor level, while converting *character* data to *numeric* results in the data being coerced into the special data value of `NA` (see below) for missing data.
+
+## Special Data Values
+
+Finally, ***R*** has three special data values that it uses in a variety of situations.
+
+- `NA` (for **not available**) is used for missing data. Many statistical functions offer the possibility to include as an argument `na.rm=TRUE` ("remove NAs") so that `NA`s are excluded from a calculation.
+- `Inf` (and `-Inf`) is used when the result of a numerical calculation is too extreme for ***R*** to express
+- `NaN` (for **not a number**) is used when ***R*** cannot express the results of a calculation , e.g., when you try to take the square root of a negative number
+
+### CHALLENGE {.unnumbered}
+
+- Store the following vector of numbers as a 5 x 3 matrix: 3, 0, 1 ,23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2
+- Be sure to fill the matrix **ROWWISE**
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+#| attr.output: '.details summary="Show Output"'
+m <-
+  matrix(
+    c(3, 0, 1 , 23, 1, 2, 33, 1, 1, 42, 0, 1, 41, 0, 2),
+    nrow = 5,
+    ncol = 3,
+    byrow = TRUE
+  )
+m
+```
+
+- Then, coerce the matrix to a data frame
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+#| attr.output: '.details summary="Show Output"'
+(d <- as.data.frame(m))
+```
+
+- As a data frame, coerce the second column to be *logical* (i.e., Boolean)
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+#| attr.output: '.details summary="Show Output"'
+(d[,2] <- as.logical(d[,2]))
+```
+
+- As a data frame, coerce the third column to be a *factor*
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+#| attr.output: '.details summary="Show Output"'
+(d[,3] <- as.factor(d[,3]))
+```
+
+- When you are done, use the `str()` command to show the data type for each variable in your dataframe.
+
+```{r}
+str(d)
+```
+
+## Other Data Frame-Like Structures
+
+### Data Tables {.unnumbered}
+
+A "data table" is a structure introduced in the package {data.table} that provides an enhancements to the data frame structure, which is the standard data structure for storing tabular data in {base} ***R***. We use the same syntax for creating a data table...
+
+```{r}
+dt <-
+  data.table(
+    firstName = c("Rick", "Negan", "Dwight", "Maggie", "Michonne"),
+    community = c("Alexandria", "Saviors", "Saviors", "Hiltop", "Alexandria"),
+    sex = c("M", "M", "M", "F", "F"),
+    age = c(42, 40, 33, 28, 31)
+  )
+dt
+str(dt)
+
+# versus...
+
+df <-
+  data.frame(
+    firstName = c("Rick", "Negan", "Dwight", "Maggie", "Michonne"),
+    community = c("Alexandria", "Saviors", "Saviors", "Hiltop", "Alexandria"),
+    sex = c("M", "M", "M", "F", "F"),
+    age = c(42, 40, 33, 28, 31)
+  )
+df
+str(df)
+```
+
+Note that printing a data table results in a slightly different output than printing a data frame (e.g., row numbers are printed followed by a ":") and the structure (`str()`) looks a bit different. Also, different from data frames, when we read in data, columns of *character* type are never converted to factors by default (i.e., we do not need to specify anything like `stringsAsFactors=FALSE` when we read in data... that's the opposite default as we see for data frames).
+
+The big advantage of using data tables over data frames is that they support a different, easier syntax for filtering rows and selecting columns and for grouping output.
+
+```{r}
+dt[sex=="M"] # filter for sex = "M" in a data table
+df[df$sex=="M", ] # filter for sex = "M" in a data frame
+dt[1:2] # return the first two rows of the data table
+df[1:2, ] # return the first two rows of the data table
+dt[ , sex] # returns the variable "sex"
+str(dt[ , sex]) # sex is a CHARACTER vector
+df[, c("sex")] # returns the variable "sex"
+str(df[, c("sex")]) # sex is a FACTOR with 2 levels
+```
+
+The data table structure also allows us more straightforward syntax - and implements much faster algorithms - for computations on columns and for perform aggregations of data by a grouping variable.
+
+### "Tibbles" {.unnumbered}
+
+A "tibble" is another newer take on the data frame structure, implemented in the package {tibble} (which is loaded as part of {tidyverse}). The structure was created to keep the best features of data frames and correct some of the more frustrating aspects associated with the older structure. For example, like data tables, tibbles do not by default change the input type of a variable from *character* to *factor* when the tibble is created.
+
+```{r}
+t <-
+  tibble(
+    firstName = c("Rick", "Negan", "Dwight", "Maggie", "Michonne"),
+    community = c("Alexandria", "Saviors", "Saviors", "Hiltop", "Alexandria"),
+    sex = c("M", "M", "M", "F", "F"),
+    age = c(42, 40, 33, 28, 31)
+  )
+t
+str(t)
+```
+
+Note that the output of printing a tibble again looks slightly different than that for data frames or data tables... e.g., the data type of each column is included in the header row, for example. `str()` also shows us that characters were not converted to factors.
+
+Additionally, subsetting tibbles with the single bracket operator (`[ ]`) always returns a tibble, whereas doing the same with a data frame can return either a data frame or a vector.
+
+```{r}
+t[, "age"]
+class(t[, "age"])
+df[, "age"]
+class(df[, "age"])
+```
+
+There are some other subtle differences regarding the behavior of tibbles versus data frames that are also worthwhile to note. Data frames support "partial matching" in variable names when the `$` operator is used, thus `df$a` will return the variable `df$age`. Tibbles are stricter and will never do partial matching.
+
+```{r}
+df$a # returns df$age
+t$a # returns NULL and gives a warning
+```
+
+Finally, tibbles are careful about recycling. When creating a tibble, columns have to have consistent lengths and only values of length 1 are recycled. Thus, in the following...
+
+```{r}
+t <- tibble(a=1:4, c=1)
+# this works fine... c is recycled
+t
+
+# t <- tibble(a=1:4, c=1:2)
+# but this would throw an error... c is not recycled even
+# though it could fit evenly into the number of rows
+
+df <- data.frame(a=1:4, c=1:2)
+df
+```
+
+```{r}
+# | include: false
+detach(package:tidyverse)
+detach(package:data.table)
+```
+
+---
+
+## Concept Review {.unnumbered}
+
+- Creating matrices and arrays: `matrix(data=, nrow=, ncol=, byrow=)`, `array(data=, dim=)`, `rbind()`, `cbind()`
+- Creating lists: `list()`
+- Creating data frames: `data.frame()`
+- Subsetting: single bracket (`[ ]`), double bracket (`[[ ]]`), and `$` notation
+- Variable coercion: `as.numeric()`, `as.character()`, `as.data.frame()`
+- Reading .csv data: `read.csv(file=, header=, stringsAsFactors=)`
+- Filtering rows of a data frame using {base} ***R***: `df[df$<variable name> == "<criterion>", ]`, `df[df[["<variable name>"]] == "<criterion>", ]`
+- Selecting/excluding columns of a data frame: `df[ , c("<variable name 1>", "<variable name 2>",...)]`,`df[ , c(<column index 1>, <column index 2>,...)]`

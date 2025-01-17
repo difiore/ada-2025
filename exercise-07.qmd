@@ -1,0 +1,58 @@
+# Exercise 07 {.unnumbered}
+
+# Practice Simulation-Based Inference {.unnumbered}
+
+## Learning Objectives {.unnumbered}
+
+- Use a real data set to practice...
+  - generating confidence intervals around sample statistics by bootstrapping
+  - doing permutation-based tests of independence
+
+## Background on the Dataset {.unnumbered}
+
+Spider monkeys (genus *Ateles*) live in large multimale-multifemale social groups containing a total of ~20-30 adult individuals. Association patterns among the members of these group are very flexible. It is rare to see more than a handful of the adult members of the group together at any given time, and, instead, group members organize themselves in multiple smaller subgroups, or "parties", that travel separately from one another. Individuals and parties may come together ("fuse"), re-assort their membership, and break apart from one another ("fission") multiple times per day. Each individual, then, shows a different pattern of association with other group members and  its own pattern of home range use.
+
+My research group has collected data on the ranging patterns of one species of spider monkeys (*Ateles belzebuth*) in Amazonian Ecuador by following focal individuals and recording their location at regular intervals throughout the day using a GPS. We also record information on the other animals associated with focal individuals at those same intervals. This process yields a large set of location records for each individual based on both when those animals are the focus of focal follows and when they are present in subgroups containing a different focal individual.
+
+Using location records collected over several years, we have generated several measures of home range size for 9 adult males and 11 adult females who are members of one social group of *Ateles belzebuth*.
+
+### Preliminaries {.unnumbered}
+
+- Using the {tidyverse} `read_csv()` function, load [this dataset](https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/tbs-2006-2008-ranges.csv) into ***R*** as a "tibble" named **d** and look at the variables it contains. For this exercise, we are interested in two variables in particular: **sex** ("M" or "F", for male versus female) and **kernel95**, which represents the size of a polygon summarizing the location records for an individual as a 95% utilization density kernel.
+
+### Step 1 {.unnumbered}
+
+- Reduce the dataset to just the two variables of interest.
+
+### Step 2 {.unnumbered}
+
+- Determine the mean, standard deviation, and standard error in “kernel95” home range size for each sex.
+
+### Step 3 {.unnumbered}
+- Create boxplots comparing “kernel95” home range size by sex.
+
+### Step 4 {.unnumbered}
+
+- For each sex, generate a bootstrap distribution for mean kernel95 home range size. To do this, for each sex, you will want to generate a set of 10,000 bootstrap samples (i.e., sampling with replacement), calculate the mean kernel95 home range size for each of these samples, and plot the resulting bootstrap sampling distribution.
+
+### Step 5 {.unnumbered}
+
+- Plot an appropriate normal distribution over the bootstrap sampling distribution.
+
+### Step 6 {.unnumbered}
+
+- Calculate a 95% confidence interval around for the mean kernel95 home range size for each sex...
+
+  - Using the `quantile()` method applied directly to your bootstrap sampling distribution, and
+
+  - Using the theory-based "standard error" method, based on `qnorm()` and the standard deviation of your bootstrap sampling distribution.
+
+### Step 7 {.unnumbered}
+
+- Use simulation-based permutation to evaluate the difference in mean kernel95 home range size for males versus females. To do this, you will want to shuffle either the variable "sex" or "kernel95" home range size a total of 10,000 times, recalculating mean kernel95 size by sex for each permuted sample and then compare the difference in male and female kernel95 means from your original sample to the permutation distribution for the difference in means.
+
+  - Under this approach, what is the "null" hypothesis? What is the test statistic? Is the difference in mean kernel95 home range size "significant"?
+
+### Step 8 {.unnumbered}
+
+- Finally, use a theory-based parametric test (e.g., a t-test) to also calculate an appropriate test statistic and associated p value for the comparison of male and female mean kernel95 home range size. Under this approach, what is the test statistic? Is the difference in mean kernel95 home range size "significant"?

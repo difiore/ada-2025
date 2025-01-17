@@ -1,0 +1,654 @@
+# Course Schedule {.unnumbered}
+
+## Part I - Using ***R*** and ***RStudio*** {.unnumbered}
+
+### An Introduction to ***R*** {.unnumbered}
+
+#### Modules {.unnumbered}
+
+- Module 01 - [Getting Started with ***R***](#module-01)
+- Module 02 - [Getting Started with ***RStudio***](#module-02)
+- Module 03 - [Extending the Functionality of ***R***](#module-03)
+- Module 04 - [Fundamentals of the ***R*** Language](#module-04)
+
+#### Topics {.unnumbered}
+
+- History of ***R***
+    - Relation to other languages and statistics software
+- Installing ***R*** and ***RStudio***
+- Using ***R*** and ***RStudio*** in the cloud
+- Setting up your ***RStudio*** workspace
+    - Panels: *Source*, *Console*, *Environment/History*, Other Views
+        - Configuration and customization
+    - Setting the working directory
+    - Saving workspaces
+- ***R*** documentation and getting help
+    - The `?` command
+    - Vignettes
+    - [Stack Overflow](http://stackoverflow.com/)
+- ***R*** Basics
+    - Using ***R*** interactively
+    - Variables and assignment
+    - Packages
+        - Installing and updating
+        - Dependencies
+    - ***R*** objects
+        - Object types - Vectors, simple functions, and environments
+        - Classes and attributes of objects
+        - Scripting and sourcing scripts
+
+#### Suggested Readings {.unnumbered}
+
+- *Introduction to Data Science*
+    - Chapter 1 - Introduction
+    - Chapter 2 - ***R*** Basics
+- *R in Action, Second Edition*
+    - Chapter 1 - Getting Started
+    - Chapter 2 - Creating a Dataset
+
+#### Other Useful Readings {.unnumbered}
+
+- *The Book of R*
+    - Chapter 1 - Getting Started
+    - Chapter 2 - Numerics, Arithmetic, Assignment, and Vectors
+- *R Programming for Data Science*
+    - Chapter 3 - History and Overview of ***R***
+    - Chapter 5 - ***R*** Nuts and Bolts
+- *Statistics: An Introduction Using R*
+    - Chapter 1 - Fundamentals
+    - Appendix: Essentials of the ***R*** Language
+- *Advanced R, First Edition*
+    - Chapter 2 - Data Structures
+- *Modern Data Science with R*
+    - Appendix B: An Introduction to ***R*** and ***RStudio***
+
+### Version Control and Reproducibility {.unnumbered}
+
+#### Modules {.unnumbered}
+
+- Module 05 - [Basics of Version Control](#module-05)
+- Module 06 - [Reproducible Research Using ***RStudio***](#module-06)
+- Some recommendations on [Programming Style](#programming-style-guide)
+
+#### Topics {.unnumbered}
+
+- Good programming practices
+    - Version control with ***git*** and ***GitHub***
+    - Data workflow with ***R*** projects using local and remote repositories
+    - Reproducible research using **Rmarkdown** and **Quarto**
+    - Programming conventions and style
+
+#### Suggested Readings {.unnumbered}
+
+- *Introduction to Data Science*
+    - Chapter 39 - ***Git*** and ***GitHub***
+- *Essentials of Data Science*
+    - Chapter 11 - ***R*** with Style
+
+#### Other Useful Readings {.unnumbered}
+
+- [*Happy Git and GitHub for the useR*](https://happygitwithr.com)
+- *Introduction to Data Science*
+    - Chapter 37 - Accessing the terminal and installing ***Git***
+    - Chapter 38 - Organizing with Unix
+    - Chapter 40 - Reproducible projects with ***RStudio*** and ***RMarkdown***/***Quarto***
+
+### Data Science Preliminaries {.unnumbered}
+
+#### Modules {.unnumbered}
+
+- Module 07 - [Additional Data Structures in ***R***](#module-07)
+- Module 08 - [Getting Data into ***R***](#module-08)
+
+#### Topics {.unnumbered}
+
+- Working with data
+    - The Tao of text
+    - More object types - matrices, n-dimensional arrays, lists, data frames, and other tabular structures (e.g., data tables and "tibbles")
+    - Subsetting and filtering data structures
+        - Single bracket (`[]`) notation
+        - Double bracket (`[[]]`) notation
+        - `$` notation
+    - Factors
+    - Class coercion and conversion
+    - Special data values - `NA`, `NaN`, `Inf`
+    - Getting data in and out of ***R***
+        - From ".csv" files - {readr}
+        - From Excel - {readxl} and others
+        - From Dropbox - {rdrop2}
+        - From other online resources - {curl}
+        - From databases - {RMySQL}, {RSQLite}, {RPostgreSQL} and others
+
+#### Suggested Readings {.unnumbered}
+
+- *The Book of R*
+    - Chapter 3 - Matrices and Arrays
+    - Chapter 5 - Lists and Data Frames
+- *R in Action*
+    - Chapter 4 - Basic Data Management
+
+#### Other Useful Readings {.unnumbered}
+
+- *The Book of R*
+    - Chapter 4 - Non-Numeric Values
+    - Chapter 6 - Special Values, Classes, and Coercion
+    - Chapter 8 - Reading and Writing Files
+- *Advanced R*
+    - Chapter 4 - Subsetting
+- *R for Data Science*
+    - Chapter 7 - Data Import
+
+### Exploratory Data Analysis {.unnumbered}
+
+#### Modules {.unnumbered}
+
+- Module 09 - [Exploratory Data Analysis](#module-09)
+
+#### Topics {.unnumbered}
+
+- Summarizing and visualizing data
+    - Basic descriptive statistics
+    - Tidying and reshaping data with {tidyr}
+    - Simple plotting (boxplots, histograms, scatterplots) with {base} ***R***, {ggplot2}, and others
+
+#### Suggested Readings {.unnumbered}
+
+- *Introduction to Data Science*
+    - Chapter 5 - The {tidyverse}
+- *R in Action*
+    - Chapter 6 - Basic Graphs
+    - Chapter 7 - Basic Statistics
+
+#### Other Useful Readings {.unnumbered}
+
+- *The Book of R*
+    - Chapter 13 - Elementary Statistics
+    - Chapter 14 - Basic Data Visualization
+- *R for Data Science*
+    - Chapter 5 - Data Tidying
+
+### Data Wrangling and Programming {.unnumbered}
+
+#### Modules {.unnumbered}
+
+- Module 10 - [Data Wrangling with {dplyr}](#module-10)
+- Module 11 - [Functions and Flow Control](#module-11)
+
+#### Topics {.unnumbered}
+
+- Manipulating data
+    - {dplyr} functions - `select()`, `filter()`, `arrange()`, `rename()`, `mutate()`, `group_by()`, `summarize()`
+    - Chaining and piping data
+- ***R*** programming practices
+    - Writing functions
+        - Argument lists
+        - Default values
+    - Program flow control
+        - Conditional statements
+        - `for()` loops
+        - `while()` loops
+
+#### Suggested Readings {.unnumbered}
+
+- *Introduction to Data Science*
+    - Chapter 4 - Programming Basics
+
+#### Other Useful Readings {.unnumbered}
+
+- *The Book of R*
+    - Chapter 9 - Calling Functions
+    - Chapter 10 - Conditions and Loops
+    - Chapter 11 - Writing Functions
+- *R for Data Science*
+    - Chapter 3 - Data Transformation
+- *R in Action*
+    - Chapter 5 - Advanced Data Management
+
+<!-- ## Part II - Statistics and Inference {.unnumbered} -->
+
+<!-- ### Location, Spread, and Sampling {.unnumbered} -->
+
+<!-- #### Modules {.unnumbered} -->
+
+<!-- - Module 12 - [Central Tendency and Spread](#module-12) -->
+
+<!-- #### Topics {.unnumbered} -->
+
+<!-- - Populations and samples, parameters and statistics -->
+<!-- - Describing central tendency and variance -->
+<!-- - Standard errors and quantiles -->
+
+<!-- #### Suggested Readings {.unnumbered} -->
+
+<!-- - *Introduction to Data Science* -->
+<!--     - Chapter 15 - Random Variables -->
+<!-- - *Statistical Inference via Data Science* -->
+<!--     - Chapter 7 - Sampling -->
+<!-- - *Modern Data Science with R* -->
+<!--     - Chapter 7 - Statistical Foundations -->
+
+<!-- #### Other Useful Readings {.unnumbered} -->
+
+<!-- - *Statistics: An Introduction Using R* -->
+<!--     - Chapter 13 - Central Tendency -->
+<!--     - Chapter 14 - Variance -->
+<!-- - *R Programming for Data Science* -->
+<!--     - Chapter 22 - Simulation -->
+
+<!-- ### Probability and Distributions {.unnumbered} -->
+
+<!-- #### Modules {.unnumbered} -->
+
+<!-- - Module 13 - [Probability and Distributions](#module-13) -->
+
+<!-- #### Topics {.unnumbered} -->
+
+<!-- - Probability and conditional probability -->
+<!-- - Random variables - discrete and continuous -->
+<!-- - Probability mass functions, probability density functions -->
+<!-- - Cumulative probability function -->
+<!-- - Some useful distributions and their properties -->
+<!--     - Distribution functions -->
+<!--         - Density (`d`) -->
+<!--         - Cumulative probability (`p`) -->
+<!--         - Quantile (`q`) -->
+<!--         - Random (`r`) functions -->
+<!--     - Discrete distributions -->
+<!--         - Bernoulli -->
+<!--         - Poisson -->
+<!--         - Binomial -->
+<!--     - Continuous distributions -->
+<!--         - Beta -->
+<!--         - Uniform -->
+<!--         - Normal -->
+<!-- - Q-Q plots -->
+
+<!-- #### Suggested Readings {.unnumbered} -->
+
+<!-- - *Introduction to Data Science* -->
+<!--     - Chapter 14 - Probability -->
+<!-- - *The Book of R* -->
+<!--     - Chapter 15 - Probability -->
+<!--     - Chapter 16 - Common Probability Distributions -->
+
+<!-- ### Confidence Intervals {.unnumbered} -->
+
+<!-- #### Modules {.unnumbered} -->
+
+<!-- - Module 14 - [Confidence Intervals](#module-14) -->
+
+<!-- #### Topics {.unnumbered} -->
+
+<!-- - Standard errors and confidence intervals -->
+<!--     - CIs based on a theoretical distribution -->
+<!--     - The Central Limit Theorem -->
+<!--     - CIs based on bootstrapping -->
+<!--     - CIs for proportions -->
+
+<!-- #### Suggested Readings {.unnumbered} -->
+
+<!-- - *Introduction to Data Science* -->
+<!--     - Chapter 16 - Statistical Inference -->
+<!-- - *The Book of R* -->
+<!--     - Chapter 17 - Sampling Distributions and Confidence -->
+
+<!-- #### Other Useful Readings {.unnumbered} -->
+
+<!-- - *Statistical Inference via Data Science* -->
+<!--     - Chapter 8 - Bootstrapping and Confidence Intervals -->
+
+<!-- ### Hypothesis Testing {.unnumbered} -->
+
+<!-- #### Modules {.unnumbered} -->
+
+<!-- - Module 15 - [Classical Hypothesis Testing](#module-15) -->
+<!-- - Module 16 - [Permutation and Randomization Tests](#module-16) -->
+<!-- - Module 17 - [Error, Power, and Effect Size](#module-17) -->
+
+<!-- #### Topics {.unnumbered} -->
+
+<!-- - ***p*** values and "significance" -->
+<!-- - Classic *null hypothesis significance testing* (NHST) -->
+<!--     - One- and two-sample $T$ and $Z$ tests -->
+<!-- - Permutation and randomization tests -->
+<!-- - Type I and Type II error -->
+<!-- - Statistical power, effect sizes -->
+
+<!-- #### Suggested Readings {.unnumbered} -->
+
+<!-- - *The Book of R* -->
+<!--     - Chapter 18 - Hypothesis Testing -->
+<!-- - *Statistical Inference via Data Science* -->
+<!--     - Chapter 9 - Hypothesis Testing -->
+<!-- - Legendre & Legendre (2012). Chapter 1.2. Statistical testing by permutation. *Numerical Ecology, 3rd Edition.* Elsevier. -->
+
+<!-- #### Other Useful Readings {.unnumbered} -->
+
+<!-- - *Statistics Done Wrong* -->
+<!--     - Chapter 1 - An Introduction to Statistical Significance -->
+<!-- - *Statistics: An Introduction Using R* -->
+<!--     - Chapter 5 - Single Samples -->
+<!--     - Chapter 6 - Two Samples -->
+
+<!-- #### Relevant Data Camp Material {.unnumbered} -->
+
+<!-- - *Foundations of Inference* - Introduction to Ideas of Inference -->
+<!-- - *Foundations of Inference* - Confidence Intervals -->
+<!-- - *Foundations of Inference* - Completing a Randomization Test -->
+<!-- - *Foundations of Inference* - Hypothesis Testing Errors -->
+
+<!-- ### Introduction to Linear Modeling {.unnumbered} -->
+
+<!-- #### Modules {.unnumbered} -->
+
+<!-- - Module 18 - [Introduction to Linear Regression](#module-18) -->
+
+<!-- #### Topics {.unnumbered} -->
+
+<!-- - Correlation and covariation -->
+<!-- - Basic linear modeling -->
+<!--     - Continuous random predictor and response variables -->
+<!--     - Simple linear regression (1 predictor and 1 response variable) -->
+<!--     - Estimating and interpreting regression coefficients -->
+<!--     - Model I versus Model II regression -->
+<!--     - The `lm()` function -->
+
+<!-- #### Suggested Readings {.unnumbered} -->
+
+<!-- - *The Book of R* -->
+<!--     - Chapter 20 - Simple Linear Regression -->
+
+<!-- #### Other Useful Readings {.unnumbered} -->
+
+<!-- - *Statistics: An Introduction Using R* -->
+<!--     - Chapter 7 - Regression -->
+<!-- - *Statistical Inference via Data Science* -->
+<!--     - Chapter 5 - Basic Regression -->
+
+<!-- #### Relevant Data Camp Material {.unnumbered} -->
+
+<!-- - *Correlation and Regression in R* - Visualizing Two Variables -->
+<!-- - *Correlation and Regression in R* - Correlation -->
+<!-- - *Correlation and Regression in R* - Simple Linear Regression -->
+<!-- - *Correlation and Regression in R* - Interpreting Regression Models -->
+
+<!-- ### Elements of Regression Analysis {.unnumbered} -->
+
+<!-- #### Modules {.unnumbered} -->
+
+<!-- - Module 19 - [Elements of Regression Analysis](#module-19) -->
+
+<!-- #### Topics {.unnumbered} -->
+
+<!-- - Inference in regression -->
+<!--     - Estimating standard errors for regression cofficients -->
+<!--     - Confidence intervals and prediction intervals -->
+<!--     - Residuals -->
+<!-- - Model checking -->
+<!-- - Partitioning of variance in linear models -->
+<!-- - Data transformations -->
+
+<!-- #### Suggested Readings {.unnumbered} -->
+
+<!-- - *Statistical Inference via Data Science* -->
+<!--     - Chapter 10 - Inference for Regression -->
+
+<!-- #### Other Useful Readings {.unnumbered} -->
+
+<!-- - Gotelli, N.J. & Ellison, A.M. (2012). Chapter 9. Regression. *A Primer of Ecological Statistics, 2nd Edition.* Sinauer Associates, Inc. -->
+
+<!-- ### Extending Linear Regression {.unnumbered} -->
+
+<!-- #### Modules {.unnumbered} -->
+
+<!-- - Module 20 - [Categorical Data Analysis](#module-20) -->
+<!-- - Module 21 - [Multiple Regression and ANCOVA](#module-21) -->
+
+<!-- #### Topics {.unnumbered} -->
+
+<!-- - Regression with categorical predictors -->
+<!--     - One- and multiple-factor ANOVA -->
+<!--     - Type I, Type II, Type III sums of squares -->
+<!--     - Interaction plots to visualize changes across groups -->
+<!-- - Simple categorical data analysis -->
+<!--     - Kruskall-Wallis tests -->
+<!--     - Chi-Square tests of goodness-of-fit and independence -->
+<!-- - Generating mock data with a defined correlation structure -->
+<!-- - Regression with multiple predictors -->
+<!--     - More than one continuous predictor -->
+<!--     - Combinations of continuous and categorical predictors -->
+<!--     - Visualizing linear models with more than one predictor -->
+<!--     - Confidence intervals and prediction in multiple regression -->
+<!--     - Interactions between predictors -->
+<!--     - Interaction plots to visualize changes across groups -->
+
+<!-- #### Suggested Readings {.unnumbered} -->
+
+<!-- - *The Book of R* -->
+<!--     - Chapter 19 - Analysis of Variance -->
+<!--     - Chapter 21 - Multiple Linear Regression -->
+
+<!-- #### Other Useful Readings {.unnumbered} -->
+
+<!-- - Gotelli, N.J. & Ellison, A.M. (2012). Chapter 10. The analysis of variance. *A Primer of Ecological Statistics, 2nd Edition.* Sunderland, Sinauer Associates, Inc. -->
+<!-- - *Statistics: An Introduction Using R* -->
+<!--     - Chapter 8 - Analysis of Variance -->
+<!--     - Chapter 9 - Analysis of Covariance -->
+
+<!-- ### Model Selection {.unnumbered} -->
+
+<!-- #### Modules {.unnumbered} -->
+
+<!-- - Module 22 - [Model Selection in Linear Regression](#module-22) -->
+
+<!-- #### Topics {.unnumbered} -->
+
+<!-- - Model simplification and selection -->
+<!--     - Partial F tests for comparing models -->
+<!--     - Forward and backward selection -->
+<!--     - Information criteria considerations for comparing models -->
+<!-- - The Akaike Information Criterion (AIC) and others -->
+<!--     - {stats} `step()` -->
+<!--     - {MASS} `stepwise()` -->
+<!--     - {AICcmodavg} -->
+
+<!-- #### Suggested Readings {.unnumbered} -->
+
+<!-- - *The Book of R* -->
+<!--     - Chapter 22 - Linear Model Selection and Diagnostics -->
+
+<!-- #### Other Useful Readings {.unnumbered} -->
+
+<!-- - Package descriptions for {AICcmodavg} and {MuMIn} -->
+
+<!-- #### Relevant Data Camp Material {.unnumbered} -->
+
+<!-- - *Correlation and Regression in R* - Model Fit -->
+
+<!-- ### Linear and Mixed Effects Modeling {.unnumbered} -->
+
+<!-- #### Modules {.unnumbered} -->
+
+<!-- - Module 23 - [Generalized Linear Models](#module-23) -->
+<!-- - Module 24 - [Mixed Effects or Multilevel Modeling](#module-24) -->
+
+<!-- #### Topics {.unnumbered} -->
+
+<!-- - Generalized linear models -->
+<!--     - Other response variables types (e.g., counts, binary responses) -->
+<!--     - Logistic regression, multiple logistic regression -->
+<!--     - Log-linear modeling -->
+<!--     - Likelihood ratio tests -->
+<!-- - Introduction to mixed effects modeling -->
+<!--     - Combining fixed and random factors -->
+<!-- - Assessing model fit for GLMs and mixed models -->
+
+<!-- #### Suggested Readings {.unnumbered} -->
+
+<!-- - *R in Action* -->
+<!--     - Chapter 13 - Generalized Linear Models -->
+<!-- - Bolker, B.M., Brooks, M.E., Clark, C.J., Geange, S.W., Poulsen, J.R., Stevens, M.H.H., White, & J.-S.S. (2008) Generalized linear mixed models: A practical guide for ecology and evolution. *Trends in Ecology and Evolution* 24: 127-135. -->
+
+<!-- #### Other Useful Readings {.unnumbered} -->
+
+<!-- - *Statistics: An Introduction Using R* -->
+<!--     - Chapter 12 - Other Response Variables -->
+<!-- - Bolker, B.M. (2008). Chapter 9. Standard statistics revisited. In: *Ecological Models and Data in R.* Princeton, NJ: Princeton University Press. -->
+<!-- - Quinn, G.P. & Keough, M.J. (2002). Chapter 13. Generalized linear models and logistic regression. *Experimental Design and Data Analysis for Biologists.* Cambridge, UK: Cambridge University Press. -->
+
+<!-- ## Part III - Miscellany {.unnumbered} -->
+
+<!-- ### [Building Custom ***R*** Packages](#building-r-packages) {.unnumbered .unlisted} -->
+
+<!-- #### Suggested Readings {.unnumbered} -->
+
+<!-- - *R in Action* -->
+<!--     - Chapter 21 - Creating a Package -->
+
+<!-- #### Other Useful Resources {.unnumbered} -->
+
+<!-- - [Hadley Wickham's Definitive Guide to ***R*** Packages](http://r-pkgs.had.co.nz/) -->
+<!-- - [Karl Broman's ***R*** Package Primer](https://kbroman.org/pkg_primer/) -->
+<!-- - [Hilary Parker's ***R*** Package Tutorial](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/) -->
+<!-- - [Fong Chun's Making your First ***R*** Package Tutorial](http://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html) -->
+<!-- - [Thomas Westlake's Writing an ***R*** Package from Scratch Tutorial](https://r-mageddon.netlify.com/post/writing-an-r-package-from-scratch/) -->
+<!-- - [Building ***R*** Packages](https://rstats-pkgs.readthedocs.io/en/latest/index.html) -->
+
+<!-- ### [Building Interactive Web Apps](#shiny) {.unnumbered .unlisted} -->
+
+<!-- #### Other Useful Resources {.unnumbered} -->
+
+<!-- - [Learning Shiny Resources from RStudio](http://shiny.rstudio.com/tutorial/) -->
+<!-- - [Zev Ross' Shiny Tutorial](http://zevross.com/blog/2016/04/19/r-powered-web-applications-with-shiny-a-tutorial-and-cheat-sheet-with-40-example-apps/) -->
+
+<!-- ## Part IV - Possible Future Modules {.unnumbered} -->
+
+<!-- ### [Using ***Python*** with ***R***](#python-from-R.html) {.unnumbered} -->
+
+<!-- <!-- #### Useful Resources {-} -->
+
+<!-- - [{reticulate}: The ***R*** Interface to ***Python***](https://rstudio.github.io/reticulate/) -->
+
+<!-- ### Additional Topics -->
+
+<!-- - [Complete "lm.R" App](shiny-tutorial/lm.R) -->
+
+<!-- ### [A Very Brief Introduction to Bayesian Methods]() -->
+
+<!-- ### [Using APIs and Basics of Text Mining]() -->
+
+<!-- > Using APIs and Basics of Text Mining -->
+
+<!-- - Using APIs ("application programing interfaces") -->
+
+<!--  - Accessing data from Twitter and Facebook -->
+
+<!--  - Tweeting and posting from R -->
+
+<!-- - Text mining basics -->
+
+<!--  - Building a corpus -->
+
+<!--  - Introduction to regular expressions -->
+
+<!--  - Building a document-term matrix -->
+
+<!--  - Term frequency analysis -->
+
+<!--  - Visualizing text data -->
+
+<!-- #### Other Useful Readings {-} -->
+
+<!--  - Williams, G. (2016). Hands-on data science with R - Text Mining. -->
+
+<!--  - Gentry, J. (2014). Twitter client for R. -->
+
+<!--  - Kumar, S., Morstatter, F., and Huan, L. 2014. *Twitter Data Analytics.* New York: Springer. -->
+
+<!--  - Package descriptions for {rtweet}, {RFacebook}, {SocialMediaLab} -->
+
+<!-- #### Cluster Analysis, Classification Trees, and Random Forests -->
+
+<!-- #### Text Mining and Natural Language Processing -->
+
+<!-- #### Social Networks and Visualizations -->
+
+<!-- #### Discriminant Function Analysis -->
+
+<!-- #### Spatial Data and Analysis -->
+
+<!-- #### Working with LIDAR Data and GIS -->
+
+<!-- #### Principal Components Analysis -->
+
+<!---#### Factor Analysis -->
+
+<!-- #### Phylogenetic Comparative Analysis -->
+
+<!-- #### Phylogenetic Tree Construction -->
+
+<!-- #### Interacting with Relationtional/Nonrelational Databases and Query Languages -->
+
+<!-- #### Manipulating and Analyzing DNA Sequence Data -->
+
+<!-- [//]:- Manipulating and analyzing DNA sequence data -->
+
+<!-- [//]:   - Data cleanup -->
+
+<!-- [//]:   - Phylogenetic analysis -->
+
+<!-- [//]:- Manipulating and analyzing genotype data (SNPs, MSATS) -->
+
+<!-- [//]:   - Population genetic analysis -->
+
+<!-- [//]: ### Working with Geospatial Data -->
+
+<!-- [//]: #### Topics {-} -->
+
+<!-- [//]:- **R** as a GIS -->
+
+<!-- [//]:  - Connecting to spatial databases -->
+
+<!-- [//]:  - Raster and vector data types -->
+
+<!-- [//]:  - Visualizing and querying spatial data -->
+
+<!-- [//]:- Coordinate system transformations -->
+
+<!-- [//]: #### Suggested Readings {-} -->
+
+<!-- [//]: #### Other Useful Readings {-} -->
+
+<!-- #### Reshaping, Graphing, and Plotting for Exploratory Data Analysis -->
+
+<!-- - FitBit API -->
+
+<!-- - OCR -->
+
+<!-- Topics -->
+
+<!-- Bayesian vs. frequentist statistics -->
+
+<!-- Basics and Bayes’ Theorem -->
+
+<!-- Priors (when they matter and when they don’t) -->
+
+<!-- Implementing Bayesian (regression) models in R -->
+
+<!-- Using {MCMCglmm} -->
+
+<!-- Burn-in, iterations, and intervals -->
+
+<!-- Model assessment -->
+
+<!-- Implementing Bayesian models in the {rethinking} package framework -->
+
+<!-- Required Readings -->
+
+<!-- Ellison, A.M. (1996). An introduction to Bayesian inference for ecological research and environmental decision-making. Ecological Applications 6(4):1036-1046. -->
+
+<!-- Useful but Optional Readings -->
+
+<!-- Hadfield, J. (2016) MCMCglmm Course Notes -->
+
+<!-- Package descriptions for {MCMCglmm} and {rethinking} -->

@@ -1,0 +1,130 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Applied Data Analysis"
+  # author: "Anthony Di Fiore"
+  subtitle: "Practical Data Science Tools, Programming, and Statistics for the Natural and Social Sciences"
+  sidebar:
+    align: center
+    search: true
+    # logo: "img/statistics-hand.svg"
+    style: docked
+    pinned: false
+    background: "light"
+    collapse-level: 2
+    border: false
+  chapters:
+    - index.qmd
+    - part: "Preliminaries"
+      chapters:
+      - 00-logistics.qmd
+      - 00-structure.qmd
+      - 00-course-schedule.qmd
+      - 00-typography-and-formatting.qmd
+      - 00-programming-style-guide.qmd
+      - 00-resources.qmd
+    - part: "Part I - Using ***R*** and ***RStudio***"
+      chapters:
+      - 01-module.qmd
+      - 02-module.qmd
+      - 03-module.qmd
+      - 04-module.qmd
+      - 05-module.qmd
+      - 06-module.qmd
+      - 07-module.qmd
+      - 08-module.qmd
+      - 09-module.qmd
+      - 10-module.qmd
+      - 11-module.qmd
+    # - part: "Part II - Statistics and Inference"
+    #   chapters:
+    #   - 12-module.qmd
+    #   - 13-module.qmd
+    #   - 14-module.qmd
+    #   - 15-module.qmd
+    #   - 16-module.qmd
+    #   - 17-module.qmd
+    #   - 18-module.qmd
+    #   - 19-module.qmd
+    #   - 20-module.qmd
+    #   - 21-module.qmd
+    #   - 22-module.qmd
+    #   - 23-module.qmd
+    #   - 24-module.qmd
+    # - part: "Part III - Miscellany"
+    #   chapters:
+    #   - 25-r-packages.qmd
+    #   - 26-python-from-R.qmd
+    #   - 27-shiny.qmd
+    #   - 28-geospatial-data.qmd
+    - part: "Exercises"
+      chapters:
+      - exercise-01.qmd
+    #  - exercise-02.qmd
+    #  - exercise-03.qmd
+    #  - exercise-04.qmd
+    #  - exercise-04-solution.qmd
+    #  - exercise-05.qmd
+    #  - exercise-05-solution.qmd
+    #  - exercise-07.qmd
+    #  - exercise-07-solution.qmd
+    #  - exercise-08.qmd
+    #  - exercise-09.qmd
+    #  - exercise-09-solution.qmd
+    #  - exercise-10.qmd
+    #  - exercise-10-solution.qmd
+    #  - exercise-11.qmd
+    #  - exercise-11-solution.qmd
+    #  - exercise-12.qmd
+    #  - exercise-12-solution.qmd
+    - part: "Assignments"
+      chapters:
+      - data-analysis-replication-assignment.qmd
+    #  - data-analysis-replication-assignment-template.qmd
+    #   - collaborative-data-science-assignment.qmd
+    #   - creative-dataviz-assignment.qmd
+    - part: "References"
+      chapters:
+        - packages.qmd
+
+knitr:
+  opts_chunk:
+    echo: true
+    warning: true
+    message: true
+    comment: "##"
+    prompt: false
+    tidy: true
+    tidy.opts:
+      width.cutoff: 80
+    fig.align: "center"
+    R.options:
+      width: 80
+
+format:
+  html:
+    css: css/style.css
+    grid:
+      sidebar-width: 350px
+    toc: true
+    fontsize: 12pt
+    toc-title: "Table of Contents"
+    toc-expand: true
+    toc-depth: 3
+    theme:
+      - css/theme.scss
+    code-tools: true
+
+filters:
+  - fold_results.lua
+
+comments:
+  hypothesis: true
+
+bibliography:
+  - bib/book.bib
+  - bib/ada.bib
+
+csl: bib/my-format.csl

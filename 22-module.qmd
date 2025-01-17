@@ -1,0 +1,269 @@
+# Model Selection in Regression {#module-22}
+
+## Overview
+
+The purpose of a model selection process in a regression analysis is to sort through our explanatory variables in a systematic fashion in order to establish which are best able to describe the response. There are different possible algorithms to use for model selection, e.g., forward and backward selection, and different ways of comparing models to one another, which may result in different parameters being included in the final model. The are also several different package that we can use to combine results from several different models.
+
+## Preliminaries
+
+- Install these packages in ***R***: [{MASS}](https://cran.r-project.org/web/packages/MASS/MASS.pdf), [{AICcmodavg}](https://cran.r-project.org/web/packages/AICcmodavg/AICcmodavg.pdf), and [{MuMIn}](https://cran.r-project.org/web/packages/MuMIn/MuMIn.pdf)
+- Load {tidyverse}
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+## Nested Comparisons and F Tests
+
+One way we can compare different models is to use F ratios and what are called **partial F tests**. This approach looks at two or more *nested* models - a larger, or more complex, model that contains explanatory variables that we are interested in and smaller, less complex, models that exclude one or more of those variables. Basically, we aim to compare the total variance in the response variable that is explained by the more complex model to that explained by a "reduced" model. If the more complex model explains a significantly greater proportion of the variation, then we conclude that predictor terms absent from the less complex model are important.
+
+For example, if including an additional term with its associated $\beta$ coefficient results in significantly better fit to the observed data than we find for a model that lacks that particular terms, then this is evidence against the null hypothesis that the $\beta$ coefficient (slope) for that term equals zero.
+
+### EXAMPLE: {.unnumbered}
+
+Let's go back to our zombie apocalypse survivors dataset and compare a few models. We need to calculate the following partial F statistic for a full versus reduced model:
+
+$$F = \frac{(R^2_{full}-R^2_{reduced})(n-q-1)}{(1-R^2_{full})(q-p)}$$
+
+where:
+
+- The $R^2$ values are the coefficients of determination of the full model and the nested "reduced" model
+- $n$ is the number of observations in the data set
+- $p$ is the number of predictor terms in the nested (reduced) model
+- $q$ is the number of predictor terms in the full model
+
+After we calculate this F statistic, we compare it to an $F$ distribution with "df1 = q-p" and "df2 = n-q" to derive a p value. The `lm()` function will do this for us automatically, but we can also do it by hand.
+
+```{r}
+f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/zombies.csv"
+z <- read_csv(f, col_names = TRUE)
+z$gender <- factor(z$gender)
+m1 <- lm(data = z, height ~ age * gender) # full model
+m2 <- lm(data = z, height ~ age + gender) # model without interaction
+m3 <- lm(data = z, height ~ age) # model with one predictor
+m4 <- lm(data = z, height ~ 1) # intercept only model
+```
+
+Once we have fitted the full and three nested models, we can carry out partial F tests to compare particular models using the `anova()` function, with the nested (reduced) and full model as arguments. The reduced model is included as the first argument and the full model is included as the second argument.
+
+```{r}
+anova(m2, m1, test = "F")
+# compares the reduced model without interactions (m2) to the full model with interactions (m1)
+```
+
+We can also calculate the F statistic by hand and compare it to the $F$ distribution.
+
+```{r}
+(f <- ((summary(m1)$r.squared - summary(m2)$r.squared) *
+  (nrow(z) - 3 - 1)) / ((1 - summary(m1)$r.squared) * (3 - 2)))
+(p <- 1 - pf(f, df1 = 3 - 2, df2 = nrow(z) - 3, lower.tail = TRUE))
+# df1 = q-p, df2 = n-q
+anova(m3, m2, test = "F")
+# compares the age only model (m3) to the age + gender model (m2)
+(f <- ((summary(m2)$r.squared - summary(m3)$r.squared) *
+  (nrow(z) - 2 - 1)) / ((1 - summary(m2)$r.squared) * (2 - 1)))
+(p <- 1 - pf(f, df1 = 2 - 1, df2 = nrow(z) - 2, lower.tail = TRUE))
+# df1 = q-p, df2 = n-q
+```
+
+In these cases, each comparison shows that the more complex model indeed results in signficantly more explantory power than the reduced model.
+
+## Forward Selection
+
+Forward selection starts with an intercept-only model and then tests which of the predictor variables best improves the goodness-of-fit. Then the model is updated by adding that term and tests which of the remaining predictors would further and best improve the fit. The process continues until there are not any other terms that could be added to improve the fit more. The ***R*** functions `add1()` and `update()`, respectively, perform the series of tests and update your fitted regression model. Setting the "test=" argument in `add1()` to "F" includes the partial F statistic value and its significance. The ".~." part of the "scope=" argument means, basically, "what is already there", while the remainder of the "scope=" argument is the list of additional variables you might add for the fullest possible model.
+
+```{r}
+m0 <- lm(data = z, height ~ 1)
+summary(m0)
+add1(m0, scope = .~. + age + weight + zombies_killed + years_of_education, test = "F")
+```
+
+Looking at the output of `add1()`, we see that adding **weight**, **age**, or **years_of_education** all would add explanatory power to our model, but **weight** is associated with the highest new F statistic and the lowest new RSS, so we should update our model by adding it as a new predictor. We do this with the `update()` function, passing it the old model and a "formula=" argument of ".~." (what is already there) "+ weight" (the new predictor).
+
+```{r}
+m1 <- update(m0, formula = .~. + weight)
+summary(m1)
+```
+
+We then repeat this process until adding additional predictors no longer improves the explanatory power of the model.
+
+```{r}
+add1(m1, scope = .~. + age + weight + zombies_killed + years_of_education, test = "F")
+m2 <- update(m1, formula = .~. + age)
+summary(m2)
+add1(m2, scope = .~. + age + weight + zombies_killed + years_of_education, test = "F")
+```
+
+After we add **weight** and **age**, no other variable improves the fit of the model significantly, so the final, best model in this case is **m2**.
+
+```{r}
+summary(m2)
+```
+
+## Backward Selection
+
+Opposite to forward selection, backward selection starts with the fullest model you want to consider and systematically drops terms that do not contribute to the explanatory value of the model. The ***R*** functions for this process are `drop1()` to inspect the partial F test results and `update()` to update the model.
+
+```{r}
+m0 <- lm(data = z, height ~ age + weight + zombies_killed +
+  years_of_education)
+summary(m0)
+drop1(m0, test = "F")
+```
+
+Here, removing either **weight** or **age** would result in a significant loss of explanatory power for our model, while removing either **zombies_killed** or **years_of_education** would not. The latter variable is associated with the lowest F value and lowest increase in RSS, so we update our model by removing it. We then run the `drop1()` function on the new, updated model and remove the next variable whose loss does not significantly reduce the explanatory power of the model. We continue doing this until removing any additional predictors results in a significantly worse model.
+
+```{r}
+m1 <- update(m0, .~. - years_of_education)
+summary(m1)
+drop1(m1, test = "F")
+m2 <- update(m1, .~. - zombies_killed)
+summary(m2)
+drop1(m2, test = "F")
+```
+
+At this point, all of the explanatory variables are still significant, so the final, best model in this case is also **m2**.
+
+```{r}
+summary(m2)
+```
+
+## Model Selection Using AIC
+
+#### Stepwise Selection using {MASS} {.unnumbered}
+
+There are two ***R*** functions that can act as further shortcuts for this process that use the [Akaike Information Criterion (AIC)](https://en.wikipedia.org/wiki/Akaike_information_criterion) rather than partial F tests to determine relative model fit. We will talk in more detail about how we get AIC in our upcoming modules on GLM and mixed modeling as well.
+
+The AIC is typically calculated as ***-2(log-likelihood) + 2K***, where $K$ is the number of model parameters (i.e., the number of $\beta$ coefficients we estimate, which equals the number of variables in the model, plus the intercept), and the log-likelihood is a measure of model fit (the higher, the better). [Keep in mind, though, that log-likelihood is a function of sample size, and larger samples will tend to have lower log-likelihoods regardless of fit!] We will not derive log-likelihoods by hand in class, but if you want to know more about how log-likelihood values are derived, you can check out [this helpful resource](https://newonlinecourses.science.psu.edu/stat504/node/27/).
+
+As you might guess from how AIC is defined, the model with the **lowest** AIC is typically designated as the best fit for the data. Note that although AIC can be used to assess the relative fit of a model to a certain data set, it really does not say anything about the absolute fit or explanatory value of the model (e.g., like the $R^2$ value can). Keep in mind that the best fit model according to AIC, among the models you test against each other, may actually explain very little of the overall variation.
+
+There are many functions within **R** that will perform stepwise model reduction automatically using AIC as a criterion. One of the most popular is called `stepAIC()`, which is a function in the {MASS} package. To use it, you must simply specify the most complex version of the model and choose whether you would like to assess the model using backwards or forwards (or both) methods of stepwise comparison.
+
+Let's try `stepAIC()` with our **m0** from above. In the call for the function, we can ask it to run forward, backward, or both directions.
+
+```{r}
+library(MASS)
+# start with full model...
+m <- lm(data = z, height ~ age + weight + zombies_killed + years_of_education)
+(s <- stepAIC(m, scope = . ~ ., direction = "both"))
+summary(s)
+# ... or start with minimal model
+m <- lm(data = z, height ~ 1)
+(s <- stepAIC(m, scope = ~ . + age + weight + zombies_killed +
+  years_of_education, direction = "both"))
+summary(s)
+detach(package:MASS)
+```
+
+Note that the `stepAIC()` function, whether we start with the full model more with a null model, has converged (using AIC, in this case) on the same best model we found above through forward and backwards selection by hand - i.e., the model with just **age** and **weight** retained as predictor variables after our process of model selection.
+
+Finally, there's a very helpful model selection package called {AICcmodavg}. You may have noticed the extra "c" in AICc... this is a "corrected" version of AIC that can account for small sample sizes (helpful for most of us in anthropology and biology). It is derived from AIC using the following equation (which you do not need to know!):
+
+$$AIC_c = AIC + \frac{2K^2 + 2K}{n-K-1}$$
+
+where $n$ is sample size and $K$ is the number of parameters in the model. This is, essentially, a version of AIC with greater penalties for models with more parameters. Since the values for AICc and AIC converge as sample size increases, it has been argued that AICc should be the default model testing criterion rather than AIC.
+
+What makes this wrapper especially useful is that the table output of the function very clearly compares AIC values for different models in a way often asked for in publications. Let's take a look using our already-defined models.
+
+```{r}
+library(AICcmodavg)
+aictab(list(m0, m1, m2), c("m0", "m1", "m2"))
+detach(package:AICcmodavg)
+```
+
+We get a few types of output that allow us to directly compare the relative fit of each model: the number of parameters (**k**), the **AICc** scores, and a number of other helpful outputs. **Delta AICc** (or $\Delta_i(AIC)=AIC_i-min(AIC)$) is simply a comparison showing how different each "least-best" model is from the best model in AICc score (i.e., the difference in their AICc scores). **AICcWt** shows us the "weight" of the model at each level (see [here](https://www.rdocumentation.org/packages/qpcR/versions/1.4-0/topics/akaike.weights) for an explanation of what this means). In this case, the best model is the first on the list and is, like in all our other model selection methods, **m2**.
+
+#### Automated Subset Selection and Model Averaging using {MuMIn} {.unnumbered}
+
+An alternative approach to model selection using AIC is provided by using the function `dredge()` in the {MuMIn} package, which explores subsets of a given global model in an automated way. With `dredge()`, we first run a global model that includes all of the terms we want to consider and then we run `dredge()` to fit subsets of that model without having to specify explicitly which submodels we want to run. The `dredge()` function returns a "model selection" table with models ranked in order of increasing AICc (i.e., lowest, or "best", first).
+
+We start by defining a "global.model"...
+
+```{r}
+library(MuMIn)
+m <- lm(data = z,
+  height ~ age + weight + zombies_killed + years_of_education,
+  na.action = "na.fail")
+```
+> **NOTE:** Here, we need to change the "na.action" argument from the default of "na.omit" to "na.fail" to prevent `dredge()` from trying to fit submodels with different data sets than the global model if there are missing values.
+
+> Alternatively, we could set that option globally for our R session before running the global model by using `options(na.action = na.fail)` and then omitting the `na.action=` argument from our call to `lm()`.
+
+> We could also filter our dataset to only include rows where none of the variables of interest have missing data using, e.g., `drop_na()`.
+
+> The command `options()$na.action` shows the current "na.action" option.
+
+We then run `dredge()` to explore a set of submodels...
+
+  - the `m.lim=` argument is optional and sets lower and upper limits on the number of terms to include
+  - the `beta=` argument specifies whether or not and how to standardize the beta coefficients; "none" is the default
+
+```{r}
+mods <- dredge(m, beta = "none", m.lim = c(0, 4))
+class(mods)
+```
+
+The `dredge()` function returns a "model.selection" object summarizing all of the models that were tested. The `get.models()` function can be used to return a list of these models.
+
+```{r}
+(mods.list <- get.models(mods, subset=TRUE))
+```
+
+Running the `coef()` function on the output of `dredge()` returns a table of coefficients from each model, where the rowname is the number of the corresponding model in the "model.selection" object.
+
+```{r}
+coef(mods)
+```
+
+### Averaging Coefficients across Sets of Models
+
+The code below averages beta coefficients for the set of models with **Delta AICc** < 4. Here, we also need to set the argument `fit=TRUE` because `dredge()` does not actually store the model results. The `model.avg()` function returns a "summary.averaging" object.
+
+```{r}
+(mods.avg <- summary(model.avg(mods,
+  subset = delta < 4, fit = TRUE)))
+class(mods.avg)
+```
+
+We can use the `confint()` function to confidence intervals for the averaged coefficient estimates across models...
+
+```{r}
+confint(mods.avg)
+```
+
+> NOTE: The ‘subset’ (or ‘conditional’) average reported is only averaging over models where the term appears. The ‘full’ average reported assumes that a term is included in every model, but the estimate and standard error are set to zero in models where the term is not included.
+
+The code below averages beta coefficients for models in the 95% confidence set, i.e., for cumulative AIC weights up to 95%:
+
+```{r}
+(mods.avg <- summary(model.avg(mods, subset = cumsum(weight) <= 0.95, fit = TRUE)))
+confint(mods.avg)
+```
+
+With the {MuMIn} package loaded, we can use the `plot()` function to make a plot of averaged model coefficients, similar to `plot_summs()` from {jtools}.
+
+```{r}
+plot(mods.avg, full = TRUE, intercept = FALSE)
+plot(mods.avg, full = FALSE, intercept = FALSE)
+```
+
+> NOTE: Omitting the `intercept=` argument or setting it to `TRUE` will include the $\beta0$ coefficient. When `full=TRUE`, coefficient averaging is done over all models in the selected set (for models where a particular parameter does not appear, the corresponding coefficient and its variance are set to zero). When `full=FALSE`, coefficient averaging is done only over models in the selected set where the parameter appears.
+
+Note that, here again, the two key predictors of zombie apocalypse survivor's **height** are **age** and **weight**, and the best models include both of these terms!
+
+```{r}
+#| include: false
+detach(package:MuMIn)
+detach(package:tidyverse)
+```
+
+<hr>
+
+## Concept Review {.unnumbered}
+
+- Model selection is an iterative process, done as part of a regression analysis, where we sort through our explanatory variables and alternative models involving those variables to discern which are best able to account for variation in the response variable
+- There are various criteria for evaluating alternative models, but all rely on comparing the "explanatory value" of more complex models versus less complex models
+- Forward selection evaluates whether adding a variable or interaction among variables to a less complex model increases the explanatory value of the model significantly
+- Backwards selection evaluates whether removing a variable or interaction among variables from a more complex model results in a significant loss of explanatory power

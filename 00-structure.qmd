@@ -1,0 +1,9 @@
+# Structure {.unnumbered}
+
+This course is divided into three main sections.
+
+In **Part I**, we will introduce and practice using the statistical programming software ***R***, the ***RStudio*** integrated development environment, and the ***R*** package ecosystem. We will also cover programming/scripting fundamentals as implemented in ***R*** (functions, flow control) and practice using version control systems (e.g., ***git*** and ***GitHub***) as we build up our skills for conducting reproducible research. We will use all of these tools to practice data wrangling and perform exploratory data analysis and visualizations.
+
+In **Part II**, we will cover basic statistical and probability theory and methods of statistical inference. We will discuss classical null hypothesis significance testing and more contemporary methods based on permutation methods and, if time permits, I may also introduce alternative Bayesian approaches to inference. In this section, we will cover a variety of linear modeling topics, including simple and multivariate regression, ANOVA and ANCOVA, generalized linear modeling, and mixed effects modeling, as well as regression diagnostics and tools for model selection.
+
+Finally, in ***Part III***, I hope to introduce a few additional and more specialized data analysis and visualization topics. Assuming we get there, ***Part III*** will introduce a mish-mash of (hopefully useful and interesting!) topics and tools, e.g., working with geospatial data and phylogenetic trees, network analysis, machine learning, natural language processing, image analysis, etc. Past experience suggests that I am proposing an ambitious amount of material to cover, so we likely will not get to some of these more specialized kinds of analyses. Still, if there’s a topic you are particularly excited about exploring, let me know and I will see what we can do!

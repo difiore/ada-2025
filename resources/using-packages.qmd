@@ -1,0 +1,296 @@
+---
+title: "Packages"
+format: html
+editor: source
+editor_options: 
+  chunk_output_type: console
+---
+
+## Working with Packages
+
+For MacOS users, there are two typical locations where new packages can be installed, a **System Library** and a **User Library**.
+
+The System Library is located inside of the ***R.Framework*** (in `/Library/Frameworks/R.framework/Resources/library`) and contains the packages with core functionality for base ***R***. This system-wide directory is the default location for new package installation for those users with computer administrator privileges, and packages installed there will be available to other users.
+
+For users without administrator privileges, new packages are typically installed to a personal **User Library**, which by default is either the directory `~/Library/R/x86_64/x.y/library` (for machines with 64-bit Intel x86 processors) or `~/Library/R/arm64/x.y/library` (for machines with 64-bit ARM processors, such as recent M-series model), where `x.y` denotes the ***R*** version. Packages installed to an particular user's **User Library** are not accessible to other users.
+
+See <https://cran.r-project.org/bin/macosx/RMacOSX-FAQ.html#How-to-install-packages> for more details.
+
+## Preliminaries
+
+### Restarting an *R* Session with a Clean Environment
+
+```{r}
+rm(list=ls()) # removes all objects from the Global Environment
+
+rstudioapi::executeCommand("restartR") # starts a fresh R session with no packages loaded, but reloads the current the Global Environment objects
+```
+
+For the purposes of illustrating how we can work with sets of packages, we will create a character vector of package names...
+
+```{r}
+# These are all core {tidyverse} packages
+packages <- c("dplyr",
+              "forcats",
+              "ggplot2",
+              "lubridate",
+              "purrr",
+              "readr",
+              "stringr",
+              "tibble",
+              "tidyr")
+```
+
+## Package Management with Base *R*
+
+### Installing, Removing, and Updating Packages
+
+```{r}
+# To install a single package...
+install.packages("dplyr")
+```
+
+Packages are, by default, installed into the first element that appears in the `.libPaths()` function from the **{base}** package, which is typically a user's personal **User Library**. Alternatively, the library into which new packages are installed can be specified using the `lib` argument to `install.packages()`.
+
+```{r}
+# To remove a single package...
+remove.packages("dplyr")
+
+# To install one or more packages...
+install.packages(packages)
+
+# To remove one or more packages...
+remove.packages(packages)
+
+# To generate a data frame of all currently installed packages and their versions...
+installed_packages <- data.frame (
+  package = installed.packages()[,1],
+  version = installed.packages()[,3]
+  )
+
+# To check whether any of a vector of package names is not yet installed we create a boolean vector equal in length to our vector of package names...
+installed <- packages %in% rownames(installed.packages())
+
+# ... and then install any that are not installed
+if (any(installed == FALSE)) {
+  install.packages(packages[!installed])
+}
+
+# To update any installed packages...
+update.packages()
+```
+
+> Note: The functions `install.packages()` and `remove.packages()` both take a single package name in quotation marks or a character vector of package names as an argument. The function `update.packages()` does not take an argument as it checks for updates for all currently installed packages in all library locations.
+
+### Loading Packages
+
+Installing packages simply places them into a standard location (the **System Library** or default **User Library**, or some other directory that you specify) on your computer. To actually use the functions they contain in an ***R*** session, you need to also load them into the ***R*** workspace.
+
+To load a package, we run the function `library()` or `require()` with the package name (either in quotation marks or as a "bare" name) as an argument. These functions can only take a single package name as an argument, so loading multiple packages in base ***R*** requires multiple `library()` or `require()` calls. See below, however, for more efficient ways to install and/or load multiple packages at once using the **{easypackages}**, **{pacman}**, **{librarian}**, or **{Require}** packages.
+
+The `require()` function is nearly identical to the `library()` function except that the latter throws an error if a package is not installed, while the former returns a value of TRUE or FALSE depending on whether the package was found by ***R*** and could be loaded successfully. The The `require()` is thus safer to use inside of functions because it will not throw an error if a package is not installed.
+
+To remove a package from the workspace and make its functionality unavailable, we use the function `detach()` with the argument `name` set to `package:` plus the name of the package to remove and with the `unload` argument set to TRUE. If the latter is set to FALSE or if left unspecified, then the package's namespace will not be unloaded, and the functions in the package may or may not be accessible. In general, we want to always unload a package's namespace when we detach the package.
+
+```{r}
+# To load a single package...
+library(dplyr)
+
+# To detach and unload a single package...
+detach(package:dplyr, unload = TRUE)
+```
+
+The functions `library()`, `require()`, and `detach()` all take a single package name (or, in the case of `detach()`, a single value for `package:packagename` as an argument) and allow the package name to be passed either in quotation marks or a "bare" name.
+
+> Note: Removing (i.e., uninstalling) a package after it has been loaded into ***R*** does not formally detach or unload its namespace or its functionality, but that functionality may be compromised if the package no longer exists! It is good practice to not remove a package without detaching and unloading its namespace first,
+
+### Shortcut to Installing and Loading a Package
+
+The following code snippet uses the `require()` function to check if a package is already installed on your computer and, if not, to install and load it. The snippet uses the negation operator (`!`) to install the package when the `require()` function returns a value of FALSE, which indicates that the package was not found by ***R*** and is not already installed. As noted above, if the package is already installed and loads successfully, then the `require()` function returns a value of TRUE as the action of this function is to search for and load the specified package.
+
+```{r}
+# To install a package if it is not already installed and load it...
+if (!require("dplyr")) {
+  install.packages("dplyr", dependencies = TRUE)
+  library(dplyr)
+}
+```
+
+> Note: If the package is not already installed, this snippet will throw a warning that "there is no package called <packagename>". That is to be expected and is not a cause for concern. If the package is already installed, then no warning will be generated.
+
+## Other Packages for Package Management
+
+### The {easypackages} package
+
+The **{easypackages}** packages facilitates installing and loading multiple packages by introducing two helper functions that allow you to either install (via the `packages()` function) or load (via the `libraries()` function) multiple packages at once. Both functions take as arguments either a comma-separated set of package names, in quotation marks, or a character vector of package names.
+
+```{r}
+rstudioapi::executeCommand("restartR")
+
+if (!require("easypackages")) {
+  install.packages("easypackages", dependencies = TRUE)
+  library(easypackages)
+}
+
+# To install multiple packages...
+easypackages::install_packages(packages)
+
+# To load multiple packages...
+easypackages::libraries(packages)
+```
+
+> Note: When called, the `easypackages::packages()` function, like the `install.packages()` function, reinstalls packages even if they already have been installed. This is often unnecessary and a waste of time and computing energy.
+
+### The {pacman} package
+
+The **{pacman}** package contains tools to perform common tasks associated with add-on packages. It wraps library loading and detaching and other package-related functions together and names them in a consistent fashion. You can pass either a character vector of package names (as you can with **{easypackage}**) or a comma-separated bare package names to the **{pacman}** functions, but if passing a character vector of names, you need to include the argument `character.only = TRUE`.
+
+```{r}
+rstudioapi::executeCommand("restartR")
+
+if (!require("pacman")) {
+  install.packages("pacman", dependencies = TRUE)
+  library(pacman)
+}
+
+# To list the functions in a package...
+pacman::p_funs("pacman")
+
+# To list all loaded packages...
+pacman::p_loaded() # excluding base R packages
+pacman::p_loaded(all = TRUE) # including base R packages
+
+# To check for whether specific packages are loaded...
+pacman::p_loaded(packages, character.only = TRUE)
+
+# To install and load a character vector of package names...
+## If a particular package is not installed, p_load() will first install it and then load it
+## If a package is already installed, the installation step is skipped
+pacman::p_load(packages, character.only = TRUE)
+
+# To unload a character vector of package names...
+pacman::p_unload(packages, character.only = TRUE)
+
+# To detach and unload all currently loaded packages, except for those in base R...
+pacman::p_unload(pacman::p_loaded(), character.only = TRUE)
+```
+
+### The {librarian} package
+
+The **{librarian}** package is very similar to **{pacman}** and and also contains tools to perform common tasks associated with add-on packages. Like **{pacman}**, it wraps library loading and detaching and other package-related functions together and names them in a consistent fashion. You can pass either a character vector of package names or comma-separated bare package names to the **{librarian}** functions.
+
+See <https://github.com/DesiQuintans/librarian> for more details.
+
+```{r}
+rstudioapi::executeCommand("restartR")
+
+if (!require("librarian")) {
+  install.packages("librarian", dependencies = TRUE)
+  library(librarian)
+}
+
+# To list loaded packages, including base R packages
+librarian::check_attached()
+
+# To check for whether specific packages are loaded...
+librarian::check_attached(packages) 
+
+# To install and load a character vector of package names...
+## If a package is not installed, shelf() will first install it and then load it
+## If a package is already installed, the installation step is skipped
+librarian::shelf(packages)
+
+# To install, but not load, a character vector of package names...
+## Again, if a package is already installed, the installation step is skipped
+librarian::stock(packages)
+
+# To unload a character vector of package names...
+librarian::unshelf(packages)
+
+# To unload all currently loaded packages, except base R packages...
+librarian::unshelf(everything = TRUE)
+```
+
+### The {Require} package
+
+The **{Require}** package also provides some similar functionality. With the `Require()` function, packages passed to the function in a character vector will be installed if not already installed and will also be loaded, unless the `require` argument is set to FALSE, in which case they will only be installed.
+
+```{r}
+rstudioapi::executeCommand("restartR")
+
+if (!require("Require")) {
+  install.packages("Require", dependencies = TRUE)
+  library(Require)
+}
+
+# To install multiple packages...
+## If a package is not installed, Require() will first install it and then load it
+## If a package is already installed, the installation step is skipped
+Require::Require(packages, require = FALSE)
+
+# To install and load multiple packages...
+Require::Require(packages)
+```
+
+> Note: The **{Require}** package has a `detachAll()` function, but for a variety of reasons it does a poorer job of detaching packages successfully than either `pacman::p_unload()` or `librarian::unshelf()`.
+
+## Conflicts
+
+When packages are loaded into ***R***, "conflicts" can occur because they contain functions with the same name loaded in different namespaces. For example, both the base **{stats}** package and the **{dplyr}** package contain a function called `filter()`. When you load **{dplyr}** after starting an ***R*** session, this creates a conflict, but depending on how the package is loaded, you may or may not notice that a conflict has occurred.
+
+For example, if we load the **{tidyverse}** package with `pacman::p_load(tidyverse)` or `librarian::shelf(tidyverse)`, we are not warned of a conflict between the **filter()** function in **{dplyr}** and base **{stats}**...
+
+```{r}
+rstudioapi::executeCommand("restartR")
+
+if (!require("tidyverse")) {
+  install.packages("tidyverse", dependencies = TRUE)
+  library(tidyverse)
+}
+
+pacman::p_unload(tidyverse) # first make sure the package is unloaded...
+pacman::p_load(tidyverse) # ... and then load it
+
+librarian::unshelf(tidyverse) # first make sure the package is unloaded...
+librarian::shelf(tidyverse) # ... and then load it
+```
+
+... but if we unload and then load the same package with `library(tidyverse)`, we are given a warning message about the conflicting function names:
+
+```{r}
+pacman::p_unload(tidyverse)
+# or 
+librarian::unshelf(tidyverse)
+library(tidyverse)
+```
+
+> Note: ***R*** automatically gives precedence to the version of a function that comes from the more-recently loaded package and namespace, and this is often a source of confusion and error.
+
+The **{conflicted}** package can be used to look at and manage conflicts more explicitly. To use it, load the package at the start of your ***R*** session, before loading other packages. Then, after loading your other packages, when you try to run a function with a conflicted name, ***R*** will report the error. For example...
+
+```{r}
+if (!require("conflicted")) {
+  install.packages("conflicted", dependencies = TRUE)
+  library(conflicted)
+}
+
+library(conflicted)
+library(dplyr)
+filter(mtcars, cyl == 8)
+```
+
+With **{conflicted}** loaded, You can assign which version of a function you want to give precedence with the `conflicts_prefer()` function. Below, we tell ***R*** to give explict precedence to the `filter()` function from **{dplyr}** for the current ***R*** session:
+
+```{r}
+conflicts_prefer(dplyr::filter)
+filter(mtcars, cyl == 8)
+```
+
+Alternatively, we can explicitly redefine the function for use during the ***R*** session:
+
+```{r}
+filter <- dplyr::filter
+filter(mtcars, cyl == 8)
+```
+
+See <https://conflicted.r-lib.org/index.html> for more details.

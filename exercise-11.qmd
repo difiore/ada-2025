@@ -1,0 +1,94 @@
+# Exercise 11 {.unnumbered}
+
+# Practice ANOVA {.unnumbered}
+
+## Learning Objectives {.unnumbered}
+
+- Conduct one-factor and two-factor ANOVA
+- Use permutation-based methods for inference testing
+
+### Preliminaries {.unnumbered}
+
+- Set up a new ***GitHub*** repo in your ***GitHub*** workspace named "exercise-11" and clone that down to your computer as a new ***RStudio*** project. The instructions outlined as **Method 1** in [**Module 6**](#module-06) will be helpful.
+
+- Using the {tidyverse} `read_csv()` function, load the "AVONETdataset1.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/AVONETdataset1.csv) as a "tibble" named **d**. As discussed in class, this is a recently published dataset that compiles morphological measurements and information on various ecological variables and geographic range data for more than 11,000 species of birds.
+
+> **Data source**:
+>
+> Tobias JA, et al. (2022). AVONET: Morphological, ecological and geographical data for all birds. *Ecology Letters* 25: 581–597.
+
+- Winnow the dataset to include only the following variables: **Species1**, **Family1**, **Order1**, **Beak.Length_Culmen**, **Beak.Width**, **Beak.Depth**, **Tarsus.Length**, **Wing.Length**, **Tail.Length**, **Mass**, **Habitat**, **Migration**, **Trophic.Level**, **Trophic.Niche**, **Min.Latitude**, **Max.Latitude**, **Centroid.Latitude**, **Primary.Lifestyle**, and **Range.Size**
+
+- Do a bit of exploratory data analysis with this dataset, e.g., using the {skimr} package. Which of the variables are categorical and which are numeric?
+
+## Challenge 1 {.unnumbered}
+
+### One-Factor ANOVA and Inference {.unnumbered}
+
+### Step 1 {.unnumbered}
+
+- Make boxplots of log(**Mass**) in relation to **Trophic.Level** and **Migration** behavior type. For each plot, drop from the visualization all species records where the categorical variable of interest is missing from the dataset. Also, you will want to convert the variable **Migration** (which is scored as a number: "1", "2", or "3") from class numeric to either being classified as a factor or as a character (string) variable.
+
+### Step 2 {.unnumbered}
+
+- Run linear models using the `lm()` function to look at the relationship between log(**Mass**) and **Trophic.Level** and between log(**Mass**) and **Migration**.
+
+- Examine the output of the resultant linear models. Is log(**Mass**) associated with either **Trophic.Level** or **Migration** category? That is, in the global test of significance, is the F statistic large enough to reject the null hypothesis of an F value of zero?
+
+- Given the regression coefficients returned for your **Migration** model, which **Migration** categor(ies) are different than the reference level? What level is the reference level? Relevel and assess differences among the remaining pair of **Migration** categories.
+
+### Step 3 {.unnumbered}
+
+- Conduct a post-hoc Tukey Honest Significant Differences test to also evaluate which **Migration** categories differ "significantly" from one another (see [**Module 20**](#module-20)).
+
+### Step 4 {.unnumbered}
+
+- Use a permutation approach to inference to generate a null distribution of F statistic values for the model of log(**Mass**) in relation to **Trophic.Level** and calculate a p value for your original F statistic. You can do this either by programming your own permutation test (e.g., by shuffling values for the predictor or response variable among observations and calculating an F statistic for each replicate) or by using the {infer} workflow and setting `calculate(stat="F")`.
+
+## Challenge 2 {.unnumbered}
+
+### Data Wrangling, One- and Two-Factor ANOVA {.unnumbered}
+
+### Step 1 {.unnumbered}
+
+- Create the following two new variables and add them to AVONET dataset:
+  - **Relative beak length**, which you should calculate as the *residual* of log(**Beak.Length_Culmen**) on log(**Mass**).
+  - **Relative tarsus length**, which you should calculate as the *residual* of log(**Tarsus.Length**) on log(**Mass**).
+
+### Step 2 {.unnumbered}
+
+- Make a boxplot or violin plot of your new relative tarsus length variable in relation to **Primary.Lifestyle** and of your new relative beak length variable in relation to **Trophic.Niche**
+
+### Step 3 {.unnumbered}
+
+- Run ANOVA analyses to look at the association between geographic range size and the variable **Migration**. You should first drop those observations for which **Migration** is not scored and also look at the distribution of the variable **Range.Size** to decide whether and how it might need to be transformed. Based on the global model, is range size associated with form of migration? How much of the variance in your measure of range size is associated with **Migration** behavior style?
+
+- Given the regression coefficients returned in the output of the model, which **Migration** categor(ies) are different than the reference level? What level is the reference level? Relevel and assess differences among the remaining pair of **Migration** categories. Also conduct a post-hoc Tukey Honest Significant Differences test to also evaluate which **Migration** categories differ "significantly" from one another (see [**Module 20**](#module-20)).
+
+### Step 4 {.unnumbered}
+
+- Winnow your original data to just consider birds from the Infraorder "Passeriformes" (song birds).
+
+- Run separate one-factor ANOVA analyses to look at the association between [1] relative beak length and **Primary.Lifestyle** and between [2] relative beak length and **Trophic.Level**. In doing so...
+
+  - Make boxplots of response variable by each predictor and by the combination of predictors.
+
+  - Run linear models for each predictor separately and interpret the model output.
+
+### Step 5 {.unnumbered}
+
+- Run a two-factor model to look at the association between relative beak length and both **Primary.Lifestyle** and **Trophic.Level** among the passeriforms. Based on the model output, what would you conclude about how relative beak length is related to these two variables?
+
+### Step 6 {.unnumbered}
+
+- Finally, run an additional two-way model with the same dataset and predictors, but adding the possibility of an interaction term. To do this, you should modify your model formula using the colon operator (`:`) to specify the interaction, e.g., relative beak length ~ **Primary.Lifestyle** + **Trophic.Level** + **Primary.Lifestyle:Trophic.Level**. Based on the model output, what would you now conclude about how relative beak length is related to these two variables?
+
+### Step 7 {.unnumbered}
+
+- Use the `interaction.plot()` function to visualize the interaction between **Primary.Lifestyle** and **Trophic.Level** (see [**Module 20**](#module-20)).
+
+## Additional Steps? {.unnumbered}
+
+In the exercise above, we really did not do any checking with this dataset to see if the data meet the primary assumptions for standard linear regression and ANOVA, which are that variables/residuals within each grouping level are roughly normally distributed and have roughly equal variances. Sample sizes within each grouping level should also be roughly equal. As noted in [**Module 20**](#module-20), a general rule of thumb for "equal" variances is to compare the largest and smallest within-grouping level standard deviations and, if this value is less than 2, then it is often reasonable to presume the assumption may not be violated.
+
+Use this approach to see whether variances in across groups in your various models (e.g., for **relative beak length ~ trophic level**) are roughly equal. Additionally, do a visual check of whether observations and model residuals within groups look to be normally distributed.

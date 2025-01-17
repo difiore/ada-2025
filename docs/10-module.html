@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.548">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Applied Data Analysis - 10&nbsp; Data Wrangling</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./11-module.html" rel="next">
+<link href="./09-module.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-module.html">Part I - Using <strong><em>R</em></strong> and <strong><em>RStudio</em></strong></a></li><li class="breadcrumb-item"><a href="./10-module.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Wrangling</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Applied Data Analysis</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Preliminaries</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-logistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Logistics</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-structure.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Structure</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-course-schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Schedule</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-typography-and-formatting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Typography and Formatting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-programming-style-guide.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Programming Style Guide</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Part I - Using <strong><em>R</em></strong> and <strong><em>RStudio</em></strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Getting Started with <strong><em>R</em></strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting Started with <strong><em>RStudio</em></strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Extending the Functionality of <strong><em>R</em></strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fundamentals of the <strong><em>R</em></strong> Language</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Basics of Version Control</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reproducible Research</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Additional Data Structures in <strong><em>R</em></strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Getting Data into <strong><em>R</em></strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-module.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-module.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functions and Flow Control</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Exercises</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercise-01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 01</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Assignments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./data-analysis-replication-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Data Analysis Replication</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">References</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">List of Packages Used</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link active" data-scroll-target="#objectives"><span class="header-section-number">10.1</span> Objectives</a></li>
+  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link" data-scroll-target="#preliminaries"><span class="header-section-number">10.2</span> Preliminaries</a></li>
+  <li><a href="#data-wrangling-using-dplyr" id="toc-data-wrangling-using-dplyr" class="nav-link" data-scroll-target="#data-wrangling-using-dplyr"><span class="header-section-number">10.3</span> Data Wrangling Using {dplyr}</a>
+  <ul class="collapse">
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><code>filter()</code></a></li>
+  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><code>select()</code></a></li>
+  <li><a href="#arrange" id="toc-arrange" class="nav-link" data-scroll-target="#arrange"><code>arrange()</code></a></li>
+  <li><a href="#rename" id="toc-rename" class="nav-link" data-scroll-target="#rename"><code>rename()</code></a></li>
+  <li><a href="#mutate" id="toc-mutate" class="nav-link" data-scroll-target="#mutate"><code>mutate()</code></a></li>
+  <li><a href="#summarize-and-group_by" id="toc-summarize-and-group_by" class="nav-link" data-scroll-target="#summarize-and-group_by"><code>summarize()</code> and <code>group_by()</code></a></li>
+  </ul></li>
+  <li><a href="#other-useful-dplyr-functions" id="toc-other-useful-dplyr-functions" class="nav-link" data-scroll-target="#other-useful-dplyr-functions"><span class="header-section-number">10.4</span> Other Useful {dplyr} Functions</a></li>
+  <li><a href="#joining-tables" id="toc-joining-tables" class="nav-link" data-scroll-target="#joining-tables"><span class="header-section-number">10.5</span> Joining Tables</a>
+  <ul class="collapse">
+  <li><a href="#inner-joins" id="toc-inner-joins" class="nav-link" data-scroll-target="#inner-joins">Inner Joins</a></li>
+  <li><a href="#outer-joins" id="toc-outer-joins" class="nav-link" data-scroll-target="#outer-joins">Outer Joins</a></li>
+  <li><a href="#other-joins" id="toc-other-joins" class="nav-link" data-scroll-target="#other-joins">Other Joins</a></li>
+  </ul></li>
+  <li><a href="#chaining-and-piping" id="toc-chaining-and-piping" class="nav-link" data-scroll-target="#chaining-and-piping"><span class="header-section-number">10.6</span> Chaining and Piping</a>
+  <ul class="collapse">
+  <li><a href="#challenge" id="toc-challenge" class="nav-link" data-scroll-target="#challenge">CHALLENGE</a></li>
+  </ul></li>
+  <li><a href="#dot-syntax-and-the-pipe" id="toc-dot-syntax-and-the-pipe" class="nav-link" data-scroll-target="#dot-syntax-and-the-pipe"><span class="header-section-number">10.7</span> Dot Syntax and the Pipe</a></li>
+  <li><a href="#pivoting-data-between-long-and-wide-formats" id="toc-pivoting-data-between-long-and-wide-formats" class="nav-link" data-scroll-target="#pivoting-data-between-long-and-wide-formats"><span class="header-section-number">10.8</span> Pivoting Data between Long and Wide Formats</a></li>
+  <li><a href="#useful-related-packages" id="toc-useful-related-packages" class="nav-link" data-scroll-target="#useful-related-packages"><span class="header-section-number">10.9</span> Useful Related Packages</a></li>
+  <li><a href="#concept-review" id="toc-concept-review" class="nav-link" data-scroll-target="#concept-review">Concept Review</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-module.html">Part I - Using <strong><em>R</em></strong> and <strong><em>RStudio</em></strong></a></li><li class="breadcrumb-item"><a href="./10-module.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Wrangling</span></a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span id="module-10" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Wrangling</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="objectives" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="objectives"><span class="header-section-number">10.1</span> Objectives</h2>
+<blockquote class="blockquote">
+<p>The objective of this module to introduce you to data wrangling and transformation using the {dplyr} and {tidyr} packages, which are part of the {tidyverse} family.</p>
+</blockquote>
+</section>
+<section id="preliminaries" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="preliminaries"><span class="header-section-number">10.2</span> Preliminaries</h2>
+<ul>
+<li>Install (but do not load yet) this package in <strong><em>R</em></strong>: <a href="https://cran.r-project.org/web/packages/tidylog/tidylog.pdf">{tidylog}</a></li>
+<li>Install and load this package: <a href="https://cran.r-project.org/web/packages/magrittr/magrittr.pdf">{magrittr}</a></li>
+<li>Load {tidyverse}</li>
+<li>Load in the KamilarAndCooper dataset we used in <a href="09-module.html"><strong>Module 09</strong></a> as a “tibble” named <strong>d</strong></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/difiore/ada-datasets/main/KamilarAndCooperData.csv"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(f, <span class="at">col_names =</span> <span class="cn">TRUE</span>)  <span class="co"># creates a 'tibble'</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 6 × 44
+##   Scientific_Name             Family        Genus Species Brain_Size_Species_M…¹
+##   &lt;chr&gt;                       &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;                    &lt;dbl&gt;
+## 1 Allenopithecus_nigroviridis Cercopitheci… Alle… nigrov…                   58.0
+## 2 Allocebus_trichotis         Cercopitheci… Allo… tricho…                   NA  
+## 3 Alouatta_belzebul           Atelidae      Alou… belzeb…                   52.8
+## 4 Alouatta_caraya             Atelidae      Alou… caraya                    52.6
+## 5 Alouatta_guariba            Atelidae      Alou… guariba                   51.7
+## 6 Alouatta_palliata           Atelidae      Alou… pallia…                   49.9
+## # ℹ abbreviated name: ¹​Brain_Size_Species_Mean
+## # ℹ 39 more variables: Brain_Size_Female_Mean &lt;dbl&gt;, Brain_size_Ref &lt;chr&gt;,
+## #   Body_mass_male_mean &lt;dbl&gt;, Body_mass_female_mean &lt;dbl&gt;,
+## #   Mass_Dimorphism &lt;dbl&gt;, Mass_Ref &lt;chr&gt;, MeanGroupSize &lt;dbl&gt;,
+## #   AdultMales &lt;dbl&gt;, AdultFemale &lt;dbl&gt;, AdultSexRatio &lt;dbl&gt;,
+## #   Social_Organization_Ref &lt;chr&gt;, InterbirthInterval_d &lt;dbl&gt;, Gestation &lt;dbl&gt;,
+## #   WeaningAge_d &lt;dbl&gt;, MaxLongevity_m &lt;dbl&gt;, LitterSz &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="data-wrangling-using-dplyr" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="data-wrangling-using-dplyr"><span class="header-section-number">10.3</span> Data Wrangling Using {dplyr}</h2>
+<p>The {dplyr} package, included in the {tidyverse}, provides “a flexible grammar of data manipulation” that makes many of the manipulations that we explore in <a href="07-module.html"><strong>Module 07</strong></a> and <a href="09-module.html"><strong>Module 09</strong></a> much easier and much more intuitive!</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/dplyr.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:25.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Among other functions, {dplyr} introduces a set of <em>verbs</em> (<code>filter()</code>, <code>select()</code>, <code>arrange()</code>, <code>rename()</code>, <code>mutate()</code>, <code>summarize()</code>, and <code>group_by()</code>) that can be used to perform useful operations on “tibbles” and related tabular data structures (e.g., normal data frames and data tables). Before using {dplyr} for summarizing data and producing aggregate statistics, let’s look in general at what we can do with these verbs…</p>
+<section id="filter" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="filter"><code>filter()</code></h3>
+<p>The <code>filter()</code> function lets us pull out rows from a data frame that meet a particular criterion or set of criteria:</p>
+<div class="cell" data-layout-align="center" data-out_width="80%">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/filter.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="422"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="color:#787878; font-size: 14px;">
+<center>
+<p>FROM: Baumer et al.&nbsp;(2017). <em>Modern Data Science with R.</em> Chapman and Hall/CRC.</p>
+</center>
+<p><br></p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selecting rows..</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, Family <span class="sc">==</span> <span class="st">"Hominidae"</span> <span class="sc">&amp;</span> Mass_Dimorphism <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 3 × 44
+##   Scientific_Name Family    Genus   Species  Brain_Size_Species_Mean
+##   &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;                      &lt;dbl&gt;
+## 1 Gorilla_gorilla Hominidae Gorilla gorilla                     490.
+## 2 Pongo_abelii    Hominidae Pongo   abelii                      390.
+## 3 Pongo_pygmaeus  Hominidae Pongo   pygmaeus                    377.
+## # ℹ 39 more variables: Brain_Size_Female_Mean &lt;dbl&gt;, Brain_size_Ref &lt;chr&gt;,
+## #   Body_mass_male_mean &lt;dbl&gt;, Body_mass_female_mean &lt;dbl&gt;,
+## #   Mass_Dimorphism &lt;dbl&gt;, Mass_Ref &lt;chr&gt;, MeanGroupSize &lt;dbl&gt;,
+## #   AdultMales &lt;dbl&gt;, AdultFemale &lt;dbl&gt;, AdultSexRatio &lt;dbl&gt;,
+## #   Social_Organization_Ref &lt;chr&gt;, InterbirthInterval_d &lt;dbl&gt;, Gestation &lt;dbl&gt;,
+## #   WeaningAge_d &lt;dbl&gt;, MaxLongevity_m &lt;dbl&gt;, LitterSz &lt;dbl&gt;,
+## #   Life_History_Ref &lt;chr&gt;, GR_MidRangeLat_dd &lt;dbl&gt;, Precip_Mean_mm &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>NOTE:</strong> The first argument of any of the {dplyr} verbs is the <code>.data</code> argument. That is the line of code above is equivalent to <code>s &lt;- filter(.data = d, Family == "Hominidae" &amp; Mass_Dimorphism &gt; 2)</code></p>
+</blockquote>
+</section>
+<section id="select" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="select"><code>select()</code></h3>
+<p>The <code>select()</code> function lets us pull out only particular columns from a data frame:</p>
+<div class="cell" data-layout-align="center" data-out_width="80%">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/select.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="424"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="color:#787878; font-size: 14px;">
+<center>
+<p>FROM: Baumer et al.&nbsp;(2017). <em>Modern Data Science with R.</em> Chapman and Hall/CRC.</p>
+</center>
+<p><br></p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># selecting specific columns...</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">select</span>(d, Family, Genus, Body_mass_male_mean)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 6 × 3
+##   Family          Genus          Body_mass_male_mean
+##   &lt;chr&gt;           &lt;chr&gt;                        &lt;dbl&gt;
+## 1 Cercopithecidae Allenopithecus                6130
+## 2 Cercopithecidae Allocebus                       92
+## 3 Atelidae        Alouatta                      7270
+## 4 Atelidae        Alouatta                      6525
+## 5 Atelidae        Alouatta                      5800
+## 6 Atelidae        Alouatta                      7150</code></pre>
+</div>
+</div>
+</section>
+<section id="arrange" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="arrange"><code>arrange()</code></h3>
+<p>The <code>arrange()</code> function lets us sort a data frame based on a select variable or set of variables:</p>
+<div class="cell" data-layout-align="center" data-out_width="80%">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/arrange.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="424"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="color:#787878; font-size: 14px;">
+<center>
+<p>FROM: Baumer et al.&nbsp;(2017). <em>Modern Data Science with R.</em> Chapman and Hall/CRC.</p>
+</center>
+<p><br></p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reordering a data frame by a set of variables...</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">arrange</span>(d, Family, Genus, Body_mass_male_mean)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 6 × 44
+##   Scientific_Name    Family   Genus    Species   Brain_Size_Species_Mean
+##   &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;                       &lt;dbl&gt;
+## 1 Alouatta_guariba   Atelidae Alouatta guariba                      51.7
+## 2 Alouatta_caraya    Atelidae Alouatta caraya                       52.6
+## 3 Alouatta_seniculus Atelidae Alouatta seniculus                    55.2
+## 4 Alouatta_palliata  Atelidae Alouatta palliata                     49.9
+## 5 Alouatta_belzebul  Atelidae Alouatta belzebul                     52.8
+## 6 Alouatta_pigra     Atelidae Alouatta pigra                        51.1
+## # ℹ 39 more variables: Brain_Size_Female_Mean &lt;dbl&gt;, Brain_size_Ref &lt;chr&gt;,
+## #   Body_mass_male_mean &lt;dbl&gt;, Body_mass_female_mean &lt;dbl&gt;,
+## #   Mass_Dimorphism &lt;dbl&gt;, Mass_Ref &lt;chr&gt;, MeanGroupSize &lt;dbl&gt;,
+## #   AdultMales &lt;dbl&gt;, AdultFemale &lt;dbl&gt;, AdultSexRatio &lt;dbl&gt;,
+## #   Social_Organization_Ref &lt;chr&gt;, InterbirthInterval_d &lt;dbl&gt;, Gestation &lt;dbl&gt;,
+## #   WeaningAge_d &lt;dbl&gt;, MaxLongevity_m &lt;dbl&gt;, LitterSz &lt;dbl&gt;,
+## #   Life_History_Ref &lt;chr&gt;, GR_MidRangeLat_dd &lt;dbl&gt;, Precip_Mean_mm &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>We can also specify the direction in which we want the data frame to be sorted:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># `desc()` can be used to reverse the order</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">arrange</span>(d, <span class="fu">desc</span>(Family), Genus, Species, <span class="fu">desc</span>(Body_mass_male_mean))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 6 × 44
+##   Scientific_Name         Family      Genus      Species  Brain_Size_Species_M…¹
+##   &lt;chr&gt;                   &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;                     &lt;dbl&gt;
+## 1 Tarsius_bancanus        Tarsiidae   Tarsius    bancanus                   3.16
+## 2 Tarsius_dentatus        Tarsiidae   Tarsius    dentatus                  NA   
+## 3 Tarsius_syrichta        Tarsiidae   Tarsius    syrichta                   3.36
+## 4 Cacajao_calvus          Pitheciidae Cacajao    calvus                    76   
+## 5 Cacajao_melanocephalus  Pitheciidae Cacajao    melanoc…                  68.8 
+## 6 Callicebus_donacophilus Pitheciidae Callicebus donacop…                  NA   
+## # ℹ abbreviated name: ¹​Brain_Size_Species_Mean
+## # ℹ 39 more variables: Brain_Size_Female_Mean &lt;dbl&gt;, Brain_size_Ref &lt;chr&gt;,
+## #   Body_mass_male_mean &lt;dbl&gt;, Body_mass_female_mean &lt;dbl&gt;,
+## #   Mass_Dimorphism &lt;dbl&gt;, Mass_Ref &lt;chr&gt;, MeanGroupSize &lt;dbl&gt;,
+## #   AdultMales &lt;dbl&gt;, AdultFemale &lt;dbl&gt;, AdultSexRatio &lt;dbl&gt;,
+## #   Social_Organization_Ref &lt;chr&gt;, InterbirthInterval_d &lt;dbl&gt;, Gestation &lt;dbl&gt;,
+## #   WeaningAge_d &lt;dbl&gt;, MaxLongevity_m &lt;dbl&gt;, LitterSz &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="rename" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="rename"><code>rename()</code></h3>
+<p>The <code>rename()</code> function allows us to change the names of particular columns in a data frame:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># renaming columns...</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">rename</span>(d, <span class="at">Female_Mass =</span> Body_mass_female_mean)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s<span class="sc">$</span>Female_Mass)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## [1] 3180   84 5520 4240 4550 5350</code></pre>
+</div>
+</div>
+</section>
+<section id="mutate" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="mutate"><code>mutate()</code></h3>
+<p>The <code>mutate()</code> function allows us to add new columns to a data frame:</p>
+<div class="cell" data-layout-align="center" data-out_width="80%">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/mutate.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="422"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="color:#787878; font-size: 14px;">
+<center>
+<p>FROM: Baumer et al.&nbsp;(2017). <em>Modern Data Science with R.</em> Chapman and Hall/CRC.</p>
+</center>
+<p><br></p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># and adding new columns...</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">Binomial =</span> <span class="fu">paste</span>(Genus, Species, <span class="at">sep =</span> <span class="st">" "</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s<span class="sc">$</span>Binomial)  <span class="co"># or head(s[['Binomial']])</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## [1] "Allenopithecus nigroviridis" "Allocebus trichotis"        
+## [3] "Alouatta belzebul"           "Alouatta caraya"            
+## [5] "Alouatta guariba"            "Alouatta palliata"</code></pre>
+</div>
+</div>
+</section>
+<section id="summarize-and-group_by" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="summarize-and-group_by"><code>summarize()</code> and <code>group_by()</code></h3>
+<p>The {dplyr} package makes it easy to summarize data using more convenient functions than the {base} function <code>aggregate()</code>, which we looked at in <a href="09-module.html"><strong>Module 09</strong></a>. The <code>summarize()</code> function specifies a list of summary variables that will appear in the output, along with the operations that will be performed on vectors in the data frame to produce those summary variables:</p>
+<div class="cell" data-layout-align="center" data-out_width="80%">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/summarize.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="426"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="color:#787878; font-size: 14px;">
+<center>
+<p>FROM: Baumer et al.&nbsp;(2017). <em>Modern Data Science with R.</em> Chapman and Hall/CRC.</p>
+</center>
+<p><br></p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: # the n() function from {dplyr} returns the number of rows in the data</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># frame</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">summarize</span>(d, <span class="at">n_cases =</span> <span class="fu">n</span>(), <span class="at">avgF =</span> <span class="fu">mean</span>(Body_mass_female_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">avgM =</span> <span class="fu">mean</span>(Body_mass_male_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 1 × 3
+##   n_cases  avgF  avgM
+##     &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     213 5396. 8112.</code></pre>
+</div>
+</div>
+<p>Additionally, the <code>group_by()</code> function allows us to construct these summary variables for sets of observations defined by a particular categorical variable, as we did above with <code>aggregate()</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>byFamily <span class="ot">&lt;-</span> <span class="fu">group_by</span>(d, Family)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: here, n() returns the number of rows in the group being considered</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">summarise</span>(byFamily, <span class="at">n_cases =</span> <span class="fu">n</span>(), <span class="at">avgF =</span> <span class="fu">mean</span>(Body_mass_female_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">avgM =</span> <span class="fu">mean</span>(Body_mass_male_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 14 × 4
+##    Family          n_cases   avgF   avgM
+##    &lt;chr&gt;             &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Atelidae             12  6616.  7895.
+##  2 Cebidae              37   876.  1012.
+##  3 Cercopithecidae      79  6328.  9543.
+##  4 Cheirogalidae         7   186.   193.
+##  5 Daubentonidae         1  2490   2620 
+##  6 Galagidae             7   372.   395.
+##  7 Hominidae             6 53444. 98681.
+##  8 Hylobatidae          11  6682.  6926.
+##  9 Indriidae             9  3887.  3638.
+## 10 Lemuridae            17  1991.  2077.
+## 11 Lepilemuridae         6   814.   792 
+## 12 Lorisidae             8   490.   512.
+## 13 Pitheciidae          10  1768.  1955.
+## 14 Tarsiidae             3   120    131</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="other-useful-dplyr-functions" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="other-useful-dplyr-functions"><span class="header-section-number">10.4</span> Other Useful {dplyr} Functions</h2>
+<ul>
+<li><code>ungroup()</code> - clears group metadata from a table put in place <code>group_by()</code></li>
+<li><code>bind_rows()</code> and <code>bind_cols()</code> - adds rows and columns, respectively, to a dataframe or tibble; when binding rows, if the column names do not match, the column will still be added and missing values filled with <code>NA</code>; when binding columns, the number of rows in each dataframe needs to be the same</li>
+<li><code>pull()</code> - pulls a single variable out of a dataframe as a vector</li>
+<li><code>sample_n()</code> - randomly samples a set of “size=” rows from a dataframe with (“replace=TRUE”) or without (“replace=FALSE”) replacement; this function is being superceded in favor of <code>slice_sample()</code>, where an additional argument (<code>n=</code> or <code>prop=</code>) allows you to specify the number or proportion of rows, respectively, to sample randomly</li>
+<li><code>drop_na()</code> - drops rows from a dataframe that have <code>NA</code> values for any variable names passed as arguments to the function</li>
+<li><code>rowwise()</code> - allows you to explicitly perform functions on a data frame on a row-at-a-time basis, which is useful if a vectorized function does not exit</li>
+</ul>
+<p>A full list of {dplyr} functions and their descriptions is available <a href="https://dplyr.tidyverse.org/reference/index.html">here</a>.</p>
+</section>
+<section id="joining-tables" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="joining-tables"><span class="header-section-number">10.5</span> Joining Tables</h2>
+<p>One of the other major forms of data wrangling that we often need to do is to <strong>combine</strong> variables from different tabular data structures into a new table. This process is often referred to as performing a “mutating join” or simply a “join”.</p>
+<blockquote class="blockquote">
+<p><strong>NOTE:</strong> For those with experience with other database systems, it is related to the “JOIN” commands in SQL.</p>
+</blockquote>
+<p>The process works by matching observations in two different tables by a common key variable and then selecting additional variables of interest to pull from each of the tables. A simple example is the following… suppose we have two tables, one that contains average brain sizes for particular species of primates and one that contains individual body sizes for some of the same species, plus others. In the latter table, too, we may have data from multiple individuals of the same species represented.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>table1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Taxon =</span> <span class="fu">c</span>(<span class="st">"Gorilla"</span>, <span class="st">"Human"</span>, <span class="st">"Chimpanzee"</span>, <span class="st">"Orangutan"</span>, <span class="st">"Baboon"</span>),</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">Avg_Brain_Size =</span> <span class="fu">c</span>(<span class="dv">470</span>, <span class="dv">1100</span>, <span class="dv">350</span>, <span class="dv">340</span>, <span class="dv">140</span>))</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>table1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 5 × 2
+##   Taxon      Avg_Brain_Size
+##   &lt;chr&gt;               &lt;dbl&gt;
+## 1 Gorilla               470
+## 2 Human                1100
+## 3 Chimpanzee            350
+## 4 Orangutan             340
+## 5 Baboon                140</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>table2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Taxon =</span> <span class="fu">c</span>(<span class="st">"Gorilla"</span>, <span class="st">"Gorilla"</span>, <span class="st">"Gorilla"</span>, <span class="st">"Human"</span>, <span class="st">"Human"</span>, <span class="st">"Chimpanzee"</span>,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Orangutan"</span>, <span class="st">"Orangutan"</span>, <span class="st">"Macaque"</span>, <span class="st">"Macaque"</span>, <span class="st">"Macaque"</span>), <span class="at">Body_Weight =</span> <span class="fu">c</span>(<span class="dv">80</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">81</span>, <span class="dv">77</span>, <span class="dv">48</span>, <span class="dv">49</span>, <span class="dv">38</span>, <span class="dv">37</span>, <span class="dv">36</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">6</span>))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>table2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 11 × 2
+##    Taxon      Body_Weight
+##    &lt;chr&gt;            &lt;dbl&gt;
+##  1 Gorilla             80
+##  2 Gorilla             81
+##  3 Gorilla             77
+##  4 Human               48
+##  5 Human               49
+##  6 Chimpanzee          38
+##  7 Orangutan           37
+##  8 Orangutan           36
+##  9 Macaque              6
+## 10 Macaque              7
+## 11 Macaque              6</code></pre>
+</div>
+</div>
+<section id="inner-joins" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="inner-joins">Inner Joins</h3>
+<p>An <em>inner join</em> or <em>equijoin</em> matches up sets of observations between two tables whenever their keys are equal. The output of an inner join is a new data frame that contains all rows from the left-hand (<em>x</em>) and right-hand (<em>y</em>) tables where there are matching values in the key column, plus all columns from <em>x</em> and <em>y</em>. If there are multiple matches between the tables, all combination of the matches are returned. This is represented schematically below:</p>
+<div class="cell" data-layout-align="center" data-out_width="80%">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/inner_join.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="338"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="color:#787878; font-size: 14px;">
+<center>
+<p>FROM: Wickham &amp; Grolemund (2017). <em>R for Data Science.</em> O’Reilly Media, Inc.</p>
+</center>
+<p><br></p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(table1, table2, <span class="at">by =</span> <span class="st">"Taxon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 8 × 3
+##   Taxon      Avg_Brain_Size Body_Weight
+##   &lt;chr&gt;               &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Gorilla               470          80
+## 2 Gorilla               470          81
+## 3 Gorilla               470          77
+## 4 Human                1100          48
+## 5 Human                1100          49
+## 6 Chimpanzee            350          38
+## 7 Orangutan             340          37
+## 8 Orangutan             340          36</code></pre>
+</div>
+</div>
+</section>
+<section id="outer-joins" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="outer-joins">Outer Joins</h3>
+<p>While an inner join keeps only observations that appear in both tables, different flavors of <em>outer joins</em> keep observations that appear in at least one of the tables. There are three types of outer joins:</p>
+<ul>
+<li>A <em>left join</em> returns all rows from the left-hand table, <strong>x</strong>, and all columns from <strong>x</strong> and <strong>y</strong>. Rows in <strong>x</strong> with no match in <strong>y</strong> will have <code>NA</code> values in the new columns from the <strong>y</strong> table. If there are multiple matches between <strong>x</strong> and *<strong>y</strong>, all combinations of the matches are returned.</li>
+<li>A <em>right join</em> returns all rows from the right-hand table, <strong>y</strong>, and all columns from <strong>x</strong> and <strong>y</strong>. Rows in <strong>y</strong> with no match in <strong>x</strong> will have <code>NA</code> values in the new columns from the <strong>x</strong> table. If there are multiple matches between <strong>x</strong> and <strong>y</strong>, all combinations of the matches are returned.</li>
+<li>A <em>full join</em> returns all rows and all columns in both the left-hand (<strong>x</strong>) and right-hand (<strong>y</strong>) tables, joining them where there are matches. Where there are not matching values, the join returns <code>NA</code> for the columns from table where they are missing.</li>
+</ul>
+<p>The following figure shows a schematic representation of these various types of outer joins:</p>
+<div class="cell" data-layout-align="center" data-out_width="60%">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/outer_joins.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="355"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="color:#787878; font-size: 14px;">
+<center>
+<p>FROM: Wickham &amp; Grolemund (2017). <em>R for Data Science.</em> O’Reilly Media, Inc.</p>
+</center>
+<p><br></p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(table1, table2, <span class="at">by =</span> <span class="st">"Taxon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 9 × 3
+##   Taxon      Avg_Brain_Size Body_Weight
+##   &lt;chr&gt;               &lt;dbl&gt;       &lt;dbl&gt;
+## 1 Gorilla               470          80
+## 2 Gorilla               470          81
+## 3 Gorilla               470          77
+## 4 Human                1100          48
+## 5 Human                1100          49
+## 6 Chimpanzee            350          38
+## 7 Orangutan             340          37
+## 8 Orangutan             340          36
+## 9 Baboon                140          NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">right_join</span>(table1, table2, <span class="at">by =</span> <span class="st">"Taxon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 11 × 3
+##    Taxon      Avg_Brain_Size Body_Weight
+##    &lt;chr&gt;               &lt;dbl&gt;       &lt;dbl&gt;
+##  1 Gorilla               470          80
+##  2 Gorilla               470          81
+##  3 Gorilla               470          77
+##  4 Human                1100          48
+##  5 Human                1100          49
+##  6 Chimpanzee            350          38
+##  7 Orangutan             340          37
+##  8 Orangutan             340          36
+##  9 Macaque                NA           6
+## 10 Macaque                NA           7
+## 11 Macaque                NA           6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">full_join</span>(table1, table2, <span class="at">by =</span> <span class="st">"Taxon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 12 × 3
+##    Taxon      Avg_Brain_Size Body_Weight
+##    &lt;chr&gt;               &lt;dbl&gt;       &lt;dbl&gt;
+##  1 Gorilla               470          80
+##  2 Gorilla               470          81
+##  3 Gorilla               470          77
+##  4 Human                1100          48
+##  5 Human                1100          49
+##  6 Chimpanzee            350          38
+##  7 Orangutan             340          37
+##  8 Orangutan             340          36
+##  9 Baboon                140          NA
+## 10 Macaque                NA           6
+## 11 Macaque                NA           7
+## 12 Macaque                NA           6</code></pre>
+</div>
+</div>
+</section>
+<section id="other-joins" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="other-joins">Other Joins</h3>
+<p>There are also two additional join types that may be sometimes be useful… note that these joins only return columns from the left-hand table, <strong>x</strong>.</p>
+<ul>
+<li>A <em>semi_join</em> returns rows from the left-hand table, <strong>x</strong>, where there are matching values in <strong>y</strong>, but keeping just the columns from <strong>x</strong>. A <em>semi_join</em> differs from an <em>inner_join</em> because an <em>inner_join</em> will return a row of <em>x</em> for every matching row of <strong>y</strong> (so some <strong>x</strong> rows can be duplicated), whereas a <em>semi_join</em> will never duplicate rows of <strong>x</strong>.</li>
+<li>An <em>anti_join</em> returns all rows from the left-hand table,<strong>x</strong> where there are not matching values in <strong>y</strong>, keeping just the columns from <strong>x</strong>.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">semi_join</span>(table1, table2, <span class="at">by =</span> <span class="st">"Taxon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 4 × 2
+##   Taxon      Avg_Brain_Size
+##   &lt;chr&gt;               &lt;dbl&gt;
+## 1 Gorilla               470
+## 2 Human                1100
+## 3 Chimpanzee            350
+## 4 Orangutan             340</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anti_join</span>(table1, table2, <span class="at">by =</span> <span class="st">"Taxon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 1 × 2
+##   Taxon  Avg_Brain_Size
+##   &lt;chr&gt;           &lt;dbl&gt;
+## 1 Baboon            140</code></pre>
+</div>
+</div>
+<p>The cheatsheet on <a href="cheatsheets/data-transformation.pdf">Data Transformation with {dplyr}</a> provides a nice overview of these and additional data wrangling functions included the {dplyr} package.</p>
+</section>
+</section>
+<section id="chaining-and-piping" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="chaining-and-piping"><span class="header-section-number">10.6</span> Chaining and Piping</h2>
+<p>One other cool thing about the {dplyr} package is that it provides a convenient way to chain together operations on a data frame using the “forward pipe” operator (<code>%&gt;%</code>). The <code>%&gt;%</code> operator basically takes what is on the left-hand side (LHS) of the operator and directly applies the function call on the right-hand side (RHS) of the operator to it. That is, it “pipes” what is on the LHS of the operator directly to the first argument of the function on the right. This process allows us to build of chains of successive operations, each one being applied to the outcome of the previous operation in the chain.</p>
+<div class="cell" data-layout-align="center" data-out_width="25%">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/pipe.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="1103"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center" data-out_width="25%">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/MagrittePipe.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="189"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>EXAMPLE:</strong></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this...</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Scientific_Name, Body_mass_female_mean) <span class="sc">%&gt;%</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 6 × 2
+##   Scientific_Name             Body_mass_female_mean
+##   &lt;chr&gt;                                       &lt;dbl&gt;
+## 1 Allenopithecus_nigroviridis                  3180
+## 2 Allocebus_trichotis                            84
+## 3 Alouatta_belzebul                            5520
+## 4 Alouatta_caraya                              4240
+## 5 Alouatta_guariba                             4550
+## 6 Alouatta_palliata                            5350</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># is equivalent to...</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">select</span>(d, Scientific_Name, Body_mass_female_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 6 × 2
+##   Scientific_Name             Body_mass_female_mean
+##   &lt;chr&gt;                                       &lt;dbl&gt;
+## 1 Allenopithecus_nigroviridis                  3180
+## 2 Allocebus_trichotis                            84
+## 3 Alouatta_belzebul                            5520
+## 4 Alouatta_caraya                              4240
+## 5 Alouatta_guariba                             4550
+## 6 Alouatta_palliata                            5350</code></pre>
+</div>
+</div>
+<p>The forward pipe is useful because it allows us to write and follow code from left to right (as when writing in English), instead of right to left with many nested parentheses.</p>
+<section id="challenge" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="challenge">CHALLENGE</h3>
+<ul>
+<li><p>In <strong>one line of code</strong>, do the following:</p>
+<ul>
+<li>Add a variable, <strong>Binomial</strong> to our data frame <strong>d</strong>, which is a concatenation of the <strong>Genus</strong> and <strong>Species</strong>…</li>
+<li>Trim the data frame to only include the variables <strong>Binomial</strong>, <strong>Family</strong>, <strong>Body_mass_female_mean</strong>, <strong>Body_mass_male_mean</strong> and <strong>Mass_Dimorphism</strong>…</li>
+<li>Group these variables by <strong>Family</strong>…</li>
+<li>Calculate the average value for female body mass, male body mass, and mass dimorphism (remember, you will need to specify <code>na.rm = TRUE</code>…)</li>
+<li>And arrange by <em>decreasing</em> average mass dimorphism.</li>
+</ul></li>
+</ul>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Show Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">Binomial =</span> <span class="fu">paste</span>(Genus, Species, <span class="at">sep =</span> <span class="st">" "</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Binomial, Family, Body_mass_female_mean, Body_mass_male_mean, Mass_Dimorphism) <span class="sc">%&gt;%</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Family) <span class="sc">%&gt;%</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">avgF =</span> <span class="fu">mean</span>(Body_mass_female_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">avgM =</span> <span class="fu">mean</span>(Body_mass_male_mean,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">avgBMD =</span> <span class="fu">mean</span>(Mass_Dimorphism, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(<span class="fu">desc</span>(avgBMD))</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<details><summary>Show Output</summary>
+<pre class="details" data-summary="Show Output"><code>## # A tibble: 14 × 4
+##    Family            avgF   avgM avgBMD
+##    &lt;chr&gt;            &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Hominidae       53444. 98681.  1.81 
+##  2 Cercopithecidae  6328.  9543.  1.49 
+##  3 Atelidae         6616.  7895.  1.23 
+##  4 Tarsiidae         120    131   1.09 
+##  5 Pitheciidae      1768.  1955.  1.09 
+##  6 Cebidae           876.  1012.  1.07 
+##  7 Lemuridae        1991.  2077.  1.06 
+##  8 Daubentonidae    2490   2620   1.05 
+##  9 Lorisidae         490.   512.  1.05 
+## 10 Galagidae         372.   395.  1.05 
+## 11 Hylobatidae      6682.  6926.  1.03 
+## 12 Cheirogalidae     186.   193.  1.02 
+## 13 Lepilemuridae     814.   792   0.980
+## 14 Indriidae        3887.  3638.  0.950</code></pre>
+</details>
+</div>
+</div>
+<p>There are several other, very cool, “special case” pipe operators that are useful in particular situations. These are available from the {magrittr} package. [Actually, the functionality of the forward pipe operator also comes from the {magrittr} package, but it is replicated in {dplyr}.]</p>
+<ul>
+<li>The “tee” pipe (<code>%T&gt;%</code>) allows you to pipe the outcome of a process into a new expression (just like the forward pipe operator does) <em>and</em> to simultaneously return the original value instead of the forward-piped result to an intermediate expression. This is useful, for example, for printing out or plotting intermediate results. In the example below, we filter our data frame for just observations of the genus <em>Alouatta</em>, print those to the screen as an intermediate side effect, and pass the filtered data to the <code>summarise()</code> function.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, Genus <span class="sc">==</span> <span class="st">"Alouatta"</span>) <span class="sc">%T&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">avgF =</span> <span class="fu">mean</span>(Body_mass_female_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 6 × 44
+##   Scientific_Name    Family   Genus    Species   Brain_Size_Species_Mean
+##   &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;                       &lt;dbl&gt;
+## 1 Alouatta_belzebul  Atelidae Alouatta belzebul                     52.8
+## 2 Alouatta_caraya    Atelidae Alouatta caraya                       52.6
+## 3 Alouatta_guariba   Atelidae Alouatta guariba                      51.7
+## 4 Alouatta_palliata  Atelidae Alouatta palliata                     49.9
+## 5 Alouatta_pigra     Atelidae Alouatta pigra                        51.1
+## 6 Alouatta_seniculus Atelidae Alouatta seniculus                    55.2
+## # ℹ 39 more variables: Brain_Size_Female_Mean &lt;dbl&gt;, Brain_size_Ref &lt;chr&gt;,
+## #   Body_mass_male_mean &lt;dbl&gt;, Body_mass_female_mean &lt;dbl&gt;,
+## #   Mass_Dimorphism &lt;dbl&gt;, Mass_Ref &lt;chr&gt;, MeanGroupSize &lt;dbl&gt;,
+## #   AdultMales &lt;dbl&gt;, AdultFemale &lt;dbl&gt;, AdultSexRatio &lt;dbl&gt;,
+## #   Social_Organization_Ref &lt;chr&gt;, InterbirthInterval_d &lt;dbl&gt;, Gestation &lt;dbl&gt;,
+## #   WeaningAge_d &lt;dbl&gt;, MaxLongevity_m &lt;dbl&gt;, LitterSz &lt;dbl&gt;,
+## #   Life_History_Ref &lt;chr&gt;, GR_MidRangeLat_dd &lt;dbl&gt;, Precip_Mean_mm &lt;dbl&gt;, …</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 1 × 1
+##    avgF
+##   &lt;dbl&gt;
+## 1 5217.</code></pre>
+</div>
+</div>
+<ul>
+<li>The “assignment” pipe (<code>%&lt;&gt;%</code>) evaluates the expression on the right-hand side of the pipe operator and reassigns the resultant value to the left-hand side.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, Genus <span class="sc">==</span> <span class="st">"Alouatta"</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>s <span class="sc">%&lt;&gt;%</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Genus, Species)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 6 × 2
+##   Genus    Species  
+##   &lt;chr&gt;    &lt;chr&gt;    
+## 1 Alouatta belzebul 
+## 2 Alouatta caraya   
+## 3 Alouatta guariba  
+## 4 Alouatta palliata 
+## 5 Alouatta pigra    
+## 6 Alouatta seniculus</code></pre>
+</div>
+</div>
+<ul>
+<li>Finally, the “exposition” pipe (<code>%$%</code>) exposes the names <em>within</em> the object on the left-hand side of the pipe to the right-hand side expression.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, Genus <span class="sc">==</span> <span class="st">"Alouatta"</span>) <span class="sc">%$%</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(Genus, <span class="st">" "</span>, Species)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## [1] "Alouatta belzebul"  "Alouatta caraya"    "Alouatta guariba"  
+## [4] "Alouatta palliata"  "Alouatta pigra"     "Alouatta seniculus"</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="dot-syntax-and-the-pipe" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="dot-syntax-and-the-pipe"><span class="header-section-number">10.7</span> Dot Syntax and the Pipe</h2>
+<p>Normally, when we use the forward pipe operator, the LHS of the operator is passed to the first argument of the function on the RHS. Thus, the following are all equivalent:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, Genus <span class="sc">==</span> <span class="st">"Alouatta"</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Genus <span class="sc">==</span> <span class="st">"Alouatta"</span>)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(Genus <span class="sc">==</span> <span class="st">"Alouatta"</span>) <span class="ot">-&gt;</span> s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The behavior of the forward pipe operator means we can use it do something like the following, where <strong>d</strong> is implicitly piped into the <code>data</code> argument for <code>ggplot()</code></p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(Body_mass_female_mean), <span class="at">y =</span> <span class="fu">log</span>(Brain_Size_Species_Mean))) <span class="sc">+</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>## Warning: Removed 42 rows containing missing values or values outside the scale range
+## (`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="10-module_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We can also use dot (<code>.</code>) syntax with the {magrittr} forward pipe operator to pass the LHS of a statement to somewhere other than the first argument of the function on the RHS. Thus…</p>
+<p><code>y %&gt;% function(x, .)</code> is equivalent to <code>function(x, y)</code></p>
+<p>… which means we can do something like this to pipe <strong>d</strong> into a function such as <code>lm()</code> (“linear model”), where the data frame that the function is run on is not the first argument:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lm</span>(<span class="fu">log</span>(Body_mass_female_mean) <span class="sc">~</span> <span class="fu">log</span>(Brain_Size_Species_Mean), <span class="at">data =</span> .)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## 
+## Call:
+## lm(formula = log(Body_mass_female_mean) ~ log(Brain_Size_Species_Mean), 
+##     data = .)
+## 
+## Coefficients:
+##                  (Intercept)  log(Brain_Size_Species_Mean)  
+##                        3.713                         1.135</code></pre>
+</div>
+</div>
+<p>We can also use the {magrittr} pipe’s curly brace (<code>{}</code>) syntax to wrap the RHS of a statement and pass the LHS into several places:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plot</span>(<span class="fu">log</span>(.<span class="sc">$</span>Brain_Size_Species_Mean), <span class="fu">log</span>(.<span class="sc">$</span>Body_mass_female_mean))</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="10-module_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>NOTE:</strong> <strong><em>R</em></strong> recently introduced a “native” pipe operator <code>|&gt;</code> into its {base} syntax. It behaves very similarly to the {magrittr} forward pipe, but does not support dot syntax the same way. It also requires an explicit functions call on the RHS, which means appending <code>()</code> to the end of the function name, rather than just using the name. The first version of the line below using <code>%&gt;%</code> could be used to take the log of all <strong>Brain_Size_Female_Mean</strong> values in <strong>d</strong>, while the second version, using <code>|&gt;</code>, needs to have <code>()</code> appended to the functions calls to work properly.</p>
+</blockquote>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Brain_Size_Female_Mean) <span class="sc">%&gt;%</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    log <span class="sc">%&gt;%</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    head</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 6 × 1
+##   Brain_Size_Female_Mean
+##                    &lt;dbl&gt;
+## 1                   3.98
+## 2                  NA   
+## 3                   3.94
+## 4                   3.87
+## 5                   3.89
+## 6                   3.87</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Brain_Size_Female_Mean) <span class="sc">|&gt;</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">log</span>() <span class="sc">|&gt;</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>## # A tibble: 6 × 1
+##   Brain_Size_Female_Mean
+##                    &lt;dbl&gt;
+## 1                   3.98
+## 2                  NA   
+## 3                   3.94
+## 4                   3.87
+## 5                   3.89
+## 6                   3.87</code></pre>
+</div>
+</div>
+</section>
+<section id="pivoting-data-between-long-and-wide-formats" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="pivoting-data-between-long-and-wide-formats"><span class="header-section-number">10.8</span> Pivoting Data between Long and Wide Formats</h2>
+</section>
+<section id="useful-related-packages" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="useful-related-packages"><span class="header-section-number">10.9</span> Useful Related Packages</h2>
+<p>The {tidylog} package provides wrappers around many {dplyr} and {tidyr} package functions that provide logged feedback on the outcome of those functions, which can be useful for understanding the effects of whatever data wrangling processes we run. For example, running <code>filter()</code> will provide feedback on the number of runs removed and kept as part of a filtering operation…</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidylog)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>## 
+## Attaching package: 'tidylog'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>## The following objects are masked from 'package:dplyr':
+## 
+##     add_count, add_tally, anti_join, count, distinct, distinct_all,
+##     distinct_at, distinct_if, filter, filter_all, filter_at, filter_if,
+##     full_join, group_by, group_by_all, group_by_at, group_by_if,
+##     inner_join, left_join, mutate, mutate_all, mutate_at, mutate_if,
+##     relocate, rename, rename_all, rename_at, rename_if, rename_with,
+##     right_join, sample_frac, sample_n, select, select_all, select_at,
+##     select_if, semi_join, slice, slice_head, slice_max, slice_min,
+##     slice_sample, slice_tail, summarise, summarise_all, summarise_at,
+##     summarise_if, summarize, summarize_all, summarize_at, summarize_if,
+##     tally, top_frac, top_n, transmute, transmute_all, transmute_at,
+##     transmute_if, ungroup</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>## The following objects are masked from 'package:tidyr':
+## 
+##     drop_na, fill, gather, pivot_longer, pivot_wider, replace_na,
+##     separate_wider_delim, separate_wider_position,
+##     separate_wider_regex, spread, uncount</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>## The following object is masked from 'package:stats':
+## 
+##     filter</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compare...</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(d, Family <span class="sc">==</span> <span class="st">"Hominidae"</span> <span class="sc">&amp;</span> Mass_Dimorphism <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to...</span></span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, Family <span class="sc">==</span> <span class="st">"Hominidae"</span> <span class="sc">&amp;</span> Mass_Dimorphism <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>## filter: removed 210 rows (99%), 3 rows remaining</code></pre>
+</div>
+</div>
+<p>Similarly, running <code>sample_n()</code> will give us logged output on that random record sampling process…</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compare...</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">sample_n</span>(d, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to...</span></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(d, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>## sample_n: removed 113 rows (53%), 100 rows remaining</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>tidylog)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>NOTE:</strong> Loading in {tidylog} function will conflict with or “mask” corresponding function names from {dplyr} and {tidyr}. In the examples above, then, to run the {tidyverse} versions of <code>filter()</code> and <code>select_n()</code>, it was necessary to use the <code>::</code> notation to specifically call the {dplyr} version of the functions directly. The {tidylog} versions of these functions run a bit more slowly, so if speed is important, you may not want to use {tidylog}, you may want to call the {dplyr} or {tidyr} functions explicitly after loading {tidylog}, or you may want to simply call the {tidylog} version of a function explicitly.</p>
+</blockquote>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> tidylog<span class="sc">::</span><span class="fu">filter</span>(d, Family <span class="sc">==</span> <span class="st">"Hominidae"</span> <span class="sc">&amp;</span> Mass_Dimorphism <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>## filter: removed 210 rows (99%), 3 rows remaining</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># | include: false</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>magrittr)</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="concept-review" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="concept-review">Concept Review</h2>
+<ul>
+<li>Using {dplyr}: <code>select()</code>, <code>filter()</code>, <code>arrange()</code>, <code>rename()</code>, <code>mutate()</code>, <code>summarise()</code>, <code>group_by()</code></li>
+<li>Chaining and piping with <code>%&gt;%</code> and other pipe operators</li>
+<li>Joining tables: <code>inner_join()</code>, <code>left_join()</code>, <code>right_join()</code>, <code>full_join()</code></li>
+<li>Using the {tidylog} package</li>
+</ul>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./09-module.html" class="pagination-link  aria-label=" &lt;span="" data="" analysis&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Exploratory Data Analysis</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./11-module.html" class="pagination-link" aria-label="<span class='chapter-number'>11</span>&nbsp; <span class='chapter-title'>Functions and Flow Control</span>">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Functions and Flow Control</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb72" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data Wrangling {#module-10}</span></span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objectives</span></span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The objective of this module to introduce you to data wrangling and transformation using the {dplyr} and {tidyr} packages, which are part of the {tidyverse} family.</span></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Preliminaries</span></span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Install (but do not load yet) this package in ***R***: <span class="co">[</span><span class="ot">{tidylog}</span><span class="co">](https://cran.r-project.org/web/packages/tidylog/tidylog.pdf)</span></span>
+<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Install and load this package: <span class="co">[</span><span class="ot">{magrittr}</span><span class="co">](https://cran.r-project.org/web/packages/magrittr/magrittr.pdf)</span></span>
+<span id="cb72-11"><a href="#cb72-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Load {tidyverse}</span>
+<span id="cb72-12"><a href="#cb72-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Load in the KamilarAndCooper dataset we used in <span class="co">[</span><span class="ot">**Module 09**</span><span class="co">](#module-09)</span> as a "tibble" named **d**</span>
+<span id="cb72-13"><a href="#cb72-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-16"><a href="#cb72-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-17"><a href="#cb72-17" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb72-18"><a href="#cb72-18" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb72-19"><a href="#cb72-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb72-20"><a href="#cb72-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb72-21"><a href="#cb72-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-22"><a href="#cb72-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-25"><a href="#cb72-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-26"><a href="#cb72-26" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb72-27"><a href="#cb72-27" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/difiore/ada-datasets/main/KamilarAndCooperData.csv"</span></span>
+<span id="cb72-28"><a href="#cb72-28" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(f, <span class="at">col_names =</span> <span class="cn">TRUE</span>) <span class="co"># creates a "tibble"</span></span>
+<span id="cb72-29"><a href="#cb72-29" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)</span>
+<span id="cb72-30"><a href="#cb72-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-31"><a href="#cb72-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-32"><a href="#cb72-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Wrangling Using {dplyr}</span></span>
+<span id="cb72-33"><a href="#cb72-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-34"><a href="#cb72-34" aria-hidden="true" tabindex="-1"></a>The {dplyr} package, included in the {tidyverse}, provides "a flexible grammar of data manipulation" that makes many of the manipulations that we explore in <span class="co">[</span><span class="ot">**Module 07**</span><span class="co">](#module-07)</span> and <span class="co">[</span><span class="ot">**Module 09**</span><span class="co">](#module-09)</span> much easier and much more intuitive!</span>
+<span id="cb72-35"><a href="#cb72-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-38"><a href="#cb72-38" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-39"><a href="#cb72-39" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb72-40"><a href="#cb72-40" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "25%"</span></span>
+<span id="cb72-41"><a href="#cb72-41" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/dplyr.png"</span>)</span>
+<span id="cb72-42"><a href="#cb72-42" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-43"><a href="#cb72-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-44"><a href="#cb72-44" aria-hidden="true" tabindex="-1"></a>Among other functions, {dplyr} introduces a set of *verbs* (<span class="in">`filter()`</span>, <span class="in">`select()`</span>, <span class="in">`arrange()`</span>, <span class="in">`rename()`</span>, <span class="in">`mutate()`</span>, <span class="in">`summarize()`</span>, and <span class="in">`group_by()`</span>) that can be used to perform useful operations on "tibbles" and related tabular data structures (e.g., normal data frames and data tables). Before using {dplyr} for summarizing data and producing aggregate statistics, let's look in general at what we can do with these verbs...</span>
+<span id="cb72-45"><a href="#cb72-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-46"><a href="#cb72-46" aria-hidden="true" tabindex="-1"></a><span class="fu">### `filter()` {.unnumbered}</span></span>
+<span id="cb72-47"><a href="#cb72-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-48"><a href="#cb72-48" aria-hidden="true" tabindex="-1"></a>The <span class="in">`filter()`</span> function lets us pull out rows from a data frame that meet a particular criterion or set of criteria:</span>
+<span id="cb72-49"><a href="#cb72-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-52"><a href="#cb72-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-53"><a href="#cb72-53" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb72-54"><a href="#cb72-54" aria-hidden="true" tabindex="-1"></a><span class="co">#| out_width: "80%"</span></span>
+<span id="cb72-55"><a href="#cb72-55" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/filter.png"</span>)</span>
+<span id="cb72-56"><a href="#cb72-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-57"><a href="#cb72-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-58"><a href="#cb72-58" aria-hidden="true" tabindex="-1"></a>::: {style="color:#787878; font-size: 14px;"}</span>
+<span id="cb72-59"><a href="#cb72-59" aria-hidden="true" tabindex="-1"></a>&lt;center&gt;</span>
+<span id="cb72-60"><a href="#cb72-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-61"><a href="#cb72-61" aria-hidden="true" tabindex="-1"></a>FROM: Baumer et al. (2017). *Modern Data Science with R.* Chapman and Hall/CRC.</span>
+<span id="cb72-62"><a href="#cb72-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-63"><a href="#cb72-63" aria-hidden="true" tabindex="-1"></a>&lt;/center&gt;</span>
+<span id="cb72-64"><a href="#cb72-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-65"><a href="#cb72-65" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb72-66"><a href="#cb72-66" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb72-67"><a href="#cb72-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-70"><a href="#cb72-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-71"><a href="#cb72-71" aria-hidden="true" tabindex="-1"></a><span class="co"># selecting rows..</span></span>
+<span id="cb72-72"><a href="#cb72-72" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, Family <span class="sc">==</span> <span class="st">"Hominidae"</span> <span class="sc">&amp;</span> Mass_Dimorphism <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
+<span id="cb72-73"><a href="#cb72-73" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s)</span>
+<span id="cb72-74"><a href="#cb72-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-75"><a href="#cb72-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-76"><a href="#cb72-76" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** The first argument of any of the {dplyr} verbs is the </span><span class="in">`.data`</span><span class="at"> argument. That is the line of code above is equivalent to </span><span class="in">`s &lt;- filter(.data = d, Family == "Hominidae" &amp; Mass_Dimorphism &gt; 2)`</span></span>
+<span id="cb72-77"><a href="#cb72-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-78"><a href="#cb72-78" aria-hidden="true" tabindex="-1"></a><span class="fu">### `select()` {.unnumbered}</span></span>
+<span id="cb72-79"><a href="#cb72-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-80"><a href="#cb72-80" aria-hidden="true" tabindex="-1"></a>The <span class="in">`select()`</span> function lets us pull out only particular columns from a data frame:</span>
+<span id="cb72-81"><a href="#cb72-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-84"><a href="#cb72-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-85"><a href="#cb72-85" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb72-86"><a href="#cb72-86" aria-hidden="true" tabindex="-1"></a><span class="co">#| out_width: "80%"</span></span>
+<span id="cb72-87"><a href="#cb72-87" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/select.png"</span>)</span>
+<span id="cb72-88"><a href="#cb72-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-89"><a href="#cb72-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-90"><a href="#cb72-90" aria-hidden="true" tabindex="-1"></a>::: {style="color:#787878; font-size: 14px;"}</span>
+<span id="cb72-91"><a href="#cb72-91" aria-hidden="true" tabindex="-1"></a>&lt;center&gt;</span>
+<span id="cb72-92"><a href="#cb72-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-93"><a href="#cb72-93" aria-hidden="true" tabindex="-1"></a>FROM: Baumer et al. (2017). *Modern Data Science with R.* Chapman and Hall/CRC.</span>
+<span id="cb72-94"><a href="#cb72-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-95"><a href="#cb72-95" aria-hidden="true" tabindex="-1"></a>&lt;/center&gt;</span>
+<span id="cb72-96"><a href="#cb72-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-97"><a href="#cb72-97" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb72-98"><a href="#cb72-98" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb72-99"><a href="#cb72-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-102"><a href="#cb72-102" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-103"><a href="#cb72-103" aria-hidden="true" tabindex="-1"></a><span class="co"># selecting specific columns...</span></span>
+<span id="cb72-104"><a href="#cb72-104" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">select</span>(d, Family, Genus, Body_mass_male_mean)</span>
+<span id="cb72-105"><a href="#cb72-105" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s)</span>
+<span id="cb72-106"><a href="#cb72-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-107"><a href="#cb72-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-108"><a href="#cb72-108" aria-hidden="true" tabindex="-1"></a><span class="fu">### `arrange()` {.unnumbered}</span></span>
+<span id="cb72-109"><a href="#cb72-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-110"><a href="#cb72-110" aria-hidden="true" tabindex="-1"></a>The <span class="in">`arrange()`</span> function lets us sort a data frame based on a select variable or set of variables:</span>
+<span id="cb72-111"><a href="#cb72-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-114"><a href="#cb72-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-115"><a href="#cb72-115" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb72-116"><a href="#cb72-116" aria-hidden="true" tabindex="-1"></a><span class="co">#| out_width: "80%"</span></span>
+<span id="cb72-117"><a href="#cb72-117" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/arrange.png"</span>)</span>
+<span id="cb72-118"><a href="#cb72-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-119"><a href="#cb72-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-120"><a href="#cb72-120" aria-hidden="true" tabindex="-1"></a>::: {style="color:#787878; font-size: 14px;"}</span>
+<span id="cb72-121"><a href="#cb72-121" aria-hidden="true" tabindex="-1"></a>&lt;center&gt;</span>
+<span id="cb72-122"><a href="#cb72-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-123"><a href="#cb72-123" aria-hidden="true" tabindex="-1"></a>FROM: Baumer et al. (2017). *Modern Data Science with R.* Chapman and Hall/CRC.</span>
+<span id="cb72-124"><a href="#cb72-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-125"><a href="#cb72-125" aria-hidden="true" tabindex="-1"></a>&lt;/center&gt;</span>
+<span id="cb72-126"><a href="#cb72-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-127"><a href="#cb72-127" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb72-128"><a href="#cb72-128" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb72-129"><a href="#cb72-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-132"><a href="#cb72-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-133"><a href="#cb72-133" aria-hidden="true" tabindex="-1"></a><span class="co"># reordering a data frame by a set of variables...</span></span>
+<span id="cb72-134"><a href="#cb72-134" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">arrange</span>(d, Family, Genus, Body_mass_male_mean)</span>
+<span id="cb72-135"><a href="#cb72-135" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s)</span>
+<span id="cb72-136"><a href="#cb72-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-137"><a href="#cb72-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-138"><a href="#cb72-138" aria-hidden="true" tabindex="-1"></a>We can also specify the direction in which we want the data frame to be sorted:</span>
+<span id="cb72-139"><a href="#cb72-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-142"><a href="#cb72-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-143"><a href="#cb72-143" aria-hidden="true" tabindex="-1"></a><span class="co"># `desc()` can be used to reverse the order</span></span>
+<span id="cb72-144"><a href="#cb72-144" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">arrange</span>(d, <span class="fu">desc</span>(Family), Genus, Species, <span class="fu">desc</span>(Body_mass_male_mean))</span>
+<span id="cb72-145"><a href="#cb72-145" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s)</span>
+<span id="cb72-146"><a href="#cb72-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-147"><a href="#cb72-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-148"><a href="#cb72-148" aria-hidden="true" tabindex="-1"></a><span class="fu">### `rename()` {.unnumbered}</span></span>
+<span id="cb72-149"><a href="#cb72-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-150"><a href="#cb72-150" aria-hidden="true" tabindex="-1"></a>The <span class="in">`rename()`</span> function allows us to change the names of particular columns in a data frame:</span>
+<span id="cb72-151"><a href="#cb72-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-154"><a href="#cb72-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-155"><a href="#cb72-155" aria-hidden="true" tabindex="-1"></a><span class="co"># renaming columns...</span></span>
+<span id="cb72-156"><a href="#cb72-156" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">rename</span>(d, <span class="st">"Female_Mass"</span> <span class="ot">=</span> Body_mass_female_mean)</span>
+<span id="cb72-157"><a href="#cb72-157" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s<span class="sc">$</span>Female_Mass)</span>
+<span id="cb72-158"><a href="#cb72-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-159"><a href="#cb72-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-160"><a href="#cb72-160" aria-hidden="true" tabindex="-1"></a><span class="fu">### `mutate()` {.unnumbered}</span></span>
+<span id="cb72-161"><a href="#cb72-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-162"><a href="#cb72-162" aria-hidden="true" tabindex="-1"></a>The <span class="in">`mutate()`</span> function allows us to add new columns to a data frame:</span>
+<span id="cb72-163"><a href="#cb72-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-166"><a href="#cb72-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-167"><a href="#cb72-167" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb72-168"><a href="#cb72-168" aria-hidden="true" tabindex="-1"></a><span class="co">#| out_width: "80%"</span></span>
+<span id="cb72-169"><a href="#cb72-169" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/mutate.png"</span>)</span>
+<span id="cb72-170"><a href="#cb72-170" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-171"><a href="#cb72-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-172"><a href="#cb72-172" aria-hidden="true" tabindex="-1"></a>::: {style="color:#787878; font-size: 14px;"}</span>
+<span id="cb72-173"><a href="#cb72-173" aria-hidden="true" tabindex="-1"></a>&lt;center&gt;</span>
+<span id="cb72-174"><a href="#cb72-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-175"><a href="#cb72-175" aria-hidden="true" tabindex="-1"></a>FROM: Baumer et al. (2017). *Modern Data Science with R.* Chapman and Hall/CRC.</span>
+<span id="cb72-176"><a href="#cb72-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-177"><a href="#cb72-177" aria-hidden="true" tabindex="-1"></a>&lt;/center&gt;</span>
+<span id="cb72-178"><a href="#cb72-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-179"><a href="#cb72-179" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb72-180"><a href="#cb72-180" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb72-181"><a href="#cb72-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-184"><a href="#cb72-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-185"><a href="#cb72-185" aria-hidden="true" tabindex="-1"></a><span class="co"># and adding new columns...</span></span>
+<span id="cb72-186"><a href="#cb72-186" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="st">"Binomial"</span> <span class="ot">=</span> <span class="fu">paste</span>(Genus, Species, <span class="at">sep =</span> <span class="st">" "</span>))</span>
+<span id="cb72-187"><a href="#cb72-187" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s<span class="sc">$</span>Binomial) <span class="co"># or head(s[["Binomial"]])</span></span>
+<span id="cb72-188"><a href="#cb72-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-189"><a href="#cb72-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-190"><a href="#cb72-190" aria-hidden="true" tabindex="-1"></a><span class="fu">### `summarize()` and `group_by()` {.unnumbered}</span></span>
+<span id="cb72-191"><a href="#cb72-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-192"><a href="#cb72-192" aria-hidden="true" tabindex="-1"></a>The {dplyr} package makes it easy to summarize data using more convenient functions than the {base} function <span class="in">`aggregate()`</span>, which we looked at in <span class="co">[</span><span class="ot">**Module 09**</span><span class="co">](#module-09)</span>. The <span class="in">`summarize()`</span> function specifies a list of summary variables that will appear in the output, along with the operations that will be performed on vectors in the data frame to produce those summary variables:</span>
+<span id="cb72-193"><a href="#cb72-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-196"><a href="#cb72-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-197"><a href="#cb72-197" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb72-198"><a href="#cb72-198" aria-hidden="true" tabindex="-1"></a><span class="co">#| out_width: "80%"</span></span>
+<span id="cb72-199"><a href="#cb72-199" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/summarize.png"</span>)</span>
+<span id="cb72-200"><a href="#cb72-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-201"><a href="#cb72-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-202"><a href="#cb72-202" aria-hidden="true" tabindex="-1"></a>::: {style="color:#787878; font-size: 14px;"}</span>
+<span id="cb72-203"><a href="#cb72-203" aria-hidden="true" tabindex="-1"></a>&lt;center&gt;</span>
+<span id="cb72-204"><a href="#cb72-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-205"><a href="#cb72-205" aria-hidden="true" tabindex="-1"></a>FROM: Baumer et al. (2017). *Modern Data Science with R.* Chapman and Hall/CRC.</span>
+<span id="cb72-206"><a href="#cb72-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-207"><a href="#cb72-207" aria-hidden="true" tabindex="-1"></a>&lt;/center&gt;</span>
+<span id="cb72-208"><a href="#cb72-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-209"><a href="#cb72-209" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb72-210"><a href="#cb72-210" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb72-211"><a href="#cb72-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-214"><a href="#cb72-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-215"><a href="#cb72-215" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: # the n() function from {dplyr} returns the number of rows in the data frame</span></span>
+<span id="cb72-216"><a href="#cb72-216" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">summarize</span>(</span>
+<span id="cb72-217"><a href="#cb72-217" aria-hidden="true" tabindex="-1"></a>  d,</span>
+<span id="cb72-218"><a href="#cb72-218" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_cases =</span> <span class="fu">n</span>(),</span>
+<span id="cb72-219"><a href="#cb72-219" aria-hidden="true" tabindex="-1"></a>  <span class="at">avgF =</span> <span class="fu">mean</span>(Body_mass_female_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb72-220"><a href="#cb72-220" aria-hidden="true" tabindex="-1"></a>  <span class="at">avgM =</span> <span class="fu">mean</span>(Body_mass_male_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb72-221"><a href="#cb72-221" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb72-222"><a href="#cb72-222" aria-hidden="true" tabindex="-1"></a>s</span>
+<span id="cb72-223"><a href="#cb72-223" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-224"><a href="#cb72-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-225"><a href="#cb72-225" aria-hidden="true" tabindex="-1"></a>Additionally, the <span class="in">`group_by()`</span> function allows us to construct these summary variables for sets of observations defined by a particular categorical variable, as we did above with <span class="in">`aggregate()`</span>.</span>
+<span id="cb72-226"><a href="#cb72-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-229"><a href="#cb72-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-230"><a href="#cb72-230" aria-hidden="true" tabindex="-1"></a>byFamily <span class="ot">&lt;-</span> <span class="fu">group_by</span>(d, Family)</span>
+<span id="cb72-231"><a href="#cb72-231" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: here, n() returns the number of rows in the group being considered</span></span>
+<span id="cb72-232"><a href="#cb72-232" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">summarise</span>(</span>
+<span id="cb72-233"><a href="#cb72-233" aria-hidden="true" tabindex="-1"></a>  byFamily,</span>
+<span id="cb72-234"><a href="#cb72-234" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_cases =</span> <span class="fu">n</span>(),</span>
+<span id="cb72-235"><a href="#cb72-235" aria-hidden="true" tabindex="-1"></a>  <span class="at">avgF =</span> <span class="fu">mean</span>(Body_mass_female_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb72-236"><a href="#cb72-236" aria-hidden="true" tabindex="-1"></a>  <span class="at">avgM =</span> <span class="fu">mean</span>(Body_mass_male_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb72-237"><a href="#cb72-237" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb72-238"><a href="#cb72-238" aria-hidden="true" tabindex="-1"></a>s</span>
+<span id="cb72-239"><a href="#cb72-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-240"><a href="#cb72-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-241"><a href="#cb72-241" aria-hidden="true" tabindex="-1"></a><span class="fu">## Other Useful {dplyr} Functions</span></span>
+<span id="cb72-242"><a href="#cb72-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-243"><a href="#cb72-243" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`ungroup()`</span> - clears group metadata from a table put in place <span class="in">`group_by()`</span></span>
+<span id="cb72-244"><a href="#cb72-244" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`bind_rows()`</span> and <span class="in">`bind_cols()`</span> - adds rows and columns, respectively, to a dataframe or tibble; when binding rows, if the column names do not match, the column will still be added and missing values filled with <span class="in">`NA`</span>; when binding columns, the number of rows in each dataframe needs to be the same</span>
+<span id="cb72-245"><a href="#cb72-245" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pull()`</span> - pulls a single variable out of a dataframe as a vector</span>
+<span id="cb72-246"><a href="#cb72-246" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`sample_n()`</span> - randomly samples a set of "size=" rows from a dataframe with ("replace=TRUE") or without ("replace=FALSE") replacement; this function is being superceded in favor of <span class="in">`slice_sample()`</span>, where an additional argument (<span class="in">`n=`</span> or <span class="in">`prop=`</span>) allows you to specify the number or proportion of rows, respectively, to sample randomly</span>
+<span id="cb72-247"><a href="#cb72-247" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`drop_na()`</span> - drops rows from a dataframe that have <span class="in">`NA`</span> values for any variable names passed as arguments to the function</span>
+<span id="cb72-248"><a href="#cb72-248" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`rowwise()`</span> - allows you to explicitly perform functions on a data frame on a row-at-a-time basis, which is useful if a vectorized function does not exit</span>
+<span id="cb72-249"><a href="#cb72-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-250"><a href="#cb72-250" aria-hidden="true" tabindex="-1"></a>A full list of {dplyr} functions and their descriptions is available <span class="co">[</span><span class="ot">here</span><span class="co">](https://dplyr.tidyverse.org/reference/index.html)</span>.</span>
+<span id="cb72-251"><a href="#cb72-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-252"><a href="#cb72-252" aria-hidden="true" tabindex="-1"></a><span class="fu">## Joining Tables</span></span>
+<span id="cb72-253"><a href="#cb72-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-254"><a href="#cb72-254" aria-hidden="true" tabindex="-1"></a>One of the other major forms of data wrangling that we often need to do is to **combine** variables from different tabular data structures into a new table. This process is often referred to as performing a "mutating join" or simply a "join".</span>
+<span id="cb72-255"><a href="#cb72-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-256"><a href="#cb72-256" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** For those with experience with other database systems, it is related to the "JOIN" commands in SQL.</span></span>
+<span id="cb72-257"><a href="#cb72-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-258"><a href="#cb72-258" aria-hidden="true" tabindex="-1"></a>The process works by matching observations in two different tables by a common key variable and then selecting additional variables of interest to pull from each of the tables. A simple example is the following... suppose we have two tables, one that contains average brain sizes for particular species of primates and one that contains individual body sizes for some of the same species, plus others. In the latter table, too, we may have data from multiple individuals of the same species represented.</span>
+<span id="cb72-259"><a href="#cb72-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-262"><a href="#cb72-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-263"><a href="#cb72-263" aria-hidden="true" tabindex="-1"></a>table1 <span class="ot">&lt;-</span></span>
+<span id="cb72-264"><a href="#cb72-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb72-265"><a href="#cb72-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">Taxon =</span> <span class="fu">c</span>(<span class="st">"Gorilla"</span>, <span class="st">"Human"</span>, <span class="st">"Chimpanzee"</span>, <span class="st">"Orangutan"</span>, <span class="st">"Baboon"</span>),</span>
+<span id="cb72-266"><a href="#cb72-266" aria-hidden="true" tabindex="-1"></a>    <span class="at">Avg_Brain_Size =</span> <span class="fu">c</span>(<span class="dv">470</span>, <span class="dv">1100</span>, <span class="dv">350</span>, <span class="dv">340</span>, <span class="dv">140</span>)</span>
+<span id="cb72-267"><a href="#cb72-267" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb72-268"><a href="#cb72-268" aria-hidden="true" tabindex="-1"></a>table1</span>
+<span id="cb72-269"><a href="#cb72-269" aria-hidden="true" tabindex="-1"></a>table2 <span class="ot">&lt;-</span></span>
+<span id="cb72-270"><a href="#cb72-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(</span>
+<span id="cb72-271"><a href="#cb72-271" aria-hidden="true" tabindex="-1"></a>    <span class="at">Taxon =</span> <span class="fu">c</span>(</span>
+<span id="cb72-272"><a href="#cb72-272" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Gorilla"</span>,</span>
+<span id="cb72-273"><a href="#cb72-273" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Gorilla"</span>,</span>
+<span id="cb72-274"><a href="#cb72-274" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Gorilla"</span>,</span>
+<span id="cb72-275"><a href="#cb72-275" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Human"</span>,</span>
+<span id="cb72-276"><a href="#cb72-276" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Human"</span>,</span>
+<span id="cb72-277"><a href="#cb72-277" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Chimpanzee"</span>,</span>
+<span id="cb72-278"><a href="#cb72-278" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Orangutan"</span>,</span>
+<span id="cb72-279"><a href="#cb72-279" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Orangutan"</span>,</span>
+<span id="cb72-280"><a href="#cb72-280" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Macaque"</span>,</span>
+<span id="cb72-281"><a href="#cb72-281" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Macaque"</span>,</span>
+<span id="cb72-282"><a href="#cb72-282" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Macaque"</span></span>
+<span id="cb72-283"><a href="#cb72-283" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb72-284"><a href="#cb72-284" aria-hidden="true" tabindex="-1"></a>    <span class="at">Body_Weight =</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">81</span>, <span class="dv">77</span>, <span class="dv">48</span>, <span class="dv">49</span>, <span class="dv">38</span>, <span class="dv">37</span>, <span class="dv">36</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">6</span>)</span>
+<span id="cb72-285"><a href="#cb72-285" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb72-286"><a href="#cb72-286" aria-hidden="true" tabindex="-1"></a>table2</span>
+<span id="cb72-287"><a href="#cb72-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-288"><a href="#cb72-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-289"><a href="#cb72-289" aria-hidden="true" tabindex="-1"></a><span class="fu">### Inner Joins {.unnumbered}</span></span>
+<span id="cb72-290"><a href="#cb72-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-291"><a href="#cb72-291" aria-hidden="true" tabindex="-1"></a>An *inner join* or *equijoin* matches up sets of observations between two tables whenever their keys are equal. The output of an inner join is a new data frame that contains all rows from the left-hand (*x*) and right-hand (*y*) tables where there are matching values in the key column, plus all columns from *x* and *y*. If there are multiple matches between the tables, all combination of the matches are returned. This is represented schematically below:</span>
+<span id="cb72-292"><a href="#cb72-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-295"><a href="#cb72-295" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-296"><a href="#cb72-296" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb72-297"><a href="#cb72-297" aria-hidden="true" tabindex="-1"></a><span class="co">#| out_width: "80%"</span></span>
+<span id="cb72-298"><a href="#cb72-298" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/inner_join.png"</span>)</span>
+<span id="cb72-299"><a href="#cb72-299" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-300"><a href="#cb72-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-301"><a href="#cb72-301" aria-hidden="true" tabindex="-1"></a>::: {style="color:#787878; font-size: 14px;"}</span>
+<span id="cb72-302"><a href="#cb72-302" aria-hidden="true" tabindex="-1"></a>&lt;center&gt;</span>
+<span id="cb72-303"><a href="#cb72-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-304"><a href="#cb72-304" aria-hidden="true" tabindex="-1"></a>FROM: Wickham &amp; Grolemund (2017). *R for Data Science.* O'Reilly Media, Inc.</span>
+<span id="cb72-305"><a href="#cb72-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-306"><a href="#cb72-306" aria-hidden="true" tabindex="-1"></a>&lt;/center&gt;</span>
+<span id="cb72-307"><a href="#cb72-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-308"><a href="#cb72-308" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb72-309"><a href="#cb72-309" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb72-310"><a href="#cb72-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-313"><a href="#cb72-313" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-314"><a href="#cb72-314" aria-hidden="true" tabindex="-1"></a><span class="fu">inner_join</span>(table1, table2, <span class="at">by=</span><span class="st">"Taxon"</span>)</span>
+<span id="cb72-315"><a href="#cb72-315" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-316"><a href="#cb72-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-317"><a href="#cb72-317" aria-hidden="true" tabindex="-1"></a><span class="fu">### Outer Joins {.unnumbered}</span></span>
+<span id="cb72-318"><a href="#cb72-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-319"><a href="#cb72-319" aria-hidden="true" tabindex="-1"></a>While an inner join keeps only observations that appear in both tables, different flavors of *outer joins* keep observations that appear in at least one of the tables. There are three types of outer joins:</span>
+<span id="cb72-320"><a href="#cb72-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-321"><a href="#cb72-321" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A *left join* returns all rows from the left-hand table, **x**, and all columns from **x** and **y**. Rows in **x** with no match in **y** will have `NA` values in the new columns from the **y** table. If there are multiple matches between **x** and \***y**, all combinations of the matches are returned.</span>
+<span id="cb72-322"><a href="#cb72-322" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A *right join* returns all rows from the right-hand table, **y**, and all columns from **x** and **y**. Rows in **y** with no match in **x** will have `NA` values in the new columns from the **x** table. If there are multiple matches between **x** and **y**, all combinations of the matches are returned.</span>
+<span id="cb72-323"><a href="#cb72-323" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A *full join* returns all rows and all columns in both the left-hand (**x**) and right-hand (**y**) tables, joining them where there are matches. Where there are not matching values, the join returns <span class="in">`NA`</span> for the columns from table where they are missing.</span>
+<span id="cb72-324"><a href="#cb72-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-325"><a href="#cb72-325" aria-hidden="true" tabindex="-1"></a>The following figure shows a schematic representation of these various types of outer joins:</span>
+<span id="cb72-326"><a href="#cb72-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-329"><a href="#cb72-329" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-330"><a href="#cb72-330" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb72-331"><a href="#cb72-331" aria-hidden="true" tabindex="-1"></a><span class="co">#| out_width: "60%"</span></span>
+<span id="cb72-332"><a href="#cb72-332" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/outer_joins.png"</span>)</span>
+<span id="cb72-333"><a href="#cb72-333" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-334"><a href="#cb72-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-335"><a href="#cb72-335" aria-hidden="true" tabindex="-1"></a>::: {style="color:#787878; font-size: 14px;"}</span>
+<span id="cb72-336"><a href="#cb72-336" aria-hidden="true" tabindex="-1"></a>&lt;center&gt;</span>
+<span id="cb72-337"><a href="#cb72-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-338"><a href="#cb72-338" aria-hidden="true" tabindex="-1"></a>FROM: Wickham &amp; Grolemund (2017). *R for Data Science.* O'Reilly Media, Inc.</span>
+<span id="cb72-339"><a href="#cb72-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-340"><a href="#cb72-340" aria-hidden="true" tabindex="-1"></a>&lt;/center&gt;</span>
+<span id="cb72-341"><a href="#cb72-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-342"><a href="#cb72-342" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb72-343"><a href="#cb72-343" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb72-344"><a href="#cb72-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-347"><a href="#cb72-347" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-348"><a href="#cb72-348" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(table1, table2, <span class="at">by=</span><span class="st">"Taxon"</span>)</span>
+<span id="cb72-349"><a href="#cb72-349" aria-hidden="true" tabindex="-1"></a><span class="fu">right_join</span>(table1, table2, <span class="at">by=</span><span class="st">"Taxon"</span>)</span>
+<span id="cb72-350"><a href="#cb72-350" aria-hidden="true" tabindex="-1"></a><span class="fu">full_join</span>(table1, table2, <span class="at">by=</span><span class="st">"Taxon"</span>)</span>
+<span id="cb72-351"><a href="#cb72-351" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-352"><a href="#cb72-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-353"><a href="#cb72-353" aria-hidden="true" tabindex="-1"></a><span class="fu">### Other Joins {.unnumbered}</span></span>
+<span id="cb72-354"><a href="#cb72-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-355"><a href="#cb72-355" aria-hidden="true" tabindex="-1"></a>There are also two additional join types that may be sometimes be useful... note that these joins only return columns from the left-hand table, **x**.</span>
+<span id="cb72-356"><a href="#cb72-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-357"><a href="#cb72-357" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A *semi_join* returns rows from the left-hand table, **x**, where there are matching values in **y**, but keeping just the columns from **x**. A *semi_join* differs from an *inner_join* because an *inner_join* will return a row of *x* for every matching row of **y** (so some **x** rows can be duplicated), whereas a *semi_join* will never duplicate rows of **x**.</span>
+<span id="cb72-358"><a href="#cb72-358" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>An *anti_join* returns all rows from the left-hand table,**x** where there are not matching values in **y**, keeping just the columns from **x**.</span>
+<span id="cb72-359"><a href="#cb72-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-362"><a href="#cb72-362" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-363"><a href="#cb72-363" aria-hidden="true" tabindex="-1"></a><span class="fu">semi_join</span>(table1, table2, <span class="at">by=</span><span class="st">"Taxon"</span>)</span>
+<span id="cb72-364"><a href="#cb72-364" aria-hidden="true" tabindex="-1"></a><span class="fu">anti_join</span>(table1, table2, <span class="at">by=</span><span class="st">"Taxon"</span>)</span>
+<span id="cb72-365"><a href="#cb72-365" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-366"><a href="#cb72-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-367"><a href="#cb72-367" aria-hidden="true" tabindex="-1"></a>The cheatsheet on <span class="co">[</span><span class="ot">Data Transformation with {dplyr}</span><span class="co">](cheatsheets/data-transformation.pdf)</span> provides a nice overview of these and additional data wrangling functions included the {dplyr} package.</span>
+<span id="cb72-368"><a href="#cb72-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-369"><a href="#cb72-369" aria-hidden="true" tabindex="-1"></a><span class="fu">## Chaining and Piping</span></span>
+<span id="cb72-370"><a href="#cb72-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-371"><a href="#cb72-371" aria-hidden="true" tabindex="-1"></a>One other cool thing about the {dplyr} package is that it provides a convenient way to chain together operations on a data frame using the "forward pipe" operator (<span class="in">`%&gt;%`</span>). The <span class="in">`%&gt;%`</span> operator basically takes what is on the left-hand side (LHS) of the operator and directly applies the function call on the right-hand side (RHS) of the operator to it. That is, it "pipes" what is on the LHS of the operator directly to the first argument of the function on the right. This process allows us to build of chains of successive operations, each one being applied to the outcome of the previous operation in the chain.</span>
+<span id="cb72-372"><a href="#cb72-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-375"><a href="#cb72-375" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-376"><a href="#cb72-376" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb72-377"><a href="#cb72-377" aria-hidden="true" tabindex="-1"></a><span class="co">#| out_width: "25%"</span></span>
+<span id="cb72-378"><a href="#cb72-378" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/pipe.png"</span>)</span>
+<span id="cb72-379"><a href="#cb72-379" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-380"><a href="#cb72-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-383"><a href="#cb72-383" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-384"><a href="#cb72-384" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb72-385"><a href="#cb72-385" aria-hidden="true" tabindex="-1"></a><span class="co">#| out_width: "25%"</span></span>
+<span id="cb72-386"><a href="#cb72-386" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/MagrittePipe.jpg"</span>)</span>
+<span id="cb72-387"><a href="#cb72-387" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-388"><a href="#cb72-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-389"><a href="#cb72-389" aria-hidden="true" tabindex="-1"></a>**EXAMPLE:**</span>
+<span id="cb72-390"><a href="#cb72-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-393"><a href="#cb72-393" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-394"><a href="#cb72-394" aria-hidden="true" tabindex="-1"></a><span class="co"># this...</span></span>
+<span id="cb72-395"><a href="#cb72-395" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(Scientific_Name, Body_mass_female_mean) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span>
+<span id="cb72-396"><a href="#cb72-396" aria-hidden="true" tabindex="-1"></a><span class="co"># is equivalent to...</span></span>
+<span id="cb72-397"><a href="#cb72-397" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">select</span>(d,Scientific_Name, Body_mass_female_mean))</span>
+<span id="cb72-398"><a href="#cb72-398" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-399"><a href="#cb72-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-400"><a href="#cb72-400" aria-hidden="true" tabindex="-1"></a>The forward pipe is useful because it allows us to write and follow code from left to right (as when writing in English), instead of right to left with many nested parentheses.</span>
+<span id="cb72-401"><a href="#cb72-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-402"><a href="#cb72-402" aria-hidden="true" tabindex="-1"></a><span class="fu">### CHALLENGE {.unnumbered}</span></span>
+<span id="cb72-403"><a href="#cb72-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-404"><a href="#cb72-404" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In **one line of code**, do the following:</span>
+<span id="cb72-405"><a href="#cb72-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-406"><a href="#cb72-406" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Add a variable, **Binomial** to our data frame **d**, which is a concatenation of the **Genus** and **Species**...</span>
+<span id="cb72-407"><a href="#cb72-407" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Trim the data frame to only include the variables **Binomial**, **Family**, **Body_mass_female_mean**, **Body_mass_male_mean** and **Mass_Dimorphism**...</span>
+<span id="cb72-408"><a href="#cb72-408" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Group these variables by **Family**...</span>
+<span id="cb72-409"><a href="#cb72-409" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Calculate the average value for female body mass, male body mass, and mass dimorphism (remember, you will need to specify <span class="in">`na.rm = TRUE`</span>...)</span>
+<span id="cb72-410"><a href="#cb72-410" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>And arrange by *decreasing* average mass dimorphism.</span>
+<span id="cb72-411"><a href="#cb72-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-414"><a href="#cb72-414" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-415"><a href="#cb72-415" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb72-416"><a href="#cb72-416" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Show Code"</span></span>
+<span id="cb72-417"><a href="#cb72-417" aria-hidden="true" tabindex="-1"></a><span class="co">#| attr.output: '.details summary="Show Output"'</span></span>
+<span id="cb72-418"><a href="#cb72-418" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">mutate</span>(d, <span class="at">Binomial =</span> <span class="fu">paste</span>(Genus, Species, <span class="at">sep =</span> <span class="st">" "</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb72-419"><a href="#cb72-419" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Binomial,</span>
+<span id="cb72-420"><a href="#cb72-420" aria-hidden="true" tabindex="-1"></a>         Family,</span>
+<span id="cb72-421"><a href="#cb72-421" aria-hidden="true" tabindex="-1"></a>         Body_mass_female_mean,</span>
+<span id="cb72-422"><a href="#cb72-422" aria-hidden="true" tabindex="-1"></a>         Body_mass_male_mean,</span>
+<span id="cb72-423"><a href="#cb72-423" aria-hidden="true" tabindex="-1"></a>         Mass_Dimorphism) <span class="sc">%&gt;%</span></span>
+<span id="cb72-424"><a href="#cb72-424" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Family) <span class="sc">%&gt;%</span></span>
+<span id="cb72-425"><a href="#cb72-425" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb72-426"><a href="#cb72-426" aria-hidden="true" tabindex="-1"></a>    <span class="at">avgF =</span> <span class="fu">mean</span>(Body_mass_female_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb72-427"><a href="#cb72-427" aria-hidden="true" tabindex="-1"></a>    <span class="at">avgM =</span> <span class="fu">mean</span>(Body_mass_male_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb72-428"><a href="#cb72-428" aria-hidden="true" tabindex="-1"></a>    <span class="at">avgBMD =</span> <span class="fu">mean</span>(Mass_Dimorphism, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb72-429"><a href="#cb72-429" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb72-430"><a href="#cb72-430" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avgBMD))</span>
+<span id="cb72-431"><a href="#cb72-431" aria-hidden="true" tabindex="-1"></a>s</span>
+<span id="cb72-432"><a href="#cb72-432" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-433"><a href="#cb72-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-434"><a href="#cb72-434" aria-hidden="true" tabindex="-1"></a>There are several other, very cool, "special case" pipe operators that are useful in particular situations. These are available from the {magrittr} package. <span class="co">[</span><span class="ot">Actually, the functionality of the forward pipe operator also comes from the {magrittr} package, but it is replicated in {dplyr}.</span><span class="co">]</span></span>
+<span id="cb72-435"><a href="#cb72-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-436"><a href="#cb72-436" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The "tee" pipe (<span class="in">`%T&gt;%`</span>) allows you to pipe the outcome of a process into a new expression (just like the forward pipe operator does) *and* to simultaneously return the original value instead of the forward-piped result to an intermediate expression. This is useful, for example, for printing out or plotting intermediate results. In the example below, we filter our data frame for just observations of the genus *Alouatta*, print those to the screen as an intermediate side effect, and pass the filtered data to the <span class="in">`summarise()`</span> function.</span>
+<span id="cb72-437"><a href="#cb72-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-440"><a href="#cb72-440" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-441"><a href="#cb72-441" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, Genus <span class="sc">==</span> <span class="st">"Alouatta"</span>) <span class="sc">%T&gt;%</span> <span class="fu">print</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb72-442"><a href="#cb72-442" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avgF =</span> <span class="fu">mean</span>(Body_mass_female_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb72-443"><a href="#cb72-443" aria-hidden="true" tabindex="-1"></a>s</span>
+<span id="cb72-444"><a href="#cb72-444" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-445"><a href="#cb72-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-446"><a href="#cb72-446" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The "assignment" pipe (<span class="in">`%&lt;&gt;%`</span>) evaluates the expression on the right-hand side of the pipe operator and reassigns the resultant value to the left-hand side.</span>
+<span id="cb72-447"><a href="#cb72-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-450"><a href="#cb72-450" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-451"><a href="#cb72-451" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, Genus <span class="sc">==</span> <span class="st">"Alouatta"</span>)</span>
+<span id="cb72-452"><a href="#cb72-452" aria-hidden="true" tabindex="-1"></a>s <span class="sc">%&lt;&gt;%</span> <span class="fu">select</span>(Genus, Species)</span>
+<span id="cb72-453"><a href="#cb72-453" aria-hidden="true" tabindex="-1"></a>s</span>
+<span id="cb72-454"><a href="#cb72-454" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-455"><a href="#cb72-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-456"><a href="#cb72-456" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Finally, the "exposition" pipe (<span class="in">`%$%`</span>) exposes the names *within* the object on the left-hand side of the pipe to the right-hand side expression.</span>
+<span id="cb72-457"><a href="#cb72-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-460"><a href="#cb72-460" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-461"><a href="#cb72-461" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, Genus <span class="sc">==</span> <span class="st">"Alouatta"</span>) <span class="sc">%$%</span> <span class="fu">paste0</span>(Genus, <span class="st">" "</span>, Species)</span>
+<span id="cb72-462"><a href="#cb72-462" aria-hidden="true" tabindex="-1"></a>s </span>
+<span id="cb72-463"><a href="#cb72-463" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-464"><a href="#cb72-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-465"><a href="#cb72-465" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dot Syntax and the Pipe</span></span>
+<span id="cb72-466"><a href="#cb72-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-467"><a href="#cb72-467" aria-hidden="true" tabindex="-1"></a>Normally, when we use the forward pipe operator, the LHS of the operator is passed to the first argument of the function on the RHS. Thus, the following are all equivalent:</span>
+<span id="cb72-468"><a href="#cb72-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-471"><a href="#cb72-471" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-472"><a href="#cb72-472" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb72-473"><a href="#cb72-473" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, Genus <span class="sc">==</span> <span class="st">"Alouatta"</span>)</span>
+<span id="cb72-474"><a href="#cb72-474" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Genus <span class="sc">==</span> <span class="st">"Alouatta"</span>)</span>
+<span id="cb72-475"><a href="#cb72-475" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Genus <span class="sc">==</span> <span class="st">"Alouatta"</span>) <span class="ot">-&gt;</span> s</span>
+<span id="cb72-476"><a href="#cb72-476" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-477"><a href="#cb72-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-478"><a href="#cb72-478" aria-hidden="true" tabindex="-1"></a>The behavior of the forward pipe operator means we can use it do something like the following, where **d** is implicitly piped into the <span class="in">`data`</span> argument for <span class="in">`ggplot()`</span></span>
+<span id="cb72-479"><a href="#cb72-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-482"><a href="#cb72-482" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-483"><a href="#cb72-483" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">log</span>(Body_mass_female_mean), <span class="at">y=</span><span class="fu">log</span>(Brain_Size_Species_Mean))) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb72-484"><a href="#cb72-484" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-485"><a href="#cb72-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-486"><a href="#cb72-486" aria-hidden="true" tabindex="-1"></a>We can also use dot (<span class="in">`.`</span>) syntax with the {magrittr} forward pipe operator to pass the LHS of a statement to somewhere other than the first argument of the function on the RHS. Thus...</span>
+<span id="cb72-487"><a href="#cb72-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-488"><a href="#cb72-488" aria-hidden="true" tabindex="-1"></a><span class="in">`y %&gt;% function(x, .)`</span> is equivalent to <span class="in">`function(x, y)`</span></span>
+<span id="cb72-489"><a href="#cb72-489" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-490"><a href="#cb72-490" aria-hidden="true" tabindex="-1"></a>... which means we can do something like this to pipe **d** into a function such as <span class="in">`lm()`</span> ("linear model"), where the data frame that the function is run on is not the first argument: </span>
+<span id="cb72-491"><a href="#cb72-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-494"><a href="#cb72-494" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-495"><a href="#cb72-495" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">lm</span>(<span class="fu">log</span>(Body_mass_female_mean) <span class="sc">~</span> <span class="fu">log</span>(Brain_Size_Species_Mean), <span class="at">data =</span> .)</span>
+<span id="cb72-496"><a href="#cb72-496" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-497"><a href="#cb72-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-498"><a href="#cb72-498" aria-hidden="true" tabindex="-1"></a>We can also use the {magrittr} pipe's curly brace (<span class="in">`{}`</span>) syntax to wrap the RHS of a statement and pass the LHS into several places:</span>
+<span id="cb72-499"><a href="#cb72-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-502"><a href="#cb72-502" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-503"><a href="#cb72-503" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> {<span class="fu">plot</span>(<span class="fu">log</span>(.<span class="sc">$</span>Brain_Size_Species_Mean), <span class="fu">log</span>(.<span class="sc">$</span>Body_mass_female_mean))}</span>
+<span id="cb72-504"><a href="#cb72-504" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-505"><a href="#cb72-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-506"><a href="#cb72-506" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** ***R*** recently introduced a "native" pipe operator `|&gt;` into its {base} syntax. It behaves very similarly to the {magrittr} forward pipe, but does not support dot syntax the same way. It also requires an explicit functions call on the RHS, which means appending `()` to the end of the function name, rather than just using the name. The first version of the line below using `%&gt;%` could be used to take the log of all **Brain_Size_Female_Mean** values in **d**, while the second version, using </span><span class="in">`|&gt;`</span><span class="at">, needs to have </span><span class="in">`()`</span><span class="at"> appended to the functions calls to work properly.</span></span>
+<span id="cb72-507"><a href="#cb72-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-510"><a href="#cb72-510" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-511"><a href="#cb72-511" aria-hidden="true" tabindex="-1"></a>d <span class="sc">%&gt;%</span> <span class="fu">select</span>(Brain_Size_Female_Mean) <span class="sc">%&gt;%</span> log <span class="sc">%&gt;%</span> head</span>
+<span id="cb72-512"><a href="#cb72-512" aria-hidden="true" tabindex="-1"></a>d <span class="sc">|&gt;</span> <span class="fu">select</span>(Brain_Size_Female_Mean) <span class="sc">|&gt;</span> <span class="fu">log</span>() <span class="sc">|&gt;</span> <span class="fu">head</span>()</span>
+<span id="cb72-513"><a href="#cb72-513" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-514"><a href="#cb72-514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-515"><a href="#cb72-515" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pivoting Data between Long and Wide Formats</span></span>
+<span id="cb72-516"><a href="#cb72-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-517"><a href="#cb72-517" aria-hidden="true" tabindex="-1"></a><span class="fu">## Useful Related Packages</span></span>
+<span id="cb72-518"><a href="#cb72-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-519"><a href="#cb72-519" aria-hidden="true" tabindex="-1"></a>The {tidylog} package provides wrappers around many {dplyr} and {tidyr} package functions that provide logged feedback on the outcome of those functions, which can be useful for understanding the effects of whatever data wrangling processes we run. For example, running <span class="in">`filter()`</span> will provide feedback on the number of runs removed and kept as part of a filtering operation...</span>
+<span id="cb72-520"><a href="#cb72-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-523"><a href="#cb72-523" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-524"><a href="#cb72-524" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidylog)</span>
+<span id="cb72-525"><a href="#cb72-525" aria-hidden="true" tabindex="-1"></a><span class="co"># compare...</span></span>
+<span id="cb72-526"><a href="#cb72-526" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(d, Family <span class="sc">==</span> <span class="st">"Hominidae"</span> <span class="sc">&amp;</span> Mass_Dimorphism <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
+<span id="cb72-527"><a href="#cb72-527" aria-hidden="true" tabindex="-1"></a><span class="co"># to...</span></span>
+<span id="cb72-528"><a href="#cb72-528" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, Family <span class="sc">==</span> <span class="st">"Hominidae"</span> <span class="sc">&amp;</span> Mass_Dimorphism <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
+<span id="cb72-529"><a href="#cb72-529" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-530"><a href="#cb72-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-531"><a href="#cb72-531" aria-hidden="true" tabindex="-1"></a>Similarly, running <span class="in">`sample_n()`</span> will give us logged output on that random record sampling process...</span>
+<span id="cb72-532"><a href="#cb72-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-535"><a href="#cb72-535" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-536"><a href="#cb72-536" aria-hidden="true" tabindex="-1"></a><span class="co"># compare...</span></span>
+<span id="cb72-537"><a href="#cb72-537" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">sample_n</span>(d, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb72-538"><a href="#cb72-538" aria-hidden="true" tabindex="-1"></a><span class="co"># to...</span></span>
+<span id="cb72-539"><a href="#cb72-539" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(d, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb72-540"><a href="#cb72-540" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>tidylog)</span>
+<span id="cb72-541"><a href="#cb72-541" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-542"><a href="#cb72-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-543"><a href="#cb72-543" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** Loading in {tidylog} function will conflict with or "mask" corresponding function names from {dplyr} and {tidyr}. In the examples above, then, to run the {tidyverse} versions of </span><span class="in">`filter()`</span><span class="at"> and </span><span class="in">`select_n()`</span><span class="at">, it was necessary to use the </span><span class="in">`::`</span><span class="at"> notation to specifically call the {dplyr} version of the functions directly. The {tidylog} versions of these functions run a bit more slowly, so if speed is important, you may not want to use {tidylog}, you may want to call the {dplyr} or {tidyr} functions explicitly after loading {tidylog}, or you may want to simply call the {tidylog} version of a function explicitly.</span></span>
+<span id="cb72-544"><a href="#cb72-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-547"><a href="#cb72-547" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-548"><a href="#cb72-548" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> tidylog<span class="sc">::</span><span class="fu">filter</span>(d, Family <span class="sc">==</span> <span class="st">"Hominidae"</span> <span class="sc">&amp;</span> Mass_Dimorphism <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
+<span id="cb72-549"><a href="#cb72-549" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-550"><a href="#cb72-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-553"><a href="#cb72-553" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb72-554"><a href="#cb72-554" aria-hidden="true" tabindex="-1"></a><span class="co"># | include: false</span></span>
+<span id="cb72-555"><a href="#cb72-555" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>magrittr)</span>
+<span id="cb72-556"><a href="#cb72-556" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>tidyverse)</span>
+<span id="cb72-557"><a href="#cb72-557" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb72-558"><a href="#cb72-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-559"><a href="#cb72-559" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb72-560"><a href="#cb72-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-561"><a href="#cb72-561" aria-hidden="true" tabindex="-1"></a><span class="fu">## Concept Review {.unnumbered}</span></span>
+<span id="cb72-562"><a href="#cb72-562" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-563"><a href="#cb72-563" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Using {dplyr}: <span class="in">`select()`</span>, <span class="in">`filter()`</span>, <span class="in">`arrange()`</span>, <span class="in">`rename()`</span>, <span class="in">`mutate()`</span>, <span class="in">`summarise()`</span>, <span class="in">`group_by()`</span></span>
+<span id="cb72-564"><a href="#cb72-564" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Chaining and piping with <span class="in">`%&gt;%`</span> and other pipe operators</span>
+<span id="cb72-565"><a href="#cb72-565" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Joining tables: <span class="in">`inner_join()`</span>, <span class="in">`left_join()`</span>, <span class="in">`right_join()`</span>, <span class="in">`full_join()`</span></span>
+<span id="cb72-566"><a href="#cb72-566" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Using the {tidylog} package</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,236 @@
+# Exercise 07 Solution {.unnumbered}
+
+# • Solution {.unnumbered}
+
+Load in dataset and libraries of interest...
+
+```{r}
+#| warning: false
+#| message: false
+library(tidyverse)
+library(mosaic)
+library(infer)
+f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/tbs-2006-2008-ranges.csv"
+d <- read_csv(f, col_names = TRUE)
+head(d)
+```
+
+### Step 1 {.unnumbered}
+
+- Reduce the dataset to just the two variables of interest.
+
+```{r}
+d <- d %>% select(sex, kernel95)
+head(d)
+```
+
+### Step 2 {.unnumbered}
+
+- Determine the mean, standard deviation, and standard error in “kernel95” home range size for each sex.
+
+```{r}
+hr_summary <- d %>%
+  group_by(sex) %>%
+  summarize(mean = mean(kernel95),
+            sd = sd(kernel95),
+            n = n(),
+            se = sd/sqrt(n)
+  )
+hr_summary
+```
+
+### Step 3 {.unnumbered}
+
+- Create boxplots comparing “kernel95” home range size by sex.
+
+```{r}
+p <- ggplot(data = d, aes(x = sex, y = kernel95)) + geom_boxplot() + geom_jitter()
+p
+```
+
+### Step 4 {.unnumbered}
+
+- For each sex, generate a bootstrap distribution for mean kernel95 home range size.
+
+> **NOTE:** The code below does this for males... simply replace "M" with "F" in the `filter()` statement to do the same for females.
+
+```{r}
+# ci in mean HR size
+n_boot <- 10000
+s <- d %>% filter(sex == "M")
+
+# option 1 - using {base} R
+boot <- vector()
+# the size of each bootstrap sample should equivalent to
+# the size our original sample
+for (i in 1:n_boot){
+  boot[[i]] <-
+    mean(sample(s$kernel95, length(s$kernel95), replace=TRUE))
+}
+
+# option 2 - using {mosaic}
+boot <- do(n_boot) * mean(sample(s$kernel95, size = length(s$kernel95), replace = TRUE))
+boot <- boot$mean # pull out mean column as vector
+
+# option 3 - using {infer}
+boot <- s %>%
+  rep_sample_n(replace = TRUE,
+               size = nrow(.),
+               reps = 10000) %>%
+  group_by(replicate) %>%
+  summarize(mean = mean(kernel95))
+boot <- boot$mean # pull out mean column as vector
+```
+
+### Step 5 {.unnumbered}
+
+- Plot the resulting bootstrap sampling distribution and plot an appropriate normal distribution over the bootstrap sampling distribution.
+
+```{r}
+#| fig-keep: "last"
+se <- sd(boot)
+histogram(boot)
+plotDist("norm", mean(boot), se, add = TRUE)
+```
+
+### Step 6 {.unnumbered}
+
+- Calculate a 95% confidence interval around for the mean kernel95 home range size for each sex...
+
+  - Using the `quantile()` method applied directly to your bootstrap sampling distribution, and
+
+  - Using the theory-based "standard error" method, based on `qnorm()` and the standard deviation of your bootstrap sampling distribution.
+
+```{r}
+#| fig-keep: "last"
+ci_boot <- c(quantile(boot, 0.025),
+             quantile(boot, 0.975))
+
+ci_theory <- mean(s$kernel95) + c(-1,1) * qnorm(0.975) * se
+
+ladd(
+  panel.abline(v=ci_boot, col="red", lty=3, lwd=2))
+
+ladd(
+  panel.abline(v=ci_theory, col="blue", lty=1, lwd=2))
+```
+
+We can also do all of the above using the {infer} package's `specify()` → `generate()` → `calculate()` → `visualize()` workflow...
+
+```{r}
+# option 4 - using {infer}
+boot <- s %>%
+  specify(response = kernel95) %>%
+  generate(reps = n_boot, type = "bootstrap") %>%
+  calculate(stat = "mean")
+
+ci_boot <- boot %>%
+  get_confidence_interval(
+    type = "percentile", level = 0.95)
+
+ci_theory <- boot %>%
+  get_confidence_interval(
+    type = "se", level = 0.95,
+    point_estimate = mean(s$kernel95))
+
+visualize(boot) + shade_confidence_interval(endpoints = ci_theory, color = "blue", lty = 1, size = 0.5, fill = "#c0c0c0") + shade_confidence_interval(endpoints = ci_boot, color = "red", lty = 3, size = 0.5, fill = "#c0c0c0")
+```
+
+### Step 7 {.unnumbered}
+
+- Use simulation-based permutation to evaluate the difference in mean kernel95 home range size for males versus females. To do this, you will want to shuffle either the variable "sex" or "kernel95" home range size a total of 10,000 times, recalculating mean kernel95 size by sex for each permuted sample and then compare the difference in male and female kernel95 means from your original sample to the permutation distribution for the difference in means.
+
+```{r}
+n_perm <- 10000 # number of permutations
+# create a dummy vector to hold results for each permutation
+permuted_diff <- vector()
+permuted_data <- d
+for (i in 1:n_perm) {
+  # scramble the sex vector:
+  # `sample()` with a vector as an argument yields a
+  # random permutation of the vector
+  permuted_data$sex <- sample(permuted_data$sex)
+  m <- permuted_data[permuted_data$sex == "M",]$kernel95
+  f <- permuted_data[permuted_data$sex == "F",]$kernel95
+  permuted_diff[[i]] <- mean(m) - mean(f)
+  }
+histogram(permuted_diff)
+actual_diff <- mean(d[d$sex == "M",]$kernel95) - mean(d[d$sex == "F",]$kernel95)
+
+p <- (sum(permuted_diff >= abs(actual_diff)) +
+        sum(permuted_diff <= -abs(actual_diff))) / n_perm
+p
+
+ladd(
+  panel.abline(v=actual_diff, col="red", lty=3, lwd=2))
+```
+
+Again, we can do this whole process using the {infer} package workflow...
+
+```{r}
+null_distribution <- d %>%
+  specify(formula = kernel95 ~ sex) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = n_perm, type = "permute") %>%
+  calculate(stat = "diff in means", order = c("M", "F"))
+
+actual_diff <- d %>%
+  specify(formula = kernel95 ~ sex) %>%
+  calculate(stat = "diff in means", order = c("M", "F"))
+actual_diff
+
+null_distribution %>%
+  get_p_value(obs_stat = actual_diff, direction = "both")
+
+visualize(null_distribution) +
+  shade_p_value(obs_stat = actual_diff, lty = 1, size = 0.5, fill = "#c0c0c0", direction = "both")
+```
+
+  - Under this approach, what is the "null" hypothesis? What is the test statistic? Is the difference in mean kernel95 home range size "significant"?
+
+The null hypothesis here is that the difference in mean kernel95 home range size for males versus females is zero. The test statistic is the actual difference in mean kernel95 home range size for males versus females, and it is evaluated relative to a permutation distribution for this statistic. Based on our very low p value (less than 0.001), under a null hypothesis significance testing framework, we would conclude that the difference is "significant" (assuming that p is less than the alpha level we specify).
+
+### Step 8 {.unnumbered}
+
+- Finally, use a theory-based parametric test (e.g., a t-test) to also calculate an appropriate test statistic and associated p value for the comparison of male and female mean kernel95 home range size. Is the difference in mean kernel95 home range size "significant"?
+
+``` {r}
+f <- d %>% filter(sex == "F")
+m <- d %>% filter(sex == "M")
+
+# first, what is ratio of variances in our two samples?
+var_f <- var(f$kernel95)
+var_m <- var(m$kernel95)
+var_f/var_m
+# ratio is less than 2.0, so we can use equal variance version of t test...
+
+num_f <- nrow(f)
+num_m <- nrow(m)
+
+mean_f <- mean(f$kernel95)
+mean_m <- mean(m$kernel95)
+
+# hand-calculate test statistic and p value...
+s2 <- ((num_m-1) * var_m + (num_f-1) * var_f)/(num_m + num_f - 2)
+t_stat <- (mean_m - mean_f) / sqrt(s2 * (1/num_m + 1/num_f))
+t_stat
+
+df <- num_m + num_f - 2
+p <- 2 * (1 - pt(t_stat, df))
+p
+
+# or use t.test() function
+t_test <- t.test(x=m$kernel95, y = f$kernel95, var.equal = TRUE)
+t_test
+```
+
+  - Under this approach, what is the test statistic? Is the difference in mean kernel95 home range size "significant"?
+
+Here, the null hypothesis again is that the difference in mean kernel95 home range size for males versus females is zero. The test statistic is the actual difference in means **scaled by something equivalent to a standard error** that takes into account the variance and size of our two samples. This test statistic is then evaluated relative to a t distribution that depends on the number of degrees of freedom, which depends on the sample size of our two samples. Again, based on the very low p value, we would conclude that the difference is "significant" under a null hypothesis significance testing framework (assuming that p is less than the alpha level we specify).
+
+```{r}
+#| include: false
+detach(package:infer)
+detach(package:mosaic)
+detach(package:tidyverse)
+```

@@ -1,0 +1,53 @@
+---
+title: "Group Presentation and Custom ***R*** Package Assignment"
+---
+
+# Group Project Assignment {.unnumbered}
+
+## Objectives {.unnumbered}
+
+The objective of this assignment is to work with several of your classmates (groups of 3) to identify, explore, and develop a short presentation for the class and accompanying ***R*** package and "vignette", demonstrating the use of a particular statistical method, data analysis workflow, or data visualization method of interest that we have not covered this semester thus far. This is your chance both to be creative and to delve more deeply into the statistics, data science, and ***R*** literature on a topic of your own choice!
+
+Below, I suggest a list of **possible** topics of interest, but these are by no means exclusive... your group should feel free to suggest any other topics you might find interesting, just please confirm with me that what you would like to focus on is appropriate.
+
+-   Principal components analysis (PCA)
+-   Discriminant function analysis
+-   Factor analysis
+-   Cluster analysis (e.g., k-means clustering)
+-   Classification trees and random forests
+-   Nonlinear regression, ridge regression, lasso regression
+-   Network construction and visualization
+-   Geospatial data visualization and spatial queries
+-   Text mining and natural language processing
+-   Phylogenetic comparative analysis
+-   Interacting with relational/nonrelational databases and query languages
+-   Manipulating and analyzing DNA sequence data
+-   Bioinformatics data processing
+-   Image analysis (e.g., classification, feature extraction)
+-   Machine learning
+-   Acoustic data analysis
+
+## What to Do {.unnumbered}
+
+You group should work together to develop a short (roughly 20 to 25 minute) but reasonably comprehensive presentation and associated HTML module, knittable from ".Rmd", that provides background on the statistical method/topic/data visualization procedure that you have chosen to explore and takes the reader through one or more examples of the application of the approach with a real dataset. Your module should be organized similarly to those that I have prepared for various other topics this semester. The presentation can either be done from the module or as a PowerPoint/Keynote/Google Slides/whatever slideshow.
+
+Thus, you will need to produce an ".Rmd" file that will be the basis for a "module vignette" that you build and will bundle into a custom ***R*** package. Besides the **vignette**, your package should also include one or more *datasets* and at least two *functions* that are called in the vignette. The functions you include can, of course, be custom functions that you create, but it is also perfectly fine to use functions that you have copied from other packages. The important thing is that you are bundling them together with your dataset and vignette for easy distribution. Regardless, though, you will want to create your own documentation for each function, as demonstrated in [Module 25](module-25).
+
+Please be sure to divide up the work of your group so that each of you are contributing more-or-less equally!
+
+## What to Turn In {.unnumbered}
+
+You will collectively take the class through your module during our final exam period. We will have five presentations total, 20-25 minutes each with time for questions. I will record these video presentations and share them via the Canvas site.
+
+Your group's work also should result in a custom **R Package** that can be shared as a single file and loaded into an ***R*** workspace (e.g., using the `install.packages()` function. As noted above, that package should combine:
+
+-   A set of functions and associated function documentation appropriate to the topic you have chosen
+-   One or more relevant datasets (either data you have simulated or, preferably, real data), that you use in a module vignette about your chosen topic
+-   A vignette that walks users through demonstrations of relevant analyses, and
+-   Appropriate METADATA for your package (e.g., information on dependencies, etc.)
+
+> **NOTE:** [Module 25](module-25) takes the user through all of the step of package development, so use it as a resource!
+
+By the due date for this assignment, one group member should upload the final **R Package**'s bundled ".gz.tar" file to the **Canvas** site for the course, and your group should collectively upload your entire ***R Package*** project to a ***GitHub*** repository and share with me, via the assignment submission text field on Canvas, the URL to that repository.
+
+> **NOTE:** I should be able to CLONE your repository and see all of the components associated with your package development.

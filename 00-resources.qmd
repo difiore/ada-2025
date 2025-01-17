@@ -1,0 +1,232 @@
+# Resources {.unnumbered}
+
+## Texts {.unnumbered}
+
+There are no required texts for this course, but we will be covering useful material from a number of the following books, all of which are excellent resources for learning basic to intermediate level statistics and ***R*** programming.
+
+-   Davies, T.M. (2016). *The Book of R: A First Course in Programming and Statistics.* No Starch Press.
+-   Baumer, B.S., Kaplan, D.T., & Horton, N.J. (2021). *Modern Data Science with R* (Second Edition). Chapman & Hall/CRC. (link to web version)[https://mdsr-book.github.io/mdsr2e/]
+-   Ismay, C. & Kim, A.Y. (2019). *Statistical Inference via Data Science: A ModernDive into R and the Tidyverse.* Chapman & Hall/CRC. (link to web version)[https://moderndive.com/]
+-   Irizarry, R.A. (2019). *Introduction to Data Science.* Lean Publishing.
+-   Kabacoff, R. (2022). *R in Action: Data Analysis and Graphics with R* (Third Edition). Manning Publications Co.
+-   Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* (Second Edition). O'Reilly Media, Inc. (link to web version)[https://r4ds.hadley.nz/]
+
+These are available in print or electronic format directly from the publishers - e.g., [No Starch Press](https://www.nostarch.com/), [O'Reilly Media, Inc.](http://www.oreilly.com/), [Manning Publications Co.](https://www.manning.com/) - or from [Amazon.com](https://www.amazon.com/).
+
+## Other Resources {.unnumbered}
+
+### Cheatsheets {.unnumbered}
+
+-   [Posit Cheatsheets Resource](https://posit.co/resources/cheatsheets/)
+-   [Base ***R***](cheatsheets/base-r.pdf)
+-   [Advanced ***R***](cheatsheets/advanced-r.pdf)
+-   [***R*** Reference Card](cheatsheets/r-reference-card.pdf)
+-   [Markdown and ***GitHub*** Flavored Markdown](cheatsheets/markdown-basics.pdf)
+-   [RMarkdown 1](cheatsheets/rmarkdown-1.pdf)
+-   [RMarkdown 2](cheatsheets/rmarkdown-2.pdf)
+-   [RMarkdown Reference Guide](cheatsheets/rmarkdown-reference-guide.pdf)
+-   [Learning RMarkdown](cheatsheets/learning-rmarkdown.pdf)
+-   [***RStudio*** IDE](cheatsheets/rstudio-ide.pdf)
+-   [Data Import](cheatsheets/data-import.pdf)
+-   [Data Transformation with {dplyr}](cheatsheets/data-transformation.pdf)
+-   [Data Wrangling with {dplyr} and {tidyr}](cheatsheets/data-wrangling.pdf)
+-   [Types of Regression (*R in Action* Table 8.1)](cheatsheets/RinActionTable8.1.pdf)
+-   [Regression Syntax (*R in Action* Table 8.2)](cheatsheets/RinActionTable8.2.pdf)
+-   [Useful Functions for Regression Models (*R in Action* Table 8.3)](cheatsheets/RinActionTable8.3.pdf)
+-   [{leaflet} for Interactive Mapping](cheatsheets/leaflet.pdf)
+-   [Basics of Probability](cheatsheets/probability.pdf)
+-   [{shiny} Tutorial 1](cheatsheets/shiny-tutorial-1.pdf)
+-   [{shiny} Tutorial 2](cheatsheets/shiny-tutorial-2.pdf)
+
+### Software Tools {.unnumbered}
+
+#### Programming Languages {.unnumbered}
+
+-   [R](https://cran.r-project.org/) (MacOS, Windows, Linux)
+-   [Python](https://www.python.org/) (MacOS, Windows, Linux)
+-   [Julia](https://julialang.org/) (MacOS, Windows, Linux)
+
+#### Text and Markdown Editors and Publishing Software {.unnumbered}
+
+-   [BB Edit](https://www.barebones.com/products/bbedit/) (MacOS)
+-   [MarkdownPad2](http://markdownpad.com/) (Windows)
+-   [Notepad++](https://notepad-plus-plus.org/) (Windows)
+-   [Obsidian](https://obsidian.md/) (MacOS)
+-   [Pandoc](https://pandoc.org/) (MacOS, Windows, Linux)
+-   [Quarto](https://quarto.org/) (MacOS, Windows, Linux)
+-   [Visual Studio Code](https://code.visualstudio.com/) (MacOS, Windows, Linux)
+
+#### IDEs {.unnumbered}
+
+-   [RStudio Desktop](https://posit.co/download/rstudio-desktop/) (R, Python) (MacOS, Windows, Linux)
+-   [RStudio Cloud/Posit Cloud](https://posit.cloud/) (R, Python) (browser)
+-   [JupyterLab](https://jupyter.org/) (R, Python, Julia) (MacOS, Windows, Linux, browser)
+-   [PyCharm](https://www.jetbrains.com/pycharm/) (Python) (MacOS)
+
+#### Version Control Tools {.unnumbered}
+
+-   [git](https://git-scm.com/) (MacOS, Windows, Linux)
+-   [GitHub](https://github.com/) (Website)
+-   [GitHub Desktop](https://desktop.github.com/) (MacOS, Windows)
+
+### Web Resources {.unnumbered}
+
+-   [CRAN (Comprehensive R Archive Network)](https://cran.r-project.org/)
+-   [DataCamp](https://www.datacamp.com)
+-   [Software Carpentry](http://software-carpentry.org/)
+-   [Data Carpentry](http://www.datacarpentry.org/)
+-   [rOpenSci](https://ropensci.org/)
+-   [Stack Overflow](http://stackoverflow.com/)
+-   [Online R Exercises](http://r-exercises.com/start-here-to-learn-r/)
+-   [R-bloggers](https://www.r-bloggers.com/)
+-   [Mockaroo](https://mockaroo.com/)
+
+### Books {.unnumbered}
+
+#### Statistical Modeling in Biology {.unnumbered}
+
+-   Bolker, B.M. (2008). *Ecological Models and Data in R.* Princeton University Press.
+-   Irizarry, R.A. & Love, M.I. (2015). *Data Analysis for the Life Sciences.* Lean Publishing.
+-   Quinn, G.P. & Keough, M.J. (2002). *Experimental Design and Data Analysis for Biologists.* Cambridge University Press.
+
+#### ***R*** and Basic Statistics {.unnumbered}
+
+-   Caffo, B. (2015). *Statistical Inference for Data Science.* Lean Publishing.
+-   Caffo, B. (2016). *Regression Models for Data Science in R.* Lean Publishing.
+-   Chihara, L.M. & Hesterberg, T.C. (2018). *Mathematical Statistics with Resampling and R.* John Wiley & Sons, Inc.
+-   Crawley, M.J. (2014). *Statistics: An Introduction Using R.* (Second Edition). John Wiley & Sons, Inc.
+-   Dalgaard, P. (2008). *Introductory Statistics with R* (Second Edition). Springer.
+-   Diez, D., Çetinkaya-Rundel, M., & Barr, C.D. (2019). *OpenIntro Statistics* (Fourth Edition). OpenIntro.org.
+-   Irizarry, R.A. (2019). *Introduction to Data Science.* Lean Publishing.
+-   Ismay, C. & Kim, A.Y. (2019). *Statistical Inference via Data Science: A ModernDive into R and the Tidyverse.* Chapman & Hall/CRC.
+-   James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). *An Introduction to Statistical Learning.* Springer.
+-   Shahbaba, B. (2012). *Biostatistics with R.* Springer.
+-   Wolfe, D.A. & Schneider, G. (2017). *Intuitive Introductory Statistics.* Springer.
+
+#### ***R*** Programming {.unnumbered}
+
+-   Davies, T.M. (2016). *The Book of R: A First Course in Programming and Statistics.* No Starch Press.
+-   Kabacoff, R. (2022). *R in Action: Data Analysis and Graphics with R* (Third Edition). Manning Publications Co.
+-   Matloff, N. (2011). *The Art of R Programming.* No Starch Press.
+-   Peng, R. (2020). *R Programming for Data Science.* Lean Publishing.
+-   Peng, R. (2016). *Exploratory Data Analysis with R.* Lean Publishing.
+-   Wickham, H. (2015). *Advanced R.* Chapman & Hall/CRC.
+-   Wickham, H. (2019). *Advanced R.* (Second Edition). Chapman & Hall/CRC.
+-   Zuur, A.F., Ieno, E.N., & Meesters, E.H.W.G. (2009). *A Beginner's Guide to R.* Springer.
+
+#### ***R*** Reference {.unnumbered}
+
+-   Adler, J. (2009). *R in a Nutshell.* O'Reilly Media, Inc.
+-   Crawley, M.J. (2012). *The R Book* (Second Edition). John Wiley & Sons, Inc.
+-   Ekstrøm, C. T. (2016). *The R Primer* (Second Edition). Chapman & Hall/CRC.
+-   Gardener, M. (2012). *The Essential R Reference.* John Wiley & Sons, Inc.
+-   Long, J.D. & Teetor, P. (2019). *R Cookbook* (Second Edition). O'Reilly Media, Inc.
+
+#### ***R*** Graphics {.unnumbered}
+
+-   Chang, W. (2013). *R Graphics Cookbook.* O'Reilly Media, Inc.
+-   Wickham, H. (2016). *ggplot2: Elegant Graphics for Data Analysis* (Second Edition). Springer.
+
+#### Data Science {.unnumbered}
+
+-   Baumer, B.S., Kaplan, D.T., & Horton, N.J. (2017). *Modern Data Science with R.* Chapman & Hall/CRC.
+-   Bruce, P. & Bruce, A. (2017). *Practical Statistics for Data Scientists.* O'Reilly Media, Inc.
+-   Cady, F. (2017). *The Data Science Handbook.* John Wiley & Sons, Inc.
+-   Grus, J. (2015). *Data Science from Scratch.* O'Reilly Media, Inc.
+-   Ismay, C. & Kim, A.Y. (2019). *Statistical Inference via Data Science: A ModernDive into R and the Tidyverse.* Chapman & Hall/CRC.
+-   Larose, C.D. & Larose D.T. (2019). *Data Science Using Python and R.* John Wiley & Sons, Inc.
+-   Maillund, T. (2016). *Introduction to Data Science and Statistical Programming in R.* Lean Publishing.
+-   McNicholas, P.D. & Tait, P.A. (2019). *Data Science with Julia.* Chapman & Hall/CRC.
+-   Pearson, R.K. (2018). *Exploratory Data Analysis Using R.* Chapman & Hall/CRC.
+-   Peng, R.D. & Matsui, E. (2015). *The Art of Data Science.* Lean Publishing.
+-   Wickham, H. & Grolemund, G. (2017). *R for Data Science.* O'Reilly Media, Inc.
+-   Williams, G.J. (2017). *The Essentials of Data Science.* Chapman & Hall/CRC.
+-   Zumel, N. & Mount, J. (2020). *Practical Data Science with R, Second Edition.* Manning Publications Co.
+
+#### Data Visualization {.unnumbered}
+
+-   Dale, K. (2016). *Data Visualization with Python and JavaScript.* O'Reilly Media, Inc.
+-   Healy, K. (2018). *Data Visualization: A Practical Introduction.* Princeton University Press.
+-   Thomas, S.A. (2015). *Data Visualization with JavaScript.* No Starch Press.
+-   Wilke, C.O. (2019) *Fundamentals of Data Visualization.* O'Reilly Media, Inc.
+
+#### Spatial Data Analysis {.unnumbered}
+
+-   Bivand, R.S., Pebesma, E., & Gómez-Rubio, V. (2013). *Applied Spatial Data Analysis with R* (Second Edition). Springer.
+-   Brundson, C. & Comber, L. (2019). *An Introduction to R for Spatial Analysis and Mapping* (Second Edition). SAGE.
+-   Brunsdon, C. & Singleton, A.D. (Eds.). (2015). *Geocomputation: A Practical Primer*. Los Angeles: SAGE.
+-   Lovelace, R., Nowosad, J., & Muenchow, J. (2019). *Geocomputation with R*. Chapman & Hall/CRC.
+
+#### ***R*** and Bayesian Statistics {.unnumbered}
+
+-   Bolstad, W.M. & Curran, J.M. (2017). *Introduction to Bayesian Statistics* (Third Edition). John Wiley & Sons, Inc.
+-   Kruschke, J.K. (2015). *Doing Bayesian Data Analysis: A Tutorial with R, JAGS, and Stan* (Second Edition). Elsevier.
+-   McElreath, R. (2019). *Statistical Rethinking: A Bayesian Course with Examples in R and Stan* (Second Edition). Chapman & Hall/CRC.
+
+#### General and Generalized Regression, Mixed Effects, and Multilevel/Hierarchical Modeling {.unnumbered}
+
+-   Burnham, K.P. & Anderson, D.R. (2002). *Model Selection and Multimodel Inference.* Springer.
+-   Dunn, P.K. & Smyth, G.K. (2018). *Generalized Linear Models With Examples in R.* Springer.
+-   Fox, J. (2016). *Applied Regression Analysis and Generalized Linear Models* (Third Edition). SAGE.
+-   Fox, J. & Weisberg, S. (2019). *An R Companion to Applied Regression.* SAGE.
+-   Gelman, A. & Hill, J. (2007). *Data Analysis Using Regression and Multilevel/Hierarchical Models.* Cambridge University Press.
+-   James, G,, Witten, D., Hastie, T., & Tibshirani, R. (2013). *An Introduction to Statistical Learning.* Springer.
+-   Hoffman, J.P. (2022). *Linear Regression Models: Applications in R.* Chapman & Hall/CRC.
+-   Zuur, A.F., Ieno, E.N., Walker, N.J., Savaliev, A.A., & Smith, G.M. (2009). *Mixed Effects Models and Extensions in Ecology with R.* Springer.
+
+#### Web Scraping, Text Mining, and Text Analysis {.unnumbered}
+
+-   Friedl, J.E.F. (2000). *Mastering Regular Expressions* (Third Edition). O'Reilly Media, Inc.
+-   Mitchell, R. (2015). *Web Scraping with Python.* O'Reilly Media, Inc.
+-   Nolan, D. & Temple Lang, D. (2014). *XML and Web Technologies for Data Sciences with R.* Springer.
+-   Silge, J. & Robinson, D. (2017). *Text Mining with R: A Tidy Approach.* O'Reilly Media, Inc.
+
+#### ***R*** Packages, ***R*** Markdown, ***Quarto***, and Reproducible Research {.unnumbered}
+
+-   Gandrud, C. (2020). *Reproducible Research with R and RStudio* (Third Edition). Chapman & Hall/CRC.
+-   Wickham, H. (2015). *R Packages.* O'Reilly Media, Inc.
+-   Xie, Y. (2017). *Bookdown: Authoring Books and Technical Documents with RMarkdown.* Chapman & Hall/CRC.
+-   Xie, Y., Allaire, J.J., & Grolemund, G. (2018). *R Markdown: The Definitive Guide.* Chapman & Hall/CRC.
+
+#### ***git*** and Unix Shell Tools {.unnumbered}
+
+-   Albing, C., Vossen, J.P., & Newham, C. (2007). *Bash Cookbook.* O'Reilly Media, Inc.
+-   Barrett, D.J. (2016). *Linux Pocket Guide: Essential Commands* (Third Edition). O'Reilly Media, Inc.
+-   Chacon, S. & Straub, B. (2014). *Pro Git* (Second Edition). Apress.
+-   Dougherty, D. & Robbins, A. (1998). *Sed and Awk* (Second Edition). O'Reilly Media, Inc.
+-   Newham, C. & Rosenblatt, B. (2005). *Learning the bash Shell* (Third Edition). O'Reilly Media, Inc.
+-   Robbins, A. (2006). *UNIX in a Nutshell* (Fourth Edition). O'Reilly Media, Inc.
+
+#### Data Science, Statistics, and Programming in ***Python*** {.unnumbered}
+
+-   Beazley, D. & Jones, B.K. (2013). *Python Cookbook* (Third Edition). O'Reilly Media, Inc.
+-   Downey, A.B. (2012). *Think Python.* O'Reilly Media, Inc.
+-   Downey, A.B. (2014). *Think Stats* (Second Edition). O'Reilly Media, Inc.
+-   Downey, A.B. (2023). *Modeling and Simulation in Python.* No Starch Press.
+-   Kazil, J. & Jarmul, K. (2016). *Data Wrangling with Python.* O'Reilly Media, Inc.
+-   Lubanovic, B. (2014). *Introducing Python.* O'Reilly Media, Inc.
+-   Lee, K.D. (2011). *Python Programming Fundamentals.* Springer.
+-   Lutz, M. (2013). *Learning Python* (Fifth Edition). O'Reilly Media, Inc.
+-   Lutz, M. (2014). *Python Pocket Reference* (Fifth Edition). O'Reilly Media, Inc.
+-   McKinney, W. (2013). *Python for Data Analysis.* O'Reilly Media, Inc.
+-   Rogel-Salazar, J. (2023). *Statistics and Data Visualisation with Python.* Chapman & Hall/CRC.
+-   VanderPlas, J. (2016). *Python Data Science Handbook.* O'Reilly Media, Inc.
+-   Vasiliev, Y. (2022). *Python for Data Science.* No Starch Press.
+-   Vaughan, L. (2023). *Python Tools for Scientists: An Introduction to Coding, Anaconda, Jupyterlab, and the Scientific Libraries.* No Starch Press
+
+#### Data Science, Statistics, and Programming in ***Julia*** {.unnumbered}
+
+-   McNicholas, P.D. & Tait, P.A. (2019). *Data Science with Julia.* Chapman and Hall/CRC.
+-   Phillips, L. (2024). *Practical Julia: A Hands-on Introduction for Scientific Minds.* No Starch Press.
+
+#### Databases and SQL {.unnumbered}
+
+-   DeBarros, A. (2022). *Practical SQL: A Beginner's Guide to Storytelling with Data.* (Second Edition). No Starch Press.
+-   Kreibich, J.A. (2010). *Using SQLite.* O'Reilly Media, Inc.
+-   Obe, R.O. & Hsu, L.S. (2012). *PostgreSQL: Up and Running.* O'Reilly Media, Inc.
+-   Robinson, I., Webber, J., & Eifrem, E. (2015). *Graph Databases* (Second Edition). O'Reilly Media, Inc.
+
+#### Machine Learning {.unnumbered}
+
+-   Boehmke, B. & Greenwall. B. (2020). *Hands-On Machine Learning with R.* Chapman & Hall/CRC.
+-   Rhys, H.I. (2020). *Machine Learning with R, tidyverse, and mlr.* Manning Publications Co.

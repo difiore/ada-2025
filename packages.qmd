@@ -1,0 +1,292 @@
+# List of Packages Used {#package-list .unnumbered}
+
+## By Module {.unnumbered}
+
+### Module 03 {.unnumbered}
+
+- **{easypackages}**: @R-easypackages
+
+### Module 05 {.unnumbered}
+
+- **{usethis}**: @R-usethis
+
+### Module 07 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+
+    - **{ggplot2}**: @R-ggplot2, @ggplot22016
+    - **{tibble}**: @R-tibble
+    - **{tidyr}**: @R-tidyr
+    - **{readr}**: @R-readr
+    - **{purrr}**: @R-purrr
+    - **{dplyr}**: @R-dplyr
+    - **{stringr}**: @R-stringr
+    - **{forcats}**: @R-forcats)
+
+- **{data.table}**: @R-data.table
+
+### Module 08 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{readxl}**: @R-readxl
+- **{XLConnect}**: @R-XLConnect
+- **{gdata}**: @R-gdata
+- **{xlsx}**: @R-xlsx
+- **{curl}**: @R-curl
+- **{rdrop2}**: @R-rdrop2
+- **{repmis}**: @R-repmis
+- **{googlesheets4}**: @R-googlesheets4
+- **{googledrive}**: @R-googledrive
+
+### Module 09 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{magrittr}**: @R-magrittr
+- **{tidylog}**: @R-tidylog
+
+### Module 10 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{curl}**: @R-curl
+- **{skimr}**: @R-skimr
+- **{summarytools}**: @R-summarytools
+- **{dataMaid}**: @R-dataMaid, @dataMaid2019
+- **{psych}**: @R-psych
+- **{pastecs}**: @R-pastecs
+- **{Hmisc}**: @R-Hmisc
+- **{ggExtra}**: @R-ggExtra
+- **{car}**: @R-car, @car2019
+- **{GGally}**: @R-GGally
+- **{corrplot}**: @R-corrplot, @corrplot2017
+- **{patchwork}**: @R-patchwork
+- **{cowplot}**: @R-cowplot
+- **{gridExtra}**: @R-gridExtra
+
+### Module 11 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{sjmisc}**: @R-sjmisc, @sjmisc2018
+
+### Module 12 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{mosaic}**: @R-mosaic, @mosaic2017
+- **{radiant}**: @R-radiant
+- **{sciplot}**: @R-sciplot
+
+### Module 13 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{mosaic}**: @R-mosaic, @mosaic2017
+- **{cowplot}**: @R-cowplot
+- **{manipulate}**: @R-manipulate
+
+### Module 14 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{mosaic}**: @R-mosaic, @mosaic2017
+- **{manipulate}**: @R-manipulate
+- **{boot}**: @R-boot, @boot1997
+
+### Module 15 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{mosaic}**: @R-mosaic, @mosaic2017
+
+### Module 16 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{mosaic}**: @R-mosaic, @mosaic2017
+- **{coin}**: @R-coin, @coin2006, @coin2008
+- **{jmuOutlier}**: @R-jmuOutlier
+- **{infer}**: @R-infer
+
+### Module 17 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{manipulate}**: @R-manipulate
+
+### Module 18 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{manipulate}**: @R-manipulate
+- **{patchwork}**: @R-patchwork
+- **{infer}**: @R-infer
+- **{broom}**: @R-broom
+- **{lmodel2}**: @R-lmodel2
+
+### Module 19 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{car}**: @R-car, @car2019
+- **{ggpubr}**: @-R-ggpubr
+
+### Module 20 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{car}**: @R-car, @car2019
+- **{broom}**: @R-broom
+- **{coin}**: @R-coin, @coin2006, @coin2008
+- **{infer}**: @R-infer
+- **{permuco}**: @R-permuco
+- **{dunn.test}**: @R-dunn.test
+- **{conover.test}**: @R-conover.test
+- **{effectsize}**: @R-effectsize, @effectsize2020
+
+### Module 21 {.unnumbered}
+
+- **{jtools}**: @R-jtools
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{broom}**: @R-broom
+- **{car}**: @R-car, @car2019
+- **{gridExtra}**: @R-gridExtra
+- **{effects}**: @R-effects, @effects2009
+
+### Module 22 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{MASS}**: @R-MASS, @MASS2002
+- **{AICcmodavg}**: @R-AICcmodavg
+- **{MuMIn}**: @R-MuMIn
+
+### Module 23 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{broom}**: @R-broom
+- **{patchwork}**: @R-patchwork
+- **{lmtest}**: @R-lmtest, @lmtest2002
+
+### Module 24 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{lmtest}**: @R-lmtest, @lmtest2002
+- **{AICcmodavg}**: @R-AICcmodavg
+- **{lme4}**: @R-lme4, @lme42015
+- **{redres}**: @R-redres
+- **{effects}**: @R-effects, @effects2009
+- **{cowplot}**: @R-cowplot
+- **{sjPlots}**: @R-sjPlot
+- **{MuMIn}**: @R-MuMIn
+- **{glmmML}**: @R-glmmML
+- **{MASS}**: @R-MASS
+
+### Module 25 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{devtools}**: @R-devtools
+- **{usethis}**: @R-usethis
+- **{roxygen2}**: @R-roxygen2
+- **{withr}**: @R-withr
+- **{manipulate}**: @R-manipulate
+
+### Module 26 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{shiny}**: @R-shiny
+- **{DT}**: @R-DT
+
+### Module 27 {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{broom}**: @R-broom
+- **{reticulate}**: @R-reticulate
+
+<hr>
+
+## In Exercises {.unnumbered}
+
+- **{emayili}**: @R-emayili
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{mailR}**: @R-mailR,
+- **{blastula}**: @R-blastula
+- **{usethis}**: @R-usethis
+- **{emo}**: @R-emo
+- **{sjmisc}**: @R-sjmisc
+- **{huxtable}**: @R-huxtable
+- **{cowplot}**: @R-cowplot
+- **{mosaic}**: @R-mosaic, @mosaic2017
+- **{kableExtra}**: @R-kableExtra
+- **{ggpubr}**: @R-ggpubr
+- **{infer}**: @R-infer
+
+<hr>
+
+## Complete List {.unnumbered}
+
+- **{AICcmodavg}**: @R-AICcmodavg
+- **{BBmisc}**: @R-BBmisc
+- **{blastula}**: @R-blastula
+- **{boot}**: @R-boot, @boot1997
+- **{broom}**: @R-broom
+- **{car}**: @R-car, @car2019
+- **{coin}**: @R-coin, @coin2006, @coin2008
+- **{collape}**: @R-collapse
+- **{conover.test}**: @R-conover.test
+- **{corrplot}**: @R-corrplot, @corrplot2017
+- **{cowplot}**: @R-cowplot
+- **{curl}**: @R-curl
+- **{data.table}**: @R-data.table
+- **{dataMaid}**: @R-dataMaid, @dataMaid2019
+- **{devtools}**: @R-devtools
+- **{dplyr}**: @R-dplyr
+- **{DT}**: @R-DT
+- **{dunn.test}**: @R-dunn.test
+- **{emayili}**: @R-emayili
+- **{easypackages}**: @R-easypackages
+- **{effects}**: @R-effects, @effects2009
+- **{effectsize}**: @R-effectsize, @effectsize2020
+- **{emo}**: @R-emo
+- **{forcats}**: @R-forcats
+- **{gdata}**: @R-gdata
+- **{GGally}**: @R-GGally
+- **{ggExtra}**: @R-ggExtra
+- **{ggplot2}**: @R-ggplot2, @ggplot22016
+- **{ggpubr}**: @R-ggpubr
+- **{glmmML}**: @R-glmmML
+- **{googledrive}**: @R-googledrive
+- **{googlesheets4}**: @R-googlesheets4
+- **{gridExtra}**: @R-gridExtra
+- **{Hmisc}**: @R-Hmisc
+- **{huxtable}**: @R-huxtable
+- **{infer}**: @R-infer
+- **{jmuOutlier}**: @R-jmuOutlier
+- **{jtools}**: @R-jtools
+- **{kableExtra}**: @R-kableExtra
+- **{knitr}**: @R-knitr, @knitr2014, @knitr2015
+- **{lme4}**: @R-lme4, @lme42015
+- **{lmodel2}**: @R-lmodel2
+- **{lmtest}**: @R-lmtest, @lmtest2002
+- **{magrittr}**: @R-magrittr
+- **{manipulate}**: @R-manipulate
+- **{MASS}**: @R-MASS, @MASS2002
+- **{mosaic}**: @R-mosaic, @mosaic2017
+- **{MuMIn}**: @R-MuMIn
+- **{pastecs}**: @R-pastecs
+- **{patchwork}**: @R-patchwork
+- **{permuco}**: @R-permuco
+- **{psych}**: @R-psych
+- **{purrr}**: @R-purrr
+- **{radiant}**: @R-radiant
+- **{rdrop2}**: @R-rdrop2
+- **{readr}**: @R-readr
+- **{redres}**: @R-redres
+- **{readxl}**: @R-readxl
+- **{repmis}**: @R-repmis
+- **{reticulate}**: @R-reticulate
+- **{roxygen2}**: @R-roxygen2
+- **{scales}**: @R-scales
+- **{sciplot}**: @R-sciplot
+- **{shiny}**: @R-shiny
+- **{sjmisc}**: @R-sjmisc, @sjmisc2018
+- **{skimr}**: @R-skimr
+- **{sjPlot}**: @R-sjPlot
+- **{stringr}**: @R-stringr
+- **{summarytools}**: @R-summarytools
+- **{tibble}**: @R-tibble
+- **{tictoc}**: @R-tictoc
+- **{tidyr}**: @R-tidyr
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{usethis}**: @R-usethis
+- **{withr}**: @R-withr
+- **{XLConnect}**: @R-XLConnect
+- **{xlsx}**: @R-xlsx

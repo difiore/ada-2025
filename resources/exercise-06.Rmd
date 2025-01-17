@@ -1,0 +1,171 @@
+---
+title: "Exercise 05"
+---
+
+# Play with Geospatial Data {.unnumbered}
+
+## Learning Objectives {.unnumbered}
+
+- Outline the fundamental **types** for spatial data: vector data (polygons, lines, and points) and raster data (grids).
+- Introduce spatial data visualization in ***R*** using **shapefiles** (".shp" files), ".gpx" files, and the **simple features** standard.
+
+#### Preliminaries {.unnumbered}
+
+-   Install and load in the following libraries: {rgdal}, {sp}, {sf}, {tmap}, {adehabitatHR}, {ggspatial}, {cowplot}, {ggsn}, {leaflet}
+
+```{r}
+library(rgdal) # for readOGR()
+library(sp) # for spatial points (sp) spatial data
+library(sf) # for simple feature (sf) spatial data
+library(tmap) # for fast plotting of thematic maps
+library(adehabitatHR) # for MCP and KDE home ranges
+library(ggspatial) # for annotating maps
+library(cowplot) # for assembling pretty plots
+library(ggsn) # for pretty N arrow
+```
+
+These can be the basis for lots of common visualizations, including drawing polygon data (e.g., countries, bodies of water), lines (e.g., roads, utility lines, animal travel routes), and points (e.g., cities, observation locations) and attaching aesthetics to them (e.g., size, shape, color) to create an analytical insight
+
+Many GIS programs (e.g., ArcGIS, QGIS) make it easy for users to create maps by loading specially formatted files with geographic metatdata (e.g., information on the coordinate reference system and projection) and data to plot. These programs do a lot of work behind the scenes to translate and visualize these into geospatial data.
+
+In ***R***, by contrast, we often have to do this work ourselves, typically building our own explicitly associations between data and geographic metadata as well as specifying details of what we want visualized and how. Rather than menu-driven interfaces or "drag-and-drop" manipulation and visualization of spatial data, we need to code things ourselves. This can cause some headaches and frustration, especially if we need to hunt down relevant information in order to provide it to ***R*** or if we have to explicitly program transformations among coordinate system. On the other hand, once we have the information we need, ***R***’s graphics routines are very rich and expressive and afford us lots of flexibility to tweak visualizations as we like. We can add lots of different kinds of information as individual layers to the same plot and style them as we please. ***R*** packages exist for connecting with web browsers and making interactive maps. Additionally, there are a many packages that allow us to do special kinds of geospatial analysis and geocomputation, as well as for linking ***R*** with geospatially-enabled databases, such as ***PostGIS***.
+
+In this exercise, we will import and plot several geospatial data stored in different formats (e.g., ".shp" files, ".gpx" files, geoJSON files, and ".csv" files) using data from Ecuador as an example. We will also explore a few types of basic geospatial analyses.
+
+### Important Concepts and Vocabulary
+
+#### Data Types {-}
+
+Vector Data
+
+Conceptually, **point data** represent distinct and separate locations in space. They are commonly defined by a pair of geographic coordinates (i.e., some X and Y or longitude and latitude values). For example, the location of a feeding tree or an archaeological site or a city can be shown as a point.
+
+Raster Data
+
+
+#### Data File Types {-}
+
+A **shapefile** (".shp" file) is a proprietary data storage format used by ESRI, the developer of ***ArcGIS*** that can be used to store different types of geographic information and geospatial data such as polygons, lines, and points, along with various details ("attributes") such as names and other metadata. The information in a shapefile is actually spread across a set of files with with different file types (minimally, ".prj", ".shx", ".dbf" files, with the same name as the ".shp" file). This format is also used by a number of GIS applications beyond ***ArcGIS*** for data storage, visualization, mapping, and analysis, and it. ***ArcGIS*** is very expensive (though also very powerful)... fortunately, much of the functionality of ***ArcGIS*** can be replicated in ***R*** or in open source GIS software such as ***QGIS*** or ***GRASS***
+
+**GPX files** is a another data storage format...
+
+
+
+
+The `readOGR()` function can be used to read in ESRI shapefiles or ".gpx" files. Here, we load in data in various formats for my research site in Ecuador...
+
+```{r plotting study location}
+countries <- readOGR(dsn=paste0("data/",spatial_dir),layer="SA-countries")
+class(countries) # SpatialPolygonsDataFrame
+ecuador <- readOGR(dsn=paste0("data/",spatial_dir),layer="ecuador")
+reserves <- readOGR(dsn=paste0("data/",spatial_dir),layer="reserves-ecuador")
+site <- readOGR(dsn=paste0("data/",spatial_dir),layer="tbs-site")
+class(site) # SpatialPointsDataFrame
+riverfile <- "smooth-rio-tiputini.gpx"
+river <- readOGR(dsn=paste0("data/",spatial_dir,"/",riverfile), layer = "routes")
+class(tiputini) #SpatialLinesDataFrame"
+trailsfile <- "trails.gpx"
+trails <- readOGR(dsn=paste0("data/",spatial_dir,"/",trailsfile), layer = "routes")
+```
+
+The {sf} package is used to convert to **simple features** format.
+
+```{r}
+countries <- st_as_sf(countries)
+ecuador <- st_as_sf(ecuador)
+reserves <- st_as_sf(reserves)
+site <- st_as_sf(site)
+river <- st_as_sf(river)
+trails <- st_as_sf(trails)
+```
+
+{ggplot} can be used for mapping **simple features** with `geom_sf()`
+
+```{r}
+sa <- ggplot() +
+  geom_sf(data = countries, aes(), fill=NA, color="black", size = 0.2) +
+  theme_void() +
+  theme(legend.position = "none")
+
+sa <- sa +
+  geom_sf(data = ecuador, aes(), alpha=0.5, fill="thistle3", color="black", size = 0.2)
+
+sa <- sa +
+  geom_sf(data = site, aes(), color="black", fill="red", size=2, shape=23)
+
+sa <- sa +
+  annotation_north_arrow(
+    location = "br",
+     which_north = "true",
+     pad_x = unit(0.75, "in"),
+     pad_y = unit(0.5, "in"),
+     style = north_arrow_fancy_orienteering)
+
+sa # pretty plot of South America with Ecuador highlighted
+
+e <- ggplot() +
+  geom_sf(data = ecuador, aes(), fill="thistle3", alpha=0.5, color="black", size = 0.5) +
+  geom_sf(data = reserves, aes(), fill="dark green", alpha=0.5, color=NA, size = 0.1) +
+  scale_y_continuous(
+    breaks=seq(-5, 1, by=1), limits = c(-5.5, 1.5)) +
+  scale_x_continuous(
+    breaks=seq(-81, -75, by=1), limits = c(-81.5, -74.5)) +
+	theme_light() +
+	labs(x="Longitude", y="Latitude")
+
+e <- e +
+  geom_sf(data = site, aes(), color="black", fill="red", alpha=0.8, size=3, shape=23)
+
+e <- e +
+  annotation_scale(
+    location = "br", width_hint = 0.25,
+    pad_x = unit(0.5, "in"),
+    pad_y = unit(0.5, "in")) +
+  annotation_north_arrow(
+    location = "br", which_north = "true",
+    pad_x = unit(0.75, "in"), pad_y = unit(0.8, "in"),
+    style = north_arrow_fancy_orienteering)
+
+e # pretty plot of Ecuador
+
+tbs <- ggplot() +
+  geom_sf(data=trails, aes(color = "Trails"), size = 0.5) +
+  geom_sf(data=river, aes(color = "Rio Tiputini"), size = 1.5) +
+  annotation_scale(
+    location = "bl", width_hint = 0.5) +
+  annotation_north_arrow(
+    location = "bl", which_north = "true",
+    pad_x = unit(0.75, "in"), pad_y = unit(0.5, "in"),
+    style = north_arrow_fancy_orienteering) +
+  scale_y_continuous(
+    breaks=seq(-0.65, -0.62, by=0.01), limits = c(-0.615, -0.655)) +
+  scale_x_continuous(
+    breaks=seq(-76.17, -76.13, by=0.01), limits = c(-76.175, -76.125)) +
+  theme_light() +
+  labs(x="Longitude", y="Latitude") +
+  scale_color_manual(
+    values = c("Trails" = "grey", "Rio Tiputini" = "blue")) +
+  theme(legend.position="none")
+tbs # pretty plot of TBS
+```
+
+```{r}
+library(tidyverse)
+library(lubridate)
+extract <- read_csv(paste0("data/",spatial_dir,"/","locations.csv"))
+coords <- extract %>% dplyr::select(c("mean_longitude", "mean_latitude")) # coordinates as latlon
+data <- extract %>%
+  mutate(date = date(point)) %>%
+  dplyr::select(date, mean_ltime)
+crs <- CRS("+init=epsg:4326") # proj4string of coords
+locs <- SpatialPointsDataFrame(coords = coords, data = data, proj4string = crs)
+class(locs)
+locs <- spTransform(locs, CRS("+proj=utm +south +zone=18 +datum=WGS84 +ellps=WGS84 +units=m +no_defs"))
+class(locs)
+locsSF <- st_as_sf(locs)
+class(locsSF)
+p <- ggplot() + geom_sf(data = locsSF)
+p
+p <- tbs + geom_sf(data = locsSF)
+p
+```

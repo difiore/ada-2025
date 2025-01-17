@@ -1,0 +1,363 @@
+# Functions and Flow Control {#module-11}
+
+## Objectives
+
+> The objective of this module to become familiar with how some additional basic programming concepts are implemented in ***R***.
+
+## Preliminaries
+
+- Install this package in ***R***: [{sjmisc}](https://cran.r-project.org/web/packages/sjmisc/sjmisc.pdf)
+- Load {tidyverse}
+
+```{r}
+#| include: false
+#| message: false
+library(tidyverse)
+```
+
+## Functions
+
+One of the strengths of using a programming language like ***R*** for data manipulation and analysis is that we can write our own functions to things we need to do in a particular way, e.g., to create a custom analysis or visualization. In [**Module 04**](#module-04) we practiced writing our own simple function, and we will revisit that here.
+
+Recall that the general format for a function is as follows:
+
+```
+function_name <- function(<argument list>) {
+  <function body>
+}
+```
+
+Functions that we define ourselves can have *multiple arguments*, and each argument can have a *default value*. Arguments are separated by commas and default values are specified in the list of arguments. For example, suppose we wanted to make a function that added a user-specified `prefix` to every entry in a particular named variable in a data frame, we could write the following:
+
+```{r}
+add_prefix <- function(df, prefix = "", variable) {
+  df[[variable]] <- paste0(prefix, df[[variable]])
+  return(df)
+}
+
+my_data <-
+  data.frame(
+    "name" = c("Ned", "Sansa", "Cersei",  "Tyrion", "Jon", "Daenerys", "Aria", "Brienne", "Rickon", "Edmure", "Petyr", "Jamie", "Robert", "Stannis", "Theon"
+    ),
+    "house" = c("Stark", "Stark", "Lannister", "Lannister", "Stark", "Targaryen", "Stark", "Tarth", "Stark", "Tully", "Baelish", "Lannister", "Baratheon", "Baratheon", "Greyjoy"
+    ),
+    "code" = sample(100000:999999, 15, replace = FALSE)
+  )
+
+df <- add_prefix(my_data, variable = "house") # uses default prefix
+head(df)
+df <- add_prefix(my_data, prefix = "House ", variable = "house") 
+head(df)
+df <- add_prefix(my_data, prefix = "00001-", variable = "code") 
+head(df)
+```
+
+> **NOTE:** Arguments can be passed to a function in any order, as long as the argument name is included. For example, for the `add_prefix()` function above, the following are equivalent:
+
+```{r}
+head(add_prefix(df = my_data, variable = "house"))
+# versus...
+head(add_prefix(variable = "house", df = my_data))
+```
+
+Note that in the example above, because the argument name `prefix` was excluded, the default value was used.
+
+***R*** also uses positional matching to assign values to arguments when argument names are excluded. Note the difference in the results of these lines:
+
+``` {r}
+head(add_prefix(my_data, "00001-", "code"))
+# versus...
+head(add_prefix(my_data, "House ", "house"))
+# versus...
+head(add_prefix(my_data, "", "house"))
+```
+
+If we try to run the line below, however, it throws an error because too few (unnamed) arguments are passed to the function for it to be able to disambiguate them:
+
+```{r}
+#| eval: false
+head(add_prefix(my_data, "00001-"))
+```
+
+Unless otherwise specified, functions return the result of the last expression evaluated in the function body. However, is good programming practice to explicitly specify the object or value you want returned from the function with `return(<value>)` or `return(<object>)`.
+
+## Conditional Expressions
+
+Conditional expressions are a basic feature of any programming language. They are used for "flow control", i.e., to structure what your program does when. The most common conditional expression is the "if... else..." statement, which is used to direct flow of a program between two paths. The general form is:
+
+```
+if (<test>) {
+  <action 1>
+} else {
+  <action 2>
+}
+```
+
+As an example...
+
+```{r}
+i <- TRUE
+
+if (i == TRUE){
+  print("Yes")
+} else {
+  print("No")
+}
+
+i <- FALSE
+
+if (i == TRUE){
+  print("Yes")
+} else {
+  print("No")
+}
+```
+
+A related form is the `ifelse()` function, which has three arguments: the test condition, the value to be returned or expression to be run if the test condition is true, and the value to be returned or expression to be run if the test condition is false. Unlike the "if... else..." formulation, the `ifelse()` function can work on a vector, too, and returns a vector.
+
+```{r}
+i <- 9
+ifelse(i <= 10, "Yes", "No")
+i <- 11
+ifelse(i <= 10, "Yes", "No")
+i <- c(9, 10, 11)
+ifelse(i <= 10, "Yes", "No")
+```
+
+> **NOTE:** There is also a {dplyr} version of the "if... else..." conditional: `if_else()`. I tend to use this one much more than the {base} ***R*** version.
+
+The function `case_when()` is the equivalent of mixing several "if... else..." statements.
+
+```{r}
+i <- 1:10
+output <- case_when(
+  i <= 3 ~ "small",
+  i <= 7 ~ "medium",
+  i <= 10 ~ "large"
+)
+output
+```
+
+For conditional statements, there are two additional functions that are often useful: `any()` and `all()`. The `any()` function takes a vector of logical values and returns `TRUE` if *any* of the elements is TRUE, while the `all()` function takes a vector of logical values and returns `TRUE` if *all* elements are TRUE.
+
+```{r}
+i <- c(9, 10, 11)
+any(i <= 10)
+all(i <= 10)
+```
+
+## Relational Operators
+
+The following relational operators are often used in conditional expressions:
+
+- less than, greater than: `<`, `>`
+- less than or equal to, greater than or equal to: `<=`, `>=`
+- equal to: `==` **NOTE:** This uses a double equal sign!
+- not equal to: `!=`
+
+## Logical and Other Operators
+
+The following additional operators are also useful and important:
+
+- `!`: logical **NOT** Note that this operator can be applied to values *and* to functions
+- `&`: element-wise logical **AND** (applies to element in a vector)
+- `&&`: logical **AND** (applies to single conditions or first element in vector)
+- `|`: element-wise logical **OR** (applies to element in a vector)
+- `||`: logical **OR** (applies to single conditions or first element in vector)
+- `%in%`: tests for membership **in** a vector
+- the {sjmisc} package adds a "not in" operator to test for membership in a vector: `%nin%`
+
+Examples:
+
+```{r}
+i <- c(9, 10, 11)
+!any(i <= 10) # logical NOT
+!all(i <= 10) # logical NOT
+```
+
+```{r}
+i <- 1:20
+i < 12 & (i%%3) == 0 # element-wise logical AND
+```
+
+```{r}
+i[1] < 12 && (i[1]%%3) == 0 # logical AND
+```
+
+```{r}
+i > 10 | (i%%2) == 0 # element-wise logical OR
+```
+
+```{r}
+i[1] > 10 || (i[1]%%2) == 0 # logical OR
+```
+
+```{r}
+a <- c("There", "is", "grandeur", "in", "this", "view", "of", "life")
+b <- "grandeur"
+b %in% a # membership
+b <- c("selection","life")
+b %in% a
+```
+
+```{r}
+#| message: false
+library(sjmisc)
+b %nin% a # not membership
+detach(package:sjmisc)
+```
+
+## Iterating with Loops
+
+### `for()` Loops {.unnumbered}
+
+When we want to execute a particular piece of code multiple times, for example to iterate over a set of values or to apply the same function to a set of elements in a vector, one way (but not the only way!) to do this is with a *loop*. There are several different constructions we can use for looping, one of the most common of which is a `for()` loop. The basic contruction for a `for()` loop is:
+
+```
+for (<index> in <range>){
+  <code to execute>
+}
+```
+
+The following examples print out each element in a vector, **v**:
+
+```{r}
+v <- seq(from = 100, to = 120, by = 2)
+for (i in 1:length(v)){ # here, we are looping over the indices of v
+  print(v[i]) 
+}
+
+for (i in seq_along(v)){ # seq_along() also loops over the indices of v
+  print(v[i])
+}
+
+for (i in v){ # here we loop over the elements of v
+  print(i)
+}
+```
+
+It is good form and improves efficiency if we allocate memory to whatever output we may want to generate inside of a loop beforehand. For example, if we want to use a loop to calculate the `median()` across all Platyrrhine primate genera for the female brain size, female body size, and canine dimorphism variables in the Kamilar and Cooper dataset we have used previously, we could do the following:
+
+```{r}
+#| message: false
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/KamilarAndCooperData.csv"
+d <- read_csv(f, col_names = TRUE) # creates a "tibble"
+s <- filter(d, Family %in% c("Atelidae","Pitheciidae","Cebidae")) %>%
+  select(Brain_Size_Female_Mean,Body_mass_female_mean,Canine_Dimorphism)
+# good practice
+output <- vector("double", ncol(s))
+for (i in seq_along(s)) {
+    output[[i]] <- median(s[[i]], na.rm = TRUE) 
+  }
+output
+```
+
+The following is another very common way to do this, but is less efficient as we are rewriting the object **output** (and making it one element longer) in every iteration of the loop.
+
+```{r}
+# not so good practice
+output <- vector()
+for (i in seq_along(s)) {
+    output <- c(output, median(s[[i]], na.rm = TRUE))
+  }
+output
+```
+
+### CHALLENGE {.unnumbered}
+
+Write a `for()` loop to print out each row in the data frame **my_data**.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+#| attr.output: '.details summary="Show Output"'
+for (i in 1:nrow(my_data)) {
+  print(my_data[i,])
+}
+```
+
+Write a `for()` loop to print out the reverse of each element in the **code** vector in the data frame **my_data**.
+
+> **HINT:** Check out the function `stri_reverse()` from the {stringi} package.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+#| attr.output: '.details summary="Show Output"'
+for (i in my_data$code){
+  print(stringi::stri_reverse(i))
+}
+```
+
+### `while()` Loops {.unnumbered}
+
+An alternative to using a `for()` loop for repeating a particular block of code is to use a `while()` loop. The general construction for a `while()` loop is:
+
+```
+while (<test expression>) {
+  <code to execute>
+}
+```
+
+Here, the test expression is evaluated at the start of the loop, and the body of the loop is only entered if the result is TRUE. Once the statements inside the loop are executed, flow returns to the top of the loop to evaluate the test expression again. That process is repeated until the test expression is FALSE, and then the loop is exited and control moves on to subsequent parts of the program.
+
+As above, the following example prints out each element in the vector, **v**:
+
+```{r}
+v <- seq(from = 100, to = 120, by = 2)
+i <- 1
+while (i <= length(v)){
+  print(v[i])
+  i <- i + 1
+}
+```
+
+## Vectorization and Functionals
+
+In many cases what we want to do in a loop is apply the same function or operation to each of the elements in a vector, matrix, data frame, list or part thereof... and often we do not actually need a loop to do that. Rather, we can often use what is called a *vectorized function*, or *functional*. The function `sapply()`, and related functions (e.g., `apply()`, `lapply()`, `mapply()`, `vapply()`) are examples of functionals: they allow us to perform *element-wise* operations on the entries in a data object.
+
+The function `sapply()` takes two arguments, a data object (a vector, list, or data frame) and a function (`FUN=`) to apply to its elements. Each element of the data object is passed on to the function, and the result is returned and concatenated into a *vector* of the same length as the original data object. `lapply()` is similar except that the output is a list rather than a vector.
+
+The following examples replicate what we did with `for()` loops above. Here, **s** is a data frame, and the function `median()` is being applied to each element, i.e., each variable, in that data frame:
+
+```{r}
+output <- sapply(s, FUN = median, na.rm = TRUE)
+# Here we are passing on an extra argument to the `median()`function, i.e., `na.rm=TRUE`. This is an example of "dot-dot-dot" (`...`) being an extra argument of the `sapply()` function where those arguments are "passed through" as arguments of the `FUN=` function. Basically, this means that we can pass on an arbitrary set and number of arguments into `sapply()` which, in this case, are then being used in the `median()` function.
+output
+class(output)
+output <- lapply(s, FUN = median, na.rm = TRUE)
+output
+class(output)
+```
+
+The `map()` family of functions from the {purrr} package (which is part of the {tidyverse} set of packages) works very similarly to the `apply()` functions:
+
+```{r}
+output <- map_dbl(s, .f = median, na.rm=TRUE)
+# note the argument `.f=` instead of `FUN=`
+# `map_dbl()` returns an atomic vector of type "double"
+output
+class(output) # returns a vector, like `sapply()`
+output <- map(s, .f = median, na.rm=TRUE)
+# `map()` returns a list
+output
+class(output) # returns a list, like `lapply()`
+# `map_dfr()` returns a data frame
+output <- map_dfr(s, .f = median, na.rm=TRUE)
+class (output) # returns a data frame, unlike any of the `apply()` functions
+output
+```
+
+```{r}
+# | include: false
+detach(package:tidyverse)
+```
+
+---
+
+## Concept Review {.unnumbered}
+
+- Functions: arguments, default values, and "dot-dot-dot" (`...`)
+- Conditional expressions: `if... else...`, `ifelse()`, `if_else()`, `case_when()`
+- Iterating with loops: `for()` loops, `while()` loops
+- Functionals for vectorizing data manipulations: `apply()` and `map()` families of function

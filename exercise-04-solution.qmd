@@ -1,0 +1,361 @@
+# Exercise 04 Solution {.unnumbered}
+
+```{r}
+#| include: false
+library(tidyverse)
+library(sjmisc)
+library(huxtable)
+```
+
+# • Solution {.unnumbered}
+
+Use the `Show Code` button to peek at one solution to each of the four functions. Note that needed libraries are specified with the `require()` at the top of each function. You could use `library()` as an alternative. You could also have these loaded in the global environment, but these would not be as "portable" across users and systems. Each of these functions includes some commented out `print()` and/or `glimpse()` statements that are useful for viewing intermediate values for debugging.
+
+> **NOTE:** The `play_wordle()` and `evaluate_guess()` functions include an additional argument, "output_type", that lets the user specify whether they would like to see simple text output or formatted ("graphic") output, which is made possible by using the {huxtable} library. A substantial chunk of the `play_wordle()` and `evaluate_guess()` functions are devoted to producing this graphic output and are not necessary.
+
+### Functions {.unnumbered}
+
+#### `load_dictionary()` {.unnumbered}
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+load_dictionary <- function(filename){
+  require(tidyverse)
+  dictionary <- read_csv(filename, col_names = TRUE)
+  dictionary <- dictionary[["words"]]
+  dictionary <- toupper(dictionary)
+  # glimpse(dictionary) # to show the structure of "dictionary" to confirm that it is a vector
+  return(dictionary)
+}
+```
+
+#### `pick_solution()` {.unnumbered}
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+pick_solution <- function(dictionary, word_length = 5) {
+  require(tidyverse)
+  possible_solutions <- dictionary[nchar(dictionary) == word_length]
+  solution <- sample(possible_solutions, 1)
+  # print(solution)
+  solution_vector <- str_split(solution, "")[[1]]
+  # glimpse(solution_vector) # to show the structure of the solution vector
+  return(solution_vector)
+}
+```
+
+#### `play_wordle()` {.unnumbered}
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+play_wordle <- function(solution, valid_list, num_guesses = 6, output_type = "text") { ## ARGUMENT "output_type=" CAN BE CUT IF GRAPHIC OUTPUT NOT NEEDED
+  require(tidyverse)
+  require(sjmisc)
+  require(huxtable) ## THIS LIBRARY CALL CAN BE CUT IF GRAPHIC OUTPUT NOT NEEDED
+  word_length <- length(solution)
+  print(paste0("You have ", num_guesses, " chances to guess a word of length ", word_length))
+  letters_left <- LETTERS # a built-in set of capital letters
+  guess_history <- data.frame(matrix(nrow = num_guesses, ncol = word_length))
+  result_history <- data.frame(matrix(nrow = num_guesses, ncol = word_length))
+  if (output_type == "graphic"){
+    guess_history <- as_huxtable(guess_history)
+    result_history <- as_huxtable(result_history)
+  }
+  for (i in 1:num_guesses) {
+    # display "keyboard"
+    print(paste0(c("Letters left: ", letters_left), collapse = " "))
+    # read in guess and confirm length and validity
+    guess <- readline(paste0("Enter guess ", i, ": ")) %>% toupper()
+    while (nchar(guess) != word_length) {
+      guess <- readline(paste0("Guess must have ", word_length, " characters. Enter guess ", i, " again : " )) %>% toupper()
+    }
+    while (guess %nin% valid_list){
+      guess <- readline(paste0("Hmm, that word is not in my dictionary of valid words. Enter guess ", i, " again: ")) %>% toupper()
+    }
+    guess <- str_split(guess, "")[[1]]
+    # print(guess) # check output
+
+    # evaluate guess
+    result <- evaluate_guess(guess, solution, output_type)
+
+    # update keyboard
+    letters_left <- setdiff(letters_left, guess)
+
+    # print results
+    guess_history[i,] <- guess
+    result_history[i,] <- result
+
+    if (output_type == "text") { ## THIS LINE CAN BE CUT IF GRAPHIC OUTPUT NOT NEEDED
+      if (all(result == "*")) {
+        guess_history <- guess_history %>% na.omit()
+        result_history <- result_history %>% na.omit()
+        print(paste0("You won in ", i, " guesses!"))
+        guess_history <- guess_history %>% unite(everything(), sep="", col="guess", remove=TRUE)
+        result_history <- result_history %>% unite(everything(), sep="", col="result", remove=TRUE)
+        history <- data.frame(
+          guess = guess_history,
+          result = result_history)
+        print(history)
+        return(invisible(history))
+      } else {
+        history <- data.frame(
+          guess = paste0(guess, collapse = ""),
+          result = paste0(result, collapse = ""))
+        print(history)
+      }
+    } ## THIS LINE CAN BE CUT IF GRAPHIC OUTPUT NOT NEEDED
+
+    ## THIS WHOLE `if() {} else {}` BLOCK BELOW CAN BE CUT IF GRAPHIC OUTPUT IS NOT NEEDED
+    if (output_type == "graphic") {
+      if (all(background_color(result) == "#6BA964")) {
+        history <- result_history %>% na.omit()
+        print(paste0("You won in ", i, " guesses!"))
+        print(history, colnames = FALSE)
+        return(invisible(history))
+      } else {
+        print(result, colnames = FALSE)
+      }
+    }
+    ## CLOSE OF BLOCK FOR GRAPHIC OUTPUT
+    
+  }
+  print(paste0("Sorry, you lost! Solution was ", paste0(solution, collapse = "")))
+
+  if (output_type == "text"){ ## ## THIS LINE CAN BE CUT IF GRAPHIC OUTPUT NOT NEEDED 
+    guess_history <- guess_history %>% unite(everything(), sep="", col="guess", remove=TRUE)
+    result_history <- result_history %>% unite(everything(), sep="", col="result", remove=TRUE)
+    history <- data.frame(
+      guess = guess_history,
+      result = result_history)
+    print(history)
+    return(invisible(history))
+  } ## THIS LINE CAN BE CUT IF GRAPHIC OUTPUT NOT NEEDED
+
+  ## THE WHOLE `if()` BLOCK BELOW CAN BE CUT IF GRAPHIC OUTPUT IS NOT NEEDED
+  if (output_type == "graphic"){
+    history <- result_history
+    print(history, colnames = FALSE)
+    return(invisible(history))
+  }
+  ## CLOSE OF BLOCK FOR GRAPHIC OUTPUT
+  
+  return()
+}
+```
+
+#### `evaluate_guess()` {.unnumbered}
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+evaluate_guess <- function(guess, solution, output_type) {
+  word_length <- length(solution)
+  text_result <- rep("-", word_length)
+  # the next lines are an ugly hack to deal with repeat letters...
+  # we first find the number of times letters in the guess appear in the solution because we will need to clear "extra" ones away
+  guess_count <- tibble(letter = guess) %>% group_by(letter) %>% summarize(n_in_guess = n())
+  solution_count <- tibble(letter = solution) %>% group_by(letter) %>% summarize(n_in_solution = n())
+  counts <- inner_join(guess_count, solution_count, by = "letter") %>% mutate(to_clear = n_in_guess - n_in_solution) %>% filter(to_clear > 0) %>% select(letter, to_clear)
+
+  for (i in 1:word_length){
+    # these `case_when()` lines are the workhorse of the function...
+    # they find if each letter in the guess appears in the solution and if it in the right place
+    text_result[i] <-
+      case_when (
+        guess[i] %in% solution & guess[i] == solution[i] ~ "*",
+        guess[i] %in% solution & guess[i] != solution[i] ~ "+",
+        guess[i] %nin% solution ~ "-"
+      )
+
+    # this `for()` loop then cycles through cases where the guess contains more of a particular letter than the solution and clears away the correct number of matches that are in in the solution but in the wrong position
+    for (j in counts$letter) {
+      if (guess[i] == j &
+          text_result[i] != "*" &
+          counts[counts$letter==j,]$to_clear > 0) {
+        text_result[i] <- "-"
+        counts[counts$letter==j,]$to_clear <-
+          counts[counts$letter==j,]$to_clear - 1
+        }
+    }
+
+  }
+
+  # format for graphic output
+  graphic_result <- t(data.frame(guess)) %>%
+     as_huxtable() %>%
+     theme_bright()%>%
+     set_all_padding(10) %>%
+     set_text_color("#FFFFFF") %>%
+     set_align("center") %>%
+     set_bold(TRUE) %>%
+     set_all_borders(brdr(4, "solid", "white")) %>%
+     set_font("arial") %>%
+     set_font_size(18)
+  for (i in 1:word_length){
+     graphic_result <- set_background_color(
+       graphic_result, 1, i, case_when(
+         text_result[i] == "*" ~ "#6BA964",
+         text_result[i] == "+" ~ "#CAB458",
+         text_result[i] == "-" ~ "#787C7E"
+       )
+     )
+  }
+  if (output_type == "text") {
+      return(text_result)
+    } else {
+      return(graphic_result)
+    }
+}
+```
+
+### Playing the Game {.unnumbered}
+
+#### Create Dictionaries {.unnumbered}
+```{r create-dictionaries}
+#| message: false
+f_solution_list <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/google-10000-english-usa-no-swears.txt"
+f_valid_list <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/collins-scrabble-words-2019.txt"
+
+valid_list <- load_dictionary(f_valid_list)
+solution_list <- load_dictionary(f_solution_list)
+```
+
+#### Winnow Solution Words to Set of Valid Words {.unnumbered}
+
+```{r narrow-list}
+solution_list <- intersect(solution_list,valid_list)
+```
+
+#### Game Play and Output {.unnumbered}
+
+```{r clear-console}
+#| include: false
+#| eval: true
+source("src/clc.R")
+```
+
+```{r play-game}
+#| eval: false
+solution <- pick_solution(solution_list, word_length = 5)
+game <- play_wordle(solution, valid_list, num_guesses = 6, output = "graphic")
+quick_html(game) # prints results as html
+```
+
+### Alternative Functions without Graphic Output
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show Code"
+play_wordle <- function(solution, valid_list, num_guesses = 6) {
+  require(tidyverse)
+  require(sjmisc)
+  word_length <- length(solution)
+  print(paste0("You have ", num_guesses, " chances to guess a word of length ", word_length))
+  letters_left <- LETTERS # a built-in set of capital letters
+  guess_history <- data.frame(matrix(nrow = num_guesses, ncol = word_length))
+  result_history <- data.frame(matrix(nrow = num_guesses, ncol = word_length))
+  for (i in 1:num_guesses) {
+    # display "keyboard"
+    print(paste0(c("Letters left: ", letters_left), collapse = " "))
+    # read in guess and confirm length and validity
+    guess <- readline(paste0("Enter guess ", i, ": ")) %>% toupper()
+    while (nchar(guess) != word_length) {
+      guess <- readline(paste0("Guess must have ", word_length, " characters. Enter guess ", i, " again : " )) %>% toupper()
+    }
+    while (guess %nin% valid_list){
+      guess <- readline(paste0("Hmm, that word is not in my dictionary of valid words. Enter guess ", i, " again: ")) %>% toupper()
+    }
+    guess <- str_split(guess, "")[[1]]
+    # print(guess) # check output
+
+    # evaluate guess
+    result <- evaluate_guess(guess, solution)
+
+    # update keyboard
+    letters_left <- setdiff(letters_left, guess)
+
+    # print results
+    guess_history[i,] <- guess
+    result_history[i,] <- result
+
+    if (all(result == "*")) {
+      guess_history <- guess_history %>% na.omit()
+      result_history <- result_history %>% na.omit()
+      print(paste0("You won in ", i, " guesses!"))
+      guess_history <- guess_history %>% unite(everything(), sep="", col="guess", remove=TRUE)
+      result_history <- result_history %>% unite(everything(), sep="", col="result", remove=TRUE)
+      history <- data.frame(
+        guess = guess_history,
+        result = result_history)
+      print(history)
+      return(invisible(history))
+    } else {
+        history <- data.frame(
+          guess = paste0(guess, collapse = ""),
+          result = paste0(result, collapse = ""))
+        print(history)
+    }
+
+  }
+  print(paste0("Sorry, you lost! Solution was ", paste0(solution, collapse = "")))
+
+  guess_history <- guess_history %>% unite(everything(), sep="", col="guess", remove=TRUE)
+  result_history <- result_history %>% unite(everything(), sep="", col="result", remove=TRUE)
+  history <- data.frame(guess = guess_history,
+      result = result_history)
+  print(history)
+  return(invisible(history))
+
+  }
+
+evaluate_guess <- function(guess, solution) {
+  word_length <- length(solution)
+  text_result <- rep("-", word_length)
+  # the next lines are an ugly hack to deal with repeat letters...
+  # we first find the number of times letters in the guess appear in the solution because we will need to clear "extra" ones away
+  guess_count <- tibble(letter = guess) %>%
+    group_by(letter) %>%
+    summarize(n_in_guess = n())
+  solution_count <- tibble(letter = solution) %>%
+    group_by(letter) %>%
+    summarize(n_in_solution = n())
+  counts <- inner_join(
+    guess_count,
+    solution_count, by = "letter") %>%
+    mutate(to_clear = n_in_guess - n_in_solution) %>%
+    filter(to_clear > 0) %>%
+    select(letter, to_clear)
+
+  for (i in 1:word_length){
+    # these `case_when()` lines are the workhorse of the function...
+    # they find if each letter in the guess appears in the solution and if it in the right place
+    text_result[i] <-
+      case_when (
+        guess[i] %in% solution & guess[i] == solution[i] ~ "*",
+        guess[i] %in% solution & guess[i] != solution[i] ~ "+",
+        guess[i] %nin% solution ~ "-"
+      )
+    # this `for()` loop then cycles through cases where the guess contains more of a particular letter than the solution and clears away the correct number of matches that are in in the solution but in the wrong position
+    for (j in counts$letter) {
+      if (guess[i] == j &
+          text_result[i] != "*" &
+          counts[counts$letter==j,]$to_clear > 0) {
+        text_result[i] <- "-"
+        counts[counts$letter==j,]$to_clear <-
+          counts[counts$letter==j,]$to_clear - 1
+        }
+    }
+  }
+  return(text_result)
+}
+```
+
+```{r}
+#| include: false
+detach(package:huxtable)
+detach(package:sjmisc)
+detach(package:tidyverse)
+```

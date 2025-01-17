@@ -1,0 +1,67 @@
+.caption {
+  color: #777;
+  margin-top: 10px;
+}
+
+p code {
+  white-space: pre-wrap;
+}
+
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+
+plot {
+  background-color: #000000;
+}
+
+pre code {
+  white-space: pre-wrap;
+}
+
+.sourceCode .cell-code {
+    background-color: #eeeeee;
+    border: 3px solid #C8E1FF;
+    border-radius: 4px;
+    font-size: 105%;
+    line-height: 1.2;
+    overflow: auto;
+    padding: 8px;
+}
+
+.cell-output summary {
+  margin-bottom: 15px;
+}
+
+.cell-output pre {
+  background-color: #C8E1FF;
+  border-radius: 4px;
+  line-height: 1.2;
+  overflow: auto;
+  padding: 8px;
+}
+
+.sidebar-logo {
+  max-height: 100px;
+}
+
+ /* unvisited link */
+a:link {
+  color: #81A8D7;
+}
+
+/* visited link */
+a:visited {
+  color: #81A8D7;
+}
+
+/* mouse over link */
+a:hover {
+  color: darkblue;
+}
+
+/* selected link */
+a:active {
+  color: darkblue;
+} 

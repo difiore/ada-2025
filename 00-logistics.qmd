@@ -1,0 +1,16 @@
+# Course Logistics {.unnumbered}
+
+## Learning Objectives {.unnumbered}
+
+At the conclusion of this course, students will be able to:
+
+-   understand and articulate **key concepts and methods** in applied data science; acquire, manipulate, and manage data from varied sources; conduct exploratory data analyses; test statistical hypotheses; build models to classify and make predictions about data; and evaluate model performance;
+-   use **modern tools for data analysis** (e.g., the Unix command line, version control systems, the ***R*** programming environment, web APIs) and apply “best practices” in data science and data management;
+-   **interact with both local and remote data sources** to store, query, process, and analyze data presented in a variety of common formats (e.g., delimited text files, structured text files, various database systems);
+-   comfortably **write their own simple computer programs/scripts** for data management, statistical analysis, visualization, and more specialized applications;
+-   design and implement **reproducible data science workflows** that take a project from data acquisition to analysis to presentation and organize their work using a version control system;
+-   and apply all of these tools to **questions of interest in the natural and social sciences**.
+
+## Prerequisites {.unnumbered}
+
+At least one semester of introductory statistics is recommended. Prior programming experience is not expected, but would be helpful!

@@ -1,0 +1,59 @@
+# Exercise 09 {.unnumbered}
+
+# Practice Simple Linear Regression {.unnumbered}
+
+## Learning Objectives {.unnumbered}
+
+- Explore a published comparative dataset on primate group size, brain size, and life history variables
+- Conduct simple linear regression analyses with this dataset where you:
+  - Generate regression coefficients by hand
+  - Use existing ***R*** functions and "formula notation" to generate regression coefficients for simple regression models
+  - Calculate theory-based standard error estimates and p values for the regression coefficients by hand and also extract these from model summaries
+  - Generate theory-based confidence intervals for the regression coefficients by hand and also extract these from model summaries
+  - Generate confidence intervals for regression coefficients and p values for regression coefficients using permutation/bootstrapping methods
+
+> **Data source**:
+>
+> Street SE, Navarrete AF, Reader SM, and Laland KN. (2017). Coevolution of cultural intelligence, extended life history, sociality, and brain size in primates. *Proceedings of the National Academy of Sciences* 114: 7908–7914.
+
+
+### Preliminaries {.unnumbered}
+
+- Set up a new ***GitHub*** repo in your ***GitHub*** workspace named "exercise-09" and clone that down to your computer as a new ***RStudio*** project. The instructions outlined as **Method 1** in [**Module 6**](#module-06) will be helpful.
+
+### Step 1 {.unnumbered}
+
+- Using the {tidyverse} `read_csv()` function, load the "Street_et_al_2017.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/Street_et_al_2017.csv) as a "tibble" named **d**.
+- Do a quick exploratory data analysis where you generate the five-number summary (median, minimum and maximum and 1st and 3rd quartile values), plus mean and standard deviation, for each quantitative variable.
+
+> **HINT**: The `skim()` function from the package {skimr} makes this very easy!
+
+### Step 2 {.unnumbered}
+
+- From this dataset, plot brain size (**ECV**) as a function of social group size (**Group_size**), longevity (**Longevity**), juvenile period length (**Weaning**), and reproductive lifespan (**Repro_lifespan**).
+
+### Step 3 {.unnumbered}
+
+- Derive by hand the ordinary least squares regression coefficients $\beta1$ and $\beta0$ for ECV as a function of social group size.
+
+> **HINT**: You will need to remove rows from your dataset where one of these variables is missing.
+
+### Step 4 {.unnumbered}
+
+- Confirm that you get the same results using the `lm()` function.
+
+### Step 5 {.unnumbered}
+
+- Repeat the analysis above for three different major radiations of primates - "catarrhines", "platyrrhines", and "strepsirhines") separately. These are stored in the variable **Taxonomic_group**. Do your regression coefficients differ among groups? How might you determine this?
+
+### Step 6 {.unnumbered}
+
+- For your first regression of ECV on social group size, calculate the standard error for the slope coefficient, the 95% CI, and the *p* value associated with this coefficient by hand. Also extract this same information from the results of running the `lm()` function.
+
+### Step 7 {.unnumbered}
+
+- Use a permutation approach with 1000 permutations to generate a null sampling distribution for the **slope coefficient**. What is it that you need to permute? What is the p value associated with your original slope coefficient? You can use either the percentile method (i.e., using quantiles from the actual permutation-based null sampling distribution) or a theory-based method (i.e., using the standard deviation of the permutation-based null sampling distribution as the estimate of the standard error, along with a normal or t distribution), or both, to calculate this p value.
+
+### Step 8 {.unnumbered}
+
+- Use bootstrapping to generate a 95% CI for your estimate of the slope coefficient using both the percentile method and the theory-based method (i.e., using the standard deviation of the bootstrapped sampling distribution as an estimate of the standard error). Do these CIs suggest that your slope coefficient is different from zero?

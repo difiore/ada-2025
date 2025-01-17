@@ -1,0 +1,33 @@
+```{r}
+#| echo: FALSE
+#| out-width: 500px
+knitr::include_graphics("img/confounding_variables_2x.png")
+```
+
+# Overview {.unnumbered}
+
+<div style = "float:right; padding-top: 10px; padding-left: 20px; padding-right: 20px; padding-bottom: 10px">
+```{r}
+#| echo: FALSE
+#| out-width: 200px
+knitr::include_graphics("img/p_values_2x.png")
+```
+</div>
+
+This course provides an overview of methods and tools for applied data analysis. It is geared toward research in biological anthropology and evolutionary biology, but the material covered is applicable to a wide range of natural, social science, and humanities disciplines. Students will receive practical, hands-on training in various data science tools and workflows, including data acquisition and wrangling, exploratory data analysis and visualization, statistical analysis and interpretation, and literate programming and version control.
+
+Statistical topics to be covered include basic descriptive and inferential statistics, hypothesis testing, basic regression and ANOVA, generalized linear modeling, and mixed effects modeling. Statistical inference will be considered from a frequentist perspective, introducing both parametric and resampling techniques. If we have time, I will also introduce a Bayesian perspective, although this approach will not be tackled at a particularly advanced level. Additional methods and tools will also be covered based on time and student interest (e.g., geospatial data analysis, phylogenetic comparative methods, social network analysis, text corpus construction and mining, population genetic analysis) and on how quickly the class feels we can move forward.
+
+The course particularly emphasizes the development of solid data science skills, focusing on the practical side of data manipulation, analysis, and visualization. Students will learn to use the statistical programming language ***R*** as well as many other useful software tools (e.g., shell scripts, text editors, databases, query languages, and version control systems).
+
+<hr>
+
+> This class is supported by [DataCamp](https://www.datacamp.com/), an intuitive online learning platform for data science. Learn ***R***, ***Python***, and ***SQL*** the way you learn best, through a combination of short expert videos and hands-on-the-keyboard exercises. Take over 100+ courses by expert instructors on topics such as importing data, data visualization or machine learning and learn faster through immediate and personalised feedback on every exercise.
+
+<hr>
+
+```{r}
+#| echo: false
+#| out.width: "30%"
+knitr::include_graphics("img/DataCamp-50px.png")
+```

@@ -1,0 +1,95 @@
+# Exercise 03 {.unnumbered}
+
+# Explore and Wrangle Data {.unnumbered}
+
+## Learning Objectives {.unnumbered}
+
+- Integrating an ***RStudio*** project, a local ***git*** repository, and a **GitHub** remote repository
+- Performing basic exploratory data analyses and visualization
+- Using {dplyr} and the pipe operator (`%>%` or `\>`) for data wrangling
+
+#### Preliminaries {.unnumbered}
+
+- Set up a new ***GitHub*** repo in your ***GitHub*** workspace called "exercise-03" and clone that down your computer as a new ***RStudio*** project. The instructions outlined as **Method 1** in [**Module 6**](#module-06) will be helpful.
+
+- Load the "data-wrangling.csv" dataset from [**this URL**](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/data-wrangling.csv) as a tabular data structure named **d** and look at the variables it contains, which are a subset of those in the Kamilar and Cooper dataset on primate ecology, behavior, and life history that we have used previously.
+
+> **HINT:** You can use the `names()` function to see a list of variable names in the dataset
+
+#### Step 1 {.unnumbered}
+
+Create a new **RMarkdown** or **Quarto** document called "EDA-challenge.Rmd" within the project and use it to complete the following challenges. Be sure to include both descriptive text about what you are doing and code blocks - i.e., follow a "literate programming" approach to be sure that a reader understands what you are doing. For the plots, feel free to use either {base} ***R*** graphics or {ggplot2}, as you prefer.
+
+1. Create a new variable named **BSD** (body size dimorphism) which is the ratio of average male to female body mass.
+
+2. Create a new variable named **sex_ratio**, which is the ratio of the number of adult females to adult males in a typical group.
+
+3. Create a new variable named **DI** (for "defensibility index"), which is the ratio of day range length to the diameter of the home range.
+
+> **HINT:** You will need to calculate the latter for each species from the size of its home range! For the purposes of this assignment, presume that the home range is a circle and use the formula for the area of a circle: $AREA = \pi \times r^2$. The variable *pi* (note, without parentheses) will return the value of $\pi$ as a constant built-in to ***R***, and the function `sqrt()` can be used to calculate the square root ($\sqrt{}$)
+
+4. Plot the relationship between day range length (y axis) and time spent moving (x axis), for these primate species *overall* and *by family* (i.e., a different plot for each family, e.g., by using faceting: `+ facet_wrap()`). Do species that spend more time moving travel farther overall? How about within any particular primate family? Should you transform either of these variables?
+
+5. Plot the relationship between day range length (y axis) and group size (x axis), *overall* and *by family*. Do species that live in larger groups travel farther overall? How about within any particular primate family? Should you transform either of these variables?
+
+6. Plot the relationship between canine size dimorphism (y axis) and body size dimorphism (x axis) *overall* and *by family*. Do taxa with greater size dimorphism also show greater canine dimorphism?
+
+7. Create a new variable named **diet_strategy** that is "frugivore" if fruits make up >50% of the diet, "folivore" if leaves make up >50% of the diet, and "omnnivore" if diet data are available, but neither of these is true (i.e., these values are not `NA`). Then, do boxplots of group size for species with different dietary strategies. Do frugivores live in larger groups than folivores?
+
+> **HINT:** To create this new variable, try combining `mutate()` with `ifelse()` or `case_when()` statements... check out the notes on "Conditional Expressions" in [**Module 11**](#module-11). Take a peak at the code snippet below if you get stuck!
+
+```{r eval=FALSE}
+#| code-fold: true
+mutate(d, "diet" = ifelse(
+  Fruit >= 50,
+  "frugivore",
+  ifelse(
+    Leaves >= 50,
+    "folivore", 
+    ifelse(
+      Fruit < 50 & Leaves < 50,
+      "omnivore",
+      NA
+    ))
+))
+
+mutate(
+  d,
+  "diet" = case_when(
+    Fruit >= 50 ~ "frugivore",
+    Leaves >= 50 ~ "folivore",
+    Fruit < 50 & Leaves < 50 ~ "omnivore",
+    TRUE ~ NA
+  )
+)
+```
+
+8. In one line of code, using {dplyr} verbs and the forward pipe (`%>%` or `|>`) operator, do the following:
+
+- Add a variable, **Binomial** to the data frame **d**, which is a concatenation of the **Genus** and **Species**...
+- Trim the data frame to only include the variables **Binomial**, **Family**, **Brain_size_species_mean**, and **Body_mass_male_mean**...
+- Group these variables by **Family**...
+- Calculate the average value for **Brain_size_species_mean** and **Body_mass_male_mean** per **Family** (remember, you may need to specify `na.rm = TRUE`)...
+- And arrange by *increasing* average brain size
+
+#### Step 2 {.unnumbered}
+
+- Render your work to HTML or (if you feel ambitious!) as a PDF. `r emo::ji("smiley")`
+
+#### Step 3 {.unnumbered}
+
+- Commit your changes locally and push your repo including your ".Rmd" file and knitted results up to ***GitHub***.
+
+#### Step 4 {.unnumbered}
+
+- Submit the URL for your repo in **Canvas**
+
+#### Optional Next Steps? {.unnumbered}
+
+Load in a dataset of your own and write ***R*** code to do the following:
+
+- Create and print a vector of the variable names in your dataset
+- Count the total number of rows (observations) in your dataset
+- For each *numeric* variable, calculate the number of observations, the mean and standard deviation, and the five-number summary
+- Make box-and-whiskers plots for each numerical variable
+- For each *categorical variable*, generate a table of counts/proportions of alternative variable values
