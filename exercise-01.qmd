@@ -15,13 +15,15 @@ editor_options:
 
 ## Preliminary Steps {.unnumbered}
 
-> **NOTE:** The most challenging thing about the exercise below is to get the authentication correct for accessing an SMTP server to send a message. It is often easy to get the ***R*** code to work correctly to contact a servers, but then to have the server not be able to send out an email. The example below should allow you to send emails via ***R*** using credentials associated with a personal or university Google **Gmail** account.
+> **NOTE:** The most challenging thing about the exercise below is to get the authentication correct for accessing an SMTP server to send a message. It is often easy to get the ***R*** code to work correctly to contact a servers, but then to have the server not be able to send out an email.
 
-<!-- # or a personal Microsoft **Outlook** account. -->
+The example below should allow you to send emails via ***R*** using credentials associated with a personal or university Google **Gmail** account.
 
-If you have a Google **Gmail** account (either a personal one, e.g., `<username>@gmail.com`, or one associated with UT, e.g., a `<username>@utexas.edu` account) with 2-factor authorization established, you can follow the steps below to create an "app password" that you can use for authentication.
+If you have a Google **Gmail** account (either a personal one, e.g., `<username>@gmail.com`, or one associated with UT, e.g., a `<username>@utexas.edu` account), you should follow the steps below to create an "app password" that you can use for authentication.
 
-- Log into your Google account or your UT Gmail account on a web browser, click on your user icon and choose "Manage your Google Account". For example...
+> **NOTE:** For this process to work smoothly, you should also have "2-Step Verification" established for the account.
+
+- Log into your Google account or your UT **Gmail** account on a web browser, click on your user icon and choose "Manage your Google Account". For example...
 
 ```{r}
 #| echo: false
@@ -53,7 +55,7 @@ knitr::include_graphics("img/security.png")
 knitr::include_graphics("img/2-step.png")
 ```
 
-At this point, you may need to provide information to verify your identity, e.g., by entering a password and/or entering a code you receive from Google. Once in the "Security" section, scroll down to the bottom of the page to the section on "App passwords" and click the "App passwords" button.
+At this point, you may need to provide information to verify your identity, e.g., by entering a password and/or entering a code you receive from Google. Once you have verified your identity, in the "Security" section, scroll down to the bottom of the page to the section on "App passwords" and click the "App passwords" button.
 
 ```{r}
 #| echo: false
@@ -69,7 +71,7 @@ knitr::include_graphics("img/app-passwords.png")
 knitr::include_graphics("img/app-name.png")
 ```
 
-Google will create new 16-digit password that you can use in lieu of your actual Google password when sending emails via Gmail in the {emayili} and {blastula} functions below. Copy and save this code in a safe place!
+Google will now create new 16-digit password that you can use in lieu of your actual Google password when sending emails via **Gmail** in the {emayili} and {blastula} functions below. Copy and save this code in a safe place!
 
 ```{r}
 #| echo: false
@@ -83,18 +85,6 @@ knitr::include_graphics("img/password.png")
 
 ```{r}
 pwd_gmail <- "" # enter your app password between the quotation marks
-```
-
-<!-- If you have a personal Microsoft **Outlook** email account, set up a variable to hold your password... -->
-
-<!-- ```{r} -->
-<!-- #| echo: false -->
-<!-- pwd_outlook <- "odksqqvcmmyyibgx" -->
-<!-- ``` -->
-
-```{r}
-#| echo: false
-pwd_outlook <- "" # enter your password between the quotation marks
 ```
 
 ## Sending an Email Version 1: Using the {emayaili} package {.unnumbered}
@@ -172,7 +162,7 @@ As of ***R*** version 4.1, we can alternatively use ***R***'s "native" pipe oper
 ```{r}
 message_gmail <- envelope() |>
   from("anthony.difiore@utexas.edu") |>
-  to("anthony.difiore@gmai.com") |>
+  to("anthony.difiore@gmail.com") |>
   subject("Sending a message using {emayili}") |>
   text("Hello! This is a plain text message sent to my personal Gmail account from my UT Gmail account.")
 ```
@@ -196,7 +186,7 @@ smtp_gmail <- server(
 )
 ```
 
-Alternatively, you can use the `gmail()` function to create a Gmail server object more easily...
+Alternatively, you can use the `gmail()` function to create a **Gmail** server object more easily...
 
 ```{r}
 smtp_gmail <- gmail(
@@ -226,44 +216,13 @@ smtp_gmail <- gmail(
 
 #### Step 5 {.unnumbered}
 
-- Send your message by passing it as an argument to the server object. Then, CHECK YOUR EMAIL to confirm that you receive the message.
+- Send your message by passing it as an argument to the server object. To confirm that things are working, send a message to yourself and then CHECK YOUR EMAIL to confirm that you receive the message. A copy of the message should appear in the **Sent** folder of your email client!
 
 ```{r}
 #| eval: FALSE
 # send using Google's Gmail server...
 smtp_gmail(message_gmail, verbose = TRUE)
 ```
-
-> **NOTE:** In the example above, I am sending the message to one Gmail address (anthony.difiore@gmail.com) using a different Gmail account (anthony.difiore@utexas.edu) to access Google's Gmail server!
-
-<!-- To use Microsoft's outgoing email server for **Outlook** email accounts, the host should be set to "smtp.office365.com", the port should be set to 587, and the message **must** come `from()` the email address you are sending from that you are using to authenticate your account. -->
-
-<!-- ```{r} -->
-<!-- message_outlook365 <- envelope() |> -->
-<!--   from("anthony.difiore@outlook.com") |> -->
-<!--   to("anthony.difiore@gmail.com") |> -->
-<!--   subject("Sending a message using {emayili}") |> -->
-<!--   text("Hello! This is a plain text message sent from an Outlook account.") -->
-<!-- ``` -->
-
-<!-- # ```{r} -->
-<!-- # smtp_outlook365 <- server( -->
-<!-- #   host = "smtp.office365.com", -->
-<!-- #   port = 587, -->
-<!-- #   max_times = 1, -->
-<!-- #   username = "anthony.difiore@outlook.com", -->
-<!-- #   password = pwd_outlook -->
-<!-- # ) -->
-<!-- # # either use a variable, e.g., `pwd_outlook` for your password or add your password between quotation marks -->
-<!-- # ``` -->
-<!-- #  -->
-<!-- # ```{r} -->
-<!-- # #| eval: false -->
-<!-- # # send using Microsoft's servers... -->
-<!-- # smtp_outlook365(message_outlook365, verbose = TRUE) -->
-<!-- #  -->
-<!-- # # NOTE: setting `verbose = FALSE` (or omitting the argument) will suppress output to the console -->
-<!-- # ``` -->
 
 #### Next Steps? {.unnumbered}
 
@@ -316,27 +275,6 @@ send.mail(
   send = TRUE
 )
 ```
-
-<!-- - Using Microsoft's Outlook/Office365 server... -->
-<!--     - To use the Outlook/Office365 server, `port=` should be set to 587 and the argument `tls=` (and not `ssl=`) must be set to TRUE to allow TLS encryption. -->
-
-<!-- ```{r eval = FALSE} -->
-<!-- send.mail( -->
-<!--   from = "anthony.difiore@outlook.com", -->
-<!--   to = "anthony.difiore@gmail.com", -->
-<!--   subject = "Sending a message using {mailR}", -->
-<!--   body = "Hello! This is a plain text message sent from an Outlook account.", -->
-<!--   smtp = list( -->
-<!--     host.name = "smtp.office365.com", -->
-<!--     port = 587, -->
-<!--     user.name = "anthony.difiore@outlook.com", -->
-<!--     passwd = pwd_outlook, -->
-<!--     tls = TRUE -->
-<!--   ), -->
-<!--   authenticate = TRUE, -->
-<!--   send = TRUE -->
-<!-- ) -->
-<!-- ``` -->
 
 ## Sending an Email Version 3: Using the {blastula} package {.unnumbered}
 
@@ -415,29 +353,19 @@ message
 
 - Create a credentials file.
 
-The following code block will create a text file (in `JSON` format) in the current working directory that contains default information for your outgoing mail server, e.g., Google's Gmail server (`host = "smtp.gmail.com"`), along with your email address and your password. When you run the following lines of code, you will be asked to enter your password, which will then be stored in the credentials file. For a Gmail account, you can use the app password you created above. Be aware that if you create a credentials file like this, your password will be stored, unencrypted, in the file.
+The following code block will create a text file (in `JSON` format) in the current working directory that contains default information for your outgoing mail server, e.g., Google's **Gmail** server (`host = "smtp.gmail.com"`), along with your email address and your password. When you run the following lines of code, you will be asked to enter your password, which will then be stored in the credentials file. For a **Gmail** account, you can use the app password you created above.
 
-<!-- For an Outlook account, use your standard password. -->
+> **NOTE:** Be aware that if you create a credentials file like this, your password will be stored, unencrypted, in the file you create!
 
 ```{r}
 #| eval: false
 # credentials file for a Gmail account
 create_smtp_creds_file(
-  file = "my_gmail_creds",
+  file = "my_gmail_creds.txt",
   user = "anthony.difiore@utexas.edu",
   provider = "gmail"
 )
 ```
-
-<!-- # ```{r} -->
-<!-- # #| include: false -->
-<!-- # # credentials file for an Outlook account -->
-<!-- # create_smtp_creds_file( -->
-<!-- #   file = "my_outlook_creds", -->
-<!-- #   user = "anthony.difiore@outlook.com", -->
-<!-- #   provider = "office365" -->
-<!-- # ) -->
-<!-- # ``` -->
 
 > **NOTE**: If you omit the `provider=` argument, you should then pass the `host=`, `port=`, and `use_ssl=` arguments yourself to the `create_smtp_creds_file()` function. The `use_ssl=` argument allows the use of STARTTLS, which initiates secured (encrypted) TLS or SSL connection, which many email servers require.
 
@@ -452,20 +380,9 @@ smtp_send(email = message,
   from = "anthony.difiore@utexas.edu",
   to = "anthony.difiore@gmail.com",
   subject = "Sending a message using {blastula} and a credentials file",
-  credentials = creds_file(file = "my_gmail_creds")
+  credentials = creds_file(file = "my_gmail_creds.txt")
 )
 ```
-
-<!-- # ```{r} -->
-<!-- # #| include: false -->
-<!-- # # send using Microsofts's servers, using the %>% operator and different credentials file... -->
-<!-- # message %>% smtp_send( -->
-<!-- #     from = "anthony.difiore@outlook.com", -->
-<!-- #     to = "anthony.difiore@gmail.com", -->
-<!-- #     subject = "Sending a message using {blastula} and a credentials file", -->
-<!-- #     credentials = creds_file(file = "my_outlook_creds") -->
-<!-- # ) -->
-<!-- # ``` -->
 
 #### Step 6 {.unnumbered}
 
@@ -487,20 +404,26 @@ message |> smtp_send(
   )
 ```
 
-<!-- ```{r} -->
-<!-- #| eval: false -->
-<!-- # send using Microsoft's servers... -->
-<!-- message %>% smtp_send( -->
-<!--     from = "anthony.difiore@outlook.com", -->
-<!--     to = "anthony.difiore@gmail.com", -->
-<!--     subject = "Sending a message using {blastula} and entering credentials manually", -->
-<!--     credentials = creds( -->
-<!--       user = "anthony.difiore@outlook.com", -->
-<!--       provider = "office365", -->
-<!--       use_ssl = TRUE -->
-<!--     ) -->
-<!--   ) -->
-<!-- ``` -->
+## Sending an Email Version 4: Using the {sendmailR} package {.unnumbered}
+
+The {sendmailR} is yet another that you can use to send emails from ***R***.
+
+```{r}
+#| eval: false
+install.packages("sendmailR")
+library(sendmailR)
+sendmail(
+  from = "anthony.difiore@utexas.edu", 
+  to = "anthony.difiore@gmail.com", 
+  subject = "Sending a message using {sendmailR}", 
+  msg = "Hello! This is a plain text message sent to my personal Gmail account from my UT Gmail account.", 
+  engine = "curl", 
+  engineopts = list(username = "anthony.difiore@utexas.edu", password = pwd_gmail), 
+  control = list(smtpServer="smtp://smtp.gmail.com", smtpPortSMTP = 587) 
+  # can also include the port as part of the smtpServer argument...
+  # e.g., `control = list(smtpServer="smtp://smtp.gmail.com:587")`
+)
+```
 
 #### Next Steps? {.unnumbered}
 
@@ -530,23 +453,14 @@ create_smtp_creds_key(
 )
 ```
 
-<!-- # ```{r} -->
-<!-- # #| include: false -->
-<!-- # # create Outlook key with a user-specified name, `id=` -->
-<!-- # create_smtp_creds_key( -->
-<!-- #   id = "my_outlook_key", -->
-<!-- #   user = "anthony.difiore@outlook.com", -->
-<!-- #   provider = "office365", -->
-<!-- #   overwrite = TRUE -->
-<!-- # ) -->
-<!-- # ``` -->
-
-```{r eval=FALSE}
+```{r}
+#| eval: false
 # View all keys
 view_credential_keys()
 ```
 
-```{r eval=FALSE}
+```{r}
+#| eval: false
 # send a message with credentials from a keychain using Google's servers...
 message |>
   smtp_send(
@@ -557,18 +471,6 @@ message |>
   )
 ```
 
-<!-- # ```{r} -->
-<!-- # #| include: false -->
-<!-- # # send a message with credentials from a keychain using Microsoft's servers... -->
-<!-- # message %>% -->
-<!-- #   smtp_send( -->
-<!-- #     from = "anthony.difiore@outlook.com", -->
-<!-- #     to = "anthony.difiore@gmail.com", -->
-<!-- #     subject = "Sending a message using {blastula} and and credentials from a keychain", -->
-<!-- #     credentials = creds_key(id = "my_outlook_key") -->
-<!-- #   ) -->
-<!-- # ``` -->
-
 ## Clean-Up Steps {.unnumbered}
 
 ```{r}
@@ -577,7 +479,8 @@ message |>
 delete_all_credential_keys()
 ```
 
-```{r include=FALSE}
+```{r}
+#| include: false
 detach(package:emayili)
 detach(package:tidyverse)
 detach(package:blastula)
