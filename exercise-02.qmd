@@ -48,7 +48,7 @@ knitr::include_graphics("img/add-collaborator.png")
 
 #### Step 4 {.unnumbered}
 
-- Create an new **RMarkdown** or **Quarto** document locally with notes you take in class this week - maybe call it "notes.Rmd" or "notes.qmd"? - including at least some expository text written in **Markdown** and at least one ***R*** code block. If you make a ".qmd" document, I recommend unchecking "Use visual markdown editor", though that is your choice.
+- Create an new **RMarkdown** or **Quarto** document locally with notes you take in class this week - maybe call it "notes.qmd" or "notes.Rmd"? - including at least some expository text written in **Markdown** and at least one ***R*** code block. If you make a ".qmd" document, I recommend unchecking "Use visual markdown editor", though that is your choice.
 
 ```{r}
 #| echo: false
@@ -66,7 +66,7 @@ knitr::include_graphics("img/new-qmd.png")
 
 #### Step 5 {.unnumbered}
 
-- Use `Knit` (for ".Rmd") or `Render` (for ".qmd") to publish your document as HTML.
+- Use `Render` (for ".qmd") or `Knit` (for ".Rmd") to publish your document as HTML.
 
 ```{r}
 #| echo: false
@@ -101,7 +101,6 @@ This is an alternative workflow to that described above, which also works well. 
 #### Step 1 {.unnumbered}
 
 - From within ***RStudio***, create a new project called "exercise-2b" in a brand new directory also called "exercise-2b".
-
 
 ```{r}
 #| echo: false

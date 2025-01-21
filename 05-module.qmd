@@ -36,10 +36,25 @@ Note that ***git*** is simply a bit of software running on your own computer tha
 
 Let us now check if you have installed correctly...
 
-- In ***RStudio***, go to the **Tools** menu and select **Terminal \> New Terminal**. In the terminal window, type, `which git`. On MacOS you should see something like: `/usr/bin/git` or `/usr/local/bin/git`, which is the path to your ***git*** executable file. On Windows, you should see something like: `/cmd/git`
-- In the same terminal, type `git --version` to see which version of ***git*** you are running. You should see something like `git version 2.35.0`.
+- In ***RStudio***, go to the **Tools** menu and select **Terminal > New Terminal** or, if it is visible, click on the *Terminal* tab in the lower left pane of  ***RStudio*** interface. In the terminal window, type, `which git`. On MacOS you should see something like: `/usr/bin/git` or `/usr/local/bin/git`, which is the path to your ***git*** executable file. On Windows, you should see something like: `/cmd/git`
 
-Running the `git --version` command or the command `git config` on MacOS may also prompt you to install a set of developer command line tools... this is okay (and good!) to accept. Doing so will install the **Xcode Command Line Tools**. You can also install these using the command `xcode-select --install`.
+```{bash}
+#| eval: false
+(base) ad26693 🐵  $ which git
+/usr/bin/git
+```
+
+> **NOTE:** Your terminal prompt may look different than how I have set mine up. My prompt ends with `$`, which is typical for the **bash** shell on MacOS. You may see, for example, a prompt that ends in `%`, which is typical for the **zsh** shell.
+
+- In the same terminal, type `git --version` to see which version of ***git*** you are running. You should see something like `git version 2.39.5`.
+
+```{bash}
+#| eval: false
+(base) ad26693 🐵  $ git --version
+git version 2.39.5 (Apple Git-154)
+```
+
+Running the `git --version` command or the command `git config` on MacOS may also prompt you to install a set of developer command line tools... this is okay (and good!) to accept. Doing so will install the **Xcode Command Line Tools**. You can also install these using the command `xcode-select --install` at the terminal prompt.
 
 > **NOTE:** See also Chapter 6 of the web book, [*Happy Git and GitHub for the useR*](https://happygitwithr.com/)
 
@@ -57,11 +72,15 @@ knitr::include_graphics("img/github.png")
 
 ### Telling ***git*** Who You Are {.unnumbered}
 
-The ***git*** VCS keeps track of who makes changes to any files in a watched repository. We thus need to tell ***git*** (on your local computer) who you are so that when you make changes to a repository, either locally or remotely, they are associated with a particular user name and email. To do this within ***RStudio***, select **Tools \> Terminal \> New Terminal** (which opens a new terminal window in the bottom left pane of the IDE) or **Tools \> Shell...**, which will open up an external terminal window. Then type in the following replacing <your name> and <your email address> with the name and the email addressed associated with the ***GitHub*** account you just set up.
+The ***git*** VCS keeps track of who makes changes to any files in a watched repository. We thus need to tell ***git*** (on your local computer) who you are so that when you make changes to a repository, either locally or remotely, they are associated with a particular user name and email. To do this within ***RStudio***, again select **Tools > Terminal > New Terminal** (which opens a new terminal window in the bottom left pane of the IDE) or **Tools > Shell...**, which will open up an external terminal window. Then type in the following replacing <your name> and <your email address> with the name and the email addressed associated with the ***GitHub*** account you just set up.
 
-`git config --global user.name <your name>`
+```{bash}
+#| eval: false
+git config --global user.name "<your name>"
+git config --global user.email "<your email address>"
+```
 
-`git config --global user.email <your email address>`
+> **NOTE:** Your name and email address do not need to be in quotes unless there is a space in one of them.
 
 Alternatively, you can enter these commands directly in a terminal window that you open yourself, rather than one opened from within ***RStudio*** (e.g., by opening **Applications/Utilities/Terminal.app** on MacOS).
 
@@ -69,11 +88,14 @@ Alternatively, you can enter these commands directly in a terminal window that y
 
 The command...
 
-`git config --global --list`
+```{bash}
+#| eval: false
+git config --global --list
+```
 
 ... can be used to check if you set things up correctly.
 
-Alternatively, you can set things up from within ***R***, rather than using a shell window, as follows:
+Alternatively, you can set things up from within ***R***, rather than using a terminal, as follows:
 
 ```{r}
 #| eval: false
@@ -104,20 +126,8 @@ Make sure your email address is verified in ***GitHub***. You probably will have
 ```{r}
 #| echo: false
 #| out-width: "75%"
-knitr::include_graphics("img/profile-settings.png")
+knitr::include_graphics("img/profile.png")
 ```
-
-- In the left sidebar, click "Emails".
-
-- Under your email address, click "Resend verification email".
-
-***GitHub*** will then send you an email with a link in it. After clicking that link, you will be taken to your ***GitHub*** dashboard and see a confirmation banner.
-
-#### Step 2: {.unnumbered}
-
-Generate a new PAT.
-
-- In the upper-right corner of any page on ***GitHub***, click your profile photo, then click "Settings"
 
 ```{r}
 #| echo: false
@@ -125,7 +135,21 @@ Generate a new PAT.
 knitr::include_graphics("img/profile-settings.png")
 ```
 
-- In the left sidebar, click "Developer settings"
+- In the left sidebar, under the "Access" section, click "Emails".
+
+- Under your email address, click "Resend verification email".
+
+***GitHub*** will then send you an email with a link in it. After clicking that link, you will be taken to your ***GitHub*** dashboard and see a confirmation banner.
+
+> **NOTE:** If you have already verified your email, the "Resend verification email" option may not appear.
+
+#### Step 2: {.unnumbered}
+
+Generate a new PAT.
+
+- Again, in the upper-right corner of any page on ***GitHub***, click your profile photo, then click "Settings"
+
+- In the left sidebar of your profile page, scroll to the bottom and click "Developer settings"
 
 ```{r}
 #| echo: false
@@ -133,15 +157,15 @@ knitr::include_graphics("img/profile-settings.png")
 knitr::include_graphics("img/developer-settings.png")
 ```
 
-- In the left sidebar, click "Personal access tokens".
+- In the left sidebar, expand the section on "Personal access tokens".
 
 ```{r}
 #| echo: false
 #| out-width: "75%"
-knitr::include_graphics("img/personal-access-token.png")
+knitr::include_graphics("img/personal-access-tokens.png")
 ```
 
-- Click "Generate new token".
+- There are two types of tokens you can create, "fine-grained" and "classic", either of which is fine to create. The former offers the opportunity to finely tune control of what actions on **GitHub** you would be able to access through ***R***, but the latter is easier to set up. Choose "Generate New Token" and select "classic"...
 
 ```{r}
 #| echo: false
@@ -153,12 +177,12 @@ knitr::include_graphics("img/generate-new-token.png")
 
 - Set an expiration date for the token.
 
-- Select extent of permissions you would like to grant this token. To use your token to access repositories from the command line, select the "repo" checkbox.
+- Select scope of permissions you would like to grant this token. To use your token to access repositories from the command line and perform other actions with repositories, select the "repo" checkbox plus any other actions you would like to be able to control.
 
 ```{r}
 #| echo: false
 #| out-width: "75%"
-knitr::include_graphics("img/new-personal-access-token.png")
+knitr::include_graphics("img/new-classic-token.png")
 ```
 
 - Scroll to the bottom of the page and click the green "Generate token" button.
@@ -169,7 +193,13 @@ knitr::include_graphics("img/new-personal-access-token.png")
 knitr::include_graphics("img/generate-token.png")
 ```
 
-Once you have a token, you enter it instead of your password when performing ***git*** operations over **HTTPS**. Personal access tokens can only be used for **HTTPS** ***git*** operations. If you instead want to use **SSH**, you will have to set that up using an `RSA` key (see details below for how to do this within ***RStudio***).
+```{r}
+#| echo: false
+#| out-width: "75%"
+knitr::include_graphics("img/save-token.png")
+```
+
+Once your token is created, copy and store it in a safe place, like a password manager. You should enter the token instead of your ***git*** password when performing operations over **HTTPS**. Personal access tokens can only be used for **HTTPS** ***git*** operations. If you instead want to use **SSH**, you will have to set that up using an `RSA` key (see details below for how to do this within ***RStudio***).
 
 ### Caching Your ***GitHub*** Credentials {.unnumbered}
 
@@ -190,20 +220,33 @@ The ***GitHub*** CLI will automatically store your ***git*** credentials for you
 
 ***git*** Credential Manager (GCM) is another way to store your credentials securely and connect to ***GitHub*** over **HTTPS**. With GCM, you do not have to manually create and store a personal access token, as GCM manages authentication on your behalf, including 2FA (two-factor authentication).
 
-- Install GCM by running the following at a command prompt:
+- Install GCM by running the following commands at a terminal command prompt:
 
-```
-$ brew tap microsoft/git
-$ brew install --cask git-credential-manager-core
+```{bash}
+#| eval: false
+brew tap microsoft/git
+brew install --cask git-credential-manager-core
 ```
 
 The next time you clone an **HTTPS** URL that requires authentication, e.g., for a private repository, ***git*** will prompt you to log in using a browser window. You may be asked to authorize an "OAuth app". If your account or organization requires two-factor authorization, you will also need to complete the 2FA challenge.
 
-Once you've authenticated successfully, your credentials will be stored in the macOS keychain and will be used every time you clone an **HTTPS** URL. ***git*** will not require you to type your credentials in the command line again unless you change your credentials.
+Once you've authenticated successfully, your credentials will be stored in your macOS keychain and will be used every time you clone an **HTTPS** URL. ***git*** will not require you to type your credentials in the command line again unless you change your credentials.
 
 If you are running Windows, **GCM** is included with the installer for ***Git for Windows***. During installation you will be asked to select a credential helper, with GCM being set as the default.
 
 The information above was pulled from the [authentication](https://docs.github.com/en/authentication) and [account security](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure) sections of ***GitHub***'s documentation. See those links for more details and recommendations for troubleshooting any problems.
+
+Use can also use the {usethis} and {gitcreds} packages to generate new PATs and to register your credentials with ***git***
+
+- Create a GitHub PAT via ***R*** by running: `usethis::create_github_token()`. This command will access a page in your browser for setting up a new (classic) token, pre-populated with appropriate scopes for working in ***R***
+- Copy and store the token in a safe place, such as a password manager
+- Use the command `gitcreds::gitcreds_set()` to register your token with ***git***.
+- Use the command `usethis::git_sitrep()` to get the rundown on your current ***git*** credentials.
+
+Troubleshooting: If you are having problems, you can try the following two steps, after generating and saving your PAT:
+
+- Run `credentials::git_credential_forget()` to clear the credentials cache
+- Run `credentials::set_github_pat()` and follow the prompts, which may involving pasting your saved token into one of the prompts.
 
 ### Creating a Remote Repository {.unnumbered}
 
@@ -366,8 +409,16 @@ It is *very* easy to do this process through the ***RStudio*** IDE, as we will s
 
 There are two ways to connect between remote and local ***git*** repositories, via either **HTTPS** (which stands for "hypertext transfer protocol") or **SSH** (which stands for "secure shell"). Our first steps will use the first of these approaches and will create a local "cloned" copy of a remote repository we have hosted on ***GitHub***.
 
-- Open a terminal shell. You can either do this directly from your operating system or you can access a shell from within ***RStudio*** by choosing **Tools \> Terminal \> New Terminal** or **Tools \> Shell...**. Again, the former command opens a new terminal within the ***RStudio*** IDE, while the latter opens an external terminal window.
-- Using the UNIX and DOS shell command `cd` (for "change directories"), navigate into the folder that you want your cloned repository to be created in. I typically create new repos in a dedicated folder called `Repos/` that I use for development work, which I keep in my main user folder on MacOS (e.g., "\~/Development/Repos").
+- Open a terminal shell. You can either do this directly from your operating system or you can access a shell from within ***RStudio*** by choosing **Tools > Terminal > New Terminal** or **Tools > Shell...**. Again, the former command opens a new terminal within the ***RStudio*** IDE, while the latter opens an external terminal window.
+- Using the UNIX and DOS shell command `cd` (for "change directories"), navigate into the folder that you want your cloned repository to be created in. I typically create new repos in a dedicated folder called `Repos/` that I use for development work, which I keep in my main user folder on MacOS (e.g., "~/Development/Repos").
+
+```{bash}
+#| eval: false
+(base) ad26693 🐵  $ cd ~/Development/Repos
+```
+
+> **NOTE:** Here, I am using the shortcut `~` operator to access my user home directory. You can, instead, to use the full path to your home directory, e.g., "/Users/ad26693/Desktop/Repos".
+
 - Now open a web browser, go to the landing page for your repository on **GitHub.com**, click the green button that says "Code", then select the "HTTPS" tab and copy the web URL that shows up in the text box by clicking on the tiny clipboard icon.
 
 ```{r}
@@ -382,14 +433,19 @@ The web URL should include your ***GitHub*** username and the name of your the r
 
 e.g., `https://github.com/difiore/test-repo.git`
 
-- Return to the terminal window in ***RStudio*** or to the external shell prompt and type: `git clone` followed by the copied URL, e.g., `git clone https://github.com/difiore/test-repo.git`
+- Return to the terminal window in ***RStudio*** or to the external shell prompt and type: `git clone` followed by the copied URL. For example...
+
+```{bash}
+#| eval: false
+(base) ad26693 🐵  $ git clone https://github.com/difiore/test-repo.git
+```
 
 > **NOTE**: Here, you may be asked for your **GitHub** username and password... if so, enter you "personal access token" instead of the password.
 
 The output should look something like:
 
-```
-[13:55:41] ~/Development/Repos$ git clone https://github.com/difiore/test-repo.git
+```{bash}
+#| eval: false
 Cloning into 'test-repo'...
 remote: Enumerating objects: 11, done.
 remote: Counting objects: 100% (11/11), done.
@@ -397,7 +453,6 @@ remote: Compressing objects: 100% (10/10), done.
 remote: Total 11 (delta 1), reused 0 (delta 0), pack-reused 0
 Receiving objects: 100% (11/11), done.
 Resolving deltas: 100% (1/1), done.
-[13:55:51] ~/Development/Repos$
 ```
 
 If you then navigate into the newly created local directory using the `cd` command, you can list and look at the cloned files. To do so, at the shell prompt type...
@@ -407,13 +462,14 @@ If you then navigate into the newly created local directory using the `cd` comma
 - `head README.md` (shows the first few lines of the file "README.md")
 - `git remote show origin` (shows information about the remote repository, including the branch that "push" and "fetch" commands will be applied to and which branch is being tracked locally)
 
-The output should look something like:
+The output should look something like...
 
-```
-[14:00:18] ~/Development/Repos$ cd test-repo/
-[14:00:29] ~/Development/Repos/test-repo$ ls -a
+```{bash}
+#| eval: false
+(base) ad26693 🐵  $ cd test-repo/
+(base) ad26693 🐵  $ ls -a
 .     ..    .git    .gitignore    README.md
-[14:00:35] ~/Development/Repos/test-repo$ head README.md
+(base) ad26693 🐵  $ head README.md
 # test-repo
 
 I am making some edits to this README file using Markdown!
@@ -423,7 +479,7 @@ I am making some edits to this README file using Markdown!
 I can use simple text formating to make **bold** or *italicized* text!
 
 ## Added this new section on a branch
-[14:02:02] ~/Development/Repos/test-repo$ git remote show origin
+(base) ad26693 🐵  $ git remote show origin
 * remote origin
   Fetch URL: https://github.com/difiore/test-repo.git
   Push  URL: https://github.com/difiore/test-repo.git
@@ -435,7 +491,6 @@ I can use simple text formating to make **bold** or *italicized* text!
     main merges with remote main
   Local ref configured for 'git push':
     main pushes to main (up to date)
-[14:02:31] ~/Development/Repos/test-repo$
 ```
 
 ### Making and Pushing Local Changes {.unnumbered}
@@ -446,8 +501,9 @@ You can also do this by navigating to the "README.md" file through the normal Wi
 
 If you now type `git status` at the shell prompt, you will see a message that the "README.md" file has been changed:
 
-```
-[14:14:42] ~/Development/Repos/test-repo$ git status
+```{bash}
+#| eval: false
+(base) ad26693 🐵  $ git status
 On branch main
 Your branch is up to date with 'origin/main'.
 
@@ -457,17 +513,18 @@ Changes not staged for commit:
   modified:   README.md
 
 no changes added to commit (use "git add" and/or "git commit -a")
-[14:14:45] ~/Development/Repos/test-repo$
 ```
 
 To propagate our changes back up to the remote repository, we now need to do three things: [1] First, we need to "stage" or "add" the files to a queue of local changes. [2] We then need to "commit" those changes to our local repository so that ***git*** acknowledges that changes have been made and approved. [3] Finally, we then need to "push" the committed changes up across the internet to the remote repository hosted on ***GitHub***. These are done with the ***git*** commands `add`, `commit`, and `push` in the shell as follows:
 
-```
-[14:14:45] ~/Development/Repos/test-repo$ git add -A
-[14:20:49] ~/Development/Repos/test-repo$ git commit -m "A commit from my local repo"
+```{bash}
+#| eval: false
+(base) ad26693 🐵  $ git add -A
+(base) ad26693 🐵  $ git commit -m "A commit from my local repo"
 [main e724f84] A commit from my local repo
  1 file changed, 1 insertion(+)
-[14:21:09] ~/Development/Repos/test-repo$ git push
+ 
+(base) ad26693 🐵  $ git push
 Enumerating objects: 5, done.
 Counting objects: 100% (5/5), done.
 Delta compression using up to 4 threads
@@ -477,7 +534,6 @@ Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
 remote: Resolving deltas: 100% (1/1), completed with 1 local object.
 To https://github.com/difiore/test-repo.git
    280fb0a..e724f84  main -> main
-[14:21:21] ~/Development/Repos/test-repo$
 ```
 
 > **NOTE:** The `-A` argument following the `git add` command means to stage *all* files in the repo that have changed since the last commit (in this case, we have only one, "README.md"). The `-m` argument following `git commit` indicates the message we want to include with our commit. It is necessary to include SOME message with each commit, and it is good practice to include a short description of what the commit includes, e.g., "Updating README file".
@@ -516,8 +572,9 @@ knitr::include_graphics("img/readme-edit-again.png")
 
 - Return to the shell prompt inside the local directory for your repository and enter the command `git pull`. You should see something like the following, indicating that the `main` branch of the local repository has been "fast-forwarded" to the state of the remote `main` branch that is being tracked:
 
-```
-[14:30:05] ~/Development/Repos/test-repo$ git pull
+```{bash}
+#| eval: false
+(base) ad26693 🐵  $ git pull
 remote: Enumerating objects: 5, done.
 remote: Counting objects: 100% (5/5), done.
 remote: Compressing objects: 100% (3/3), done.
@@ -529,15 +586,14 @@ Updating e724f84..8734542
 Fast-forward
  README.md | 2 ++
  1 file changed, 2 insertions(+)
-[14:30:10] ~/Development/Repos/test-repo$
 ```
 
 If you run the command `git pull` and the local repo is in sync with the version hosted on ***GitHub***, you should see something like the following:
 
-```
-[14:30:25] ~/Development/Repos/test-repo$ git pull
+```{bash}
+#| eval: false
+(base) ad26693 🐵  $ git pull
 Already up to date.
-[14:30:26] ~/Development/Repos/test-repo$
 ```
 
 ## Additional Useful Information
@@ -548,8 +604,8 @@ Already up to date.
 
 ***RStudio*** includes functionality to make it very straightforward to use various system shells with projects under version control. This includes:
 
-- You can use the **Tools \> Terminal \> New Terminal** and **Tools \> Shell...** commands to open a new terminal within ***RStudio*** or a new system shell window with the working directory already initialized to your project's root directory.
-- When using ***git*** on Windows, these command by default should open the **Git Bash** shell, which is a port of the Unix bash shell to Windows that has been specially configured for use with a version of **git** called ***MSYS Git***. Note that you can disable this behavior and use the standard Windows command prompt instead choosing using **Tools \> Global Options** and selecting an alternative terminal in the *Terminal* section).
+- You can use the **Tools > Terminal > New Terminal** and **Tools > Shell...** commands to open a new terminal within ***RStudio*** or a new system shell window with the working directory already initialized to your project's root directory.
+- When using ***git*** on Windows, these command by default should open the **Git Bash** shell, which is a port of the Unix bash shell to Windows that has been specially configured for use with a version of **git** called ***MSYS Git***. Note that you can disable this behavior and use the standard Windows command prompt instead choosing using **Tools > Global Options** and selecting an alternative terminal in the *Terminal* section).
 
 ### Using SSH instead of HTTPS {.unnumbered}
 
@@ -633,8 +689,9 @@ knitr::include_graphics("img/clone-with-ssh.png")
 
 The output should look something like:
 
-```
-[14:05:30] ~/Development/Repos$ git clone git@github.com:difiore/test-repo.git
+```{bash}
+#| eval: false
+(base) ad26693 🐵  $ git clone git@github.com:difiore/test-repo.git
 Cloning into 'test-repo'...
 The authenticity of host 'github.com (140.82.113.3)' can't be established.
 ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
@@ -642,9 +699,10 @@ This key is not known by any other names
 Are you sure you want to continue connecting (yes/no/[fingerprint])?
 ```
 
-Here, you can answer `yes` and hit \<RETURN\>.
+Here, you can answer `yes` and hit <RETURN>.
 
-```
+```{bash}
+#| eval: false
 Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
 remote: Enumerating objects: 17, done.
 remote: Counting objects: 100% (17/17), done.
@@ -658,23 +716,25 @@ Resolving deltas: 100% (3/3), done.
 
 We can check what protocol you are using to connect to a remote repository by `cd`ing into the repository and then typing `git remote -v`. You should then see something like:
 
-```
-    [14:09:31] ~/Development/Repos$ git remote -v
-    origin  git@github.com:difiore/test-repo.git (fetch)
-    origin  git@github.com:difiore/test-repo.git (push)
+``` {bash}
+#| eval: false
+(base) ad26693 🐵  $ git remote -v
+origin  git@github.com:difiore/test-repo.git (fetch)
+origin  git@github.com:difiore/test-repo.git (push)
 ```
 
 To change the protocol we use, we simply point ***git*** to the URL associated with the desired transfer protocol. The following commands switch us from using SSH to HTTPS, then back.
 
-```
-    [14:12:10] ~/Development/Repos$ git remote set-url origin https://github.com/difiore/test-repo.git
-    [14:12:13] ~/Development/Repos$ git remote -v
-    origin	https://github.com/difiore/test-repo.git (fetch)
-    origin	https://github.com/difiore/test-repo.git (push)
-    [14:12:17] ~/Development/Repos$ git remote set-url origin git@github.com:difiore/test-repo.git
-    [14:12:31] ~/Development/Repos$ git remote -v
-    origin  git@github.com:difiore/test-repo.git (fetch)
-    origin  git@github.com:difiore/test-repo.git (push)
+```{bash}
+#| eval: false
+(base) ad26693 🐵  $ git remote set-url origin https://github.com/difiore/test-repo.git
+(base) ad26693 🐵  $ git remote -v
+origin	https://github.com/difiore/test-repo.git (fetch)
+origin	https://github.com/difiore/test-repo.git (push)
+(base) ad26693 🐵  $ git remote set-url origin git@github.com:difiore/test-repo.git
+(base) ad26693 🐵  $ git remote -v
+origin  git@github.com:difiore/test-repo.git (fetch)
+origin  git@github.com:difiore/test-repo.git (push)
 ```
 
 ### Using ***git*** with Windows {.unnumbered}
@@ -707,7 +767,7 @@ knitr::include_graphics("img/git7.png")
 
 **File 1.** `C:\Program Files\Git\bin\git.exe`
 
-When you open ***RStudio*** after installing ***git*** and then go to **Tools \> Global Options** and select the **Git/SVN**\* section, you should see the path above appear in the text box for "Git executable".
+When you open ***RStudio*** after installing ***git*** and then go to **Tools > Global Options** and select the **Git/SVN** section, you should see the path above appear in the text box for "Git executable".
 
 I am not entirely sure that this is the case, but I THINK this *git.exe* file simply links an executable file that is actually stored in a different place (see ***File 2***. below), but this is where many programs will expect to find the ***git*** executable by default.
 
@@ -717,7 +777,7 @@ I am not entirely sure that this is the case, but I THINK this *git.exe* file si
 
 This is the executable file that is accessible via a PATH environmental variable that *should* get added to your Windows environment automatically when you installed the ***git*** software with the defaults noted above.
 
-Thus, after installing ***git*** and restarting your computer, when you then choose **Tools \> Shell...** or **Tools \> Terminal \> New Terminal** from ***RStudio*** and type `which git` in the shell that opens up, it should be THIS executable which is called and returned. That is, if you access the shell or terminal from ***RStudio*** and type `which git` you should get `/cmd/git`.
+Thus, after installing ***git*** and restarting your computer, when you then choose **Tools > Shell...** or **Tools > Terminal > New Terminal** from ***RStudio*** and type `which git` in the shell that opens up, it should be THIS executable which is called and returned. That is, if you access the shell or terminal from ***RStudio*** and type `which git` you should get `/cmd/git`.
 
 ```{r}
 #| echo: false
@@ -729,7 +789,7 @@ knitr::include_graphics("img/msys-git.png")
 
 This version of the ***git*** executable is what opens if you directly open the ***Git Bash*** shell, rather than opening it from within ***RStudio***.
 
-After installing ***git***, you **can** access ***Git Bash*** from the Windows start menu (i.e., the menu that pops up from clicking the Windows icon at the bottom left of your Windows desktop). If you select **Git \> Git Bash** from the start menu, a shell window will open up, and if you then type `which git` there, it will return `/mingw64/bin`. Honestly, I have no idea why accessing the ***Git Bash*** shell this way rather than through ***RStudio*** runs a different instance of ***git***!
+After installing ***git***, you **can** access ***Git Bash*** from the Windows start menu (i.e., the menu that pops up from clicking the Windows icon at the bottom left of your Windows desktop). If you select **Git > Git Bash** from the start menu, a shell window will open up, and if you then type `which git` there, it will return `/mingw64/bin`. Honestly, I have no idea why accessing the ***Git Bash*** shell this way rather than through ***RStudio*** runs a different instance of ***git***!
 
 ```{r}
 #| echo: false
@@ -765,7 +825,7 @@ We need to log out and log in again or restart Windows to have the PATH environm
 
 #### Step 3 {.unnumbered}
 
-Start up ***RStudio*** and check that the path to the ***git*** executable in **Tools \> Global Options \> Git/SVN** is set to `C:\Program Files\Git\bin\git.exe` I think it should be set automatically, but if not, click the "Browse" button next to the text box and find this path and then restart ***RStudio***.
+Start up ***RStudio*** and check that the path to the ***git*** executable in **Tools > Global Options > Git/SVN** is set to `C:\Program Files\Git\bin\git.exe` I think it should be set automatically, but if not, click the "Browse" button next to the text box and find this path and then restart ***RStudio***.
 
 ```{r}
 #| echo: false
@@ -777,7 +837,7 @@ knitr::include_graphics("img/path-to-git.png")
 
 #### Step 4 {.unnumbered}
 
-In **Tools \> Global Options \> Terminal**, make sure that new terminals are set to open with ***Git Bash*** rather than some other shell. You can set this in the pop down menu "New terminals open with..." There seemed to be an issue that some folks had where new terminal windows were opening at the COMMAND PROMPT, which is not what we want but is easily corrected.
+In **Tools > Global Options > Terminal**, make sure that new terminals are set to open with ***Git Bash*** rather than some other shell. You can set this in the pop down menu "New terminals open with..." There seemed to be an issue that some folks had where new terminal windows were opening at the COMMAND PROMPT, which is not what we want but is easily corrected.
 
 ```{r}
 #| echo: false
@@ -787,7 +847,7 @@ knitr::include_graphics("img/select-terminal.png")
 
 #### Step 5 {.unnumbered}
 
-Choose **Tools \> Shell...** or **Tools \> Terminal \> New Terminal" and confirm that you are opening in the** *Git Bash*\*\* shell. This should be the case if you have done step 4 above. The command prompt will read something like...
+Choose **Tools > Shell...** or **Tools > Terminal > New Terminal** and confirm that you are opening in the ***Git Bash*** shell. This should be the case if you have done step 4 above. The command prompt will read something like...
 
 - In green: `YOUR.USERNAME@YOUR.COMPUTER NAME`
 - In purple: `MSYS` (the default name for the MinTTY ***Git Bash*** shell)
@@ -822,9 +882,11 @@ knitr::include_graphics("img/msys-git.png")
 
 Set your ***git*** identity as instructed above by typing the following at the command prompt:
 
-`git config --global user.name “your name”`
-
-`git config --global user.email “your email address”`
+```{bash}
+#| eval: false
+git config --global user.name "<your name>"
+git config --global user.email "<your email address>"
+```
 
 > **NOTE:** Your name and email address do not need to be in quotes unless there is a space in one of them.
 
@@ -832,7 +894,10 @@ Set your ***git*** identity as instructed above by typing the following at the c
 
 Check your configuration by typing the following at the command prompt:
 
-`git config --list`
+```{bash}
+#| eval: false
+git config --list
+```
 
 You should get a list of settings that includes at least two settings, `user.name` and `user.email`, that match what you just entered.
 
