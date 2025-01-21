@@ -197,15 +197,13 @@ To create a new remote repository on ***GitHub*** into which you can push the co
 
 ##### Step 1 {.unnumbered}
 
-- Configure a ***GitHub*** Personal Access Token (PAT):
+- Make sure you have configured a ***GitHub*** Personal Access Token (PAT) using the process outlined in [**Module 5**](#module-05).
 
+Briefly...
   - Login to your ***GitHub*** account and go to the *Settings* tab. Then select `Developer Settings` and then `Personal Access Tokens`.
-  - Select `Generate new token` and give it a nickname that reminds you of the intended purpose (e.g., "GitHub Access from R").
+  - Select `Generate new token`, create a new "classic" token, and give it a nickname that reminds you of the intended purpose (e.g., "GitHub Access from R").
   - Pick a *scope* that confers the privileges you need, e.g., `repo`, and then press the green "Generate Token" button.
-  - The PAT will be displayed. It is a string of 40 random letters and digits. Copy this string to the clipboard.
-  - Enter the PAT in your ".Renviron" file as a line that looks like this: `GITHUB_PAT=<your token>` (not in quotation marks).
-  - The ".Renviron" file is a hidden file located in a user's home directory that can be used to set some default parameters for new ***R*** sessions. You can load and edit this with a function from the {usethis} package. At a console prompt, type `usethis::edit_r_environ()`. Your ".Renviron" file should open up in the ***RStudio*** editor. Add your the `GITHUB_PAT=<your token>` line as above, save and close the file. Be sure to put a line break at the end!
-  - Restart R (**Session > Restart R** in the ***RStudio*** menu bar), as environment variables are loaded from ".Renviron" only at the start of an ***R*** session. Check that the PAT is now available: `Sys.getenv("GITHUB_PAT")`. You should see your PAT print to screen.
+  - Copy this token to a safe place, and register this credential with ***git*** using one of the methods outlined in [**Module 5**](#module-05)
 
 ##### Step 2 {.unnumbered}
 

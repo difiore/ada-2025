@@ -199,7 +199,7 @@ knitr::include_graphics("img/generate-token.png")
 knitr::include_graphics("img/save-token.png")
 ```
 
-Once your token is created, copy and store it in a safe place, like a password manager. You should enter the token instead of your ***git*** password when performing operations over **HTTPS**. Personal access tokens can only be used for **HTTPS** ***git*** operations. If you instead want to use **SSH**, you will have to set that up using an `RSA` key (see details below for how to do this within ***RStudio***).
+The token will be a string of 40 random letters and digits. Once it has been created, copy and store it in a safe place, like a password manager. You should enter the token instead of your ***git*** password when performing operations over **HTTPS**. Personal access tokens can only be used for **HTTPS** ***git*** operations. If you instead want to use **SSH**, you will have to set that up using an `RSA` key (see details below for how to do this within ***RStudio***).
 
 ### Caching Your ***GitHub*** Credentials {.unnumbered}
 

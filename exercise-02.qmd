@@ -124,14 +124,14 @@ knitr::include_graphics("img/exercise-2b.png")
 
 #### Step 2 {.unnumbered}
 
-- Configure a ***GitHub*** Personal Access Token (PAT) and add it to your “.Renviron” file as described in [**Module 6**](#module-06) using the {usethis} package.
+- Configure a ***GitHub*** Personal Access Token (PAT) as described in [**Module 5**](#module-05) and [**Module 6**](#module-06), making sure that ***R*** and ***RStudio*** can access your cached credentials.
 
 #### Step 3 {.unnumbered}
 
-- Open your project and run `usethis::use_github(protocol="https")` from the ***R*** console within your project's working directory.
+- As outlined in [**Module 6**](#module-06) **Method 3 Option 1**, open your project locally and run `usethis::use_github(protocol="https")` from the ***R*** console within your project's working directory.
 
 #### Step 4 {.unnumbered}
 
-- Answer the question about whether the suggested name for the remote repository is adequate and hit enter.
+- Answer the question about whether the suggested name for the remote repository is adequate and hit <Enter>.
 
 This will create a new remote repository on ***GitHub***, add it as a `remote origin/main`, and open the ***GitHub*** page for the repository in your browser. Switch back to ***RStudio*** and continue with Steps 4 to 8 from above.

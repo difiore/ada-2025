@@ -62,7 +62,7 @@ book:
     - part: "Exercises"
       chapters:
       - exercise-01.qmd
-    #  - exercise-02.qmd
+      - exercise-02.qmd
     #  - exercise-03.qmd
     #  - exercise-04.qmd
     #  - exercise-04-solution.qmd
