@@ -197,13 +197,12 @@ To create a new remote repository on ***GitHub*** into which you can push the co
 
 ##### Step 1 {.unnumbered}
 
-- Make sure you have configured a ***GitHub*** Personal Access Token (PAT) using the process outlined in [**Module 5**](#module-05).
+- Make sure you have configured a ***GitHub*** Personal Access Token (PAT) using the process outlined in [**Module 5**](#module-05). Briefly...
 
-Briefly...
-  - Login to your ***GitHub*** account and go to the *Settings* tab. Then select `Developer Settings` and then `Personal Access Tokens`.
-  - Select `Generate new token`, create a new "classic" token, and give it a nickname that reminds you of the intended purpose (e.g., "GitHub Access from R").
-  - Pick a *scope* that confers the privileges you need, e.g., `repo`, and then press the green "Generate Token" button.
-  - Copy this token to a safe place, and register this credential with ***git*** using one of the methods outlined in [**Module 5**](#module-05)
+    - Login to your ***GitHub*** account and go to the *Settings* tab. Then select `Developer Settings` and then `Personal Access Tokens`.
+    - Select `Generate new token`, create a new "classic" token, and give it a nickname that reminds you of the intended purpose (e.g., "GitHub Access from R").
+    - Pick a *scope* that confers the privileges you need, e.g., `repo`, and then press the green "Generate Token" button.
+    - Copy this token to a safe place, and register this credential with ***git*** using one of the methods outlined in [**Module 5**](#module-05)
 
 ##### Step 2 {.unnumbered}
 
