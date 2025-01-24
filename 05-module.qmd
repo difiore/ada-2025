@@ -30,7 +30,7 @@ One of the most popular and frequently used VCSs is ***git***.
 knitr::include_graphics("img/install-git.png")
 ```
 
-> **NOTE:** To install on MacOS, binary installers may not be available for the newest version of ***git***. Thus, you may need to first install the packahe manager software ***Homebrew*** and then run `brew install git` at the command line. Visit [https://brew.sh/](https://brew.sh/) for instructions on installing ***Homebrew***.
+> **NOTE:** To install on MacOS, binary installers may not be available for the newest version of ***git***. Thus, you may need to first install the package manager software ***Homebrew*** and then run `brew install git` at the command line. Visit [https://brew.sh/](https://brew.sh/) for instructions on installing ***Homebrew***.
 
 Note that ***git*** is simply a bit of software running on your own computer that watches the contents of particular user-specified folders.
 
@@ -72,7 +72,7 @@ knitr::include_graphics("img/github.png")
 
 ### Telling ***git*** Who You Are {.unnumbered}
 
-The ***git*** VCS keeps track of who makes changes to any files in a watched repository. We thus need to tell ***git*** (on your local computer) who you are so that when you make changes to a repository, either locally or remotely, they are associated with a particular user name and email. To do this within ***RStudio***, again select **Tools > Terminal > New Terminal** (which opens a new terminal window in the bottom left pane of the IDE) or **Tools > Shell...**, which will open up an external terminal window. Then type in the following replacing <your name> and <your email address> with the name and the email addressed associated with the ***GitHub*** account you just set up.
+The ***git*** VCS keeps track of who makes changes to any files in a watched repository. We thus need to tell ***git*** (on your local computer) who you are so that when you make changes to a repository, either locally or remotely, they are associated with a particular user name and email. To do this within ***RStudio***, again select **Tools > Terminal > New Terminal** (which opens a new terminal window in the bottom left pane of the IDE) or **Tools > Shell...** (which will open up an external terminal window). Then, type in the following replacing <your name> and <your email address> with the name and the email addressed associated with the ***GitHub*** account you just set up.
 
 ```{bash}
 #| eval: false
@@ -230,15 +230,17 @@ brew install --cask git-credential-manager-core
 
 The next time you clone an **HTTPS** URL that requires authentication, e.g., for a private repository, ***git*** will prompt you to log in using a browser window. You may be asked to authorize an "OAuth app". If your account or organization requires two-factor authorization, you will also need to complete the 2FA challenge.
 
-Once you've authenticated successfully, your credentials will be stored in your macOS keychain and will be used every time you clone an **HTTPS** URL. ***git*** will not require you to type your credentials in the command line again unless you change your credentials.
+Once you have authenticated successfully, your credentials will be stored in your macOS keychain and will be used every time you clone an **HTTPS** URL. ***git*** will not require you to type your credentials in the command line again unless you change your credentials.
 
 If you are running Windows, **GCM** is included with the installer for ***Git for Windows***. During installation you will be asked to select a credential helper, with GCM being set as the default.
 
 The information above was pulled from the [authentication](https://docs.github.com/en/authentication) and [account security](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure) sections of ***GitHub***'s documentation. See those links for more details and recommendations for troubleshooting any problems.
 
-Use can also use the {usethis} and {gitcreds} packages to generate new PATs and to register your credentials with ***git***
+### Creating and Registering ***GitHub*** Credentials from ***RStudio***
 
-- Create a GitHub PAT via ***R*** by running: `usethis::create_github_token()`. This command will access a page in your browser for setting up a new (classic) token, pre-populated with appropriate scopes for working in ***R***
+Use can also use the {usethis} and {gitcreds} packages to generate new PATs and to register your credentials with ***git*** from within ***RStudio***.
+
+- Create a ***GitHub*** PAT via ***R*** by running: `usethis::create_github_token()`. This command will access a page in your browser for setting up a new (classic) token, pre-populated with appropriate scopes for working in ***R***
 - Copy and store the token in a safe place, such as a password manager
 - Use the command `gitcreds::gitcreds_set()` to register your token with ***git***.
 - Use the command `usethis::git_sitrep()` to get the rundown on your current ***git*** credentials.
@@ -405,7 +407,7 @@ Similarly, once a local repository under version control has been created and co
 
 It is *very* easy to do this process through the ***RStudio*** IDE, as we will see below, but we are going to first do it through the command line to show you all of the steps that ***RStudio*** facilitates.
 
-### Cloning a Remote Repository {.unnumbered}
+### Cloning a Remote Repository from the Command Line{.unnumbered}
 
 There are two ways to connect between remote and local ***git*** repositories, via either **HTTPS** (which stands for "hypertext transfer protocol") or **SSH** (which stands for "secure shell"). Our first steps will use the first of these approaches and will create a local "cloned" copy of a remote repository we have hosted on ***GitHub***.
 
@@ -493,7 +495,7 @@ I can use simple text formating to make **bold** or *italicized* text!
     main pushes to main (up to date)
 ```
 
-### Making and Pushing Local Changes {.unnumbered}
+### Making and Pushing Local Changes from the Command Line {.unnumbered}
 
 Now, edit one of the local files in your repo. You can do this by opening the "README.md" file in any text editor (e.g., use the shell command `open README.md`, make some changes, and save) or by using the shell commands `echo` and `>>` (which redirects output to a file instead of the command prompt) to add text to the end of the file (e.g., `echo "Here is some new text I am adding from the shell to update the README file." >> README.md`).
 
@@ -556,7 +558,7 @@ knitr::include_graphics("img/commits-history.png")
 
 > **NOTE:** See also Chapters 9 to 12 of the web book, [*Happy Git and GitHub for the useR*](https://happygitwithr.com/)
 
-### Pulling Changes from ***GitHub*** {.unnumbered}
+### Pulling Changes from ***GitHub*** from the Command Line {.unnumbered}
 
 Similarly, we can make edits to files in a remote repository on ***GitHub*** using the service's web-based **Markdown** editor and then then "pull" those down to our local repository.
 
@@ -598,7 +600,7 @@ Already up to date.
 
 ## Additional Useful Information
 
-### Using the Shell {.unnumbered}
+### Using the Shell within ***RStudio*** {.unnumbered}
 
 ***RStudio*** provides an interface to the most common version control operations including managing changelists, "diffing" files, committing, and viewing history. While these features cover basic everyday use of ***git***, as we have seen above, we may also occasionally need to use the command line in either a system shell to access all of the underlying functionality of ***git***.
 
@@ -622,7 +624,7 @@ If you are interested in using SSH for connecting with ***GitHub***, you can do 
 
 - Create an `RSA Key`
 
-In the "Git/SVN" tab of the **Tools \> Global Options** dialog box, press the button `Create RSA key`, which will create a new code that you will need for using **SSH** to send and receive data from remote servers as an alternative to the somewhat less secure **HTTPS** protocol we have already seen.
+In the "Git/SVN" tab of the **Tools > Global Options** dialog box, press the button `Create RSA key`, which will create a new code that you will need for using **SSH** to send and receive data from remote servers as an alternative to the somewhat less secure **HTTPS** protocol we have already seen.
 
 ```{r}
 #| echo: false
@@ -634,7 +636,7 @@ knitr::include_graphics("img/create-rsa-key.png")
 
 - View and Copy the `RSA Key`
 
-From the "Git/SVN" tab of the **Tools \> Global Options** dialog box, press the text link `View public key`, copy the displayed key, and close out of the dialog box.
+From the "Git/SVN" tab of the **Tools > Global Options** dialog box, press the text link `View public key`, copy the displayed key, and close out of the dialog box.
 
 ```{r}
 #| echo: false
@@ -771,7 +773,7 @@ When you open ***RStudio*** after installing ***git*** and then go to **Tools > 
 
 I am not entirely sure that this is the case, but I THINK this *git.exe* file simply links an executable file that is actually stored in a different place (see ***File 2***. below), but this is where many programs will expect to find the ***git*** executable by default.
 
-***RStudio*** *should* find and fill in this path by itself, but if it does not, then click the "Browse" button next to the text box and browse to select this file: "C:\Program Files\Git\bin\git.exe"
+***RStudio*** *should* find and fill in this path by itself, but if it does not, then click the "Browse" button next to the text box and browse to select this file: `C:\Program Files\Git\bin\git.exe`.
 
 **File 2.** `C:\Program Files\Git\cmd\git.exe`
 
@@ -819,9 +821,7 @@ Install it using the default settings in the installation dialog boxes. This *sh
 
 #### Step 2 {.unnumbered}
 
-Log out of Windows and log in again or completely restart Windows.
-
-We need to log out and log in again or restart Windows to have the PATH environmental variable updated. This, I think, is one of the issues folks were having.
+Log out of Windows and log in again or completely restart Windows. This is needed to have the PATH environmental variable updated.
 
 #### Step 3 {.unnumbered}
 
@@ -909,7 +909,7 @@ knitr::include_graphics("img/git-config-setup.png")
 
 #### Step 9 {.unnumbered}
 
-Return to ***RStudio*** and start a new project (**File \> New Project**) from a "New Directory" (e.g., "test-repo").
+Return to ***RStudio*** and start a new project (**File > New Project**) from a "New Directory" (e.g., "test-repo").
 
 Check the box indicating that you want to "Create a git repository", ***RStudio*** should close and reopen and the ***git*** icon and ***git*** tab should now appear in the IDE. Also, if you now open a project that is already under version control (e.g., that you clone from ***GitHub***), then these should also appear.
 

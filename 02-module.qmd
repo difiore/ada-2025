@@ -100,13 +100,24 @@ Feel free to organize the rest of your setup as you would like. For example, you
 knitr::include_graphics("img/preferences-other.png")
 ```
 
-Finally, if you have already installed ***git*** on your computer, go to the *Git/SVN* section and make sure that the checkbox "Enable version control interface for RStudio projects" is selected and that the path to your ***git*** executable is filled. If you have installed ***git*** successfully, this should be filled with something like "/usr/bin/git". If it is not, do not worry... we can set this later after installing and troubleshooting that program.
+Finally, if you have already installed ***git*** on your computer, go to the *Git/SVN* section...
 
 ```{r}
 #| echo: false
 #| out-width: "60%"
 knitr::include_graphics("img/git-svn.png")
 ```
+
+... and make sure that the checkbox "Enable version control interface for RStudio projects" is selected and that the path to your ***git*** executable is filled. If you have installed ***git*** successfully, this should be filled with something like "/usr/bin/git" or "usr/local/bin/git". If it is not, do not worry... we can set this later after installing and troubleshooting that program. Also make sure that the "Sign git commits" box is unchecked.
+
+```{r}
+#| echo: false
+#| out-width: "60%"
+knitr::include_graphics("img/enable-version-control.png")
+```
+
+
+
 
 ---
 
