@@ -12,7 +12,7 @@
 
 - Set up a new ***GitHub*** repo in your ***GitHub*** workspace called "exercise-03" and clone that down your computer as a new ***RStudio*** project. The instructions outlined as **Method 1** in [**Module 6**](#module-06) will be helpful.
 
-- Load the "data-wrangling.csv" dataset from [**this URL**](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/data-wrangling.csv) as a tabular data structure named **d** and look at the variables it contains, which are a subset of those in the Kamilar and Cooper dataset on primate ecology, behavior, and life history that we have used previously.
+- Load the "data-wrangling.csv" dataset from [**this URL**](https://raw.githubusercontent.com/difiore/ada-datasets/main/data-wrangling.csv) as a tabular data structure named **d** and look at the variables it contains, which are a subset of those in the Kamilar and Cooper dataset on primate ecology, behavior, and life history that we have used previously.
 
 > **HINT:** You can use the `names()` function to see a list of variable names in the dataset
 
