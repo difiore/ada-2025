@@ -6,7 +6,7 @@
 
 ## Preliminaries
 
-- GO TO: <https://github.com/difiore/ada-2024-datasets>, select the "random-people.csv" file, then press the "Download" button and save the file to your local computer (e.g., on your desktop).
+- GO TO: <https://github.com/difiore/ada-datasets>, select the "random-people.csv" file, then press the "Download" button and save the file to your local computer (e.g., on your desktop).
 
 ```{r}
 #| echo: false

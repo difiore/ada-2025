@@ -393,7 +393,7 @@ d <- source_data(link, header = TRUE, sep =",")
 detach(package:repmis)
 ```
 
-> **NOTE:** The {boxr} package also provides lots of functionality to interact with files on **Box** directly, but setup requires an authentication process that I have not yet been able to get working.
+> **NOTE:** The {boxr} package also provides lots of functionality to interact with files on **Box** directly, but setup requires an authentication process that I have not yet been able to get working!
 
 ### Importing Data from ***Google Sheets*** {.unnumbered}
 
@@ -425,7 +425,7 @@ Follow the links below for more information on the basics of using [{googledrive
 
 #### ***Dropbox*** {.unnumbered}
 
-The {rdrop2} package, if you are able to install it, can also be used to **download** a file from a personal ***Dropbox*** account to your local computer, rather than just connecting to a ***Dropbox*** file to read the data stored there. This should work with any file type.
+The {rdrop2} package, if you are able to install it, can also be used to **download** a file from a personal ***Dropbox*** account to your local computer, rather than just connecting to a ***Dropbox*** file to read the data stored there. This should work with any file type. The {rdrop2} package may not be available to install via CRAN, so you may need to install the package directly from the developer's ***GitHub*** site [https://github.com/karthik/rDrop2](https://github.com/karthik/rDrop2). To do so, install the package {devtools} and then run `devtools::install_github("karthik/rdrop2")`
 
 > **NOTE:** Again, the following code block cannot be rendered to show you the output because it requires an interactive ***R*** environment for `drop_search()`, etc.
 
