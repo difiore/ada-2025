@@ -182,7 +182,7 @@ FROM: Baumer et al. (2017). *Modern Data Science with R.* Chapman and Hall/CRC.
 :::
 
 ```{r}
-# NOTE: # the n() function from {dplyr} returns the number of rows in the data frame
+# the n() function returns the number of rows in the data frame
 s <- summarize(
   d,
   n_cases = n(),
@@ -195,10 +195,10 @@ s
 Additionally, the `group_by()` function allows us to construct these summary variables for sets of observations defined by a particular categorical variable, as we did above with `aggregate()`.
 
 ```{r}
-byFamily <- group_by(d, Family)
-# NOTE: here, n() returns the number of rows in the group being considered
+by_family <- group_by(d, Family)
+# here, n() returns the number of rows in the group being considered
 s <- summarise(
-  byFamily,
+  by_family,
   n_cases = n(),
   avgF = mean(Body_mass_female_mean, na.rm = TRUE),
   avgM = mean(Body_mass_male_mean, na.rm = TRUE)
@@ -328,13 +328,13 @@ One other cool thing about the {dplyr} package is that it provides a convenient 
 
 ```{r}
 #| echo: false
-#| out_width: "25%"
+#| out-width: "25%"
 knitr::include_graphics("img/pipe.png")
 ```
 
 ```{r}
 #| echo: false
-#| out_width: "25%"
+#| out-width: "25%"
 knitr::include_graphics("img/MagrittePipe.jpg")
 ```
 
@@ -418,6 +418,7 @@ d %>% filter(Genus == "Alouatta") -> s
 The behavior of the forward pipe operator means we can use it do something like the following, where **d** is implicitly piped into the `data` argument for `ggplot()`
 
 ```{r}
+#| warning: false
 d %>% ggplot(aes(x=log(Body_mass_female_mean), y=log(Brain_Size_Species_Mean))) + geom_point()
 ```
 
@@ -443,8 +444,6 @@ d %>% {plot(log(.$Brain_Size_Species_Mean), log(.$Body_mass_female_mean))}
 d %>% select(Brain_Size_Female_Mean) %>% log %>% head
 d |> select(Brain_Size_Female_Mean) |> log() |> head()
 ```
-
-## Pivoting Data between Long and Wide Formats
 
 ## Useful Related Packages
 

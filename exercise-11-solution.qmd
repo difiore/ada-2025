@@ -13,7 +13,7 @@ library(infer)
 library(mosaic)
 library(ggpubr)
 
-f <- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/AVONETdataset1.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
 d <- read_csv(f, col_names = TRUE)
 ```
 

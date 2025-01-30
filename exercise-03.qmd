@@ -34,28 +34,25 @@ Create a new **Quarto** document called "EDA-challenge.qmd" within the project a
 
 6. Plot the relationship between canine size dimorphism (y axis) and body size dimorphism (x axis) *overall* and *by family*. Do taxa with greater size dimorphism also show greater canine dimorphism?
 
-7. Create a new variable named **diet_strategy** that is "frugivore" if fruits make up >50% of the diet, "folivore" if leaves make up >50% of the diet, and "omnivore" if diet data are available, but neither of these is true (i.e., these values are not `NA`). Then, do boxplots of group size for species with different dietary strategies. Do frugivores live in larger groups than folivores?
+7. Create a new variable named **diet_strategy** that is "frugivore" if fruits make up >50% of the diet, "folivore" if leaves make up >50% of the diet, and "omnivore" if diet data are available, but neither of these is true (i.e., these values are not `NA`). Then, do boxplots of group size for species with different dietary strategies, omitting the category `NA` from your plot. Do frugivores live in larger groups than folivores?
 
 > **HINT:** To create this new variable, try combining `mutate()` with `ifelse()` or `case_when()` statements... check out the notes on "Conditional Expressions" in [**Module 11**](#module-11). Take a peak at the code snippet below if you get stuck!
 
 ```{r eval=FALSE}
 #| code-fold: true
-mutate(d, "diet" = ifelse(
+mutate(d, "diet_strategy" = ifelse(
   Fruit >= 50,
   "frugivore",
   ifelse(
     Leaves >= 50,
-    "folivore", 
-    ifelse(
-      Fruit < 50 & Leaves < 50,
-      "omnivore",
-      NA
-    ))
+    "folivore",
+    ifelse(Fruit < 50 & Leaves < 50, "omnivore", NA)
+  )
 ))
 
 mutate(
   d,
-  "diet" = case_when(
+  "diet_strategy" = case_when(
     Fruit >= 50 ~ "frugivore",
     Leaves >= 50 ~ "folivore",
     Fruit < 50 & Leaves < 50 ~ "omnivore",
@@ -69,8 +66,9 @@ mutate(
 - Add a variable, **Binomial** to the data frame **d**, which is a concatenation of the **Genus** and **Species** variables...
 - Trim the data frame to only include the variables **Binomial**, **Family**, **Brain_size_species_mean**, and **Body_mass_male_mean**...
 - Group these variables by **Family**...
-- Calculate the average value for **Brain_size_species_mean** and **Body_mass_male_mean** per **Family** (remember, you may need to specify `na.rm = TRUE`)...
-- And arrange by *increasing* average brain size
+- Calculate the average value for **Brain_Size_Species_Mean** and **Body_mass_male_mean** per **Family** (remember, you may need to specify `na.rm = TRUE`)...
+- Arrange by *increasing* average brain size...
+- And *print* the output to the console
 
 #### Step 2 {.unnumbered}
 

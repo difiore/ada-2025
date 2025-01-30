@@ -10,7 +10,7 @@
 library(tidyverse)
 library(cowplot)
 library(mosaic)
-f <- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/KamilarAndCooperData.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/KamilarAndCooperData.csv"
 d <- read_csv(f, col_names = TRUE)
 ```
 

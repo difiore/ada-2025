@@ -31,7 +31,7 @@ sd_pop <- function(x, na.rm = TRUE) {
 
 ### Step 1 {.unnumbered}
 
-- Using the {tidyverse} `read_csv()` function, load the "IMDB-movies.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/IMDB-movies.csv) as a "tibble" named **d**.
+- Using the {tidyverse} `read_csv()` function, load the "IMDB-movies.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-datasets/main/IMDB-movies.csv) as a "tibble" named **d**.
 
 ```{r}
 f <- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/IMDB-movies.csv"
@@ -189,14 +189,14 @@ These different estimates of the SE are all pretty close to one another, except 
 ## Challenge 2 {.unnumbered}
 
 ### Step 1 {.unnumbered}
-- Using the {tidyverse} `read_csv()` function, load the "zombies.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/zombies.csv) as a "tibble" named **z**. This dataset includes the first and last name and gender of the entire population of 1000 people who have survived the zombie apocalypse and are now ekeing out an existence somewhere on the Gulf Coast, along with several other variables (height, weight, age, number of years of education, number of zombies they have killed, and college major).
+- Using the {tidyverse} `read_csv()` function, load the "zombies.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv) as a "tibble" named **z**. This dataset includes the first and last name and gender of the entire population of 1000 people who have survived the zombie apocalypse and are now ekeing out an existence somewhere on the Gulf Coast, along with several other variables (height, weight, age, number of years of education, number of zombies they have killed, and college major).
 
 ```{r}
 #| message: false
 n <- 50 # set sample size
 alpha <- 0.05 # set alpha
 
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/zombies.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 d <- read_csv(f, col_names = TRUE)
 
 survivors <- dplyr::select(d, "gender", "height", "weight", "age", "zombies_killed", "years_of_education")

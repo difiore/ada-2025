@@ -10,7 +10,7 @@ Load in dataset and libraries of interest...
 library(tidyverse)
 library(mosaic)
 library(infer)
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/tbs-2006-2008-ranges.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/tbs-2006-2008-ranges.csv"
 d <- read_csv(f, col_names = TRUE)
 head(d)
 ```

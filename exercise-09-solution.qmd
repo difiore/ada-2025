@@ -11,7 +11,7 @@ Using the {tidyverse} `read_csv()` function, load the "Street_et_al_2017.csv" da
 #| message: false
 library(tidyverse)
 library(broom)
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/Street_et_al_2017.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/Street_et_al_2017.csv"
 d <- read_csv(f, col_names = TRUE)
 ```
 
