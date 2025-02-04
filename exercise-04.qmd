@@ -53,19 +53,19 @@ Additionally, also need to establish a dictionary of "valid" words that players 
 
 - Once you have created your function, use that function to create two variables, **solution_list** and **valid_list**, that, respectively contain *vectors* of possible solution words and valid words to guess. That is, you should be able to run the following to create these two vectors:
 
-```
+```{default}
 valid_list <- load_dictionary(<filename here>)
 solution_list <- load_dictionary(<filename here>)
 ```
 
 Running `str(valid_list)` should return...
 
-```
+```{default}
 chr [1:279496] "AA" "AAH" "AAHED" "AAHING"...
 ```
 Running `str(solution_list)` should return...
 
-```
+```{default}
 chr [1:8336] "THE" "OF" "AND" "TO"...
 ```
 
@@ -83,7 +83,7 @@ As a bonus, you might include a second argument for your `pick_solution()` funct
 
 Once your function works, run it and assign the result to a variable called **solution**.
 
-```
+```{default}
 solution <- pick_solution(solution_list)
 ```
 
@@ -93,7 +93,7 @@ Now, to tackle the bulk of the problem, create two more functions. The first sho
 
 > **HINT**: Here is possible skeleton code for that function.
 
-```
+```{default}
 play_wordle <- function(solution, valid_list, num_guesses=6){
       <function code here>
     }
@@ -119,7 +119,7 @@ toupper("change my case")
 
 > **HINT:** The `readline()` function, which can take a character string as an argument, will provide a "prompt" entering a line of numeric or character data. Hitting `<enter>` or `<return>` signals the end of the line.
 
-```
+```{default}
 guess <- readline("Enter some data here, then press <enter>: ")
 ```
 

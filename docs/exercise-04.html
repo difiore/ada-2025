@@ -447,12 +447,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Create your own custom function called <code>load_dictionary()</code> that takes a single argument, “filename”, that can be used to read in either of the two data files your downloaded.</p></li>
 <li><p>Once you have created your function, use that function to create two variables, <strong>solution_list</strong> and <strong>valid_list</strong>, that, respectively contain <em>vectors</em> of possible solution words and valid words to guess. That is, you should be able to run the following to create these two vectors:</p></li>
 </ul>
-<pre><code>valid_list &lt;- load_dictionary(&lt;filename here&gt;)
-solution_list &lt;- load_dictionary(&lt;filename here&gt;)</code></pre>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>valid_list &lt;- load_dictionary(&lt;filename here&gt;)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>solution_list &lt;- load_dictionary(&lt;filename here&gt;)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Running <code>str(valid_list)</code> should return…</p>
-<pre><code>chr [1:279496] "AA" "AAH" "AAHED" "AAHING"...</code></pre>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>chr [1:279496] "AA" "AAH" "AAHED" "AAHING"...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Running <code>str(solution_list)</code> should return…</p>
-<pre><code>chr [1:8336] "THE" "OF" "AND" "TO"...</code></pre>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>chr [1:8336] "THE" "OF" "AND" "TO"...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="step-2" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="step-2">Step 2</h3>
@@ -470,7 +476,9 @@ solution_list &lt;- load_dictionary(&lt;filename here&gt;)</code></pre>
 </blockquote>
 <p>As a bonus, you might include a second argument for your <code>pick_solution()</code> function called “word_length” that makes your function flexible enough to select a solution word that is something other than 5 characters long.</p>
 <p>Once your function works, run it and assign the result to a variable called <strong>solution</strong>.</p>
-<pre><code>solution &lt;- pick_solution(solution_list)</code></pre>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>solution &lt;- pick_solution(solution_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="step-4" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="step-4">Step 4</h3>
@@ -478,9 +486,11 @@ solution_list &lt;- load_dictionary(&lt;filename here&gt;)</code></pre>
 <blockquote class="blockquote">
 <p><strong>HINT</strong>: Here is possible skeleton code for that function.</p>
 </blockquote>
-<pre><code>play_wordle &lt;- function(solution, valid_list, num_guesses=6){
-      &lt;function code here&gt;
-    }</code></pre>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>play_wordle &lt;- function(solution, valid_list, num_guesses=6){</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>      &lt;function code here&gt;</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Think carefully about what the <code>play_wordle()</code> function needs to do. It should:</p>
 <ol type="1">
 <li><p>At the onset, tell the player the rules of the game, e.g., “You have … chances to guess a word of length …”</p></li>
@@ -508,7 +518,9 @@ solution_list &lt;- load_dictionary(&lt;filename here&gt;)</code></pre>
 <blockquote class="blockquote">
 <p><strong>HINT:</strong> The <code>readline()</code> function, which can take a character string as an argument, will provide a “prompt” entering a line of numeric or character data. Hitting <code>&lt;enter&gt;</code> or <code>&lt;return&gt;</code> signals the end of the line.</p>
 </blockquote>
-<pre><code>guess &lt;- readline("Enter some data here, then press &lt;enter&gt;: ")</code></pre>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>guess &lt;- readline("Enter some data here, then press &lt;enter&gt;: ")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ol start="4" type="1">
 <li><p>Compare the guess to the solution word and generate the necessary feedback, e.g., <code>*</code> for <em>in the word and in the correct position</em>, <code>+</code> for <em>in the word but in the wrong position</em>, and <code>-</code> for <em>not in the word</em>. For this step, try writing a separate “helper” function, <code>evaluate_guess()</code>, called from within <code>play_wordle()</code>. This function should take, as arguments, the player’s guess and the value of the <strong>solution</strong> variable. This is probably the trickiest part of the problem to program, and there are lots of approaches you might take to evaluating guesses. After you work on this for a while, I can share one solution.</p></li>
 <li><p>Update the list of letters not yet guessed.</p></li>
@@ -1045,99 +1057,99 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Once you have created your function, use that function to create two variables, **solution_list** and **valid_list**, that, respectively contain *vectors* of possible solution words and valid words to guess. That is, you should be able to run the following to create these two vectors:</span>
 <span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a><span class="in">valid_list &lt;- load_dictionary(&lt;filename here&gt;)</span></span>
-<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a><span class="in">solution_list &lt;- load_dictionary(&lt;filename here&gt;)</span></span>
-<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>Running <span class="in">`str(valid_list)`</span> should return...</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a><span class="in">```{default}</span></span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a><span class="in">valid_list &lt;- load_dictionary(&lt;filename here&gt;)</span></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a><span class="in">solution_list &lt;- load_dictionary(&lt;filename here&gt;)</span></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a><span class="in">chr [1:279496] "AA" "AAH" "AAHED" "AAHING"...</span></span>
-<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>Running <span class="in">`str(solution_list)`</span> should return...</span>
-<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a><span class="in">chr [1:8336] "THE" "OF" "AND" "TO"...</span></span>
-<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>Running <span class="in">`str(valid_list)`</span> should return...</span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{default}</span></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a><span class="in">chr [1:279496] "AA" "AAH" "AAHED" "AAHING"...</span></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>Running <span class="in">`str(solution_list)`</span> should return...</span>
 <span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 2 {.unnumbered}</span></span>
-<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Winnow your variable **solution_list** to only include words that are included in **valid_list**. There are multiple ways that you could do this, but the set operation function, `intersection()` is an easy way. Use ***R*** help to look at the documentation for the `intersection()` function to see if you can get that to work. How many words are in your updated **solution_list** vector?</span>
-<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 3 {.unnumbered}</span></span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{default}</span></span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a><span class="in">chr [1:8336] "THE" "OF" "AND" "TO"...</span></span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Write a custom function called <span class="in">`pick_solution()`</span> that <span class="co">[</span><span class="ot">1</span><span class="co">]</span> removes all words from **solution_list** that are not 5 letters in length, [2] then randomly chooses a single word from those that remain, and [3] then splits that word into a vector of single-character elements. You should be able to pass your **solution_list** vector as the argument to the function.</span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 2 {.unnumbered}</span></span>
 <span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **HINT**: For [1], you will want to subset the `solution_list` vector according to some criterion of word length. For [2], you may find the `sample()` function useful (use ***R*** help to look up documentation on that function). For [3], you may want to look at the functions `strsplit()` from {base} ***R*** or `str_split()` from the {stringr} package (part of {tidyverse}). Pay attention to the **data structures** that those functions return, because you will need to carefully reference one of the elements that is returned in order to wind up with a vector!</span></span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Winnow your variable **solution_list** to only include words that are included in **valid_list**. There are multiple ways that you could do this, but the set operation function, `intersection()` is an easy way. Use ***R*** help to look at the documentation for the `intersection()` function to see if you can get that to work. How many words are in your updated **solution_list** vector?</span>
 <span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a>As a bonus, you might include a second argument for your <span class="in">`pick_solution()`</span> function called "word_length" that makes your function flexible enough to select a solution word that is something other than 5 characters long.</span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 3 {.unnumbered}</span></span>
 <span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a>Once your function works, run it and assign the result to a variable called **solution**.</span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Write a custom function called <span class="in">`pick_solution()`</span> that <span class="co">[</span><span class="ot">1</span><span class="co">]</span> removes all words from **solution_list** that are not 5 letters in length, [2] then randomly chooses a single word from those that remain, and [3] then splits that word into a vector of single-character elements. You should be able to pass your **solution_list** vector as the argument to the function.</span>
 <span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a><span class="in">solution &lt;- pick_solution(solution_list)</span></span>
-<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **HINT**: For [1], you will want to subset the `solution_list` vector according to some criterion of word length. For [2], you may find the `sample()` function useful (use ***R*** help to look up documentation on that function). For [3], you may want to look at the functions `strsplit()` from {base} ***R*** or `str_split()` from the {stringr} package (part of {tidyverse}). Pay attention to the **data structures** that those functions return, because you will need to carefully reference one of the elements that is returned in order to wind up with a vector!</span></span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a>As a bonus, you might include a second argument for your <span class="in">`pick_solution()`</span> function called "word_length" that makes your function flexible enough to select a solution word that is something other than 5 characters long.</span>
 <span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 4 {.unnumbered}</span></span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a>Once your function works, run it and assign the result to a variable called **solution**.</span>
 <span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a>Now, to tackle the bulk of the problem, create two more functions. The first should be called <span class="in">`play_wordle()`</span> and it should take three arguments: <span class="co">[</span><span class="ot">1</span><span class="co">]</span> the answer to the puzzle (the value of your **solution** variable), [2] a list of valid guesses (the contents of your **valid_list** variable), and [3] a value for "number of guesses", which you should set to the original **Wordle** game default of 6.</span>
-<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **HINT**: Here is possible skeleton code for that function.</span></span>
-<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{default}</span></span>
+<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a><span class="in">solution &lt;- pick_solution(solution_list)</span></span>
 <span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a><span class="in">play_wordle &lt;- function(solution, valid_list, num_guesses=6){</span></span>
-<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;function code here&gt;</span></span>
-<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 4 {.unnumbered}</span></span>
+<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a>Now, to tackle the bulk of the problem, create two more functions. The first should be called <span class="in">`play_wordle()`</span> and it should take three arguments: <span class="co">[</span><span class="ot">1</span><span class="co">]</span> the answer to the puzzle (the value of your **solution** variable), [2] a list of valid guesses (the contents of your **valid_list** variable), and [3] a value for "number of guesses", which you should set to the original **Wordle** game default of 6.</span>
 <span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a>Think carefully about what the <span class="in">`play_wordle()`</span> function needs to do. It should:</span>
+<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **HINT**: Here is possible skeleton code for that function.</span></span>
 <span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>At the onset, tell the player the rules of the game, e.g., "You have ... chances to guess a word of length ..."</span>
-<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Display what letters the player has not yet guessed (at the onset, this would be all 26 letters of the alphabet), e.g., "Letters left: ..."</span>
-<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **HINT:** There is a built-in dataset in ***R*** called </span><span class="in">`LETTERS`</span><span class="at">, which contains the 26 capital letters in the English alphabet and another, </span><span class="in">`letters`</span><span class="at">, that contains all the lowercase letters. You will probably want to use either the </span><span class="in">`toupper()`</span><span class="at"> or </span><span class="in">`tolower()`</span><span class="at"> functions to ensure that you are always working with the same formatted letters in words and guesses.</span></span>
-<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a><span class="co"># using the LETTERS built-in vector</span></span>
-<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a>LETTERS</span>
+<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{default}</span></span>
+<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a><span class="in">play_wordle &lt;- function(solution, valid_list, num_guesses=6){</span></span>
+<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;function code here&gt;</span></span>
+<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a>Think carefully about what the <span class="in">`play_wordle()`</span> function needs to do. It should:</span>
+<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>At the onset, tell the player the rules of the game, e.g., "You have ... chances to guess a word of length ..."</span>
 <span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a><span class="co"># using the `toupper()` function</span></span>
-<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a><span class="fu">toupper</span>(<span class="st">"change my case"</span>)</span>
-<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Display what letters the player has not yet guessed (at the onset, this would be all 26 letters of the alphabet), e.g., "Letters left: ..."</span>
+<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **HINT:** There is a built-in dataset in ***R*** called </span><span class="in">`LETTERS`</span><span class="at">, which contains the 26 capital letters in the English alphabet and another, </span><span class="in">`letters`</span><span class="at">, that contains all the lowercase letters. You will probably want to use either the </span><span class="in">`toupper()`</span><span class="at"> or </span><span class="in">`tolower()`</span><span class="at"> functions to ensure that you are always working with the same formatted letters in words and guesses.</span></span>
 <span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Prompt the player for a guess, e.g., "Enter guess number ...", read in their guess, and check that their guess is valid (i.e., that it contains the correct number of letters and is a word included in the "valid" word list).</span>
-<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **HINT:** The </span><span class="in">`readline()`</span><span class="at"> function, which can take a character string as an argument, will provide a "prompt" entering a line of numeric or character data. Hitting </span><span class="in">`&lt;enter&gt;`</span><span class="at"> or </span><span class="in">`&lt;return&gt;`</span><span class="at"> signals the end of the line.</span></span>
-<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a><span class="in">guess &lt;- readline("Enter some data here, then press &lt;enter&gt;: ")</span></span>
-<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Compare the guess to the solution word and generate the necessary feedback, e.g., <span class="in">`*`</span> for *in the word and in the correct position*, `+` for *in the word but in the wrong position*, and `-` for *not in the word*. For this step, try writing a separate "helper" function, `evaluate_guess()`, called from within `play_wordle()`. This function should take, as arguments, the player's guess and the value of the **solution** variable. This is probably the trickiest part of the problem to program, and there are lots of approaches you might take to evaluating guesses. After you work on this for a while, I can share one solution.</span>
+<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a><span class="co"># using the LETTERS built-in vector</span></span>
+<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a>LETTERS</span>
+<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a><span class="co"># using the `toupper()` function</span></span>
+<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a><span class="fu">toupper</span>(<span class="st">"change my case"</span>)</span>
+<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Update the list of letters not yet guessed.</span>
+<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Prompt the player for a guess, e.g., "Enter guess number ...", read in their guess, and check that their guess is valid (i.e., that it contains the correct number of letters and is a word included in the "valid" word list).</span>
 <span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **HINT**: Again, consider using set operations to update the list of letters not yet guessed. </span><span class="in">`setdiff()`</span><span class="at"> is a function that returns the difference between two vectors.</span></span>
+<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **HINT:** The </span><span class="in">`readline()`</span><span class="at"> function, which can take a character string as an argument, will provide a "prompt" entering a line of numeric or character data. Hitting </span><span class="in">`&lt;enter&gt;`</span><span class="at"> or </span><span class="in">`&lt;return&gt;`</span><span class="at"> signals the end of the line.</span></span>
 <span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Check if the puzzle was solved. If so, the function should indicate that the player WON the game and print out their guess and feedback history. If not, the function should prompt the player for another guess, unless they have already hit the maximum number of guesses allowed.</span>
-<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>If all guesses are exhausted, the function should indicate that the player LOST the game and, again, print out their guess and feedback history.</span>
-<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a><span class="fu">### Optional Next Steps? {.unnumbered}</span></span>
+<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{default}</span></span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="in">guess &lt;- readline("Enter some data here, then press &lt;enter&gt;: ")</span></span>
+<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Try modifying your code to mimic the "hard mode" in **Wordle**, where information about the letters in the solution and their positions revealed in prior guesses has to be used in subsequent guesses.</span>
+<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Compare the guess to the solution word and generate the necessary feedback, e.g., <span class="in">`*`</span> for *in the word and in the correct position*, `+` for *in the word but in the wrong position*, and `-` for *not in the word*. For this step, try writing a separate "helper" function, `evaluate_guess()`, called from within `play_wordle()`. This function should take, as arguments, the player's guess and the value of the **solution** variable. This is probably the trickiest part of the problem to program, and there are lots of approaches you might take to evaluating guesses. After you work on this for a while, I can share one solution.</span>
 <span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Try spicing up the feedback given using colors or alternative formatting. One way to do this would be to use the {huxtable} package, which is a package for creating text tables that can be styled for display in the ***R*** console and can also output to HTML, PDF, and a variety of other formats.</span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Update the list of letters not yet guessed.</span>
 <span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Have ***R*** keep track of the date and not let you play more than one **Wordle** game per day.</span>
+<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **HINT**: Again, consider using set operations to update the list of letters not yet guessed. </span><span class="in">`setdiff()`</span><span class="at"> is a function that returns the difference between two vectors.</span></span>
 <span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Have ***R*** keep track of your performance across multiple games of **Wordle**.</span>
+<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Check if the puzzle was solved. If so, the function should indicate that the player WON the game and print out their guess and feedback history. If not, the function should prompt the player for another guess, unless they have already hit the maximum number of guesses allowed.</span>
 <span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Allow ***R*** to post your **Wordle** results to a social media platform of your choosing. For this, check out, e.g., the {Rfacebook} or {rtweet} packages.</span>
+<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>If all guesses are exhausted, the function should indicate that the player LOST the game and, again, print out their guess and feedback history.</span>
 <span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Convert your code to an interactive {shiny} app to have it run in a web brower. Later modules will introduce you to programming with {shiny}.</span>
+<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a><span class="fu">### Optional Next Steps? {.unnumbered}</span></span>
+<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Try modifying your code to mimic the "hard mode" in **Wordle**, where information about the letters in the solution and their positions revealed in prior guesses has to be used in subsequent guesses.</span>
+<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Try spicing up the feedback given using colors or alternative formatting. One way to do this would be to use the {huxtable} package, which is a package for creating text tables that can be styled for display in the ***R*** console and can also output to HTML, PDF, and a variety of other formats.</span>
+<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Have ***R*** keep track of the date and not let you play more than one **Wordle** game per day.</span>
+<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Have ***R*** keep track of your performance across multiple games of **Wordle**.</span>
+<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Allow ***R*** to post your **Wordle** results to a social media platform of your choosing. For this, check out, e.g., the {Rfacebook} or {rtweet} packages.</span>
+<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Convert your code to an interactive {shiny} app to have it run in a web brower. Later modules will introduce you to programming with {shiny}.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
