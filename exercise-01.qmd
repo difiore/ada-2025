@@ -1,8 +1,3 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
 # Exercise 01 {.unnumbered}
 
 # Send Emails Programmatically {.unnumbered}
@@ -419,10 +414,10 @@ sendmail(
   msg = "Hello! This is a plain text message sent to my personal Gmail account from my UT Gmail account.", 
   engine = "curl", 
   engineopts = list(username = "anthony.difiore@utexas.edu", password = pwd_gmail), 
-  control = list(smtpServer="smtp://smtp.gmail.com", smtpPortSMTP = 587) 
-  # can also include the port as part of the smtpServer argument...
-  # e.g., `control = list(smtpServer="smtp://smtp.gmail.com:587")`
+  control = list(smtpServer="smtp://smtp.gmail.com", smtpPortSMTP = 587)
 )
+# can also include the port as part of the smtpServer argument...
+# e.g., `control = list(smtpServer="smtp://smtp.gmail.com:587")`
 ```
 
 #### Next Steps? {.unnumbered}

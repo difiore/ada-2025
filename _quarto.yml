@@ -64,7 +64,7 @@ book:
       - exercise-01.qmd
       - exercise-02.qmd
       - exercise-03.qmd
-    #  - exercise-04.qmd
+      - exercise-04.qmd
     #  - exercise-04-solution.qmd
     #  - exercise-05.qmd
     #  - exercise-05-solution.qmd

@@ -1,3 +1,9 @@
+---
+format:
+  html:
+    self-contained: true
+---
+
 # Exercise 04 {.unnumbered}
 
 # Program a Word Game {.unnumbered}
@@ -26,7 +32,7 @@ The assignment and steps below were inspired by [this fun blog post](https://sta
 
 - Set up a new ***GitHub*** repo in you or your partner's ***GitHub*** workspace named "exercise-04" and clone that down to both of your computers as a new ***RStudio*** project. The instructions outlined as **Method 1** in [**Module 6**](#module-06) will be helpful. Make sure that both you and your partner are collaborators on the repo and that you add me as a collaborator as well (my ***GitHub*** username is "difiore").
 
-- Go to <https://github.com/difiore/ada-2024-datasets>, download the following two data files, and add them to your repo:
+- Go to <https://github.com/difiore/ada-datasets>, download the following two data files, and add them to your repo:
 
     - collins-scrabble-words-2019.txt
     - google-10000-english-usa-no-swears.txt
@@ -35,7 +41,7 @@ The first of these files (279,497 lines long) contains a list of "Official Scrab
 
 The second of these files (9885 lines long) contains a list of ~10,000 of the most common words in the English language, based on data compiled by Google, and omitting common swear words. Again, the first line is the word "words" and is used as a header.
 
-- Create a new **RMarkdown** or **Quarto** document, called "wordle.Rmd" or "wordle.qmd". In this, you do your best to recreate all of the wordplay used in Wordle.
+- Create a new **Quarto** or **RMarkdown** document, called "wordle.qmd" or "wordle.Rmd". In this, you do your best to recreate all of the wordplay used in Wordle.
 
 ### Introduction {.unnumbered}
 
@@ -77,7 +83,7 @@ chr [1:8336] "THE" "OF" "AND" "TO"...
 
 - Write a custom function called `pick_solution()` that [1] removes all words from **solution_list** that are not 5 letters in length, [2] then randomly chooses a single word from those that remain, and [3] then splits that word into a vector of single-character elements. You should be able to pass your **solution_list** vector as the argument to the function.
 
-> **HINT**: For [1], you will want to subset the `solution_list` vector according to some criterion of word length. For [2], you may find the `sample()` function useful (use ***R*** help to look up documentation on that function). For [3], you may want to look at the functions `strsplit()` from {base} ***R*** or `str_split()` from the {stringr} package (part of {tidyverse}). Pay attention to the data structure that those functions return, because you will need to carefully reference one of the elements that is returned in order to wind up with a vector.
+> **HINT**: For [1], you will want to subset the `solution_list` vector according to some criterion of word length. For [2], you may find the `sample()` function useful (use ***R*** help to look up documentation on that function). For [3], you may want to look at the functions `strsplit()` from {base} ***R*** or `str_split()` from the {stringr} package (part of {tidyverse}). Pay attention to the **data structures** that those functions return, because you will need to carefully reference one of the elements that is returned in order to wind up with a vector!
 
 As a bonus, you might include a second argument for your `pick_solution()` function called "word_length" that makes your function flexible enough to select a solution word that is something other than 5 characters long.
 
