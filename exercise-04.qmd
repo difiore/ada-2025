@@ -1,9 +1,3 @@
----
-format:
-  html:
-    self-contained: true
----
-
 # Exercise 04 {.unnumbered}
 
 # Program a Word Game {.unnumbered}

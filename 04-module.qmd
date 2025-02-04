@@ -1,3 +1,8 @@
+---
+format:
+  html:
+    self-contained: true
+---
 # Fundamentals of the ***R*** Language {#module-04}
 
 ## Objectives
