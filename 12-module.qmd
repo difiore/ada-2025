@@ -1,4 +1,4 @@
-# Central Tendency and Spread {#module-12}
+# Central Tendency, Spread, and Sampling {#module-12}
 
 ## Objectives
 
