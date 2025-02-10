@@ -600,7 +600,7 @@ window.Quarto = {
 ## [1] 5
 ## 
 ## $p.value
-## [1] 0.0223</code></pre>
+## [1] 0.02</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>jmuOutlier)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -927,7 +927,7 @@ window.Quarto = {
 </div>
 <p>Then, we use the function <code>specify()</code> to indicate the variables we are interested in. The <code>specify()</code> function takes an argument of <code>formula=</code> response~explanatory. If we are working with proportion data, we also need to provide an argument for what value of the explanatory variable counts as a success, using <code>success=</code>, but that is not the case for our colobus weight data, where our response variable is numeric, not binary.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(<span class="at">formula =</span> weight <span class="sc">~</span> sex)</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co"># this does not change the data frame but adds some meta data</span></span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -947,7 +947,7 @@ window.Quarto = {
 </div>
 <p>The function <code>hypothesize()</code> is then used to declare the null hypothesis we wish to test. We use the argument <code>null="point"</code> if we are doing a test of a single mean (<code>mu=</code>) or proportion (<code>p=</code>) or <code>null="independence"</code> if we are doing a test of the independence of two variables (i.e., a two-sample test).</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>)</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># again, this does not change the data frame but adds some meta data</span></span>
 <span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -968,7 +968,7 @@ window.Quarto = {
 </div>
 <p>We then use the <code>generate()</code> function to generate replicates of “shuffled” or “permuted” data under the assumption that the null hypothesis is true. That is, we generating datasets from which we then derived a null distribution for our statistic of interest.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>d_permutations <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>d_permutations <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>)</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -981,7 +981,7 @@ window.Quarto = {
 </div>
 <p>Next, we use <code>calculate()</code> to calculate summary statistics of interest for each replicate. We can calculate a variety of different statistics, including the mean (“mean”), proportion (“prop”), difference in means (“diff in means”), difference in proportions (“diff in props”), and others. This step generates a null distribution for our summary statistic. For differences in means or proportions, we need to also include an argument specifying the order of the levels of the explanatory variable for subtraction.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>null_distribution <span class="ot">&lt;-</span> d_permutations <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>null_distribution <span class="ot">&lt;-</span> d_permutations <span class="sc">|&gt;</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in means"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>))</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to subtract female weight from male weight</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1006,8 +1006,8 @@ window.Quarto = {
 </div>
 <p>So, now we have a null or permutation distribution for the test statistic… then, we can also use {infer} package functions to easily calculate hte observed summary statistic that we want to compare to this null distribution by simply leaving out the <code>hypothesize()</code> and <code>generate()</code> steps.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>observed_stat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(f, <span class="at">col_names =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(weight <span class="sc">~</span> sex) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>observed_stat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(f, <span class="at">col_names =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(weight <span class="sc">~</span> sex) <span class="sc">|&gt;</span></span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in means"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>## Rows: 40 Columns: 3
@@ -1085,7 +1085,7 @@ window.Quarto = {
 <pre><code>## # A tibble: 1 × 1
 ##   p_value
 ##     &lt;dbl&gt;
-## 1   0.024</code></pre>
+## 1    0.01</code></pre>
 </div>
 </div>
 <p>Note that this p value is pretty similar to that returned by <code>jmuOutlier::perm.test()</code> and by our custom <code>perm1samp()</code> function, though as noted above, those use slightly different permutation processes.</p>
@@ -1109,10 +1109,10 @@ window.Quarto = {
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
 <summary>Show Code</summary>
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>null_distribution <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(lactating <span class="sc">~</span> species, <span class="at">success =</span> <span class="st">"1"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>null_distribution <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(lactating <span class="sc">~</span> species, <span class="at">success =</span> <span class="st">"1"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in props"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"species1"</span>, <span class="st">"species2"</span>))</span>
 <span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: This runs a LOT slower than our custom permutation function for the</span></span>
@@ -1128,8 +1128,8 @@ window.Quarto = {
 </div>
 <details class="code-fold">
 <summary>Show Code</summary>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>observed_stat <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(lactating <span class="sc">~</span> species, <span class="at">success =</span> <span class="st">"1"</span>) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>observed_stat <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">specify</span>(lactating <span class="sc">~</span> species, <span class="at">success =</span> <span class="st">"1"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in props"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"species1"</span>, <span class="st">"species2"</span>))</span>
 <span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_distribution, <span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span> <span class="fu">shade_p_value</span>(observed_stat, <span class="at">direction =</span> <span class="st">"both"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1150,7 +1150,7 @@ window.Quarto = {
 <pre class="details" data-summary="Show Output"><code>## # A tibble: 1 × 1
 ##   p_value
 ##     &lt;dbl&gt;
-## 1   0.408</code></pre>
+## 1   0.412</code></pre>
 </details>
 </div>
 <details class="code-fold">
@@ -2162,7 +2162,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb62-534"><a href="#cb62-534" aria-hidden="true" tabindex="-1"></a>Then, we use the function <span class="in">`specify()`</span> to indicate the variables we are interested in. The <span class="in">`specify()`</span> function takes an argument of <span class="in">`formula=`</span> response\~explanatory. If we are working with proportion data, we also need to provide an argument for what value of the explanatory variable counts as a success, using <span class="in">`success=`</span>, but that is not the case for our colobus weight data, where our response variable is numeric, not binary.</span>
 <span id="cb62-535"><a href="#cb62-535" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-538"><a href="#cb62-538" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-539"><a href="#cb62-539" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> <span class="fu">specify</span>(<span class="at">formula =</span> weight<span class="sc">~</span>sex)</span>
+<span id="cb62-539"><a href="#cb62-539" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span> <span class="fu">specify</span>(<span class="at">formula =</span> weight<span class="sc">~</span>sex)</span>
 <span id="cb62-540"><a href="#cb62-540" aria-hidden="true" tabindex="-1"></a><span class="co"># this does not change the data frame but adds some meta data</span></span>
 <span id="cb62-541"><a href="#cb62-541" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)</span>
 <span id="cb62-542"><a href="#cb62-542" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -2170,7 +2170,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb62-544"><a href="#cb62-544" aria-hidden="true" tabindex="-1"></a>The function <span class="in">`hypothesize()`</span> is then used to declare the null hypothesis we wish to test. We use the argument <span class="in">`null="point"`</span> if we are doing a test of a single mean (<span class="in">`mu=`</span>) or proportion (<span class="in">`p=`</span>) or <span class="in">`null="independence"`</span> if we are doing a test of the independence of two variables (i.e., a two-sample test).</span>
 <span id="cb62-545"><a href="#cb62-545" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-548"><a href="#cb62-548" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-549"><a href="#cb62-549" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>)</span>
+<span id="cb62-549"><a href="#cb62-549" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span> <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>)</span>
 <span id="cb62-550"><a href="#cb62-550" aria-hidden="true" tabindex="-1"></a><span class="co"># again, this does not change the data frame but adds some meta data</span></span>
 <span id="cb62-551"><a href="#cb62-551" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)</span>
 <span id="cb62-552"><a href="#cb62-552" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -2178,7 +2178,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb62-554"><a href="#cb62-554" aria-hidden="true" tabindex="-1"></a>We then use the <span class="in">`generate()`</span> function to generate replicates of "shuffled" or "permuted" data under the assumption that the null hypothesis is true. That is, we generating datasets from which we then derived a null distribution for our statistic of interest.</span>
 <span id="cb62-555"><a href="#cb62-555" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-558"><a href="#cb62-558" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-559"><a href="#cb62-559" aria-hidden="true" tabindex="-1"></a>d_permutations <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span> <span class="fu">generate</span>(<span class="at">reps=</span><span class="dv">1000</span>, <span class="at">type=</span><span class="st">"permute"</span>)</span>
+<span id="cb62-559"><a href="#cb62-559" aria-hidden="true" tabindex="-1"></a>d_permutations <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span> <span class="fu">generate</span>(<span class="at">reps=</span><span class="dv">1000</span>, <span class="at">type=</span><span class="st">"permute"</span>)</span>
 <span id="cb62-560"><a href="#cb62-560" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(d)</span>
 <span id="cb62-561"><a href="#cb62-561" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(d_permutations)</span>
 <span id="cb62-562"><a href="#cb62-562" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -2186,7 +2186,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb62-564"><a href="#cb62-564" aria-hidden="true" tabindex="-1"></a>Next, we use <span class="in">`calculate()`</span> to calculate summary statistics of interest for each replicate. We can calculate a variety of different statistics, including the mean ("mean"), proportion ("prop"), difference in means ("diff in means"), difference in proportions ("diff in props"), and others. This step generates a null distribution for our summary statistic. For differences in means or proportions, we need to also include an argument specifying the order of the levels of the explanatory variable for subtraction.</span>
 <span id="cb62-565"><a href="#cb62-565" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-568"><a href="#cb62-568" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-569"><a href="#cb62-569" aria-hidden="true" tabindex="-1"></a>null_distribution <span class="ot">&lt;-</span> d_permutations <span class="sc">%&gt;%</span></span>
+<span id="cb62-569"><a href="#cb62-569" aria-hidden="true" tabindex="-1"></a>null_distribution <span class="ot">&lt;-</span> d_permutations <span class="sc">|&gt;</span></span>
 <span id="cb62-570"><a href="#cb62-570" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat=</span><span class="st">"diff in means"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>,<span class="st">"female"</span>))</span>
 <span id="cb62-571"><a href="#cb62-571" aria-hidden="true" tabindex="-1"></a><span class="co"># to subtract female weight from male weight</span></span>
 <span id="cb62-572"><a href="#cb62-572" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -2201,9 +2201,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb62-583"><a href="#cb62-583" aria-hidden="true" tabindex="-1"></a>So, now we have a null or permutation distribution for the test statistic... then, we can also use {infer} package functions to easily calculate hte observed summary statistic that we want to compare to this null distribution by simply leaving out the <span class="in">`hypothesize()`</span> and <span class="in">`generate()`</span> steps.</span>
 <span id="cb62-584"><a href="#cb62-584" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-587"><a href="#cb62-587" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-588"><a href="#cb62-588" aria-hidden="true" tabindex="-1"></a>observed_stat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(f, <span class="at">col_names=</span><span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb62-589"><a href="#cb62-589" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(weight <span class="sc">~</span> sex) <span class="sc">%&gt;%</span></span>
-<span id="cb62-590"><a href="#cb62-590" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat=</span><span class="st">"diff in means"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>))</span>
+<span id="cb62-588"><a href="#cb62-588" aria-hidden="true" tabindex="-1"></a>observed_stat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(f, <span class="at">col_names =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb62-589"><a href="#cb62-589" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(weight <span class="sc">~</span> sex) <span class="sc">|&gt;</span></span>
+<span id="cb62-590"><a href="#cb62-590" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in means"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>))</span>
 <span id="cb62-591"><a href="#cb62-591" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb62-592"><a href="#cb62-592" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb62-593"><a href="#cb62-593" aria-hidden="true" tabindex="-1"></a>We can plot this observed test statistic atop the null distribution using the <span class="in">`shade_p_value()`</span> function, which has two arguments: a value for <span class="in">`obs_stat=`</span> and a <span class="in">`direction=`</span> ("left, "right", or "both") corresponding to two different one-tailed or a two-tailed alternative hypothesis.</span>
@@ -2273,67 +2273,66 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb62-669"><a href="#cb62-669" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
 <span id="cb62-670"><a href="#cb62-670" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Show Code"</span></span>
 <span id="cb62-671"><a href="#cb62-671" aria-hidden="true" tabindex="-1"></a><span class="co">#| attr.output: '.details summary="Show Output"'</span></span>
-<span id="cb62-672"><a href="#cb62-672" aria-hidden="true" tabindex="-1"></a>null_distribution <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb62-673"><a href="#cb62-673" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(lactating <span class="sc">~</span> species, <span class="at">success=</span><span class="st">"1"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb62-674"><a href="#cb62-674" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null=</span><span class="st">"independence"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb62-675"><a href="#cb62-675" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps=</span><span class="dv">1000</span>, <span class="at">type=</span><span class="st">"permute"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb62-676"><a href="#cb62-676" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat=</span><span class="st">"diff in props"</span>, <span class="at">order=</span><span class="fu">c</span>(<span class="st">"species1"</span>,<span class="st">"species2"</span>))</span>
+<span id="cb62-672"><a href="#cb62-672" aria-hidden="true" tabindex="-1"></a>null_distribution <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span></span>
+<span id="cb62-673"><a href="#cb62-673" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(lactating <span class="sc">~</span> species, <span class="at">success =</span> <span class="st">"1"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb62-674"><a href="#cb62-674" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb62-675"><a href="#cb62-675" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb62-676"><a href="#cb62-676" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in props"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"species1"</span>, <span class="st">"species2"</span>))</span>
 <span id="cb62-677"><a href="#cb62-677" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-678"><a href="#cb62-678" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: This runs a LOT slower than our custom permutation function for</span></span>
-<span id="cb62-679"><a href="#cb62-679" aria-hidden="true" tabindex="-1"></a><span class="co"># the same number of reps!</span></span>
-<span id="cb62-680"><a href="#cb62-680" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_distribution, <span class="at">bins=</span><span class="dv">20</span>)</span>
-<span id="cb62-681"><a href="#cb62-681" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-682"><a href="#cb62-682" aria-hidden="true" tabindex="-1"></a>observed_stat <span class="ot">&lt;-</span> d <span class="sc">%&gt;%</span></span>
-<span id="cb62-683"><a href="#cb62-683" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(lactating <span class="sc">~</span> species, <span class="at">success=</span><span class="st">"1"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb62-684"><a href="#cb62-684" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat=</span><span class="st">"diff in props"</span>, <span class="at">order=</span><span class="fu">c</span>(<span class="st">"species1"</span>,<span class="st">"species2"</span>))</span>
-<span id="cb62-685"><a href="#cb62-685" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-686"><a href="#cb62-686" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_distribution, <span class="at">bins=</span><span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb62-687"><a href="#cb62-687" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shade_p_value</span>(observed_stat, <span class="at">direction =</span> <span class="st">"both"</span>)</span>
-<span id="cb62-688"><a href="#cb62-688" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-689"><a href="#cb62-689" aria-hidden="true" tabindex="-1"></a><span class="fu">get_p_value</span>(null_distribution, observed_stat, <span class="at">direction =</span> <span class="st">"both"</span>)</span>
-<span id="cb62-690"><a href="#cb62-690" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>infer)</span>
-<span id="cb62-691"><a href="#cb62-691" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb62-692"><a href="#cb62-692" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-693"><a href="#cb62-693" aria-hidden="true" tabindex="-1"></a>This p value is similar to that returned by our custom permutation test!</span>
-<span id="cb62-694"><a href="#cb62-694" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-695"><a href="#cb62-695" aria-hidden="true" tabindex="-1"></a><span class="fu">## Advantages of Permutation Tests</span></span>
-<span id="cb62-696"><a href="#cb62-696" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-697"><a href="#cb62-697" aria-hidden="true" tabindex="-1"></a>Some of the key advantages of permutation tests include the following:</span>
-<span id="cb62-698"><a href="#cb62-698" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-699"><a href="#cb62-699" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>They are "distribution-free" - i.e., they do not make any assumptions about the distribution of the underlying data</span>
-<span id="cb62-700"><a href="#cb62-700" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>There is no presumption of random sampling from some imaginary hypothetical population</span>
-<span id="cb62-701"><a href="#cb62-701" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Unlike some other nonparametric tests, they do not depend on large sample sizes for their validity</span>
-<span id="cb62-702"><a href="#cb62-702" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Many common nonparametric tests **are** permutation tests, just carried out on RANKS</span>
-<span id="cb62-703"><a href="#cb62-703" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>They can be used with many kinds of data (nominal, ordinal, interval/ratio)</span>
-<span id="cb62-704"><a href="#cb62-704" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>They are relatively straightforward to conduct and interpret</span>
-<span id="cb62-705"><a href="#cb62-705" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-706"><a href="#cb62-706" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
-<span id="cb62-707"><a href="#cb62-707" aria-hidden="true" tabindex="-1"></a><span class="in">detach(package:mosaic)</span></span>
-<span id="cb62-708"><a href="#cb62-708" aria-hidden="true" tabindex="-1"></a><span class="in">detach(package:tidyverse)</span></span>
-<span id="cb62-709"><a href="#cb62-709" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb62-710"><a href="#cb62-710" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-711"><a href="#cb62-711" aria-hidden="true" tabindex="-1"></a>&lt;hr&gt;</span>
-<span id="cb62-712"><a href="#cb62-712" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-713"><a href="#cb62-713" aria-hidden="true" tabindex="-1"></a><span class="fu">## Concept Review {.unnumbered}</span></span>
-<span id="cb62-714"><a href="#cb62-714" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-715"><a href="#cb62-715" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Permutation/randomization tests involve these steps:</span>
-<span id="cb62-716"><a href="#cb62-716" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-717"><a href="#cb62-717" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Compute a sample statistic of your choice (mean, median, proportion, etc.) using the set of original observations</span>
-<span id="cb62-718"><a href="#cb62-718" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Rearrange attributes of the original observations in all or a very large number of random possible permutations, computing the test statistic each time, to yield a permutation or null distribution for the test statistic under the null hypothesis</span>
-<span id="cb62-719"><a href="#cb62-719" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Look at the value of the sample statistic relative to the permutation distribution</span>
-<span id="cb62-720"><a href="#cb62-720" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Based on the permutation distribution, calculate the probability of seeing a sample statistic as high or higher than that observed, i.e., the portion of the permutation distribution that equals or exceed the value of the sample statistic... this is the permutation test p value</span>
-<span id="cb62-721"><a href="#cb62-721" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-722"><a href="#cb62-722" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`jmuOutlier::perm.test()`</span>, <span class="in">`coin::indepedence_test()`</span>, or write your own!</span>
-<span id="cb62-723"><a href="#cb62-723" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-724"><a href="#cb62-724" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>{infer} workflow</span>
-<span id="cb62-725"><a href="#cb62-725" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-726"><a href="#cb62-726" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** This permutation-based approach to statistical inference is consistent with the philosophy promoted by statistician Allen Downey that, "There is really only test", and that at all statistical tests are based on the same framework. Note that this is still a form of null hypothesis significance testing, or NHST!</span></span>
-<span id="cb62-727"><a href="#cb62-727" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-730"><a href="#cb62-730" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb62-731"><a href="#cb62-731" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb62-732"><a href="#cb62-732" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
-<span id="cb62-733"><a href="#cb62-733" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/downey.png"</span>)</span>
-<span id="cb62-734"><a href="#cb62-734" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-678"><a href="#cb62-678" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">: This runs a LOT slower than our custom permutation function for the same number of reps!</span></span>
+<span id="cb62-679"><a href="#cb62-679" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_distribution, <span class="at">bins=</span><span class="dv">20</span>)</span>
+<span id="cb62-680"><a href="#cb62-680" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-681"><a href="#cb62-681" aria-hidden="true" tabindex="-1"></a>observed_stat <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span></span>
+<span id="cb62-682"><a href="#cb62-682" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(lactating <span class="sc">~</span> species, <span class="at">success =</span> <span class="st">"1"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb62-683"><a href="#cb62-683" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in props"</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"species1"</span>, <span class="st">"species2"</span>))</span>
+<span id="cb62-684"><a href="#cb62-684" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-685"><a href="#cb62-685" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_distribution, <span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb62-686"><a href="#cb62-686" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shade_p_value</span>(observed_stat, <span class="at">direction =</span> <span class="st">"both"</span>)</span>
+<span id="cb62-687"><a href="#cb62-687" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-688"><a href="#cb62-688" aria-hidden="true" tabindex="-1"></a><span class="fu">get_p_value</span>(null_distribution, observed_stat, <span class="at">direction =</span> <span class="st">"both"</span>)</span>
+<span id="cb62-689"><a href="#cb62-689" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>infer)</span>
+<span id="cb62-690"><a href="#cb62-690" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-691"><a href="#cb62-691" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-692"><a href="#cb62-692" aria-hidden="true" tabindex="-1"></a>This p value is similar to that returned by our custom permutation test!</span>
+<span id="cb62-693"><a href="#cb62-693" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-694"><a href="#cb62-694" aria-hidden="true" tabindex="-1"></a><span class="fu">## Advantages of Permutation Tests</span></span>
+<span id="cb62-695"><a href="#cb62-695" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-696"><a href="#cb62-696" aria-hidden="true" tabindex="-1"></a>Some of the key advantages of permutation tests include the following:</span>
+<span id="cb62-697"><a href="#cb62-697" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-698"><a href="#cb62-698" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>They are "distribution-free" - i.e., they do not make any assumptions about the distribution of the underlying data</span>
+<span id="cb62-699"><a href="#cb62-699" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>There is no presumption of random sampling from some imaginary hypothetical population</span>
+<span id="cb62-700"><a href="#cb62-700" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Unlike some other nonparametric tests, they do not depend on large sample sizes for their validity</span>
+<span id="cb62-701"><a href="#cb62-701" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Many common nonparametric tests **are** permutation tests, just carried out on RANKS</span>
+<span id="cb62-702"><a href="#cb62-702" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>They can be used with many kinds of data (nominal, ordinal, interval/ratio)</span>
+<span id="cb62-703"><a href="#cb62-703" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>They are relatively straightforward to conduct and interpret</span>
+<span id="cb62-704"><a href="#cb62-704" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-705"><a href="#cb62-705" aria-hidden="true" tabindex="-1"></a><span class="in">```{r include=FALSE}</span></span>
+<span id="cb62-706"><a href="#cb62-706" aria-hidden="true" tabindex="-1"></a><span class="in">detach(package:mosaic)</span></span>
+<span id="cb62-707"><a href="#cb62-707" aria-hidden="true" tabindex="-1"></a><span class="in">detach(package:tidyverse)</span></span>
+<span id="cb62-708"><a href="#cb62-708" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb62-709"><a href="#cb62-709" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-710"><a href="#cb62-710" aria-hidden="true" tabindex="-1"></a>&lt;hr&gt;</span>
+<span id="cb62-711"><a href="#cb62-711" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-712"><a href="#cb62-712" aria-hidden="true" tabindex="-1"></a><span class="fu">## Concept Review {.unnumbered}</span></span>
+<span id="cb62-713"><a href="#cb62-713" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-714"><a href="#cb62-714" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Permutation/randomization tests involve these steps:</span>
+<span id="cb62-715"><a href="#cb62-715" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-716"><a href="#cb62-716" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Compute a sample statistic of your choice (mean, median, proportion, etc.) using the set of original observations</span>
+<span id="cb62-717"><a href="#cb62-717" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Rearrange attributes of the original observations in all or a very large number of random possible permutations, computing the test statistic each time, to yield a permutation or null distribution for the test statistic under the null hypothesis</span>
+<span id="cb62-718"><a href="#cb62-718" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Look at the value of the sample statistic relative to the permutation distribution</span>
+<span id="cb62-719"><a href="#cb62-719" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Based on the permutation distribution, calculate the probability of seeing a sample statistic as high or higher than that observed, i.e., the portion of the permutation distribution that equals or exceed the value of the sample statistic... this is the permutation test p value</span>
+<span id="cb62-720"><a href="#cb62-720" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-721"><a href="#cb62-721" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`jmuOutlier::perm.test()`</span>, <span class="in">`coin::indepedence_test()`</span>, or write your own!</span>
+<span id="cb62-722"><a href="#cb62-722" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-723"><a href="#cb62-723" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>{infer} workflow</span>
+<span id="cb62-724"><a href="#cb62-724" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-725"><a href="#cb62-725" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** This permutation-based approach to statistical inference is consistent with the philosophy promoted by statistician Allen Downey that, "There is really only test", and that at all statistical tests are based on the same framework. Note that this is still a form of null hypothesis significance testing, or NHST!</span></span>
+<span id="cb62-726"><a href="#cb62-726" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-729"><a href="#cb62-729" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb62-730"><a href="#cb62-730" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb62-731"><a href="#cb62-731" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
+<span id="cb62-732"><a href="#cb62-732" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/downey.png"</span>)</span>
+<span id="cb62-733"><a href="#cb62-733" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

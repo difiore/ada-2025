@@ -504,7 +504,7 @@ library(infer)
 Then, we use the function `specify()` to indicate the variables we are interested in. The `specify()` function takes an argument of `formula=` response\~explanatory. If we are working with proportion data, we also need to provide an argument for what value of the explanatory variable counts as a success, using `success=`, but that is not the case for our colobus weight data, where our response variable is numeric, not binary.
 
 ```{r}
-d <- d %>% specify(formula = weight~sex)
+d <- d |> specify(formula = weight~sex)
 # this does not change the data frame but adds some meta data
 head(d)
 ```
@@ -512,7 +512,7 @@ head(d)
 The function `hypothesize()` is then used to declare the null hypothesis we wish to test. We use the argument `null="point"` if we are doing a test of a single mean (`mu=`) or proportion (`p=`) or `null="independence"` if we are doing a test of the independence of two variables (i.e., a two-sample test).
 
 ```{r}
-d <- d %>% hypothesize(null = "independence")
+d <- d |> hypothesize(null = "independence")
 # again, this does not change the data frame but adds some meta data
 head(d)
 ```
@@ -520,7 +520,7 @@ head(d)
 We then use the `generate()` function to generate replicates of "shuffled" or "permuted" data under the assumption that the null hypothesis is true. That is, we generating datasets from which we then derived a null distribution for our statistic of interest.
 
 ```{r}
-d_permutations <- d %>% generate(reps=1000, type="permute")
+d_permutations <- d |> generate(reps=1000, type="permute")
 nrow(d)
 nrow(d_permutations)
 ```
@@ -528,7 +528,7 @@ nrow(d_permutations)
 Next, we use `calculate()` to calculate summary statistics of interest for each replicate. We can calculate a variety of different statistics, including the mean ("mean"), proportion ("prop"), difference in means ("diff in means"), difference in proportions ("diff in props"), and others. This step generates a null distribution for our summary statistic. For differences in means or proportions, we need to also include an argument specifying the order of the levels of the explanatory variable for subtraction.
 
 ```{r}
-null_distribution <- d_permutations %>%
+null_distribution <- d_permutations |>
   calculate(stat="diff in means", order = c("male","female"))
 # to subtract female weight from male weight
 ```
@@ -543,9 +543,9 @@ histogram(null_distribution$stat, nint=20)
 So, now we have a null or permutation distribution for the test statistic... then, we can also use {infer} package functions to easily calculate hte observed summary statistic that we want to compare to this null distribution by simply leaving out the `hypothesize()` and `generate()` steps.
 
 ```{r}
-observed_stat <- read_csv(f, col_names=TRUE) %>%
-  specify(weight ~ sex) %>%
-  calculate(stat="diff in means", order = c("male", "female"))
+observed_stat <- read_csv(f, col_names = TRUE) |>
+  specify(weight ~ sex) |>
+  calculate(stat = "diff in means", order = c("male", "female"))
 ```
 
 We can plot this observed test statistic atop the null distribution using the `shade_p_value()` function, which has two arguments: a value for `obs_stat=` and a `direction=` ("left, "right", or "both") corresponding to two different one-tailed or a two-tailed alternative hypothesis.
@@ -615,21 +615,20 @@ Now, use the {infer} workflow to test whether the proportion of lactating female
 #| code-fold: true
 #| code-summary: "Show Code"
 #| attr.output: '.details summary="Show Output"'
-null_distribution <- d %>%
-  specify(lactating ~ species, success="1") %>%
-  hypothesize(null="independence") %>%
-  generate(reps=1000, type="permute") %>%
-  calculate(stat="diff in props", order=c("species1","species2"))
+null_distribution <- d |>
+  specify(lactating ~ species, success = "1") |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in props", order = c("species1", "species2"))
 
-# NOTE: This runs a LOT slower than our custom permutation function for
-# the same number of reps!
+# NOTE: This runs a LOT slower than our custom permutation function for the same number of reps!
 visualize(null_distribution, bins=20)
 
-observed_stat <- d %>%
-  specify(lactating ~ species, success="1") %>%
-  calculate(stat="diff in props", order=c("species1","species2"))
+observed_stat <- d |>
+  specify(lactating ~ species, success = "1") |>
+  calculate(stat = "diff in props", order = c("species1", "species2"))
 
-visualize(null_distribution, bins=10) +
+visualize(null_distribution, bins = 10) +
   shade_p_value(observed_stat, direction = "both")
 
 get_p_value(null_distribution, observed_stat, direction = "both")

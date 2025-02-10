@@ -635,8 +635,9 @@ Alternatively, can use the `rep_sample_n()` function from the {infer} package to
 ```{r}
 #| warning: false
 library(infer)
-boot <- as.data.frame(s) %>%
-  rep_sample_n(size = length(s), replace = TRUE, reps = n_boot) %>% group_by(replicate) %>%
+boot <- as.data.frame(s) |>
+  rep_sample_n(size = length(s), replace = TRUE, reps = n_boot) |>
+  group_by(replicate) |>
   summarize(mean = mean(s))
 hist(boot$mean,
           breaks = 25,

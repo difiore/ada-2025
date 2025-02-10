@@ -1087,9 +1087,9 @@ window.Quarto = {
 <p>Alternatively, can use the <code>rep_sample_n()</code> function from the {infer} package to perform boostrapping. This function takes a data frame as an argument and randomly samples from that data frame a specified number of times (defined by the “size=” argument) to produce a large data object consisting of samples for each replicate and a column data that indicates which replicate each sample datum comes from. To use <code>rep_sample_n()</code>, we need to first convert our original sample vector <strong>s</strong> into a data frame. We can then use <code>group_by()</code> and <code>summarize()</code> from {dplyr} to generate a bootstrap sampling distribution, as we did above.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>boot <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(s) <span class="sc">%&gt;%</span></span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="fu">length</span>(s), <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">reps =</span> n_boot) <span class="sc">%&gt;%</span></span>
-<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(replicate) <span class="sc">%&gt;%</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>boot <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(s) <span class="sc">|&gt;</span></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="fu">length</span>(s), <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">reps =</span> n_boot) <span class="sc">|&gt;</span></span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(replicate) <span class="sc">|&gt;</span></span>
 <span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(s))</span>
 <span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot<span class="sc">$</span>mean, <span class="at">breaks =</span> <span class="dv">25</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>), <span class="at">xlab =</span> <span class="st">"Mean"</span>, <span class="at">main =</span> <span class="st">"Bootstrap Sampling Distribution</span><span class="sc">\n</span><span class="st">from rep_sample_n()"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -2288,121 +2288,122 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb86-685"><a href="#cb86-685" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb86-686"><a href="#cb86-686" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
 <span id="cb86-687"><a href="#cb86-687" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
-<span id="cb86-688"><a href="#cb86-688" aria-hidden="true" tabindex="-1"></a>boot <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(s) <span class="sc">%&gt;%</span></span>
-<span id="cb86-689"><a href="#cb86-689" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="fu">length</span>(s), <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">reps =</span> n_boot) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(replicate) <span class="sc">%&gt;%</span></span>
-<span id="cb86-690"><a href="#cb86-690" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(s))</span>
-<span id="cb86-691"><a href="#cb86-691" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot<span class="sc">$</span>mean,</span>
-<span id="cb86-692"><a href="#cb86-692" aria-hidden="true" tabindex="-1"></a>          <span class="at">breaks =</span> <span class="dv">25</span>,</span>
-<span id="cb86-693"><a href="#cb86-693" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>),</span>
-<span id="cb86-694"><a href="#cb86-694" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">"Mean"</span>,</span>
-<span id="cb86-695"><a href="#cb86-695" aria-hidden="true" tabindex="-1"></a>          <span class="at">main =</span> <span class="st">"Bootstrap Sampling Distribution</span><span class="sc">\n</span><span class="st">from rep_sample_n()"</span>)</span>
-<span id="cb86-696"><a href="#cb86-696" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb86-697"><a href="#cb86-697" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-698"><a href="#cb86-698" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Using the {boot} Package {.unnumbered}</span></span>
-<span id="cb86-699"><a href="#cb86-699" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-700"><a href="#cb86-700" aria-hidden="true" tabindex="-1"></a>We can also use the fast and versatile {boot} package to do bootstrapping for any statistic.</span>
-<span id="cb86-701"><a href="#cb86-701" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-702"><a href="#cb86-702" aria-hidden="true" tabindex="-1"></a>For this approach, we define a custom function that we will use to generate the statistic we are interested in that we will then calculate for each bootstrapped sample:</span>
-<span id="cb86-703"><a href="#cb86-703" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-706"><a href="#cb86-706" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb86-707"><a href="#cb86-707" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb86-708"><a href="#cb86-708" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb86-709"><a href="#cb86-709" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
-<span id="cb86-710"><a href="#cb86-710" aria-hidden="true" tabindex="-1"></a><span class="co"># here, the `stat()` function we define calculates the mean value of a bootstrap sample</span></span>
-<span id="cb86-711"><a href="#cb86-711" aria-hidden="true" tabindex="-1"></a><span class="co">#   taken with replacement from a vector of interest passed into `data`</span></span>
-<span id="cb86-712"><a href="#cb86-712" aria-hidden="true" tabindex="-1"></a><span class="co"># the function we write for `statistic=` has two arguments, a data set and a</span></span>
-<span id="cb86-713"><a href="#cb86-713" aria-hidden="true" tabindex="-1"></a><span class="co">#   set of indices, generated at random by the `boot()` function, to sample</span></span>
-<span id="cb86-714"><a href="#cb86-714" aria-hidden="true" tabindex="-1"></a><span class="co">#   from the dataset</span></span>
-<span id="cb86-715"><a href="#cb86-715" aria-hidden="true" tabindex="-1"></a><span class="co"># this corresponds to the default argument `stype="i"` in the `boot()` call</span></span>
-<span id="cb86-716"><a href="#cb86-716" aria-hidden="true" tabindex="-1"></a>stat <span class="ot">&lt;-</span> <span class="cf">function</span>(data, indices) {</span>
-<span id="cb86-717"><a href="#cb86-717" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">mean</span>(data[indices])) </span>
-<span id="cb86-718"><a href="#cb86-718" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb86-719"><a href="#cb86-719" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb86-720"><a href="#cb86-720" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-721"><a href="#cb86-721" aria-hidden="true" tabindex="-1"></a>Then, we run the <span class="in">`boot()`</span> function passing in the data to be resampled from ("data="), the statistic we want to calculate ("statistic="), and the number of bootstrap replicates (or "resamples") we want using the argument "R=".</span>
-<span id="cb86-722"><a href="#cb86-722" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-725"><a href="#cb86-725" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb86-726"><a href="#cb86-726" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-keep: last</span></span>
-<span id="cb86-727"><a href="#cb86-727" aria-hidden="true" tabindex="-1"></a>boot <span class="ot">&lt;-</span> <span class="fu">boot</span>(<span class="at">data =</span> s, <span class="at">statistic =</span> stat, <span class="at">R =</span> n_boot) <span class="co"># stype="i" by default</span></span>
-<span id="cb86-728"><a href="#cb86-728" aria-hidden="true" tabindex="-1"></a><span class="co"># the object returned includes a table, `t`, of `stat`s results from each</span></span>
-<span id="cb86-729"><a href="#cb86-729" aria-hidden="true" tabindex="-1"></a><span class="co">#   bootstrap</span></span>
-<span id="cb86-730"><a href="#cb86-730" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb86-731"><a href="#cb86-731" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-732"><a href="#cb86-732" aria-hidden="true" tabindex="-1"></a>Again, it is interesting to plot the bootstrap sampling distibution and compare methods for calculating CIs.</span>
-<span id="cb86-733"><a href="#cb86-733" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-736"><a href="#cb86-736" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb86-737"><a href="#cb86-737" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-keep: last</span></span>
-<span id="cb86-738"><a href="#cb86-738" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing the results and comparing methods for calculating CIs</span></span>
-<span id="cb86-739"><a href="#cb86-739" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb86-740"><a href="#cb86-740" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot<span class="sc">$</span>t, <span class="at">breaks =</span> <span class="dv">25</span>,</span>
-<span id="cb86-741"><a href="#cb86-741" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>),</span>
-<span id="cb86-742"><a href="#cb86-742" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Mean"</span>,</span>
-<span id="cb86-743"><a href="#cb86-743" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Bootstrap Sampling Distribution</span><span class="sc">\n</span><span class="st">from boot()"</span>)</span>
-<span id="cb86-744"><a href="#cb86-744" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-745"><a href="#cb86-745" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">mean</span>(boot<span class="sc">$</span>t), <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">3</span>) <span class="co"># mean of our simulated samples</span></span>
-<span id="cb86-746"><a href="#cb86-746" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fu">mean</span>(boot<span class="sc">$</span>t) <span class="sc">+</span> <span class="fl">0.2</span>, <span class="at">y =</span> <span class="dv">700</span>, <span class="st">"mean of bootstrap distribution "</span>,</span>
-<span id="cb86-747"><a href="#cb86-747" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">srt =</span> <span class="dv">90</span>, <span class="at">pos =</span> <span class="dv">3</span>)</span>
-<span id="cb86-748"><a href="#cb86-748" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(s), <span class="at">col=</span><span class="st">"black"</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb86-749"><a href="#cb86-749" aria-hidden="true" tabindex="-1"></a><span class="co"># mean of our original vector of samples, s</span></span>
-<span id="cb86-750"><a href="#cb86-750" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fu">mean</span>(s) <span class="sc">-</span> <span class="fl">0.125</span>, <span class="at">y =</span> <span class="dv">700</span>, <span class="st">"mean of original sample"</span>,</span>
-<span id="cb86-751"><a href="#cb86-751" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">srt =</span> <span class="dv">90</span>, <span class="at">pos =</span> <span class="dv">3</span>)</span>
-<span id="cb86-752"><a href="#cb86-752" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-753"><a href="#cb86-753" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate and plot bootstrap CIs</span></span>
-<span id="cb86-754"><a href="#cb86-754" aria-hidden="true" tabindex="-1"></a>lower_boot <span class="ot">&lt;-</span> <span class="fu">quantile</span>(boot<span class="sc">$</span>t, <span class="fl">0.025</span>)</span>
-<span id="cb86-755"><a href="#cb86-755" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> lower_boot, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
-<span id="cb86-756"><a href="#cb86-756" aria-hidden="true" tabindex="-1"></a>upper_boot <span class="ot">&lt;-</span> <span class="fu">quantile</span>(boot<span class="sc">$</span>t, <span class="fl">0.975</span>)</span>
-<span id="cb86-757"><a href="#cb86-757" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> upper_boot, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
-<span id="cb86-758"><a href="#cb86-758" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> lower_boot <span class="sc">+</span> <span class="fl">0.25</span>, <span class="at">y =</span> <span class="dv">700</span>, <span class="st">"lower CI - bootstrap"</span>,</span>
-<span id="cb86-759"><a href="#cb86-759" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">srt =</span> <span class="dv">90</span>, <span class="at">pos =</span> <span class="dv">3</span>)</span>
-<span id="cb86-760"><a href="#cb86-760" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> upper_boot <span class="sc">-</span> <span class="fl">0.125</span>, <span class="at">y =</span> <span class="dv">700</span>, <span class="st">"upper CI - bootstrap"</span>,</span>
-<span id="cb86-761"><a href="#cb86-761" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">srt =</span> <span class="dv">90</span>, <span class="at">pos =</span> <span class="dv">3</span>)</span>
-<span id="cb86-762"><a href="#cb86-762" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb86-763"><a href="#cb86-763" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-764"><a href="#cb86-764" aria-hidden="true" tabindex="-1"></a>We can also use the <span class="in">`boot.ci()`</span> function from the {boot} package to calculate CIs for using various methods, although the available methods do not include exactly the one we most want, i.e., the quantile method. Instead, all the options for <span class="in">`boot.ci()`</span> generate equi-tailed CIs based on presumed theoretical shapes for the sampling distribution. The "basic" and "percent" intervals are the closest to the empirical quantile method.</span>
-<span id="cb86-765"><a href="#cb86-765" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-768"><a href="#cb86-768" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb86-769"><a href="#cb86-769" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-keep: last</span></span>
-<span id="cb86-770"><a href="#cb86-770" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb86-771"><a href="#cb86-771" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot<span class="sc">$</span>t, <span class="at">breaks =</span> <span class="dv">25</span>,</span>
-<span id="cb86-772"><a href="#cb86-772" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>),</span>
-<span id="cb86-773"><a href="#cb86-773" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Mean"</span>,</span>
-<span id="cb86-774"><a href="#cb86-774" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Bootstrap Sampling Distribution</span><span class="sc">\n</span><span class="st">from boot()"</span>)</span>
-<span id="cb86-775"><a href="#cb86-775" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">boot.ci</span>(boot)</span>
-<span id="cb86-776"><a href="#cb86-776" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>basic[<span class="dv">4</span>], <span class="at">col =</span> <span class="st">"green"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb86-777"><a href="#cb86-777" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>basic[<span class="dv">5</span>], <span class="at">col =</span> <span class="st">"green"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb86-778"><a href="#cb86-778" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>percent[<span class="dv">4</span>], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb86-779"><a href="#cb86-779" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>percent[<span class="dv">5</span>], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb86-780"><a href="#cb86-780" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>bca[<span class="dv">4</span>], <span class="at">col =</span> <span class="st">"purple"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb86-781"><a href="#cb86-781" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>bca[<span class="dv">5</span>], <span class="at">col =</span> <span class="st">"purple"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb86-782"><a href="#cb86-782" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>normal[<span class="dv">2</span>], <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb86-783"><a href="#cb86-783" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>normal[<span class="dv">3</span>], <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb86-784"><a href="#cb86-784" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb86-785"><a href="#cb86-785" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-786"><a href="#cb86-786" aria-hidden="true" tabindex="-1"></a>These alternative CIs are all very close to one another and are close to what we calculated using the <span class="in">`quantile()`</span> approach!</span>
-<span id="cb86-787"><a href="#cb86-787" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-788"><a href="#cb86-788" aria-hidden="true" tabindex="-1"></a><span class="fu">### CHALLENGE {.unnumbered}</span></span>
-<span id="cb86-789"><a href="#cb86-789" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-790"><a href="#cb86-790" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How does the CI calculated by bootstrap simulation compare to that calculated based on assuming a normal or $t$ distribution?</span>
-<span id="cb86-791"><a href="#cb86-791" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How does the width of the CI change with decreasing or increasing $n$ (the number of observations drawn from your sample with replacement)? For example, if we set $n$ at 5? At 50? At 500?</span>
-<span id="cb86-792"><a href="#cb86-792" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-795"><a href="#cb86-795" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb86-796"><a href="#cb86-796" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb86-797"><a href="#cb86-797" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>infer)</span>
-<span id="cb86-798"><a href="#cb86-798" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>boot)</span>
-<span id="cb86-799"><a href="#cb86-799" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>manipulate)</span>
-<span id="cb86-800"><a href="#cb86-800" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>mosaic)</span>
-<span id="cb86-801"><a href="#cb86-801" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>tidyverse)</span>
-<span id="cb86-802"><a href="#cb86-802" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb86-803"><a href="#cb86-803" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-804"><a href="#cb86-804" aria-hidden="true" tabindex="-1"></a>&lt;hr&gt;</span>
-<span id="cb86-805"><a href="#cb86-805" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-806"><a href="#cb86-806" aria-hidden="true" tabindex="-1"></a><span class="fu">## Concept Review {.unnumbered}</span></span>
-<span id="cb86-807"><a href="#cb86-807" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-808"><a href="#cb86-808" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We can generate confidence intervals around a statistic (e.g., a mean) estimated from a sample as:</span>
-<span id="cb86-809"><a href="#cb86-809" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-810"><a href="#cb86-810" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>*mean* $±$ *critical value* (i.e., the relevant quantile for the standardized version of a particular theoretical sampling distribution such as the normal or Student's $t$) $\times$ *standard error* in the statistic, which is typically estimated as the standard deviation of a sample divided by the square root of the sample size, or $\frac{s}{\sqrt{n}}$</span>
-<span id="cb86-811"><a href="#cb86-811" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb86-812"><a href="#cb86-812" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bootstrapping allows us to estimate confidence intervals by simulation from a sample, without assuming a particular shape for the sampling distribution</span>
+<span id="cb86-688"><a href="#cb86-688" aria-hidden="true" tabindex="-1"></a>boot <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(s) <span class="sc">|&gt;</span></span>
+<span id="cb86-689"><a href="#cb86-689" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="fu">length</span>(s), <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">reps =</span> n_boot) <span class="sc">|&gt;</span></span>
+<span id="cb86-690"><a href="#cb86-690" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(replicate) <span class="sc">|&gt;</span></span>
+<span id="cb86-691"><a href="#cb86-691" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(s))</span>
+<span id="cb86-692"><a href="#cb86-692" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot<span class="sc">$</span>mean,</span>
+<span id="cb86-693"><a href="#cb86-693" aria-hidden="true" tabindex="-1"></a>          <span class="at">breaks =</span> <span class="dv">25</span>,</span>
+<span id="cb86-694"><a href="#cb86-694" aria-hidden="true" tabindex="-1"></a>          <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>),</span>
+<span id="cb86-695"><a href="#cb86-695" aria-hidden="true" tabindex="-1"></a>          <span class="at">xlab =</span> <span class="st">"Mean"</span>,</span>
+<span id="cb86-696"><a href="#cb86-696" aria-hidden="true" tabindex="-1"></a>          <span class="at">main =</span> <span class="st">"Bootstrap Sampling Distribution</span><span class="sc">\n</span><span class="st">from rep_sample_n()"</span>)</span>
+<span id="cb86-697"><a href="#cb86-697" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb86-698"><a href="#cb86-698" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-699"><a href="#cb86-699" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Using the {boot} Package {.unnumbered}</span></span>
+<span id="cb86-700"><a href="#cb86-700" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-701"><a href="#cb86-701" aria-hidden="true" tabindex="-1"></a>We can also use the fast and versatile {boot} package to do bootstrapping for any statistic.</span>
+<span id="cb86-702"><a href="#cb86-702" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-703"><a href="#cb86-703" aria-hidden="true" tabindex="-1"></a>For this approach, we define a custom function that we will use to generate the statistic we are interested in that we will then calculate for each bootstrapped sample:</span>
+<span id="cb86-704"><a href="#cb86-704" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-707"><a href="#cb86-707" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb86-708"><a href="#cb86-708" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb86-709"><a href="#cb86-709" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb86-710"><a href="#cb86-710" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(boot)</span>
+<span id="cb86-711"><a href="#cb86-711" aria-hidden="true" tabindex="-1"></a><span class="co"># here, the `stat()` function we define calculates the mean value of a bootstrap sample</span></span>
+<span id="cb86-712"><a href="#cb86-712" aria-hidden="true" tabindex="-1"></a><span class="co">#   taken with replacement from a vector of interest passed into `data`</span></span>
+<span id="cb86-713"><a href="#cb86-713" aria-hidden="true" tabindex="-1"></a><span class="co"># the function we write for `statistic=` has two arguments, a data set and a</span></span>
+<span id="cb86-714"><a href="#cb86-714" aria-hidden="true" tabindex="-1"></a><span class="co">#   set of indices, generated at random by the `boot()` function, to sample</span></span>
+<span id="cb86-715"><a href="#cb86-715" aria-hidden="true" tabindex="-1"></a><span class="co">#   from the dataset</span></span>
+<span id="cb86-716"><a href="#cb86-716" aria-hidden="true" tabindex="-1"></a><span class="co"># this corresponds to the default argument `stype="i"` in the `boot()` call</span></span>
+<span id="cb86-717"><a href="#cb86-717" aria-hidden="true" tabindex="-1"></a>stat <span class="ot">&lt;-</span> <span class="cf">function</span>(data, indices) {</span>
+<span id="cb86-718"><a href="#cb86-718" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">mean</span>(data[indices])) </span>
+<span id="cb86-719"><a href="#cb86-719" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb86-720"><a href="#cb86-720" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb86-721"><a href="#cb86-721" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-722"><a href="#cb86-722" aria-hidden="true" tabindex="-1"></a>Then, we run the <span class="in">`boot()`</span> function passing in the data to be resampled from ("data="), the statistic we want to calculate ("statistic="), and the number of bootstrap replicates (or "resamples") we want using the argument "R=".</span>
+<span id="cb86-723"><a href="#cb86-723" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-726"><a href="#cb86-726" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb86-727"><a href="#cb86-727" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-keep: last</span></span>
+<span id="cb86-728"><a href="#cb86-728" aria-hidden="true" tabindex="-1"></a>boot <span class="ot">&lt;-</span> <span class="fu">boot</span>(<span class="at">data =</span> s, <span class="at">statistic =</span> stat, <span class="at">R =</span> n_boot) <span class="co"># stype="i" by default</span></span>
+<span id="cb86-729"><a href="#cb86-729" aria-hidden="true" tabindex="-1"></a><span class="co"># the object returned includes a table, `t`, of `stat`s results from each</span></span>
+<span id="cb86-730"><a href="#cb86-730" aria-hidden="true" tabindex="-1"></a><span class="co">#   bootstrap</span></span>
+<span id="cb86-731"><a href="#cb86-731" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb86-732"><a href="#cb86-732" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-733"><a href="#cb86-733" aria-hidden="true" tabindex="-1"></a>Again, it is interesting to plot the bootstrap sampling distibution and compare methods for calculating CIs.</span>
+<span id="cb86-734"><a href="#cb86-734" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-737"><a href="#cb86-737" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb86-738"><a href="#cb86-738" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-keep: last</span></span>
+<span id="cb86-739"><a href="#cb86-739" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing the results and comparing methods for calculating CIs</span></span>
+<span id="cb86-740"><a href="#cb86-740" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb86-741"><a href="#cb86-741" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot<span class="sc">$</span>t, <span class="at">breaks =</span> <span class="dv">25</span>,</span>
+<span id="cb86-742"><a href="#cb86-742" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>),</span>
+<span id="cb86-743"><a href="#cb86-743" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Mean"</span>,</span>
+<span id="cb86-744"><a href="#cb86-744" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Bootstrap Sampling Distribution</span><span class="sc">\n</span><span class="st">from boot()"</span>)</span>
+<span id="cb86-745"><a href="#cb86-745" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-746"><a href="#cb86-746" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> <span class="fu">mean</span>(boot<span class="sc">$</span>t), <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">3</span>) <span class="co"># mean of our simulated samples</span></span>
+<span id="cb86-747"><a href="#cb86-747" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fu">mean</span>(boot<span class="sc">$</span>t) <span class="sc">+</span> <span class="fl">0.2</span>, <span class="at">y =</span> <span class="dv">700</span>, <span class="st">"mean of bootstrap distribution "</span>,</span>
+<span id="cb86-748"><a href="#cb86-748" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">srt =</span> <span class="dv">90</span>, <span class="at">pos =</span> <span class="dv">3</span>)</span>
+<span id="cb86-749"><a href="#cb86-749" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="fu">mean</span>(s), <span class="at">col=</span><span class="st">"black"</span>, <span class="at">lwd =</span> <span class="dv">3</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb86-750"><a href="#cb86-750" aria-hidden="true" tabindex="-1"></a><span class="co"># mean of our original vector of samples, s</span></span>
+<span id="cb86-751"><a href="#cb86-751" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fu">mean</span>(s) <span class="sc">-</span> <span class="fl">0.125</span>, <span class="at">y =</span> <span class="dv">700</span>, <span class="st">"mean of original sample"</span>,</span>
+<span id="cb86-752"><a href="#cb86-752" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">srt =</span> <span class="dv">90</span>, <span class="at">pos =</span> <span class="dv">3</span>)</span>
+<span id="cb86-753"><a href="#cb86-753" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-754"><a href="#cb86-754" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate and plot bootstrap CIs</span></span>
+<span id="cb86-755"><a href="#cb86-755" aria-hidden="true" tabindex="-1"></a>lower_boot <span class="ot">&lt;-</span> <span class="fu">quantile</span>(boot<span class="sc">$</span>t, <span class="fl">0.025</span>)</span>
+<span id="cb86-756"><a href="#cb86-756" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> lower_boot, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb86-757"><a href="#cb86-757" aria-hidden="true" tabindex="-1"></a>upper_boot <span class="ot">&lt;-</span> <span class="fu">quantile</span>(boot<span class="sc">$</span>t, <span class="fl">0.975</span>)</span>
+<span id="cb86-758"><a href="#cb86-758" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> upper_boot, <span class="at">col =</span> <span class="st">"blue"</span>)</span>
+<span id="cb86-759"><a href="#cb86-759" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> lower_boot <span class="sc">+</span> <span class="fl">0.25</span>, <span class="at">y =</span> <span class="dv">700</span>, <span class="st">"lower CI - bootstrap"</span>,</span>
+<span id="cb86-760"><a href="#cb86-760" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">srt =</span> <span class="dv">90</span>, <span class="at">pos =</span> <span class="dv">3</span>)</span>
+<span id="cb86-761"><a href="#cb86-761" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> upper_boot <span class="sc">-</span> <span class="fl">0.125</span>, <span class="at">y =</span> <span class="dv">700</span>, <span class="st">"upper CI - bootstrap"</span>,</span>
+<span id="cb86-762"><a href="#cb86-762" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">srt =</span> <span class="dv">90</span>, <span class="at">pos =</span> <span class="dv">3</span>)</span>
+<span id="cb86-763"><a href="#cb86-763" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb86-764"><a href="#cb86-764" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-765"><a href="#cb86-765" aria-hidden="true" tabindex="-1"></a>We can also use the <span class="in">`boot.ci()`</span> function from the {boot} package to calculate CIs for using various methods, although the available methods do not include exactly the one we most want, i.e., the quantile method. Instead, all the options for <span class="in">`boot.ci()`</span> generate equi-tailed CIs based on presumed theoretical shapes for the sampling distribution. The "basic" and "percent" intervals are the closest to the empirical quantile method.</span>
+<span id="cb86-766"><a href="#cb86-766" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-769"><a href="#cb86-769" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb86-770"><a href="#cb86-770" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-keep: last</span></span>
+<span id="cb86-771"><a href="#cb86-771" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb86-772"><a href="#cb86-772" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(boot<span class="sc">$</span>t, <span class="at">breaks =</span> <span class="dv">25</span>,</span>
+<span id="cb86-773"><a href="#cb86-773" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>),</span>
+<span id="cb86-774"><a href="#cb86-774" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Mean"</span>,</span>
+<span id="cb86-775"><a href="#cb86-775" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Bootstrap Sampling Distribution</span><span class="sc">\n</span><span class="st">from boot()"</span>)</span>
+<span id="cb86-776"><a href="#cb86-776" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">boot.ci</span>(boot)</span>
+<span id="cb86-777"><a href="#cb86-777" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>basic[<span class="dv">4</span>], <span class="at">col =</span> <span class="st">"green"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb86-778"><a href="#cb86-778" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>basic[<span class="dv">5</span>], <span class="at">col =</span> <span class="st">"green"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb86-779"><a href="#cb86-779" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>percent[<span class="dv">4</span>], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb86-780"><a href="#cb86-780" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>percent[<span class="dv">5</span>], <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb86-781"><a href="#cb86-781" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>bca[<span class="dv">4</span>], <span class="at">col =</span> <span class="st">"purple"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb86-782"><a href="#cb86-782" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>bca[<span class="dv">5</span>], <span class="at">col =</span> <span class="st">"purple"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb86-783"><a href="#cb86-783" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>normal[<span class="dv">2</span>], <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb86-784"><a href="#cb86-784" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci<span class="sc">$</span>normal[<span class="dv">3</span>], <span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb86-785"><a href="#cb86-785" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb86-786"><a href="#cb86-786" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-787"><a href="#cb86-787" aria-hidden="true" tabindex="-1"></a>These alternative CIs are all very close to one another and are close to what we calculated using the <span class="in">`quantile()`</span> approach!</span>
+<span id="cb86-788"><a href="#cb86-788" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-789"><a href="#cb86-789" aria-hidden="true" tabindex="-1"></a><span class="fu">### CHALLENGE {.unnumbered}</span></span>
+<span id="cb86-790"><a href="#cb86-790" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-791"><a href="#cb86-791" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How does the CI calculated by bootstrap simulation compare to that calculated based on assuming a normal or $t$ distribution?</span>
+<span id="cb86-792"><a href="#cb86-792" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How does the width of the CI change with decreasing or increasing $n$ (the number of observations drawn from your sample with replacement)? For example, if we set $n$ at 5? At 50? At 500?</span>
+<span id="cb86-793"><a href="#cb86-793" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-796"><a href="#cb86-796" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb86-797"><a href="#cb86-797" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb86-798"><a href="#cb86-798" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>infer)</span>
+<span id="cb86-799"><a href="#cb86-799" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>boot)</span>
+<span id="cb86-800"><a href="#cb86-800" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>manipulate)</span>
+<span id="cb86-801"><a href="#cb86-801" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>mosaic)</span>
+<span id="cb86-802"><a href="#cb86-802" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>tidyverse)</span>
+<span id="cb86-803"><a href="#cb86-803" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb86-804"><a href="#cb86-804" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-805"><a href="#cb86-805" aria-hidden="true" tabindex="-1"></a>&lt;hr&gt;</span>
+<span id="cb86-806"><a href="#cb86-806" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-807"><a href="#cb86-807" aria-hidden="true" tabindex="-1"></a><span class="fu">## Concept Review {.unnumbered}</span></span>
+<span id="cb86-808"><a href="#cb86-808" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-809"><a href="#cb86-809" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>We can generate confidence intervals around a statistic (e.g., a mean) estimated from a sample as:</span>
+<span id="cb86-810"><a href="#cb86-810" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-811"><a href="#cb86-811" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>*mean* $±$ *critical value* (i.e., the relevant quantile for the standardized version of a particular theoretical sampling distribution such as the normal or Student's $t$) $\times$ *standard error* in the statistic, which is typically estimated as the standard deviation of a sample divided by the square root of the sample size, or $\frac{s}{\sqrt{n}}$</span>
+<span id="cb86-812"><a href="#cb86-812" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-813"><a href="#cb86-813" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bootstrapping allows us to estimate confidence intervals by simulation from a sample, without assuming a particular shape for the sampling distribution</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

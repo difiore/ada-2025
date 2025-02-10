@@ -329,7 +329,7 @@ median_plot <-
 # using `rerun()` from {purrr} to generate a sampling distribution
 samp_dist_mean_alt1 <-
   rerun(reps, mean(~ averageRating,
-    data=sample_n(d, size=n, replace=FALSE))) %>%
+    data=sample_n(d, size=n, replace=FALSE))) |>
     unlist()
 mean_plot_alt1 <-
   histogram(samp_dist_mean_alt1,
@@ -341,10 +341,10 @@ mean_plot_alt1 <-
 ```{r}
 # using `rep_sample_n()` from {infer} to generate a sampling distribution
 library(infer)
-samp_dist_mean_alt2 <- d %>%
-  rep_sample_n(size = n, reps = reps, replace = FALSE) %>%
-  group_by(replicate) %>%
-  summarize(mean = mean(averageRating)) %>%
+samp_dist_mean_alt2 <- d |>
+  rep_sample_n(size = n, reps = reps, replace = FALSE) |>
+  group_by(replicate) |>
+  summarize(mean = mean(averageRating)) |>
   pull(mean)
 detach(package:infer)
 
@@ -424,9 +424,9 @@ s <- tibble("n"=numeric(),
   ".index"=numeric())
 
 for (n in seq(from=20, to=200, by=20)){
-  samp_dist <- {do(reps) * sample_n(d, size=n, replace=FALSE)} %>%
-    group_by(.index) %>%
-    dplyr::summarise(mean=mean(averageRating)) %>%
+  samp_dist <- {do(reps) * sample_n(d, size=n, replace=FALSE)} |>
+    group_by(.index) |>
+    dplyr::summarise(mean=mean(averageRating)) |>
     mutate(n=n)
     s <- bind_rows(s,
        samp_dist)
@@ -438,10 +438,11 @@ output <- tibble("n"=numeric(),
   "samp_dist_se"=numeric())
 
 for (reps in c(10,25,50,100,250,500,1000,2000)){
-  subsample <- s %>% group_by(n) %>%
-  sample_n(reps, replace = FALSE) %>%
-  dplyr::summarise(samp_dist_mean=mean(mean),
-    samp_dist_se=sd(mean)) %>%
+  subsample <- s |> 
+    group_by(n) |>
+    sample_n(reps, replace = FALSE) |>
+    dplyr::summarise(samp_dist_mean=mean(mean),
+      samp_dist_se=sd(mean)) |>
     mutate(reps=reps)
   output <- bind_rows(output,
     subsample)
@@ -492,16 +493,16 @@ where $\sigma^2$ is the population variance (and $\sigma$ is thus the population
 We can compare the SEs for different sample sizes estimated above from our empirical sampling distributions with the SEs calculated directly from the population variance using the code below.
 
 ```{r}
-# select estimated SEs for different sample sizes with 1000 reps
-# from our output tibble
-sampling_output <- filter(output, reps==1000) %>% select(n, samp_dist_se)
+# select estimated SEs for different sample sizes with 1000 reps from our output tibble
+sampling_output <- filter(output, reps == 1000) |>
+  select(n, samp_dist_se)
 # create a tibble of SEs based on the known population variance
-pop_output <- tibble("n"=numeric(), "pop_se"=numeric())
-for (n in seq(from=10, to=200, by=10)){
-  pop_se <- sqrt(pop_var(d$averageRating)/n)
-  pop_output <- bind_rows(pop_output,c(n=n,pop_se=pop_se))
+pop_output <- tibble("n" = numeric(), "pop_se" = numeric())
+for (n in seq(from = 10, to = 200, by = 10)) {
+  pop_se <- sqrt(pop_var(d$averageRating) / n)
+  pop_output <- bind_rows(pop_output, c(n = n, pop_se = pop_se))
 }
-(compare <- inner_join(sampling_output, pop_output, by="n"))
+(compare <- inner_join(sampling_output, pop_output, by = "n"))
 # the sample_dist_se and pop_se columns should be very close in value!
 ```
 

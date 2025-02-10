@@ -205,8 +205,10 @@ Note that the t statistic is calculated as simply the estimate value divided by 
 ```{r}
 m <- lm(zombies_killed ~ age, data = d)
 coefficients <- tidy(m)
-coefficients <- coefficients %>% mutate(`t.calc` = estimate / std.error)
-coefficients <- coefficients %>% mutate(`p.calc` = 2 * (1-pt(abs(t.calc), df = nrow(m$model)-2)))
+coefficients <- coefficients |>
+  mutate(`t.calc` = estimate / std.error)
+coefficients <- coefficients |>
+  mutate(`p.calc` = 2 * (1-pt(abs(t.calc), df = nrow(m$model)-2)))
 # the p value is 2 times the tail probability implied by the t statistic
 coefficients
 ```
