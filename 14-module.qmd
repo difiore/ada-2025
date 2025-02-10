@@ -95,9 +95,9 @@ We could also do this...
 And we can also make our own generic `CI()` function based on assuming that our the sampling distribution for our estimate of the mean is normal:
 
 ```{r}
-CI = function(x, level = 0.95) {
+CI <- function(x, level = 0.95) {
   alpha <- 1 - level
-  ci = mean(x) + c(-1, 1) * qnorm(1 - (alpha / 2)) * sqrt(var(x) / length(x))
+  ci <- mean(x) + c(-1, 1) * qnorm(1 - (alpha / 2)) * sqrt(var(x) / length(x))
   return(ci)
 }
 
@@ -186,7 +186,7 @@ n <- 10
 (se <- sqrt(lambda/n))
 # the estimated SE, here, based on an estimate of the population variance
 # if available
-par(mfrow=c(1,3))
+par(mfrow=c(1, 3))
 hist(
   rpois(10000, lambda = lambda),
   probability = TRUE,
@@ -199,7 +199,6 @@ for (i in 1:1000){
 }
 hist(
   x,
-  # the breaks argument, as noted here, makes 20 bins
   breaks = seq(
     from = min(x),
     to = max(x),
@@ -223,16 +222,16 @@ lambda <- 14
 n <- 1000
 (se <- sqrt(lambda/n))
 # the estimated SE, here, based on an estimate of the population variance if available
-par(mfrow=c(1,3))
+par(mfrow=c(1, 3))
 hist(
-  rpois(10000, lambda = lambda) ,
+  rpois(10000, lambda = lambda),
   probability = TRUE,
   xlab = "x",
   main = "Original Distribution"
 )
-x <- vector(length=1000)
+x <- vector(length = 1000)
 for (i in 1:1000){
-	x[[i]] <- mean(rpois(n=n, lambda=lambda))
+	x[[i]] <- mean(rpois(n = n, lambda = lambda))
 }
 hist(
   x,
@@ -257,7 +256,7 @@ We can convert the sampling distribution to a standard normal by subtracting off
 
 ```{r}
 #| fig-height: 3
-par(mfrow=c(1,2))
+par(mfrow=c(1, 2))
 hist(
   x,
   breaks = seq(

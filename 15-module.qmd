@@ -98,7 +98,7 @@ First, we read in our data:
 
 ```{r}
 #| message: false
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/vervet-weights.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/vervet-weights.csv"
 d <- read_csv(f, col_names=TRUE)
 head(d)
 mean(d$weight)
@@ -327,7 +327,7 @@ First, read in the data:
 
 ```{r}
 #| message: false
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/woolly-weights.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/woolly-weights.csv"
 d <- read_csv(f, col_names=TRUE)
 head(d)
 ```
@@ -440,7 +440,7 @@ knitr::include_graphics("img/bwcolobus.jpg")
 
 ```{r}
 #| message: false
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/colobus-weights.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/colobus-weights.csv"
 d <- read_csv(f, col_names=TRUE)
 head(d)
 ```
@@ -605,7 +605,7 @@ Let's play with a sample... test scores of individuals taking a certain statisti
 
 ```{r}
 #| message: false
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/test_scores.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/test_scores.csv"
 d <- read_csv(f, col_names = TRUE)
 head(d)
 x <- d$`Score after`-d$`Score before`

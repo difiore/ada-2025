@@ -25,7 +25,7 @@ library(manipulate)
 So far, we have looked principally at single variables, but one of the main things we are often interested in is the relationships among two or more variables. **Regression modeling** is one of the most powerful and important set of tools for looking at relationships among more than one variable. With our zombie apocalypse survivors dataset, we started to do this using simple bivariate scatterplots... let's look at those data again and do a simple bivariate plot of height by weight.
 
 ```{r}
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/zombies.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 d <- read_csv(f, col_names = TRUE)
 head(d)
 plot(data = d, height ~ weight)
@@ -424,20 +424,20 @@ original.slope <- lm(data = d, height ~ weight) %>%
     lower = estimate - std.error * critical_value,
     upper = estimate + std.error * critical_value
   ) %>%
-  filter(term=="weight")
+  filter(term == "weight")
 original.slope # show model results for slope of weight
 ```
 
 We can generate a null distribution for our slope estimates via permutation using {infer} package functions... essentially, each permutation involves randomly shuffling values of the response variable under the null hypothesis such that they are independent of the explanatory variable (and vice versa).
 
 ```{r}
-permuted.slope <- d %>%
+permuted.slope <- d |>
   # specify model
-  specify(height ~ weight) %>%
+  specify(height ~ weight) |>
   # use a null hypothesis of independence
-  hypothesize(null = "independence") %>%
+  hypothesize(null = "independence") |>
   # generate permutation replicates
-  generate(reps = 1000, type = "permute") %>%
+  generate(reps = 1000, type = "permute") |>
   # calculate the slope statistic
   calculate(stat = "slope")
 
@@ -445,11 +445,12 @@ head(permuted.slope) # slopes from first few permutation replicates
 
 # create confidence intervals
 
-permuted.slope.summary <- permuted.slope %>%
+permuted.slope.summary <- permuted.slope |>
   # summarize the mean, t distribution based CI, and quantile-based CI
   summarize(
     # mean of stat
-    estimate = mean(stat), # should be very close to ZERO
+    estimate = mean(stat),
+    # should be very close to ZERO
     # std error of stat
     std.error = sd(stat),
     # calculate the CI based on the SE and t distribution
@@ -556,7 +557,7 @@ We can also easily visualize the sampling distribution (and CI) based on bootstr
 
 ```{r}
 # plot the sampling distribution for based on bootstrapping plus a CI
-hist(boot.slope$stat, main="Histogram of Bootstrapped\nSlope Values",
+hist(boot.slope$stat, main = "Histogram of Bootstrapped\nSlope Values",
   xlab = "Slope Coefficient")
 abline(v = CI.percentile)
 
@@ -719,13 +720,14 @@ Construct a linear model using `lm()` for the regression of zombie apocalypse su
 alpha <- 0.05
 v <- seq(from = 10, to = 30, by = 1)
 m <- lm(data = d, height ~ age)
-sd <- glance(m) %>% pull(sigma)
-df <- augment(m, newdata=data.frame(age=v), se_fit=TRUE) %>%
+sd <- glance(m) |>
+  pull(sigma)
+df <- augment(m, newdata = data.frame(age = v), se_fit = TRUE) |>
   # add CI
   mutate(
     c.lower = .fitted - qt(1-alpha/2, nrow(d) - 2) * .se.fit,
     c.upper = .fitted + qt(1-alpha/2, nrow(d) -2) * .se.fit
-  ) %>%
+  ) |>
   # add PI
   mutate(se.prediction = sqrt(sd ^ 2 + .se.fit ^ 2),
     p.lower = .fitted - qt(1-alpha/2, nrow(d) - 2) * se.prediction,
@@ -739,11 +741,21 @@ df <- augment(m, newdata=data.frame(age=v), se_fit=TRUE) %>%
 #    interval = "prediction", 1 - alpha)
 
 plot(data=d, height ~ age)
-lines(x=df$age,y=df$.fitted, col="black")
-lines(x=df$age,y=df$c.lower, col="blue")
-lines(x=df$age,y=df$c.upper, col="blue")
-lines(x=df$age,y=df$p.lower, col="red")
-lines(x=df$age,y=df$p.upper, col="red")
+lines(x = df$age,
+      y = df$.fitted,
+      col = "black")
+lines(x = df$age,
+      y = df$c.lower,
+      col = "blue")
+lines(x = df$age,
+      y = df$c.upper,
+      col = "blue")
+lines(x = df$age,
+      y = df$p.lower,
+      col = "red")
+lines(x = df$age,
+      y = df$p.upper,
+      col = "red")
 
 # or
 g1 <- ggplot(data = d, aes(x = age, y = height))

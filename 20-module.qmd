@@ -25,7 +25,7 @@ library(effectsize)
 Thus far we have used simple linear regression models involving continuous explanatory variables, but we can also use a discrete or categorical explanatory variable, made up of 2 or more groups that are coded as "factors" (i.e., we use integer values from 1 to $k$ discrete groups as dummy values for our categorical variables). Let's load in our zombie apocalpyse survivor data again, but this time after doing so, we will convert **gender** and **major** to factors using the function `as.factor()`. [We could also do this by reading the data in using `read.csv()`, which has as a default argument `stringsAsFactors=TRUE`.] Then look at the `class()` and `summary()` of the variable **gender**.
 
 ```{r}
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/zombies.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 z <- read_csv(f, col_names = TRUE)
 z$gender <- factor(z$gender) # can also use `as.factor()`
 z$major <- factor(z$major) # can also use `as.factor()`
@@ -263,7 +263,7 @@ detach(package:coin)
 Load in the "gibbon-femurs.csv" dataset, which contains the lengths, in centimeters, of the femurs of 400 juvenile, subadult, and adult individuals gibbons. Use both ANOVA and simple linear regression to examine the relationship between age and femur length.
 
 ```{r}
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/gibbon-femurs.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/gibbon-femurs.csv"
 d <- read_csv(f, col_names=TRUE)
 d$age <- factor(d$age, levels = c("inf", "juv", "subadult", "adult"))
 # converts age to a factor and order the age levels so that

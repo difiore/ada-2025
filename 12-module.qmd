@@ -253,11 +253,11 @@ Since one of the goals of statistics is to estimate and make inferences about po
 
 To explore how we do this, let's start with a population where we KNOW every data point. We will use that first to describe our population empirically. We will then draw samples out of that population and see how well that the samples we draw can be used to describe the population.
 
-Load the "IMDB-movies.csv" dataset from the **ada-2024-datasets** repository on ***GitHub*** as a "tibble", **d**. This dataset contains data on close to 29,000 movies scraped in early 2020 from the online [Internet Movie Database](https://www.imdb.com/interfaces/), including their year of title, director, year of production, running time, average viewer rating on a 10 point scale, and the number of votes that rating is based on. [Note that in collating this data, I excluded movies with fewer than 1000 votes.] Once we load the data, we will filter the dataset to keep only movies with a `startYear` from 1999 to 2019, which should leave us with 17,628 movies. We are going to use this dataset as our POPULATION.
+Load the "IMDB-movies.csv" dataset from the **ada-datasets** repository on ***GitHub*** as a "tibble", **d**. This dataset contains data on close to 29,000 movies scraped in early 2020 from the online [Internet Movie Database](https://www.imdb.com/interfaces/), including their year of title, director, year of production, running time, average viewer rating on a 10 point scale, and the number of votes that rating is based on. [Note that in collating this data, I excluded movies with fewer than 1000 votes.] Once we load the data, we will filter the dataset to keep only movies with a `startYear` from 1999 to 2019, which should leave us with 17,628 movies. We are going to use this dataset as our POPULATION.
 
 ```{r}
 #| message: false
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/IMDB-movies.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/IMDB-movies.csv"
 d <- read_csv(f, col_names = TRUE)
 d <- filter(d, startYear %in% 1999:2019) # the %in% operator is VERY useful!
 head(d)

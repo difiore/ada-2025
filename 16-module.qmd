@@ -36,7 +36,7 @@ Recall that in one of the tests we conducted in [**Module 15**](#module-15) was 
 
 ```{r}
 #| message: false
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/vervet-weights.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/vervet-weights.csv"
 d <- read_csv(f, col_names=TRUE)
 x <- d$weight # current weights
 n <- length(x)
@@ -186,7 +186,7 @@ Another of the tests we conducted in [**Module 15**](#module-15) was to evaluate
 
 ```{r}
 #| message: false
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/colobus-weights.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/colobus-weights.csv"
 d <- read_csv(f, col_names=TRUE)
 head(d)
 x <- d[d$sex=="female",]$weight
@@ -496,7 +496,7 @@ We first read in our data and load the {infer} package:
 
 ```{r}
 #| message: false
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/colobus-weights.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/colobus-weights.csv"
 d <- read_csv(f, col_names=TRUE)
 library(infer)
 ```
@@ -567,23 +567,25 @@ As an additional example of this approach, let's consider the vervet trapping da
 
 ```{r}
 #| message: false
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/vervet-weights.csv"
-d <- read_csv(f, col_names=TRUE)
-null_distribution <- d %>%
-  specify(response = weight) %>% # here we specify just a response not a formula
-  hypothesize(null="point", mu = 5) %>% # here we are comparing a sample to an expectation
-  generate(reps = 1000, type = "bootstrap") %>%
-  # Note that here type="bootstrap"! This is actually doing something a little different than we did above... it is sampling *with replacement* from our set of weights  rather than randomly permuting the sign of the difference of each value from the mean! (Here, the number of observations sampled is equal to the original number of observations)
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/vervet-weights.csv"
+d <- read_csv(f, col_names = TRUE)
+null_distribution <- d |>
+  specify(response = weight) |>
+  # here we specify just a response, not a formula
+  hypothesize(null = "point", mu = 5) |>
+  # here we are comparing a sample to an expectation
+  generate(reps = 1000, type = "bootstrap") |>
   calculate(stat = "mean")
+  # Note that here type="bootstrap"! This is actually doing something a little different than we did above... it is sampling *with replacement* from our set of weights  rather than randomly permuting the sign of the difference of each value from the mean! (Here, the number of observations sampled is equal to the original number of observations)
 
-observed_stat <- d %>%
-  specify(response = weight) %>%
+observed_stat <- d |>
+  specify(response = weight) |>
   calculate(stat="mean")
 
 visualize(null_distribution, bins = 20) +
   shade_p_value(obs_stat = observed_stat, direction = "both")
 
-get_p_value(null_distribution,observed_stat, direction = "both")
+get_p_value(null_distribution, observed_stat, direction = "both")
 ```
 
 Note that this p value is pretty similar to that returned by `jmuOutlier::perm.test()` and by our custom `perm1samp()` function, though as noted above, those use slightly different permutation processes.

@@ -38,17 +38,17 @@ book:
       - 09-module.qmd
       - 10-module.qmd
       - 11-module.qmd
-    # - part: "Part II - Statistics and Inference"
-    #   chapters:
-    #   - 12-module.qmd
-    #   - 13-module.qmd
-    #   - 14-module.qmd
-    #   - 15-module.qmd
-    #   - 16-module.qmd
-    #   - 17-module.qmd
-    #   - 18-module.qmd
-    #   - 19-module.qmd
-    #   - 20-module.qmd
+    - part: "Part II - Statistics and Inference"
+      chapters:
+      - 12-module.qmd
+      - 13-module.qmd
+      - 14-module.qmd
+      - 15-module.qmd
+      - 16-module.qmd
+      - 17-module.qmd
+      - 18-module.qmd
+      - 19-module.qmd
+      - 20-module.qmd
     #   - 21-module.qmd
     #   - 22-module.qmd
     #   - 23-module.qmd
