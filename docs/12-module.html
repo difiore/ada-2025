@@ -637,7 +637,7 @@ window.Quarto = {
 </details>
 </div>
 </div>
-<p>A shortcut to calculate the <strong>sum of squares</strong> for a vector, <strong>x</strong>, that does not actually require calculating <code>mean(x)</code> is the <code>(sum of the squared values in the dataset) minus the (square of the summed values) / n</code>, or…</p>
+<p>A shortcut to calculate the <strong>sum of squares</strong> for a vector, <strong>x</strong>, that does not actually require calculating <code>mean(x)</code> is the <em>(sum of the squared values in the dataset) minus the (square of the summed values) / n</em>, or…</p>
 <p><span class="math display">\[\sum\limits_{i=1}^{k}(x^2) - \frac{(\sum\limits_{i=1}^{k} x)^2}{n}\]</span></p>
 <p>Thus, another formula for the <strong>sum of squares</strong> is the following:</p>
 <div class="cell" data-layout-align="center">
@@ -774,14 +774,14 @@ window.Quarto = {
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pop_sd</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 1.990493</code></pre>
+<pre><code>## [1] 1.976435</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sample_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sqrt</span>(<span class="fu">sample_var</span>(x))</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_sd</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 1.991489</code></pre>
+<pre><code>## [1] 1.977424</code></pre>
 </div>
 </div>
 <p>The <code>sdpop()</code> function from the {radiant} package can be used to calculate the standard deviation for a completely sampled population.</p>
@@ -789,7 +789,7 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(radiant)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sdpop</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 1.990493</code></pre>
+<pre><code>## [1] 1.976435</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>radiant)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -797,7 +797,7 @@ window.Quarto = {
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 1.991489</code></pre>
+<pre><code>## [1] 1.977424</code></pre>
 </div>
 </div>
 </section>
@@ -1799,7 +1799,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb78-108"><a href="#cb78-108" aria-hidden="true" tabindex="-1"></a><span class="fu">sum_of_squares</span>(x)</span>
 <span id="cb78-109"><a href="#cb78-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-110"><a href="#cb78-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-111"><a href="#cb78-111" aria-hidden="true" tabindex="-1"></a>A shortcut to calculate the **sum of squares** for a vector, **x**, that does not actually require calculating <span class="in">`mean(x)`</span> is the <span class="in">`(sum of the squared values in the dataset) minus the (square of the summed values) / n`</span>, or...</span>
+<span id="cb78-111"><a href="#cb78-111" aria-hidden="true" tabindex="-1"></a>A shortcut to calculate the **sum of squares** for a vector, **x**, that does not actually require calculating <span class="in">`mean(x)`</span> is the *(sum of the squared values in the dataset) minus the (square of the summed values) / n*, or...</span>
 <span id="cb78-112"><a href="#cb78-112" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb78-113"><a href="#cb78-113" aria-hidden="true" tabindex="-1"></a>$$\sum\limits_{i=1}^{k}(x^2) - \frac{(\sum\limits_{i=1}^{k} x)^2}{n}$$</span>
 <span id="cb78-114"><a href="#cb78-114" aria-hidden="true" tabindex="-1"></a></span>
@@ -1870,417 +1870,419 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb78-189"><a href="#cb78-189" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb78-190"><a href="#cb78-190" aria-hidden="true" tabindex="-1"></a>In the following code block, we first set up a plot window to hold the results of our simulations and plot a line for the known population variance (i.e., the square of $\sigma$, the standard deviation). We then use nested <span class="in">`for`</span> loops to iterate the process of drawing samples of a specific size, $n$, from the specified distribution. We do this for samples of size $n$ = 5, 10, 15... up to 100, and we draw out 50 replicates of each sample size. Recall from <span class="co">[</span><span class="ot">**Module 11**</span><span class="co">](#module-11)</span> that the structure for <span class="in">`for`</span> loops is:</span>
 <span id="cb78-191"><a href="#cb78-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-192"><a href="#cb78-192" aria-hidden="true" tabindex="-1"></a><span class="in">    for (&lt;index&gt; in &lt;range&gt;){</span></span>
-<span id="cb78-193"><a href="#cb78-193" aria-hidden="true" tabindex="-1"></a><span class="in">      &lt;code to execute&gt;</span></span>
-<span id="cb78-194"><a href="#cb78-194" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb78-195"><a href="#cb78-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-198"><a href="#cb78-198" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-199"><a href="#cb78-199" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
-<span id="cb78-200"><a href="#cb78-200" aria-hidden="true" tabindex="-1"></a><span class="co"># set up plot window</span></span>
-<span id="cb78-201"><a href="#cb78-201" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),</span>
-<span id="cb78-202"><a href="#cb78-202" aria-hidden="true" tabindex="-1"></a>     <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15</span>),</span>
-<span id="cb78-203"><a href="#cb78-203" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"n"</span>,</span>
-<span id="cb78-204"><a href="#cb78-204" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Sample Size"</span>,</span>
-<span id="cb78-205"><a href="#cb78-205" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Variance"</span>)</span>
-<span id="cb78-206"><a href="#cb78-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-207"><a href="#cb78-207" aria-hidden="true" tabindex="-1"></a><span class="co"># add the population variance (= square of population standard deviation) to the plot</span></span>
-<span id="cb78-208"><a href="#cb78-208" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(</span>
-<span id="cb78-209"><a href="#cb78-209" aria-hidden="true" tabindex="-1"></a>  <span class="at">h =</span> <span class="dv">4</span>,</span>
-<span id="cb78-210"><a href="#cb78-210" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"red"</span>,</span>
-<span id="cb78-211"><a href="#cb78-211" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span>,</span>
-<span id="cb78-212"><a href="#cb78-212" aria-hidden="true" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">2</span></span>
-<span id="cb78-213"><a href="#cb78-213" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb78-214"><a href="#cb78-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-215"><a href="#cb78-215" aria-hidden="true" tabindex="-1"></a><span class="co"># run simulations and add results to plot</span></span>
-<span id="cb78-216"><a href="#cb78-216" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb78-217"><a href="#cb78-217" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb78-218"><a href="#cb78-218" aria-hidden="true" tabindex="-1"></a><span class="co"># samples of 5, 10, 15...</span></span>
-<span id="cb78-219"><a href="#cb78-219" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">5</span>, <span class="at">to =</span> <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">5</span>)) {</span>
-<span id="cb78-220"><a href="#cb78-220" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set up a variable, reps, to hold the set of variances calculated for each replicate</span></span>
-<span id="cb78-221"><a href="#cb78-221" aria-hidden="true" tabindex="-1"></a>  reps <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"double"</span>, <span class="dv">50</span>)</span>
-<span id="cb78-222"><a href="#cb78-222" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 50 replicates</span></span>
-<span id="cb78-223"><a href="#cb78-223" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>) {</span>
-<span id="cb78-224"><a href="#cb78-224" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
-<span id="cb78-225"><a href="#cb78-225" aria-hidden="true" tabindex="-1"></a>    <span class="fu">points</span>(n, <span class="fu">var</span>(x))</span>
-<span id="cb78-226"><a href="#cb78-226" aria-hidden="true" tabindex="-1"></a>    reps[[i]] <span class="ot">=</span> <span class="fu">var</span>(x)</span>
-<span id="cb78-227"><a href="#cb78-227" aria-hidden="true" tabindex="-1"></a>    <span class="co"># this is a common programming motif in R and is more memory and time efficient than another common motif, `reps &lt;- c(reps, var(x))`</span></span>
-<span id="cb78-228"><a href="#cb78-228" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb78-229"><a href="#cb78-229" aria-hidden="true" tabindex="-1"></a>  <span class="fu">points</span>(n,</span>
-<span id="cb78-230"><a href="#cb78-230" aria-hidden="true" tabindex="-1"></a>         <span class="fu">mean</span>(reps),</span>
-<span id="cb78-231"><a href="#cb78-231" aria-hidden="true" tabindex="-1"></a>         <span class="at">bg =</span> <span class="st">"red"</span>,</span>
-<span id="cb78-232"><a href="#cb78-232" aria-hidden="true" tabindex="-1"></a>         <span class="at">pch =</span> <span class="dv">23</span>,</span>
-<span id="cb78-233"><a href="#cb78-233" aria-hidden="true" tabindex="-1"></a>         <span class="at">cex =</span> <span class="dv">2</span>) <span class="co"># plots average</span></span>
-<span id="cb78-234"><a href="#cb78-234" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb78-235"><a href="#cb78-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-236"><a href="#cb78-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-237"><a href="#cb78-237" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How does *sample variance* compare to *population variance*? What happens to the sample variances as sample size increases?</span>
+<span id="cb78-192"><a href="#cb78-192" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb78-193"><a href="#cb78-193" aria-hidden="true" tabindex="-1"></a><span class="in">for (&lt;index&gt; in &lt;range&gt;){</span></span>
+<span id="cb78-194"><a href="#cb78-194" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;code to execute&gt;</span></span>
+<span id="cb78-195"><a href="#cb78-195" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb78-196"><a href="#cb78-196" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb78-197"><a href="#cb78-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-200"><a href="#cb78-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-201"><a href="#cb78-201" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb78-202"><a href="#cb78-202" aria-hidden="true" tabindex="-1"></a><span class="co"># set up plot window</span></span>
+<span id="cb78-203"><a href="#cb78-203" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),</span>
+<span id="cb78-204"><a href="#cb78-204" aria-hidden="true" tabindex="-1"></a>     <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15</span>),</span>
+<span id="cb78-205"><a href="#cb78-205" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"n"</span>,</span>
+<span id="cb78-206"><a href="#cb78-206" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Sample Size"</span>,</span>
+<span id="cb78-207"><a href="#cb78-207" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Variance"</span>)</span>
+<span id="cb78-208"><a href="#cb78-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-209"><a href="#cb78-209" aria-hidden="true" tabindex="-1"></a><span class="co"># add the population variance (= square of population standard deviation) to the plot</span></span>
+<span id="cb78-210"><a href="#cb78-210" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb78-211"><a href="#cb78-211" aria-hidden="true" tabindex="-1"></a>  <span class="at">h =</span> <span class="dv">4</span>,</span>
+<span id="cb78-212"><a href="#cb78-212" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">"red"</span>,</span>
+<span id="cb78-213"><a href="#cb78-213" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb78-214"><a href="#cb78-214" aria-hidden="true" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">2</span></span>
+<span id="cb78-215"><a href="#cb78-215" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb78-216"><a href="#cb78-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-217"><a href="#cb78-217" aria-hidden="true" tabindex="-1"></a><span class="co"># run simulations and add results to plot</span></span>
+<span id="cb78-218"><a href="#cb78-218" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb78-219"><a href="#cb78-219" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb78-220"><a href="#cb78-220" aria-hidden="true" tabindex="-1"></a><span class="co"># samples of 5, 10, 15...</span></span>
+<span id="cb78-221"><a href="#cb78-221" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">5</span>, <span class="at">to =</span> <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">5</span>)) {</span>
+<span id="cb78-222"><a href="#cb78-222" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set up a variable, reps, to hold the set of variances calculated for each replicate</span></span>
+<span id="cb78-223"><a href="#cb78-223" aria-hidden="true" tabindex="-1"></a>  reps <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"double"</span>, <span class="dv">50</span>)</span>
+<span id="cb78-224"><a href="#cb78-224" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 50 replicates</span></span>
+<span id="cb78-225"><a href="#cb78-225" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>) {</span>
+<span id="cb78-226"><a href="#cb78-226" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
+<span id="cb78-227"><a href="#cb78-227" aria-hidden="true" tabindex="-1"></a>    <span class="fu">points</span>(n, <span class="fu">var</span>(x))</span>
+<span id="cb78-228"><a href="#cb78-228" aria-hidden="true" tabindex="-1"></a>    reps[[i]] <span class="ot">=</span> <span class="fu">var</span>(x)</span>
+<span id="cb78-229"><a href="#cb78-229" aria-hidden="true" tabindex="-1"></a>    <span class="co"># this is a common programming motif in R and is more memory and time efficient than another common motif, `reps &lt;- c(reps, var(x))`</span></span>
+<span id="cb78-230"><a href="#cb78-230" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb78-231"><a href="#cb78-231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">points</span>(n,</span>
+<span id="cb78-232"><a href="#cb78-232" aria-hidden="true" tabindex="-1"></a>         <span class="fu">mean</span>(reps),</span>
+<span id="cb78-233"><a href="#cb78-233" aria-hidden="true" tabindex="-1"></a>         <span class="at">bg =</span> <span class="st">"red"</span>,</span>
+<span id="cb78-234"><a href="#cb78-234" aria-hidden="true" tabindex="-1"></a>         <span class="at">pch =</span> <span class="dv">23</span>,</span>
+<span id="cb78-235"><a href="#cb78-235" aria-hidden="true" tabindex="-1"></a>         <span class="at">cex =</span> <span class="dv">2</span>) <span class="co"># plots average</span></span>
+<span id="cb78-236"><a href="#cb78-236" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb78-237"><a href="#cb78-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-238"><a href="#cb78-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-239"><a href="#cb78-239" aria-hidden="true" tabindex="-1"></a>Another measure of spread around a mean that we often see reported is the **standard deviation**. The standard deviation is simply the *square root of the variance* ($\sqrt{\sigma^2} = \sigma$). The advantage of using the standard deviation as a statistic or parameter is that the units of standard deviation are the same as the units of our original measurement (rather than being units squared, which are our units for variance).</span>
+<span id="cb78-239"><a href="#cb78-239" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How does *sample variance* compare to *population variance*? What happens to the sample variances as sample size increases?</span>
 <span id="cb78-240"><a href="#cb78-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-241"><a href="#cb78-241" aria-hidden="true" tabindex="-1"></a>In ***R*** we can write...</span>
+<span id="cb78-241"><a href="#cb78-241" aria-hidden="true" tabindex="-1"></a>Another measure of spread around a mean that we often see reported is the **standard deviation**. The standard deviation is simply the *square root of the variance* ($\sqrt{\sigma^2} = \sigma$). The advantage of using the standard deviation as a statistic or parameter is that the units of standard deviation are the same as the units of our original measurement (rather than being units squared, which are our units for variance).</span>
 <span id="cb78-242"><a href="#cb78-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-245"><a href="#cb78-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-246"><a href="#cb78-246" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
-<span id="cb78-247"><a href="#cb78-247" aria-hidden="true" tabindex="-1"></a>pop_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">sqrt</span>(<span class="fu">pop_var</span>(x))}</span>
-<span id="cb78-248"><a href="#cb78-248" aria-hidden="true" tabindex="-1"></a><span class="fu">pop_sd</span>(x)</span>
-<span id="cb78-249"><a href="#cb78-249" aria-hidden="true" tabindex="-1"></a>sample_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">sqrt</span>(<span class="fu">sample_var</span>(x))}</span>
-<span id="cb78-250"><a href="#cb78-250" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_sd</span>(x)</span>
-<span id="cb78-251"><a href="#cb78-251" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-252"><a href="#cb78-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-253"><a href="#cb78-253" aria-hidden="true" tabindex="-1"></a>The <span class="in">`sdpop()`</span> function from the {radiant} package can be used to calculate the standard deviation for a completely sampled population.</span>
+<span id="cb78-243"><a href="#cb78-243" aria-hidden="true" tabindex="-1"></a>In ***R*** we can write...</span>
+<span id="cb78-244"><a href="#cb78-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-247"><a href="#cb78-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-248"><a href="#cb78-248" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb78-249"><a href="#cb78-249" aria-hidden="true" tabindex="-1"></a>pop_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">sqrt</span>(<span class="fu">pop_var</span>(x))}</span>
+<span id="cb78-250"><a href="#cb78-250" aria-hidden="true" tabindex="-1"></a><span class="fu">pop_sd</span>(x)</span>
+<span id="cb78-251"><a href="#cb78-251" aria-hidden="true" tabindex="-1"></a>sample_sd <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">sqrt</span>(<span class="fu">sample_var</span>(x))}</span>
+<span id="cb78-252"><a href="#cb78-252" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_sd</span>(x)</span>
+<span id="cb78-253"><a href="#cb78-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-254"><a href="#cb78-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-257"><a href="#cb78-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-258"><a href="#cb78-258" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb78-259"><a href="#cb78-259" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(radiant)</span>
-<span id="cb78-260"><a href="#cb78-260" aria-hidden="true" tabindex="-1"></a><span class="fu">sdpop</span>(x)</span>
-<span id="cb78-261"><a href="#cb78-261" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>radiant)</span>
-<span id="cb78-262"><a href="#cb78-262" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-263"><a href="#cb78-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-264"><a href="#cb78-264" aria-hidden="true" tabindex="-1"></a>The built-in ***R*** function <span class="in">`sd()`</span> can be used to calculate the standard deviation of a sample.</span>
+<span id="cb78-255"><a href="#cb78-255" aria-hidden="true" tabindex="-1"></a>The <span class="in">`sdpop()`</span> function from the {radiant} package can be used to calculate the standard deviation for a completely sampled population.</span>
+<span id="cb78-256"><a href="#cb78-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-259"><a href="#cb78-259" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-260"><a href="#cb78-260" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb78-261"><a href="#cb78-261" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(radiant)</span>
+<span id="cb78-262"><a href="#cb78-262" aria-hidden="true" tabindex="-1"></a><span class="fu">sdpop</span>(x)</span>
+<span id="cb78-263"><a href="#cb78-263" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>radiant)</span>
+<span id="cb78-264"><a href="#cb78-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-265"><a href="#cb78-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-268"><a href="#cb78-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-269"><a href="#cb78-269" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span>
-<span id="cb78-270"><a href="#cb78-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-271"><a href="#cb78-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-272"><a href="#cb78-272" aria-hidden="true" tabindex="-1"></a><span class="fu">## Using Measures of Spread</span></span>
+<span id="cb78-266"><a href="#cb78-266" aria-hidden="true" tabindex="-1"></a>The built-in ***R*** function <span class="in">`sd()`</span> can be used to calculate the standard deviation of a sample.</span>
+<span id="cb78-267"><a href="#cb78-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-270"><a href="#cb78-270" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-271"><a href="#cb78-271" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span>
+<span id="cb78-272"><a href="#cb78-272" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-273"><a href="#cb78-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-274"><a href="#cb78-274" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sampling Distributions {.unnumbered}</span></span>
+<span id="cb78-274"><a href="#cb78-274" aria-hidden="true" tabindex="-1"></a><span class="fu">## Using Measures of Spread</span></span>
 <span id="cb78-275"><a href="#cb78-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-276"><a href="#cb78-276" aria-hidden="true" tabindex="-1"></a>Since one of the goals of statistics is to estimate and make inferences about population-level parameters based on characteristics of a sample, it is important that we be able to judge and report just how reliable or unreliable our statistical estimates those population-level parameters are.</span>
+<span id="cb78-276"><a href="#cb78-276" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sampling Distributions {.unnumbered}</span></span>
 <span id="cb78-277"><a href="#cb78-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-278"><a href="#cb78-278" aria-hidden="true" tabindex="-1"></a>To explore how we do this, let's start with a population where we KNOW every data point. We will use that first to describe our population empirically. We will then draw samples out of that population and see how well that the samples we draw can be used to describe the population.</span>
+<span id="cb78-278"><a href="#cb78-278" aria-hidden="true" tabindex="-1"></a>Since one of the goals of statistics is to estimate and make inferences about population-level parameters based on characteristics of a sample, it is important that we be able to judge and report just how reliable or unreliable our statistical estimates those population-level parameters are.</span>
 <span id="cb78-279"><a href="#cb78-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-280"><a href="#cb78-280" aria-hidden="true" tabindex="-1"></a>Load the "IMDB-movies.csv" dataset from the **ada-datasets** repository on ***GitHub*** as a "tibble", **d**. This dataset contains data on close to 29,000 movies scraped in early 2020 from the online <span class="co">[</span><span class="ot">Internet Movie Database</span><span class="co">](https://www.imdb.com/interfaces/)</span>, including their year of title, director, year of production, running time, average viewer rating on a 10 point scale, and the number of votes that rating is based on. <span class="co">[</span><span class="ot">Note that in collating this data, I excluded movies with fewer than 1000 votes.</span><span class="co">]</span> Once we load the data, we will filter the dataset to keep only movies with a <span class="in">`startYear`</span> from 1999 to 2019, which should leave us with 17,628 movies. We are going to use this dataset as our POPULATION.</span>
+<span id="cb78-280"><a href="#cb78-280" aria-hidden="true" tabindex="-1"></a>To explore how we do this, let's start with a population where we KNOW every data point. We will use that first to describe our population empirically. We will then draw samples out of that population and see how well that the samples we draw can be used to describe the population.</span>
 <span id="cb78-281"><a href="#cb78-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-284"><a href="#cb78-284" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-285"><a href="#cb78-285" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb78-286"><a href="#cb78-286" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/difiore/ada-datasets/main/IMDB-movies.csv"</span></span>
-<span id="cb78-287"><a href="#cb78-287" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(f, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb78-288"><a href="#cb78-288" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, startYear <span class="sc">%in%</span> <span class="dv">1999</span><span class="sc">:</span><span class="dv">2019</span>) <span class="co"># the %in% operator is VERY useful!</span></span>
-<span id="cb78-289"><a href="#cb78-289" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)</span>
-<span id="cb78-290"><a href="#cb78-290" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-291"><a href="#cb78-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-292"><a href="#cb78-292" aria-hidden="true" tabindex="-1"></a>First, we will do some exploratory data analysis on this dataset using, in part, some functions from the {mosaic} package. {mosaic} makes some kinds of quick exploratory data analysis very fast and easy to do (though we already know how to do lots of what we can do with {mosaic} in other ways)!</span>
+<span id="cb78-282"><a href="#cb78-282" aria-hidden="true" tabindex="-1"></a>Load the "IMDB-movies.csv" dataset from the **ada-datasets** repository on ***GitHub*** as a "tibble", **d**. This dataset contains data on close to 29,000 movies scraped in early 2020 from the online <span class="co">[</span><span class="ot">Internet Movie Database</span><span class="co">](https://www.imdb.com/interfaces/)</span>, including their year of title, director, year of production, running time, average viewer rating on a 10 point scale, and the number of votes that rating is based on. <span class="co">[</span><span class="ot">Note that in collating this data, I excluded movies with fewer than 1000 votes.</span><span class="co">]</span> Once we load the data, we will filter the dataset to keep only movies with a <span class="in">`startYear`</span> from 1999 to 2019, which should leave us with 17,628 movies. We are going to use this dataset as our POPULATION.</span>
+<span id="cb78-283"><a href="#cb78-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-286"><a href="#cb78-286" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-287"><a href="#cb78-287" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb78-288"><a href="#cb78-288" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/difiore/ada-datasets/main/IMDB-movies.csv"</span></span>
+<span id="cb78-289"><a href="#cb78-289" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(f, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb78-290"><a href="#cb78-290" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, startYear <span class="sc">%in%</span> <span class="dv">1999</span><span class="sc">:</span><span class="dv">2019</span>) <span class="co"># the %in% operator is VERY useful!</span></span>
+<span id="cb78-291"><a href="#cb78-291" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)</span>
+<span id="cb78-292"><a href="#cb78-292" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-293"><a href="#cb78-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-294"><a href="#cb78-294" aria-hidden="true" tabindex="-1"></a>Functions in the {mosaic} package have a <span class="in">`data=`</span> argument as well as a <span class="in">`~`</span> argument that specifies which variable of interest from the <span class="in">`data=`</span> argument the function is to be applied to.</span>
+<span id="cb78-294"><a href="#cb78-294" aria-hidden="true" tabindex="-1"></a>First, we will do some exploratory data analysis on this dataset using, in part, some functions from the {mosaic} package. {mosaic} makes some kinds of quick exploratory data analysis very fast and easy to do (though we already know how to do lots of what we can do with {mosaic} in other ways)!</span>
 <span id="cb78-295"><a href="#cb78-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-298"><a href="#cb78-298" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-299"><a href="#cb78-299" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb78-300"><a href="#cb78-300" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
-<span id="cb78-301"><a href="#cb78-301" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(averageRating <span class="sc">~</span> startYear, <span class="at">data=</span>d, <span class="at">xlab=</span><span class="st">"Year"</span>, <span class="at">ylab=</span><span class="st">"Average Rating"</span>)</span>
-<span id="cb78-302"><a href="#cb78-302" aria-hidden="true" tabindex="-1"></a><span class="co"># the `histogram()` function from {mosaic} plots neat "augmented" histograms</span></span>
-<span id="cb78-303"><a href="#cb78-303" aria-hidden="true" tabindex="-1"></a><span class="fu">histogram</span>(<span class="sc">~</span> averageRating, <span class="at">data=</span>d, <span class="at">xlab=</span><span class="st">"Average Rating"</span>)</span>
-<span id="cb78-304"><a href="#cb78-304" aria-hidden="true" tabindex="-1"></a><span class="co"># the `favstats()` function from {mosiac} calculates a variant of the 5-number summary</span></span>
-<span id="cb78-305"><a href="#cb78-305" aria-hidden="true" tabindex="-1"></a>(pop_stats <span class="ot">&lt;-</span> <span class="fu">favstats</span>(<span class="sc">~</span> averageRating, <span class="at">data =</span> d))</span>
-<span id="cb78-306"><a href="#cb78-306" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-307"><a href="#cb78-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-308"><a href="#cb78-308" aria-hidden="true" tabindex="-1"></a>Now, let's draw a single SAMPLE of 100 movies randomly from this population and visualize its average viewer rating. After setting the random number seed (analogous to setting what position we start at in a traditional table of random numbers), run the subsequent lines of code several times and look at how the results differ...</span>
+<span id="cb78-296"><a href="#cb78-296" aria-hidden="true" tabindex="-1"></a>Functions in the {mosaic} package have a <span class="in">`data=`</span> argument as well as a <span class="in">`~`</span> argument that specifies which variable of interest from the <span class="in">`data=`</span> argument the function is to be applied to.</span>
+<span id="cb78-297"><a href="#cb78-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-300"><a href="#cb78-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-301"><a href="#cb78-301" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb78-302"><a href="#cb78-302" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb78-303"><a href="#cb78-303" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(averageRating <span class="sc">~</span> startYear, <span class="at">data=</span>d, <span class="at">xlab=</span><span class="st">"Year"</span>, <span class="at">ylab=</span><span class="st">"Average Rating"</span>)</span>
+<span id="cb78-304"><a href="#cb78-304" aria-hidden="true" tabindex="-1"></a><span class="co"># the `histogram()` function from {mosaic} plots neat "augmented" histograms</span></span>
+<span id="cb78-305"><a href="#cb78-305" aria-hidden="true" tabindex="-1"></a><span class="fu">histogram</span>(<span class="sc">~</span> averageRating, <span class="at">data=</span>d, <span class="at">xlab=</span><span class="st">"Average Rating"</span>)</span>
+<span id="cb78-306"><a href="#cb78-306" aria-hidden="true" tabindex="-1"></a><span class="co"># the `favstats()` function from {mosiac} calculates a variant of the 5-number summary</span></span>
+<span id="cb78-307"><a href="#cb78-307" aria-hidden="true" tabindex="-1"></a>(pop_stats <span class="ot">&lt;-</span> <span class="fu">favstats</span>(<span class="sc">~</span> averageRating, <span class="at">data =</span> d))</span>
+<span id="cb78-308"><a href="#cb78-308" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-309"><a href="#cb78-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-310"><a href="#cb78-310" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** We use </span><span class="in">`set.seed()`</span><span class="at"> here so that each time this function is run, it returns the same sequence of random numbers until the seed is reset.</span></span>
+<span id="cb78-310"><a href="#cb78-310" aria-hidden="true" tabindex="-1"></a>Now, let's draw a single SAMPLE of 100 movies randomly from this population and visualize its average viewer rating. After setting the random number seed (analogous to setting what position we start at in a traditional table of random numbers), run the subsequent lines of code several times and look at how the results differ...</span>
 <span id="cb78-311"><a href="#cb78-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-314"><a href="#cb78-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-315"><a href="#cb78-315" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb78-316"><a href="#cb78-316" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-317"><a href="#cb78-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-320"><a href="#cb78-320" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-321"><a href="#cb78-321" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb78-322"><a href="#cb78-322" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
-<span id="cb78-323"><a href="#cb78-323" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb78-324"><a href="#cb78-324" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(d, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">FALSE</span>)</span>
-<span id="cb78-325"><a href="#cb78-325" aria-hidden="true" tabindex="-1"></a><span class="co"># `sample_n()` from {dplyr} selects rows at random from a data frame</span></span>
-<span id="cb78-326"><a href="#cb78-326" aria-hidden="true" tabindex="-1"></a><span class="co"># it's another SUPER useful function</span></span>
-<span id="cb78-327"><a href="#cb78-327" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(s<span class="sc">$</span>startYear)</span>
-<span id="cb78-328"><a href="#cb78-328" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(averageRating <span class="sc">~</span> startYear, <span class="at">data=</span>s, <span class="at">xlab=</span><span class="st">"Year"</span>, <span class="at">ylab=</span><span class="st">"Average Rating"</span>)</span>
-<span id="cb78-329"><a href="#cb78-329" aria-hidden="true" tabindex="-1"></a><span class="fu">histogram</span>(<span class="sc">~</span> averageRating, <span class="at">data=</span>s, <span class="at">xlab=</span><span class="st">"Average Rating"</span>)</span>
-<span id="cb78-330"><a href="#cb78-330" aria-hidden="true" tabindex="-1"></a>(samp_stats <span class="ot">&lt;-</span> <span class="fu">favstats</span>(<span class="sc">~</span> averageRating, <span class="at">data =</span> s))</span>
-<span id="cb78-331"><a href="#cb78-331" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-332"><a href="#cb78-332" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-333"><a href="#cb78-333" aria-hidden="true" tabindex="-1"></a>Note that each time we select a sample and calculate summary statistics, such as the mean and standard deviation of a sample, we get slightly different results. If we repeat this sampling process multiple times, we can use the results to generate a **distribution** for a particular summary statistic of interest, e.g., for the mean or the median. This process generates what is called a **sampling distribution** for the statistic.</span>
+<span id="cb78-312"><a href="#cb78-312" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** We use </span><span class="in">`set.seed()`</span><span class="at"> here so that each time this function is run, it returns the same sequence of random numbers until the seed is reset.</span></span>
+<span id="cb78-313"><a href="#cb78-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-316"><a href="#cb78-316" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-317"><a href="#cb78-317" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb78-318"><a href="#cb78-318" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb78-319"><a href="#cb78-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-322"><a href="#cb78-322" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-323"><a href="#cb78-323" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb78-324"><a href="#cb78-324" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb78-325"><a href="#cb78-325" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb78-326"><a href="#cb78-326" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(d, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">FALSE</span>)</span>
+<span id="cb78-327"><a href="#cb78-327" aria-hidden="true" tabindex="-1"></a><span class="co"># `sample_n()` from {dplyr} selects rows at random from a data frame</span></span>
+<span id="cb78-328"><a href="#cb78-328" aria-hidden="true" tabindex="-1"></a><span class="co"># it's another SUPER useful function</span></span>
+<span id="cb78-329"><a href="#cb78-329" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(s<span class="sc">$</span>startYear)</span>
+<span id="cb78-330"><a href="#cb78-330" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(averageRating <span class="sc">~</span> startYear, <span class="at">data=</span>s, <span class="at">xlab=</span><span class="st">"Year"</span>, <span class="at">ylab=</span><span class="st">"Average Rating"</span>)</span>
+<span id="cb78-331"><a href="#cb78-331" aria-hidden="true" tabindex="-1"></a><span class="fu">histogram</span>(<span class="sc">~</span> averageRating, <span class="at">data=</span>s, <span class="at">xlab=</span><span class="st">"Average Rating"</span>)</span>
+<span id="cb78-332"><a href="#cb78-332" aria-hidden="true" tabindex="-1"></a>(samp_stats <span class="ot">&lt;-</span> <span class="fu">favstats</span>(<span class="sc">~</span> averageRating, <span class="at">data =</span> s))</span>
+<span id="cb78-333"><a href="#cb78-333" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-334"><a href="#cb78-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-335"><a href="#cb78-335" aria-hidden="true" tabindex="-1"></a>The code below allows us to generate a sampling distribution virtually. The <span class="in">`do() *`</span> construction from {mosaic}, in combination with one of the {mosaic} package's aggregating functions (e.g., <span class="in">`mean()`</span>, <span class="in">`median()`</span>, etc.), can be used to repeat sampling from the population a user-specified number of times, calculate a summary statistic, and then bundle the results into a vector all in the same line. <span class="co">[</span><span class="ot">Of course, we could also write a loop to do the same thing... and there are other ways we could do this as well (see examples below).</span><span class="co">]</span></span>
+<span id="cb78-335"><a href="#cb78-335" aria-hidden="true" tabindex="-1"></a>Note that each time we select a sample and calculate summary statistics, such as the mean and standard deviation of a sample, we get slightly different results. If we repeat this sampling process multiple times, we can use the results to generate a **distribution** for a particular summary statistic of interest, e.g., for the mean or the median. This process generates what is called a **sampling distribution** for the statistic.</span>
 <span id="cb78-336"><a href="#cb78-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-337"><a href="#cb78-337" aria-hidden="true" tabindex="-1"></a>This process of *simulating* samples drawn from a population and then generating statistics on the basis of each of our virtual samples is a very powerful tool that we will apply over and over again as we talk about statistical inference. This process is the basis for bootstrapping confidence intervals (see [**Module 14**](#module-14)) and for conducting randomization/permutation tests (see [**Module 16**](#module-16)).</span>
+<span id="cb78-337"><a href="#cb78-337" aria-hidden="true" tabindex="-1"></a>The code below allows us to generate a sampling distribution virtually. The <span class="in">`do() *`</span> construction from {mosaic}, in combination with one of the {mosaic} package's aggregating functions (e.g., <span class="in">`mean()`</span>, <span class="in">`median()`</span>, etc.), can be used to repeat sampling from the population a user-specified number of times, calculate a summary statistic, and then bundle the results into a vector all in the same line. <span class="co">[</span><span class="ot">Of course, we could also write a loop to do the same thing... and there are other ways we could do this as well (see examples below).</span><span class="co">]</span></span>
 <span id="cb78-338"><a href="#cb78-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-339"><a href="#cb78-339" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Using the {mosaic} Package {.unnumbered}</span></span>
+<span id="cb78-339"><a href="#cb78-339" aria-hidden="true" tabindex="-1"></a>This process of *simulating* samples drawn from a population and then generating statistics on the basis of each of our virtual samples is a very powerful tool that we will apply over and over again as we talk about statistical inference. This process is the basis for bootstrapping confidence intervals (see [**Module 14**](#module-14)) and for conducting randomization/permutation tests (see [**Module 16**](#module-16)).</span>
 <span id="cb78-340"><a href="#cb78-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-343"><a href="#cb78-343" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-344"><a href="#cb78-344" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb78-345"><a href="#cb78-345" aria-hidden="true" tabindex="-1"></a><span class="co"># using `do(reps) *` from {mosaic} to generate a sampling distribution</span></span>
-<span id="cb78-346"><a href="#cb78-346" aria-hidden="true" tabindex="-1"></a>reps <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb78-347"><a href="#cb78-347" aria-hidden="true" tabindex="-1"></a>samp_dist_mean <span class="ot">&lt;-</span></span>
-<span id="cb78-348"><a href="#cb78-348" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do</span>(reps) <span class="sc">*</span> <span class="fu">mean</span>(<span class="sc">~</span> averageRating, <span class="at">data=</span><span class="fu">sample_n</span>(d, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb78-349"><a href="#cb78-349" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generates a sampling distribution</span></span>
-<span id="cb78-350"><a href="#cb78-350" aria-hidden="true" tabindex="-1"></a>mean_plot <span class="ot">&lt;-</span></span>
-<span id="cb78-351"><a href="#cb78-351" aria-hidden="true" tabindex="-1"></a>  <span class="fu">histogram</span>( <span class="sc">~</span> mean, <span class="at">data =</span> samp_dist_mean,</span>
-<span id="cb78-352"><a href="#cb78-352" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Sampling Distribution for the</span><span class="sc">\n</span><span class="st">Mean of Average Rating"</span>)</span>
-<span id="cb78-353"><a href="#cb78-353" aria-hidden="true" tabindex="-1"></a>samp_dist_median <span class="ot">&lt;-</span></span>
-<span id="cb78-354"><a href="#cb78-354" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do</span>(reps) <span class="sc">*</span> <span class="fu">median</span>( <span class="sc">~</span> averageRating, <span class="at">data =</span> <span class="fu">sample_n</span>(d, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">FALSE</span>))</span>
-<span id="cb78-355"><a href="#cb78-355" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generates a sampling distribution</span></span>
-<span id="cb78-356"><a href="#cb78-356" aria-hidden="true" tabindex="-1"></a>median_plot <span class="ot">&lt;-</span></span>
-<span id="cb78-357"><a href="#cb78-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">histogram</span>(<span class="sc">~</span> median, <span class="at">data=</span>samp_dist_median,</span>
-<span id="cb78-358"><a href="#cb78-358" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Sampling Distribution for the</span><span class="sc">\n</span><span class="st">Median of Average Rating"</span>)</span>
-<span id="cb78-359"><a href="#cb78-359" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-360"><a href="#cb78-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-361"><a href="#cb78-361" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Using the {purrr} Package {.unnumbered}</span></span>
-<span id="cb78-364"><a href="#cb78-364" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-365"><a href="#cb78-365" aria-hidden="true" tabindex="-1"></a><span class="co"># using `rerun()` from {purrr} to generate a sampling distribution</span></span>
-<span id="cb78-366"><a href="#cb78-366" aria-hidden="true" tabindex="-1"></a>samp_dist_mean_alt1 <span class="ot">&lt;-</span></span>
-<span id="cb78-367"><a href="#cb78-367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rerun</span>(reps, <span class="fu">mean</span>(<span class="sc">~</span> averageRating,</span>
-<span id="cb78-368"><a href="#cb78-368" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span><span class="fu">sample_n</span>(d, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">FALSE</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb78-369"><a href="#cb78-369" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unlist</span>()</span>
-<span id="cb78-370"><a href="#cb78-370" aria-hidden="true" tabindex="-1"></a>mean_plot_alt1 <span class="ot">&lt;-</span></span>
-<span id="cb78-371"><a href="#cb78-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">histogram</span>(samp_dist_mean_alt1,</span>
-<span id="cb78-372"><a href="#cb78-372" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Sampling Distribution for the</span><span class="sc">\n</span><span class="st">Mean of Average Rating"</span>)</span>
-<span id="cb78-373"><a href="#cb78-373" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-374"><a href="#cb78-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-375"><a href="#cb78-375" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Using the {infer} Package {.unnumbered}</span></span>
+<span id="cb78-341"><a href="#cb78-341" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Using the {mosaic} Package {.unnumbered}</span></span>
+<span id="cb78-342"><a href="#cb78-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-345"><a href="#cb78-345" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-346"><a href="#cb78-346" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb78-347"><a href="#cb78-347" aria-hidden="true" tabindex="-1"></a><span class="co"># using `do(reps) *` from {mosaic} to generate a sampling distribution</span></span>
+<span id="cb78-348"><a href="#cb78-348" aria-hidden="true" tabindex="-1"></a>reps <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb78-349"><a href="#cb78-349" aria-hidden="true" tabindex="-1"></a>samp_dist_mean <span class="ot">&lt;-</span></span>
+<span id="cb78-350"><a href="#cb78-350" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do</span>(reps) <span class="sc">*</span> <span class="fu">mean</span>(<span class="sc">~</span> averageRating, <span class="at">data=</span><span class="fu">sample_n</span>(d, <span class="at">size =</span> n, <span class="at">replace =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb78-351"><a href="#cb78-351" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generates a sampling distribution</span></span>
+<span id="cb78-352"><a href="#cb78-352" aria-hidden="true" tabindex="-1"></a>mean_plot <span class="ot">&lt;-</span></span>
+<span id="cb78-353"><a href="#cb78-353" aria-hidden="true" tabindex="-1"></a>  <span class="fu">histogram</span>( <span class="sc">~</span> mean, <span class="at">data =</span> samp_dist_mean,</span>
+<span id="cb78-354"><a href="#cb78-354" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Sampling Distribution for the</span><span class="sc">\n</span><span class="st">Mean of Average Rating"</span>)</span>
+<span id="cb78-355"><a href="#cb78-355" aria-hidden="true" tabindex="-1"></a>samp_dist_median <span class="ot">&lt;-</span></span>
+<span id="cb78-356"><a href="#cb78-356" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do</span>(reps) <span class="sc">*</span> <span class="fu">median</span>( <span class="sc">~</span> averageRating, <span class="at">data =</span> <span class="fu">sample_n</span>(d, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">FALSE</span>))</span>
+<span id="cb78-357"><a href="#cb78-357" aria-hidden="true" tabindex="-1"></a>  <span class="co"># generates a sampling distribution</span></span>
+<span id="cb78-358"><a href="#cb78-358" aria-hidden="true" tabindex="-1"></a>median_plot <span class="ot">&lt;-</span></span>
+<span id="cb78-359"><a href="#cb78-359" aria-hidden="true" tabindex="-1"></a>  <span class="fu">histogram</span>(<span class="sc">~</span> median, <span class="at">data=</span>samp_dist_median,</span>
+<span id="cb78-360"><a href="#cb78-360" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Sampling Distribution for the</span><span class="sc">\n</span><span class="st">Median of Average Rating"</span>)</span>
+<span id="cb78-361"><a href="#cb78-361" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb78-362"><a href="#cb78-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-363"><a href="#cb78-363" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Using the {purrr} Package {.unnumbered}</span></span>
+<span id="cb78-366"><a href="#cb78-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-367"><a href="#cb78-367" aria-hidden="true" tabindex="-1"></a><span class="co"># using `rerun()` from {purrr} to generate a sampling distribution</span></span>
+<span id="cb78-368"><a href="#cb78-368" aria-hidden="true" tabindex="-1"></a>samp_dist_mean_alt1 <span class="ot">&lt;-</span></span>
+<span id="cb78-369"><a href="#cb78-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rerun</span>(reps, <span class="fu">mean</span>(<span class="sc">~</span> averageRating,</span>
+<span id="cb78-370"><a href="#cb78-370" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span><span class="fu">sample_n</span>(d, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">FALSE</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb78-371"><a href="#cb78-371" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unlist</span>()</span>
+<span id="cb78-372"><a href="#cb78-372" aria-hidden="true" tabindex="-1"></a>mean_plot_alt1 <span class="ot">&lt;-</span></span>
+<span id="cb78-373"><a href="#cb78-373" aria-hidden="true" tabindex="-1"></a>  <span class="fu">histogram</span>(samp_dist_mean_alt1,</span>
+<span id="cb78-374"><a href="#cb78-374" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Sampling Distribution for the</span><span class="sc">\n</span><span class="st">Mean of Average Rating"</span>)</span>
+<span id="cb78-375"><a href="#cb78-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-376"><a href="#cb78-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-379"><a href="#cb78-379" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-380"><a href="#cb78-380" aria-hidden="true" tabindex="-1"></a><span class="co"># using `rep_sample_n()` from {infer} to generate a sampling distribution</span></span>
-<span id="cb78-381"><a href="#cb78-381" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
-<span id="cb78-382"><a href="#cb78-382" aria-hidden="true" tabindex="-1"></a>samp_dist_mean_alt2 <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span></span>
-<span id="cb78-383"><a href="#cb78-383" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep_sample_n</span>(<span class="at">size =</span> n, <span class="at">reps =</span> reps, <span class="at">replace =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb78-384"><a href="#cb78-384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(replicate) <span class="sc">|&gt;</span></span>
-<span id="cb78-385"><a href="#cb78-385" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(averageRating)) <span class="sc">|&gt;</span></span>
-<span id="cb78-386"><a href="#cb78-386" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(mean)</span>
-<span id="cb78-387"><a href="#cb78-387" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>infer)</span>
-<span id="cb78-388"><a href="#cb78-388" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-389"><a href="#cb78-389" aria-hidden="true" tabindex="-1"></a>mean_plot_alt2 <span class="ot">&lt;-</span></span>
-<span id="cb78-390"><a href="#cb78-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">histogram</span>(samp_dist_mean_alt2,</span>
-<span id="cb78-391"><a href="#cb78-391" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Sampling Distribution for the</span><span class="sc">\n</span><span class="st">Mean of Average Rating"</span>)</span>
-<span id="cb78-392"><a href="#cb78-392" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-393"><a href="#cb78-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-396"><a href="#cb78-396" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-397"><a href="#cb78-397" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb78-398"><a href="#cb78-398" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
-<span id="cb78-399"><a href="#cb78-399" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
-<span id="cb78-400"><a href="#cb78-400" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(mean_plot, median_plot, <span class="at">ncol=</span><span class="dv">2</span>)</span>
-<span id="cb78-401"><a href="#cb78-401" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>cowplot)</span>
-<span id="cb78-402"><a href="#cb78-402" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-403"><a href="#cb78-403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-404"><a href="#cb78-404" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **IMPORTANT NOTE:** The histograms we plot in the code above are for **sampling distributions** of the statistics in question. They do not represent the distribution of values in any particular sample! This is SUPER IMPORTANT to recognize and keep in mind.</span></span>
+<span id="cb78-377"><a href="#cb78-377" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Using the {infer} Package {.unnumbered}</span></span>
+<span id="cb78-378"><a href="#cb78-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-381"><a href="#cb78-381" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-382"><a href="#cb78-382" aria-hidden="true" tabindex="-1"></a><span class="co"># using `rep_sample_n()` from {infer} to generate a sampling distribution</span></span>
+<span id="cb78-383"><a href="#cb78-383" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
+<span id="cb78-384"><a href="#cb78-384" aria-hidden="true" tabindex="-1"></a>samp_dist_mean_alt2 <span class="ot">&lt;-</span> d <span class="sc">|&gt;</span></span>
+<span id="cb78-385"><a href="#cb78-385" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rep_sample_n</span>(<span class="at">size =</span> n, <span class="at">reps =</span> reps, <span class="at">replace =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb78-386"><a href="#cb78-386" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(replicate) <span class="sc">|&gt;</span></span>
+<span id="cb78-387"><a href="#cb78-387" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(averageRating)) <span class="sc">|&gt;</span></span>
+<span id="cb78-388"><a href="#cb78-388" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(mean)</span>
+<span id="cb78-389"><a href="#cb78-389" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>infer)</span>
+<span id="cb78-390"><a href="#cb78-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-391"><a href="#cb78-391" aria-hidden="true" tabindex="-1"></a>mean_plot_alt2 <span class="ot">&lt;-</span></span>
+<span id="cb78-392"><a href="#cb78-392" aria-hidden="true" tabindex="-1"></a>  <span class="fu">histogram</span>(samp_dist_mean_alt2,</span>
+<span id="cb78-393"><a href="#cb78-393" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Sampling Distribution for the</span><span class="sc">\n</span><span class="st">Mean of Average Rating"</span>)</span>
+<span id="cb78-394"><a href="#cb78-394" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb78-395"><a href="#cb78-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-398"><a href="#cb78-398" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-399"><a href="#cb78-399" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb78-400"><a href="#cb78-400" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb78-401"><a href="#cb78-401" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb78-402"><a href="#cb78-402" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(mean_plot, median_plot, <span class="at">ncol=</span><span class="dv">2</span>)</span>
+<span id="cb78-403"><a href="#cb78-403" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>cowplot)</span>
+<span id="cb78-404"><a href="#cb78-404" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-405"><a href="#cb78-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-406"><a href="#cb78-406" aria-hidden="true" tabindex="-1"></a>The **mean of the sampling distribution** (i.e., the mean of $\bar{x}$) for a particular statistic should be a really good **point estimate** of the population value for that statistic (i.e., $\mu$). Compare the following to confirm this:</span>
+<span id="cb78-406"><a href="#cb78-406" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **IMPORTANT NOTE:** The histograms we plot in the code above are for **sampling distributions** of the statistics in question. They do not represent the distribution of values in any particular sample! This is SUPER IMPORTANT to recognize and keep in mind.</span></span>
 <span id="cb78-407"><a href="#cb78-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-410"><a href="#cb78-410" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-411"><a href="#cb78-411" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb78-412"><a href="#cb78-412" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="sc">~</span> mean, <span class="at">data=</span>samp_dist_mean)</span>
-<span id="cb78-413"><a href="#cb78-413" aria-hidden="true" tabindex="-1"></a><span class="co"># this is the estimated population mean calculated as the</span></span>
-<span id="cb78-414"><a href="#cb78-414" aria-hidden="true" tabindex="-1"></a><span class="co"># mean of the sampling distribution of sample means</span></span>
-<span id="cb78-415"><a href="#cb78-415" aria-hidden="true" tabindex="-1"></a>pop_stats<span class="sc">$</span>mean <span class="co"># true population mean</span></span>
-<span id="cb78-416"><a href="#cb78-416" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="sc">~</span> median, <span class="at">data=</span>samp_dist_median)</span>
-<span id="cb78-417"><a href="#cb78-417" aria-hidden="true" tabindex="-1"></a><span class="co"># this is the estimated population median calculated as the</span></span>
-<span id="cb78-418"><a href="#cb78-418" aria-hidden="true" tabindex="-1"></a><span class="co"># mean of the sampling distribution of sample medians</span></span>
-<span id="cb78-419"><a href="#cb78-419" aria-hidden="true" tabindex="-1"></a>pop_stats<span class="sc">$</span>median <span class="co"># true population median</span></span>
-<span id="cb78-420"><a href="#cb78-420" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-421"><a href="#cb78-421" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-422"><a href="#cb78-422" aria-hidden="true" tabindex="-1"></a><span class="fu">### Standard Errors {.unnumbered}</span></span>
+<span id="cb78-408"><a href="#cb78-408" aria-hidden="true" tabindex="-1"></a>The **mean of the sampling distribution** (i.e., the mean of $\bar{x}$) for a particular statistic should be a really good **point estimate** of the population value for that statistic (i.e., $\mu$). Compare the following to confirm this:</span>
+<span id="cb78-409"><a href="#cb78-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-412"><a href="#cb78-412" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-413"><a href="#cb78-413" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb78-414"><a href="#cb78-414" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="sc">~</span> mean, <span class="at">data=</span>samp_dist_mean)</span>
+<span id="cb78-415"><a href="#cb78-415" aria-hidden="true" tabindex="-1"></a><span class="co"># this is the estimated population mean calculated as the</span></span>
+<span id="cb78-416"><a href="#cb78-416" aria-hidden="true" tabindex="-1"></a><span class="co"># mean of the sampling distribution of sample means</span></span>
+<span id="cb78-417"><a href="#cb78-417" aria-hidden="true" tabindex="-1"></a>pop_stats<span class="sc">$</span>mean <span class="co"># true population mean</span></span>
+<span id="cb78-418"><a href="#cb78-418" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="sc">~</span> median, <span class="at">data=</span>samp_dist_median)</span>
+<span id="cb78-419"><a href="#cb78-419" aria-hidden="true" tabindex="-1"></a><span class="co"># this is the estimated population median calculated as the</span></span>
+<span id="cb78-420"><a href="#cb78-420" aria-hidden="true" tabindex="-1"></a><span class="co"># mean of the sampling distribution of sample medians</span></span>
+<span id="cb78-421"><a href="#cb78-421" aria-hidden="true" tabindex="-1"></a>pop_stats<span class="sc">$</span>median <span class="co"># true population median</span></span>
+<span id="cb78-422"><a href="#cb78-422" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-423"><a href="#cb78-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-424"><a href="#cb78-424" aria-hidden="true" tabindex="-1"></a>So, just how reliable or unreliable are these estimates of a population parameter based on the mean of the sampling distribution for a statistic of interest? That is, how far off is a statistic that we calculate based on a sampling distribution likely to be from the true POPULATION value of the parameter of interest?</span>
+<span id="cb78-424"><a href="#cb78-424" aria-hidden="true" tabindex="-1"></a><span class="fu">### Standard Errors {.unnumbered}</span></span>
 <span id="cb78-425"><a href="#cb78-425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-426"><a href="#cb78-426" aria-hidden="true" tabindex="-1"></a>One way to quantify the uncertainty is by calculating the variability of the summary statistic of interest across replicate samples drawn from the population. For example, we could calculate the *variance of the sampling distribution*. More commonly, because variance is expressed in *units squared*, we take the square root of this variance to calculate the *standard deviation of the sampling distribution* and thus express our uncertainly in *units* of the original measurement. Formally, this value is referred to as the **standard error** (**SE**) of measurement for any given summary statistic of interest. [Typically, that statistic is the *mean*, and we thus are calculating the *standard error of the mean*.]</span>
+<span id="cb78-426"><a href="#cb78-426" aria-hidden="true" tabindex="-1"></a>So, just how reliable or unreliable are these estimates of a population parameter based on the mean of the sampling distribution for a statistic of interest? That is, how far off is a statistic that we calculate based on a sampling distribution likely to be from the true POPULATION value of the parameter of interest?</span>
 <span id="cb78-427"><a href="#cb78-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-428"><a href="#cb78-428" aria-hidden="true" tabindex="-1"></a>The **SE** is, in effect, the *average deviation* between statistic values calculated from different and incomplete sets of samples drawn from a population and the average statistic value calculated across that set of samples (which should converge on the true population value for that statistic). The SE of the mean is thus a measure of *how dispersed sample means (*$\bar{x}$) are expected to be around the estimated population mean ($\mu$) (i.e., how far off from the true population mean an estimate based on a sample of size $n$ is likely to be). Similarly, the SE of the median would be a measure of how dispersed sample medians are expected to be, on average, around the estimated population median, and so forth.</span>
+<span id="cb78-428"><a href="#cb78-428" aria-hidden="true" tabindex="-1"></a>One way to quantify the uncertainty is by calculating the variability of the summary statistic of interest across replicate samples drawn from the population. For example, we could calculate the *variance of the sampling distribution*. More commonly, because variance is expressed in *units squared*, we take the square root of this variance to calculate the *standard deviation of the sampling distribution* and thus express our uncertainly in *units* of the original measurement. Formally, this value is referred to as the **standard error** (**SE**) of measurement for any given summary statistic of interest. [Typically, that statistic is the *mean*, and we thus are calculating the *standard error of the mean*.]</span>
 <span id="cb78-429"><a href="#cb78-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-430"><a href="#cb78-430" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Estimating a SE from a Sampling Distribution {.unnumbered}</span></span>
+<span id="cb78-430"><a href="#cb78-430" aria-hidden="true" tabindex="-1"></a>The **SE** is, in effect, the *average deviation* between statistic values calculated from different and incomplete sets of samples drawn from a population and the average statistic value calculated across that set of samples (which should converge on the true population value for that statistic). The SE of the mean is thus a measure of *how dispersed sample means (*$\bar{x}$) are expected to be around the estimated population mean ($\mu$) (i.e., how far off from the true population mean an estimate based on a sample of size $n$ is likely to be). Similarly, the SE of the median would be a measure of how dispersed sample medians are expected to be, on average, around the estimated population median, and so forth.</span>
 <span id="cb78-431"><a href="#cb78-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-432"><a href="#cb78-432" aria-hidden="true" tabindex="-1"></a>To estimate the SE from a sampling distribution, we simply take the standard standard deviation of the set of values comprising that distribution. Above, we used the <span class="in">`do() * &lt;function&gt;`</span> construction to generate sampling distributions for the mean and median of average viewer ratings in the "movies.csv" dataset, so all we need to do is pull out the standard deviation of those distributions to estimate the standard error.</span>
+<span id="cb78-432"><a href="#cb78-432" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Estimating a SE from a Sampling Distribution {.unnumbered}</span></span>
 <span id="cb78-433"><a href="#cb78-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-436"><a href="#cb78-436" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-437"><a href="#cb78-437" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb78-438"><a href="#cb78-438" aria-hidden="true" tabindex="-1"></a>se_mean <span class="ot">&lt;-</span> <span class="fu">favstats</span>(<span class="sc">~</span> mean, <span class="at">data=</span>samp_dist_mean)<span class="sc">$</span>sd</span>
-<span id="cb78-439"><a href="#cb78-439" aria-hidden="true" tabindex="-1"></a><span class="co"># or, se_mean &lt;- sd(samp_dist_mean$mean)</span></span>
-<span id="cb78-440"><a href="#cb78-440" aria-hidden="true" tabindex="-1"></a>(<span class="fu">paste0</span>( <span class="st">"Estimated population mean = "</span>,</span>
-<span id="cb78-441"><a href="#cb78-441" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="fu">favstats</span>(<span class="sc">~</span> mean, <span class="at">data=</span>samp_dist_mean)<span class="sc">$</span>mean,<span class="dv">3</span>),</span>
-<span id="cb78-442"><a href="#cb78-442" aria-hidden="true" tabindex="-1"></a>  <span class="st">" ± "</span>, <span class="fu">round</span>(se_mean,<span class="dv">3</span>),</span>
-<span id="cb78-443"><a href="#cb78-443" aria-hidden="true" tabindex="-1"></a>  <span class="st">" SE based on "</span>, reps, <span class="st">" samples of size "</span>, n))</span>
-<span id="cb78-444"><a href="#cb78-444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-445"><a href="#cb78-445" aria-hidden="true" tabindex="-1"></a>se_median <span class="ot">&lt;-</span> <span class="fu">favstats</span>(<span class="sc">~</span> median, <span class="at">data=</span>samp_dist_median)<span class="sc">$</span>sd</span>
-<span id="cb78-446"><a href="#cb78-446" aria-hidden="true" tabindex="-1"></a><span class="co"># or, se_median &lt;- sd(samp_dist_median$median)</span></span>
-<span id="cb78-447"><a href="#cb78-447" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-448"><a href="#cb78-448" aria-hidden="true" tabindex="-1"></a>(<span class="fu">paste0</span>( <span class="st">"Estimated population median = "</span>,</span>
-<span id="cb78-449"><a href="#cb78-449" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="fu">favstats</span>(<span class="sc">~</span> median, <span class="at">data=</span>samp_dist_median)<span class="sc">$</span>mean, <span class="dv">3</span>),</span>
-<span id="cb78-450"><a href="#cb78-450" aria-hidden="true" tabindex="-1"></a>  <span class="st">" ± "</span>, <span class="fu">round</span>(se_median,<span class="dv">3</span>),</span>
-<span id="cb78-451"><a href="#cb78-451" aria-hidden="true" tabindex="-1"></a>  <span class="st">" SE based on "</span>, reps, <span class="st">" samples of size "</span>, n))</span>
-<span id="cb78-452"><a href="#cb78-452" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-453"><a href="#cb78-453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-454"><a href="#cb78-454" aria-hidden="true" tabindex="-1"></a>As we might expect for any measure of uncertainty or error, the **SE** [1] increases with the variability in a sample (i.e., estimates based on high-variability samples should be more uncertain) and [2] decreases with the size of the sample (i.e., estimates based on larger samples should be less uncertain). The **SE** thus reflects a ratio of variance to sample size.</span>
+<span id="cb78-434"><a href="#cb78-434" aria-hidden="true" tabindex="-1"></a>To estimate the SE from a sampling distribution, we simply take the standard standard deviation of the set of values comprising that distribution. Above, we used the <span class="in">`do() * &lt;function&gt;`</span> construction to generate sampling distributions for the mean and median of average viewer ratings in the "movies.csv" dataset, so all we need to do is pull out the standard deviation of those distributions to estimate the standard error.</span>
+<span id="cb78-435"><a href="#cb78-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-438"><a href="#cb78-438" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-439"><a href="#cb78-439" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb78-440"><a href="#cb78-440" aria-hidden="true" tabindex="-1"></a>se_mean <span class="ot">&lt;-</span> <span class="fu">favstats</span>(<span class="sc">~</span> mean, <span class="at">data=</span>samp_dist_mean)<span class="sc">$</span>sd</span>
+<span id="cb78-441"><a href="#cb78-441" aria-hidden="true" tabindex="-1"></a><span class="co"># or, se_mean &lt;- sd(samp_dist_mean$mean)</span></span>
+<span id="cb78-442"><a href="#cb78-442" aria-hidden="true" tabindex="-1"></a>(<span class="fu">paste0</span>( <span class="st">"Estimated population mean = "</span>,</span>
+<span id="cb78-443"><a href="#cb78-443" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="fu">favstats</span>(<span class="sc">~</span> mean, <span class="at">data=</span>samp_dist_mean)<span class="sc">$</span>mean,<span class="dv">3</span>),</span>
+<span id="cb78-444"><a href="#cb78-444" aria-hidden="true" tabindex="-1"></a>  <span class="st">" ± "</span>, <span class="fu">round</span>(se_mean,<span class="dv">3</span>),</span>
+<span id="cb78-445"><a href="#cb78-445" aria-hidden="true" tabindex="-1"></a>  <span class="st">" SE based on "</span>, reps, <span class="st">" samples of size "</span>, n))</span>
+<span id="cb78-446"><a href="#cb78-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-447"><a href="#cb78-447" aria-hidden="true" tabindex="-1"></a>se_median <span class="ot">&lt;-</span> <span class="fu">favstats</span>(<span class="sc">~</span> median, <span class="at">data=</span>samp_dist_median)<span class="sc">$</span>sd</span>
+<span id="cb78-448"><a href="#cb78-448" aria-hidden="true" tabindex="-1"></a><span class="co"># or, se_median &lt;- sd(samp_dist_median$median)</span></span>
+<span id="cb78-449"><a href="#cb78-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-450"><a href="#cb78-450" aria-hidden="true" tabindex="-1"></a>(<span class="fu">paste0</span>( <span class="st">"Estimated population median = "</span>,</span>
+<span id="cb78-451"><a href="#cb78-451" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="fu">favstats</span>(<span class="sc">~</span> median, <span class="at">data=</span>samp_dist_median)<span class="sc">$</span>mean, <span class="dv">3</span>),</span>
+<span id="cb78-452"><a href="#cb78-452" aria-hidden="true" tabindex="-1"></a>  <span class="st">" ± "</span>, <span class="fu">round</span>(se_median,<span class="dv">3</span>),</span>
+<span id="cb78-453"><a href="#cb78-453" aria-hidden="true" tabindex="-1"></a>  <span class="st">" SE based on "</span>, reps, <span class="st">" samples of size "</span>, n))</span>
+<span id="cb78-454"><a href="#cb78-454" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-455"><a href="#cb78-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-456"><a href="#cb78-456" aria-hidden="true" tabindex="-1"></a><span class="fu">### Questions to Explore {.unnumbered}</span></span>
+<span id="cb78-456"><a href="#cb78-456" aria-hidden="true" tabindex="-1"></a>As we might expect for any measure of uncertainty or error, the **SE** [1] increases with the variability in a sample (i.e., estimates based on high-variability samples should be more uncertain) and [2] decreases with the size of the sample (i.e., estimates based on larger samples should be less uncertain). The **SE** thus reflects a ratio of variance to sample size.</span>
 <span id="cb78-457"><a href="#cb78-457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-458"><a href="#cb78-458" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How does changing the **size of our samples** (**n**) impact the **mean** and **SE** of our estimate of the population parameter?</span>
-<span id="cb78-459"><a href="#cb78-459" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How does changing the **number of replicate samples** (**reps**) impact the **mean** and **SE** of our estimate of the population parameter?</span>
-<span id="cb78-460"><a href="#cb78-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-461"><a href="#cb78-461" aria-hidden="true" tabindex="-1"></a>We can explore these two questions with the following code... note that we just take one set of 2000 replicates and then resample from that randomly to explore the impact of different, smaller numbers of replicates:</span>
+<span id="cb78-458"><a href="#cb78-458" aria-hidden="true" tabindex="-1"></a><span class="fu">### Questions to Explore {.unnumbered}</span></span>
+<span id="cb78-459"><a href="#cb78-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-460"><a href="#cb78-460" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How does changing the **size of our samples** (**n**) impact the **mean** and **SE** of our estimate of the population parameter?</span>
+<span id="cb78-461"><a href="#cb78-461" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How does changing the **number of replicate samples** (**reps**) impact the **mean** and **SE** of our estimate of the population parameter?</span>
 <span id="cb78-462"><a href="#cb78-462" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-465"><a href="#cb78-465" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-466"><a href="#cb78-466" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb78-467"><a href="#cb78-467" aria-hidden="true" tabindex="-1"></a>reps <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
-<span id="cb78-468"><a href="#cb78-468" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="st">"n"</span><span class="ot">=</span><span class="fu">numeric</span>(),</span>
-<span id="cb78-469"><a href="#cb78-469" aria-hidden="true" tabindex="-1"></a>  <span class="st">"mean"</span><span class="ot">=</span><span class="fu">numeric</span>(),</span>
-<span id="cb78-470"><a href="#cb78-470" aria-hidden="true" tabindex="-1"></a>  <span class="st">".index"</span><span class="ot">=</span><span class="fu">numeric</span>())</span>
-<span id="cb78-471"><a href="#cb78-471" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-472"><a href="#cb78-472" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">seq</span>(<span class="at">from=</span><span class="dv">20</span>, <span class="at">to=</span><span class="dv">200</span>, <span class="at">by=</span><span class="dv">20</span>)){</span>
-<span id="cb78-473"><a href="#cb78-473" aria-hidden="true" tabindex="-1"></a>  samp_dist <span class="ot">&lt;-</span> {<span class="fu">do</span>(reps) <span class="sc">*</span> <span class="fu">sample_n</span>(d, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">FALSE</span>)} <span class="sc">|&gt;</span></span>
-<span id="cb78-474"><a href="#cb78-474" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(.index) <span class="sc">|&gt;</span></span>
-<span id="cb78-475"><a href="#cb78-475" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(averageRating)) <span class="sc">|&gt;</span></span>
-<span id="cb78-476"><a href="#cb78-476" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">n=</span>n)</span>
-<span id="cb78-477"><a href="#cb78-477" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(s,</span>
-<span id="cb78-478"><a href="#cb78-478" aria-hidden="true" tabindex="-1"></a>       samp_dist)</span>
-<span id="cb78-479"><a href="#cb78-479" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb78-480"><a href="#cb78-480" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-481"><a href="#cb78-481" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="st">"n"</span><span class="ot">=</span><span class="fu">numeric</span>(),</span>
-<span id="cb78-482"><a href="#cb78-482" aria-hidden="true" tabindex="-1"></a>  <span class="st">"reps"</span><span class="ot">=</span><span class="fu">numeric</span>(),</span>
-<span id="cb78-483"><a href="#cb78-483" aria-hidden="true" tabindex="-1"></a>  <span class="st">"samp_dist_mean"</span><span class="ot">=</span><span class="fu">numeric</span>(),</span>
-<span id="cb78-484"><a href="#cb78-484" aria-hidden="true" tabindex="-1"></a>  <span class="st">"samp_dist_se"</span><span class="ot">=</span><span class="fu">numeric</span>())</span>
-<span id="cb78-485"><a href="#cb78-485" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-486"><a href="#cb78-486" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (reps <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">25</span>,<span class="dv">50</span>,<span class="dv">100</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>,<span class="dv">2000</span>)){</span>
-<span id="cb78-487"><a href="#cb78-487" aria-hidden="true" tabindex="-1"></a>  subsample <span class="ot">&lt;-</span> s <span class="sc">|&gt;</span> </span>
-<span id="cb78-488"><a href="#cb78-488" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(n) <span class="sc">|&gt;</span></span>
-<span id="cb78-489"><a href="#cb78-489" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(reps, <span class="at">replace =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb78-490"><a href="#cb78-490" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">samp_dist_mean=</span><span class="fu">mean</span>(mean),</span>
-<span id="cb78-491"><a href="#cb78-491" aria-hidden="true" tabindex="-1"></a>      <span class="at">samp_dist_se=</span><span class="fu">sd</span>(mean)) <span class="sc">|&gt;</span></span>
-<span id="cb78-492"><a href="#cb78-492" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">reps=</span>reps)</span>
-<span id="cb78-493"><a href="#cb78-493" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(output,</span>
-<span id="cb78-494"><a href="#cb78-494" aria-hidden="true" tabindex="-1"></a>    subsample)</span>
-<span id="cb78-495"><a href="#cb78-495" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb78-496"><a href="#cb78-496" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-497"><a href="#cb78-497" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-500"><a href="#cb78-500" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-501"><a href="#cb78-501" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>output, <span class="fu">aes</span>(<span class="at">x=</span>n, <span class="at">y=</span>samp_dist_mean)) <span class="sc">+</span></span>
-<span id="cb78-502"><a href="#cb78-502" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb78-503"><a href="#cb78-503" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span> reps) <span class="sc">+</span></span>
-<span id="cb78-504"><a href="#cb78-504" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Sample Size"</span>) <span class="sc">+</span></span>
-<span id="cb78-505"><a href="#cb78-505" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mean"</span>) <span class="sc">+</span></span>
-<span id="cb78-506"><a href="#cb78-506" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fl">6.0</span>, <span class="fl">6.5</span>)</span>
-<span id="cb78-507"><a href="#cb78-507" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>output, <span class="fu">aes</span>(<span class="at">x=</span>n, <span class="at">y=</span>samp_dist_se)) <span class="sc">+</span></span>
-<span id="cb78-508"><a href="#cb78-508" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb78-509"><a href="#cb78-509" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span> reps) <span class="sc">+</span></span>
-<span id="cb78-510"><a href="#cb78-510" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Sample Size"</span>) <span class="sc">+</span></span>
-<span id="cb78-511"><a href="#cb78-511" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"SE"</span>) <span class="sc">+</span></span>
-<span id="cb78-512"><a href="#cb78-512" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="fl">0.5</span>)</span>
-<span id="cb78-513"><a href="#cb78-513" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> output, <span class="fu">aes</span>(<span class="at">x =</span> n)) <span class="sc">+</span></span>
-<span id="cb78-514"><a href="#cb78-514" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> samp_dist_mean <span class="sc">+</span> samp_dist_se), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb78-515"><a href="#cb78-515" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> samp_dist_mean)) <span class="sc">+</span></span>
-<span id="cb78-516"><a href="#cb78-516" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> samp_dist_mean <span class="sc">-</span> samp_dist_se), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb78-517"><a href="#cb78-517" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>( <span class="sc">~</span> reps) <span class="sc">+</span></span>
-<span id="cb78-518"><a href="#cb78-518" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Sample Size"</span>) <span class="sc">+</span></span>
-<span id="cb78-519"><a href="#cb78-519" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mean ± SE"</span>) <span class="sc">+</span></span>
-<span id="cb78-520"><a href="#cb78-520" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fl">5.8</span>, <span class="fl">6.7</span>)</span>
-<span id="cb78-521"><a href="#cb78-521" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-522"><a href="#cb78-522" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-525"><a href="#cb78-525" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-526"><a href="#cb78-526" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb78-527"><a href="#cb78-527" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
-<span id="cb78-528"><a href="#cb78-528" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
-<span id="cb78-529"><a href="#cb78-529" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(p1, p2, p3, <span class="at">nrow=</span><span class="dv">3</span>)</span>
-<span id="cb78-530"><a href="#cb78-530" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>cowplot)</span>
-<span id="cb78-531"><a href="#cb78-531" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-532"><a href="#cb78-532" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-533"><a href="#cb78-533" aria-hidden="true" tabindex="-1"></a>Notice that as the number of replicates increases, our estimates of both the mean and SE become less variable, while as the sample size increases, our SE decreases (and our estimate of the mean thus becomes less uncertain), regardless of number of replicates.</span>
+<span id="cb78-463"><a href="#cb78-463" aria-hidden="true" tabindex="-1"></a>We can explore these two questions with the following code... note that we just take one set of 2000 replicates and then resample from that randomly to explore the impact of different, smaller numbers of replicates:</span>
+<span id="cb78-464"><a href="#cb78-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-467"><a href="#cb78-467" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-468"><a href="#cb78-468" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb78-469"><a href="#cb78-469" aria-hidden="true" tabindex="-1"></a>reps <span class="ot">&lt;-</span> <span class="dv">2000</span></span>
+<span id="cb78-470"><a href="#cb78-470" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="st">"n"</span><span class="ot">=</span><span class="fu">numeric</span>(),</span>
+<span id="cb78-471"><a href="#cb78-471" aria-hidden="true" tabindex="-1"></a>  <span class="st">"mean"</span><span class="ot">=</span><span class="fu">numeric</span>(),</span>
+<span id="cb78-472"><a href="#cb78-472" aria-hidden="true" tabindex="-1"></a>  <span class="st">".index"</span><span class="ot">=</span><span class="fu">numeric</span>())</span>
+<span id="cb78-473"><a href="#cb78-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-474"><a href="#cb78-474" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">seq</span>(<span class="at">from=</span><span class="dv">20</span>, <span class="at">to=</span><span class="dv">200</span>, <span class="at">by=</span><span class="dv">20</span>)){</span>
+<span id="cb78-475"><a href="#cb78-475" aria-hidden="true" tabindex="-1"></a>  samp_dist <span class="ot">&lt;-</span> {<span class="fu">do</span>(reps) <span class="sc">*</span> <span class="fu">sample_n</span>(d, <span class="at">size=</span>n, <span class="at">replace=</span><span class="cn">FALSE</span>)} <span class="sc">|&gt;</span></span>
+<span id="cb78-476"><a href="#cb78-476" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(.index) <span class="sc">|&gt;</span></span>
+<span id="cb78-477"><a href="#cb78-477" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">mean=</span><span class="fu">mean</span>(averageRating)) <span class="sc">|&gt;</span></span>
+<span id="cb78-478"><a href="#cb78-478" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">n=</span>n)</span>
+<span id="cb78-479"><a href="#cb78-479" aria-hidden="true" tabindex="-1"></a>    s <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(s,</span>
+<span id="cb78-480"><a href="#cb78-480" aria-hidden="true" tabindex="-1"></a>       samp_dist)</span>
+<span id="cb78-481"><a href="#cb78-481" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb78-482"><a href="#cb78-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-483"><a href="#cb78-483" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="st">"n"</span><span class="ot">=</span><span class="fu">numeric</span>(),</span>
+<span id="cb78-484"><a href="#cb78-484" aria-hidden="true" tabindex="-1"></a>  <span class="st">"reps"</span><span class="ot">=</span><span class="fu">numeric</span>(),</span>
+<span id="cb78-485"><a href="#cb78-485" aria-hidden="true" tabindex="-1"></a>  <span class="st">"samp_dist_mean"</span><span class="ot">=</span><span class="fu">numeric</span>(),</span>
+<span id="cb78-486"><a href="#cb78-486" aria-hidden="true" tabindex="-1"></a>  <span class="st">"samp_dist_se"</span><span class="ot">=</span><span class="fu">numeric</span>())</span>
+<span id="cb78-487"><a href="#cb78-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-488"><a href="#cb78-488" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (reps <span class="cf">in</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">25</span>,<span class="dv">50</span>,<span class="dv">100</span>,<span class="dv">250</span>,<span class="dv">500</span>,<span class="dv">1000</span>,<span class="dv">2000</span>)){</span>
+<span id="cb78-489"><a href="#cb78-489" aria-hidden="true" tabindex="-1"></a>  subsample <span class="ot">&lt;-</span> s <span class="sc">|&gt;</span> </span>
+<span id="cb78-490"><a href="#cb78-490" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(n) <span class="sc">|&gt;</span></span>
+<span id="cb78-491"><a href="#cb78-491" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(reps, <span class="at">replace =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb78-492"><a href="#cb78-492" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">samp_dist_mean=</span><span class="fu">mean</span>(mean),</span>
+<span id="cb78-493"><a href="#cb78-493" aria-hidden="true" tabindex="-1"></a>      <span class="at">samp_dist_se=</span><span class="fu">sd</span>(mean)) <span class="sc">|&gt;</span></span>
+<span id="cb78-494"><a href="#cb78-494" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">reps=</span>reps)</span>
+<span id="cb78-495"><a href="#cb78-495" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(output,</span>
+<span id="cb78-496"><a href="#cb78-496" aria-hidden="true" tabindex="-1"></a>    subsample)</span>
+<span id="cb78-497"><a href="#cb78-497" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb78-498"><a href="#cb78-498" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb78-499"><a href="#cb78-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-502"><a href="#cb78-502" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-503"><a href="#cb78-503" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>output, <span class="fu">aes</span>(<span class="at">x=</span>n, <span class="at">y=</span>samp_dist_mean)) <span class="sc">+</span></span>
+<span id="cb78-504"><a href="#cb78-504" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb78-505"><a href="#cb78-505" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span> reps) <span class="sc">+</span></span>
+<span id="cb78-506"><a href="#cb78-506" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Sample Size"</span>) <span class="sc">+</span></span>
+<span id="cb78-507"><a href="#cb78-507" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mean"</span>) <span class="sc">+</span></span>
+<span id="cb78-508"><a href="#cb78-508" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fl">6.0</span>, <span class="fl">6.5</span>)</span>
+<span id="cb78-509"><a href="#cb78-509" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>output, <span class="fu">aes</span>(<span class="at">x=</span>n, <span class="at">y=</span>samp_dist_se)) <span class="sc">+</span></span>
+<span id="cb78-510"><a href="#cb78-510" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb78-511"><a href="#cb78-511" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span> reps) <span class="sc">+</span></span>
+<span id="cb78-512"><a href="#cb78-512" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Sample Size"</span>) <span class="sc">+</span></span>
+<span id="cb78-513"><a href="#cb78-513" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"SE"</span>) <span class="sc">+</span></span>
+<span id="cb78-514"><a href="#cb78-514" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="fl">0.5</span>)</span>
+<span id="cb78-515"><a href="#cb78-515" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> output, <span class="fu">aes</span>(<span class="at">x =</span> n)) <span class="sc">+</span></span>
+<span id="cb78-516"><a href="#cb78-516" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> samp_dist_mean <span class="sc">+</span> samp_dist_se), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb78-517"><a href="#cb78-517" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> samp_dist_mean)) <span class="sc">+</span></span>
+<span id="cb78-518"><a href="#cb78-518" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> samp_dist_mean <span class="sc">-</span> samp_dist_se), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb78-519"><a href="#cb78-519" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>( <span class="sc">~</span> reps) <span class="sc">+</span></span>
+<span id="cb78-520"><a href="#cb78-520" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Sample Size"</span>) <span class="sc">+</span></span>
+<span id="cb78-521"><a href="#cb78-521" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mean ± SE"</span>) <span class="sc">+</span></span>
+<span id="cb78-522"><a href="#cb78-522" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fl">5.8</span>, <span class="fl">6.7</span>)</span>
+<span id="cb78-523"><a href="#cb78-523" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb78-524"><a href="#cb78-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-527"><a href="#cb78-527" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-528"><a href="#cb78-528" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb78-529"><a href="#cb78-529" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
+<span id="cb78-530"><a href="#cb78-530" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb78-531"><a href="#cb78-531" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(p1, p2, p3, <span class="at">nrow=</span><span class="dv">3</span>)</span>
+<span id="cb78-532"><a href="#cb78-532" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>cowplot)</span>
+<span id="cb78-533"><a href="#cb78-533" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-534"><a href="#cb78-534" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-535"><a href="#cb78-535" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Calculating SEs from the Population Variance {.unnumbered}</span></span>
+<span id="cb78-535"><a href="#cb78-535" aria-hidden="true" tabindex="-1"></a>Notice that as the number of replicates increases, our estimates of both the mean and SE become less variable, while as the sample size increases, our SE decreases (and our estimate of the mean thus becomes less uncertain), regardless of number of replicates.</span>
 <span id="cb78-536"><a href="#cb78-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-537"><a href="#cb78-537" aria-hidden="true" tabindex="-1"></a>Note that above, we estimated the **SE** by taking the standard deviation of a sampling distribution, where we derived that distribution by taking multiple samples from a perfectly known population. However, if we know the actual population variance ($\sigma^2$) or population standard deviation ($\sigma$), which we do in this case, we can actually calculate the expected **SE** for samples of a given size *directly*, without basing that on an empirical sampling distribution that we have derived from repeated sampling. This is because, mathematically, the variance of a fully realized sampling distribution (i.e., of taking all possible samples of size $n$ from a population) is equal to the variance of the population divided by the sample size. The square root of the variance of the sampling distribution is the standard deviation, i.e., the standard error.</span>
+<span id="cb78-537"><a href="#cb78-537" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Calculating SEs from the Population Variance {.unnumbered}</span></span>
 <span id="cb78-538"><a href="#cb78-538" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-539"><a href="#cb78-539" aria-hidden="true" tabindex="-1"></a>$$SE = \sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}$$</span>
+<span id="cb78-539"><a href="#cb78-539" aria-hidden="true" tabindex="-1"></a>Note that above, we estimated the **SE** by taking the standard deviation of a sampling distribution, where we derived that distribution by taking multiple samples from a perfectly known population. However, if we know the actual population variance ($\sigma^2$) or population standard deviation ($\sigma$), which we do in this case, we can actually calculate the expected **SE** for samples of a given size *directly*, without basing that on an empirical sampling distribution that we have derived from repeated sampling. This is because, mathematically, the variance of a fully realized sampling distribution (i.e., of taking all possible samples of size $n$ from a population) is equal to the variance of the population divided by the sample size. The square root of the variance of the sampling distribution is the standard deviation, i.e., the standard error.</span>
 <span id="cb78-540"><a href="#cb78-540" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-541"><a href="#cb78-541" aria-hidden="true" tabindex="-1"></a>where $\sigma^2$ is the population variance (and $\sigma$ is thus the population standard deviation) and $n$ is the sample size.</span>
+<span id="cb78-541"><a href="#cb78-541" aria-hidden="true" tabindex="-1"></a>$$SE = \sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}$$</span>
 <span id="cb78-542"><a href="#cb78-542" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-543"><a href="#cb78-543" aria-hidden="true" tabindex="-1"></a>We can compare the SEs for different sample sizes estimated above from our empirical sampling distributions with the SEs calculated directly from the population variance using the code below.</span>
+<span id="cb78-543"><a href="#cb78-543" aria-hidden="true" tabindex="-1"></a>where $\sigma^2$ is the population variance (and $\sigma$ is thus the population standard deviation) and $n$ is the sample size.</span>
 <span id="cb78-544"><a href="#cb78-544" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-547"><a href="#cb78-547" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-548"><a href="#cb78-548" aria-hidden="true" tabindex="-1"></a><span class="co"># select estimated SEs for different sample sizes with 1000 reps from our output tibble</span></span>
-<span id="cb78-549"><a href="#cb78-549" aria-hidden="true" tabindex="-1"></a>sampling_output <span class="ot">&lt;-</span> <span class="fu">filter</span>(output, reps <span class="sc">==</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span></span>
-<span id="cb78-550"><a href="#cb78-550" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(n, samp_dist_se)</span>
-<span id="cb78-551"><a href="#cb78-551" aria-hidden="true" tabindex="-1"></a><span class="co"># create a tibble of SEs based on the known population variance</span></span>
-<span id="cb78-552"><a href="#cb78-552" aria-hidden="true" tabindex="-1"></a>pop_output <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="st">"n"</span> <span class="ot">=</span> <span class="fu">numeric</span>(), <span class="st">"pop_se"</span> <span class="ot">=</span> <span class="fu">numeric</span>())</span>
-<span id="cb78-553"><a href="#cb78-553" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">10</span>, <span class="at">to =</span> <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">10</span>)) {</span>
-<span id="cb78-554"><a href="#cb78-554" aria-hidden="true" tabindex="-1"></a>  pop_se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">pop_var</span>(d<span class="sc">$</span>averageRating) <span class="sc">/</span> n)</span>
-<span id="cb78-555"><a href="#cb78-555" aria-hidden="true" tabindex="-1"></a>  pop_output <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(pop_output, <span class="fu">c</span>(<span class="at">n =</span> n, <span class="at">pop_se =</span> pop_se))</span>
-<span id="cb78-556"><a href="#cb78-556" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb78-557"><a href="#cb78-557" aria-hidden="true" tabindex="-1"></a>(compare <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(sampling_output, pop_output, <span class="at">by =</span> <span class="st">"n"</span>))</span>
-<span id="cb78-558"><a href="#cb78-558" aria-hidden="true" tabindex="-1"></a><span class="co"># the sample_dist_se and pop_se columns should be very close in value!</span></span>
-<span id="cb78-559"><a href="#cb78-559" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-560"><a href="#cb78-560" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-561"><a href="#cb78-561" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Estimating SEs from a Single Sample {.unnumbered}</span></span>
+<span id="cb78-545"><a href="#cb78-545" aria-hidden="true" tabindex="-1"></a>We can compare the SEs for different sample sizes estimated above from our empirical sampling distributions with the SEs calculated directly from the population variance using the code below.</span>
+<span id="cb78-546"><a href="#cb78-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-549"><a href="#cb78-549" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-550"><a href="#cb78-550" aria-hidden="true" tabindex="-1"></a><span class="co"># select estimated SEs for different sample sizes with 1000 reps from our output tibble</span></span>
+<span id="cb78-551"><a href="#cb78-551" aria-hidden="true" tabindex="-1"></a>sampling_output <span class="ot">&lt;-</span> <span class="fu">filter</span>(output, reps <span class="sc">==</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb78-552"><a href="#cb78-552" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(n, samp_dist_se)</span>
+<span id="cb78-553"><a href="#cb78-553" aria-hidden="true" tabindex="-1"></a><span class="co"># create a tibble of SEs based on the known population variance</span></span>
+<span id="cb78-554"><a href="#cb78-554" aria-hidden="true" tabindex="-1"></a>pop_output <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="st">"n"</span> <span class="ot">=</span> <span class="fu">numeric</span>(), <span class="st">"pop_se"</span> <span class="ot">=</span> <span class="fu">numeric</span>())</span>
+<span id="cb78-555"><a href="#cb78-555" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">10</span>, <span class="at">to =</span> <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">10</span>)) {</span>
+<span id="cb78-556"><a href="#cb78-556" aria-hidden="true" tabindex="-1"></a>  pop_se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">pop_var</span>(d<span class="sc">$</span>averageRating) <span class="sc">/</span> n)</span>
+<span id="cb78-557"><a href="#cb78-557" aria-hidden="true" tabindex="-1"></a>  pop_output <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(pop_output, <span class="fu">c</span>(<span class="at">n =</span> n, <span class="at">pop_se =</span> pop_se))</span>
+<span id="cb78-558"><a href="#cb78-558" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb78-559"><a href="#cb78-559" aria-hidden="true" tabindex="-1"></a>(compare <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(sampling_output, pop_output, <span class="at">by =</span> <span class="st">"n"</span>))</span>
+<span id="cb78-560"><a href="#cb78-560" aria-hidden="true" tabindex="-1"></a><span class="co"># the sample_dist_se and pop_se columns should be very close in value!</span></span>
+<span id="cb78-561"><a href="#cb78-561" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-562"><a href="#cb78-562" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-563"><a href="#cb78-563" aria-hidden="true" tabindex="-1"></a>Of course, in practice we often do not know the true population variance or standard deviation, nor do we have the opportunity to generate a sampling distribution empirically and then use this to estimate the **SE**. Instead, we collect typically just collect a single sample from a population about which we know very little.</span>
+<span id="cb78-563"><a href="#cb78-563" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Estimating SEs from a Single Sample {.unnumbered}</span></span>
 <span id="cb78-564"><a href="#cb78-564" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-565"><a href="#cb78-565" aria-hidden="true" tabindex="-1"></a>In these cases, we use some statistic about our single sample as a **point estimate** for the parameter value in our population (e.g., $\bar{x}$ for $\mu$), and we use the variance or standard deviation and size of that single sample to estimate the **SE** around that point estimate for our statistic of interest: i.e., **square root of (sample variance / sample size)** or **sample standard deviation / (square root of sample size)**</span>
+<span id="cb78-565"><a href="#cb78-565" aria-hidden="true" tabindex="-1"></a>Of course, in practice we often do not know the true population variance or standard deviation, nor do we have the opportunity to generate a sampling distribution empirically and then use this to estimate the **SE**. Instead, we collect typically just collect a single sample from a population about which we know very little.</span>
 <span id="cb78-566"><a href="#cb78-566" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-567"><a href="#cb78-567" aria-hidden="true" tabindex="-1"></a>$$SE = \sqrt{\frac{s^2}{n}} = \frac{s}{\sqrt{n}}$$</span>
+<span id="cb78-567"><a href="#cb78-567" aria-hidden="true" tabindex="-1"></a>In these cases, we use some statistic about our single sample as a **point estimate** for the parameter value in our population (e.g., $\bar{x}$ for $\mu$), and we use the variance or standard deviation and size of that single sample to estimate the **SE** around that point estimate for our statistic of interest: i.e., **square root of (sample variance / sample size)** or **sample standard deviation / (square root of sample size)**</span>
 <span id="cb78-568"><a href="#cb78-568" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-569"><a href="#cb78-569" aria-hidden="true" tabindex="-1"></a>where $s^2$ is the sample variance and $s$ is the sample standard deviation.</span>
+<span id="cb78-569"><a href="#cb78-569" aria-hidden="true" tabindex="-1"></a>$$SE = \sqrt{\frac{s^2}{n}} = \frac{s}{\sqrt{n}}$$</span>
 <span id="cb78-570"><a href="#cb78-570" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-571"><a href="#cb78-571" aria-hidden="true" tabindex="-1"></a><span class="fu">### CHALLENGE {.unnumbered}</span></span>
+<span id="cb78-571"><a href="#cb78-571" aria-hidden="true" tabindex="-1"></a>where $s^2$ is the sample variance and $s$ is the sample standard deviation.</span>
 <span id="cb78-572"><a href="#cb78-572" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-573"><a href="#cb78-573" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Write your own function to calculate the **standard error of the mean** for a vector of values representing a single sample of observations from a population. You can use either your own function for the sample variance that you created above or the built-in `var()` function. There are, of course, several ways you could do this. Then, use your new function with `summarize()` and `sample_n()` to extract a single sample of size "n=100" from **d** and calculate an estimate of the population SE for that sample size.</span>
+<span id="cb78-573"><a href="#cb78-573" aria-hidden="true" tabindex="-1"></a><span class="fu">### CHALLENGE {.unnumbered}</span></span>
 <span id="cb78-574"><a href="#cb78-574" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-577"><a href="#cb78-577" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-578"><a href="#cb78-578" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb78-579"><a href="#cb78-579" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Show Code"</span></span>
-<span id="cb78-580"><a href="#cb78-580" aria-hidden="true" tabindex="-1"></a><span class="co">#| attr.output: '.details summary="Show Output"'</span></span>
-<span id="cb78-581"><a href="#cb78-581" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
-<span id="cb78-582"><a href="#cb78-582" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
-<span id="cb78-583"><a href="#cb78-583" aria-hidden="true" tabindex="-1"></a>my_se1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {<span class="fu">sqrt</span>(<span class="fu">sample_var</span>(x) <span class="sc">/</span> <span class="fu">length</span>(x))}</span>
-<span id="cb78-584"><a href="#cb78-584" aria-hidden="true" tabindex="-1"></a>my_se2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {<span class="fu">sqrt</span>(<span class="fu">var</span>(x) <span class="sc">/</span> <span class="fu">length</span>(x))}</span>
-<span id="cb78-585"><a href="#cb78-585" aria-hidden="true" tabindex="-1"></a>my_se3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {<span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(x))}</span>
-<span id="cb78-586"><a href="#cb78-586" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-587"><a href="#cb78-587" aria-hidden="true" tabindex="-1"></a>new_sample <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(d, <span class="at">size =</span> n)</span>
-<span id="cb78-588"><a href="#cb78-588" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(</span>
-<span id="cb78-589"><a href="#cb78-589" aria-hidden="true" tabindex="-1"></a>  new_sample,</span>
-<span id="cb78-590"><a href="#cb78-590" aria-hidden="true" tabindex="-1"></a>  <span class="at">se1 =</span> <span class="fu">my_se1</span>(averageRating),</span>
-<span id="cb78-591"><a href="#cb78-591" aria-hidden="true" tabindex="-1"></a>  <span class="at">se2 =</span> <span class="fu">my_se2</span>(averageRating),</span>
-<span id="cb78-592"><a href="#cb78-592" aria-hidden="true" tabindex="-1"></a>  <span class="at">se3 =</span> <span class="fu">my_se3</span>(averageRating)</span>
-<span id="cb78-593"><a href="#cb78-593" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb78-594"><a href="#cb78-594" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-595"><a href="#cb78-595" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-596"><a href="#cb78-596" aria-hidden="true" tabindex="-1"></a>The package {sciplot} includes the function, <span class="in">`se()`</span>, for calculating standard errors (as do others).</span>
+<span id="cb78-575"><a href="#cb78-575" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Write your own function to calculate the **standard error of the mean** for a vector of values representing a single sample of observations from a population. You can use either your own function for the sample variance that you created above or the built-in `var()` function. There are, of course, several ways you could do this. Then, use your new function with `summarize()` and `sample_n()` to extract a single sample of size "n=100" from **d** and calculate an estimate of the population SE for that sample size.</span>
+<span id="cb78-576"><a href="#cb78-576" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-579"><a href="#cb78-579" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-580"><a href="#cb78-580" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb78-581"><a href="#cb78-581" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Show Code"</span></span>
+<span id="cb78-582"><a href="#cb78-582" aria-hidden="true" tabindex="-1"></a><span class="co">#| attr.output: '.details summary="Show Output"'</span></span>
+<span id="cb78-583"><a href="#cb78-583" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb78-584"><a href="#cb78-584" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb78-585"><a href="#cb78-585" aria-hidden="true" tabindex="-1"></a>my_se1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {<span class="fu">sqrt</span>(<span class="fu">sample_var</span>(x) <span class="sc">/</span> <span class="fu">length</span>(x))}</span>
+<span id="cb78-586"><a href="#cb78-586" aria-hidden="true" tabindex="-1"></a>my_se2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {<span class="fu">sqrt</span>(<span class="fu">var</span>(x) <span class="sc">/</span> <span class="fu">length</span>(x))}</span>
+<span id="cb78-587"><a href="#cb78-587" aria-hidden="true" tabindex="-1"></a>my_se3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {<span class="fu">sd</span>(x) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(x))}</span>
+<span id="cb78-588"><a href="#cb78-588" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-589"><a href="#cb78-589" aria-hidden="true" tabindex="-1"></a>new_sample <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(d, <span class="at">size =</span> n)</span>
+<span id="cb78-590"><a href="#cb78-590" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(</span>
+<span id="cb78-591"><a href="#cb78-591" aria-hidden="true" tabindex="-1"></a>  new_sample,</span>
+<span id="cb78-592"><a href="#cb78-592" aria-hidden="true" tabindex="-1"></a>  <span class="at">se1 =</span> <span class="fu">my_se1</span>(averageRating),</span>
+<span id="cb78-593"><a href="#cb78-593" aria-hidden="true" tabindex="-1"></a>  <span class="at">se2 =</span> <span class="fu">my_se2</span>(averageRating),</span>
+<span id="cb78-594"><a href="#cb78-594" aria-hidden="true" tabindex="-1"></a>  <span class="at">se3 =</span> <span class="fu">my_se3</span>(averageRating)</span>
+<span id="cb78-595"><a href="#cb78-595" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb78-596"><a href="#cb78-596" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-597"><a href="#cb78-597" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-600"><a href="#cb78-600" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-601"><a href="#cb78-601" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb78-602"><a href="#cb78-602" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sciplot)</span>
-<span id="cb78-603"><a href="#cb78-603" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(new_sample,</span>
-<span id="cb78-604"><a href="#cb78-604" aria-hidden="true" tabindex="-1"></a>  <span class="at">se4 =</span> sciplot<span class="sc">::</span><span class="fu">se</span>(averageRating)</span>
-<span id="cb78-605"><a href="#cb78-605" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb78-606"><a href="#cb78-606" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>sciplot)</span>
-<span id="cb78-607"><a href="#cb78-607" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-608"><a href="#cb78-608" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-611"><a href="#cb78-611" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb78-612"><a href="#cb78-612" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb78-613"><a href="#cb78-613" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>mosaic)</span>
-<span id="cb78-614"><a href="#cb78-614" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb78-615"><a href="#cb78-615" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-616"><a href="#cb78-616" aria-hidden="true" tabindex="-1"></a>&lt;hr&gt;</span>
+<span id="cb78-598"><a href="#cb78-598" aria-hidden="true" tabindex="-1"></a>The package {sciplot} includes the function, <span class="in">`se()`</span>, for calculating standard errors (as do others).</span>
+<span id="cb78-599"><a href="#cb78-599" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-602"><a href="#cb78-602" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-603"><a href="#cb78-603" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb78-604"><a href="#cb78-604" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sciplot)</span>
+<span id="cb78-605"><a href="#cb78-605" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(new_sample,</span>
+<span id="cb78-606"><a href="#cb78-606" aria-hidden="true" tabindex="-1"></a>  <span class="at">se4 =</span> sciplot<span class="sc">::</span><span class="fu">se</span>(averageRating)</span>
+<span id="cb78-607"><a href="#cb78-607" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb78-608"><a href="#cb78-608" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>sciplot)</span>
+<span id="cb78-609"><a href="#cb78-609" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb78-610"><a href="#cb78-610" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-613"><a href="#cb78-613" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb78-614"><a href="#cb78-614" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb78-615"><a href="#cb78-615" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(package<span class="sc">:</span>mosaic)</span>
+<span id="cb78-616"><a href="#cb78-616" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb78-617"><a href="#cb78-617" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-618"><a href="#cb78-618" aria-hidden="true" tabindex="-1"></a><span class="fu">## Concept Review {.unnumbered}</span></span>
+<span id="cb78-618"><a href="#cb78-618" aria-hidden="true" tabindex="-1"></a>&lt;hr&gt;</span>
 <span id="cb78-619"><a href="#cb78-619" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-620"><a href="#cb78-620" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\mu, \bar{x}$ = population mean, sample mean</span>
+<span id="cb78-620"><a href="#cb78-620" aria-hidden="true" tabindex="-1"></a><span class="fu">## Concept Review {.unnumbered}</span></span>
 <span id="cb78-621"><a href="#cb78-621" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-622"><a href="#cb78-622" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>$\bar{x}$ is an estimator for $\mu$</span>
+<span id="cb78-622"><a href="#cb78-622" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\mu, \bar{x}$ = population mean, sample mean</span>
 <span id="cb78-623"><a href="#cb78-623" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-624"><a href="#cb78-624" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\sigma^2, s^2$ = population variance, sample variance</span>
+<span id="cb78-624"><a href="#cb78-624" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>$\bar{x}$ is an estimator for $\mu$</span>
 <span id="cb78-625"><a href="#cb78-625" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-626"><a href="#cb78-626" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\sigma, s$ = population standard deviation, sample standard deviation</span>
+<span id="cb78-626"><a href="#cb78-626" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\sigma^2, s^2$ = population variance, sample variance</span>
 <span id="cb78-627"><a href="#cb78-627" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-628"><a href="#cb78-628" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>$s$ is an estimator for $\sigma$</span>
+<span id="cb78-628"><a href="#cb78-628" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\sigma, s$ = population standard deviation, sample standard deviation</span>
 <span id="cb78-629"><a href="#cb78-629" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-630"><a href="#cb78-630" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sample variance and standard deviation: <span class="in">`var()`</span>, <span class="in">`sd()`</span></span>
+<span id="cb78-630"><a href="#cb78-630" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>$s$ is an estimator for $\sigma$</span>
 <span id="cb78-631"><a href="#cb78-631" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-632"><a href="#cb78-632" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>These are measures of the variation/spread in a **sample**</span>
+<span id="cb78-632"><a href="#cb78-632" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sample variance and standard deviation: <span class="in">`var()`</span>, <span class="in">`sd()`</span></span>
 <span id="cb78-633"><a href="#cb78-633" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-634"><a href="#cb78-634" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sampling distributions and standard errors</span>
+<span id="cb78-634"><a href="#cb78-634" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>These are measures of the variation/spread in a **sample**</span>
 <span id="cb78-635"><a href="#cb78-635" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-636"><a href="#cb78-636" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Mean of the sampling distribution of $\bar{x}$ is an estimate of $\mu$</span>
+<span id="cb78-636"><a href="#cb78-636" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sampling distributions and standard errors</span>
 <span id="cb78-637"><a href="#cb78-637" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-638"><a href="#cb78-638" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Standard deviation of the sampling distribution of $\bar{x}$ = $\frac{\sigma}{\sqrt{n}}$ = standard error</span>
+<span id="cb78-638"><a href="#cb78-638" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Mean of the sampling distribution of $\bar{x}$ is an estimate of $\mu$</span>
 <span id="cb78-639"><a href="#cb78-639" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-640"><a href="#cb78-640" aria-hidden="true" tabindex="-1"></a><span class="ss">      - </span>This is a measure of the variation/spread in a **sample statistic**</span>
+<span id="cb78-640"><a href="#cb78-640" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Standard deviation of the sampling distribution of $\bar{x}$ = $\frac{\sigma}{\sqrt{n}}$ = standard error</span>
 <span id="cb78-641"><a href="#cb78-641" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-642"><a href="#cb78-642" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Standard errors: <span class="in">`sciplot::se()`</span></span>
+<span id="cb78-642"><a href="#cb78-642" aria-hidden="true" tabindex="-1"></a><span class="ss">      - </span>This is a measure of the variation/spread in a **sample statistic**</span>
 <span id="cb78-643"><a href="#cb78-643" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-644"><a href="#cb78-644" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Using the <span class="in">`sample_n()`</span> function from {dplyr} and <span class="in">`do() * &lt;function&gt;`</span> construction from {mosaic} to generate sampling distributions</span>
+<span id="cb78-644"><a href="#cb78-644" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Standard errors: <span class="in">`sciplot::se()`</span></span>
+<span id="cb78-645"><a href="#cb78-645" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-646"><a href="#cb78-646" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Using the <span class="in">`sample_n()`</span> function from {dplyr} and <span class="in">`do() * &lt;function&gt;`</span> construction from {mosaic} to generate sampling distributions</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

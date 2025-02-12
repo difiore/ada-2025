@@ -102,7 +102,7 @@ sum_of_squares <- function(x){sum(x^2) - length(x)*mean(x)^2}
 sum_of_squares(x)
 ```
 
-A shortcut to calculate the **sum of squares** for a vector, **x**, that does not actually require calculating `mean(x)` is the `(sum of the squared values in the dataset) minus the (square of the summed values) / n`, or...
+A shortcut to calculate the **sum of squares** for a vector, **x**, that does not actually require calculating `mean(x)` is the *(sum of the squared values in the dataset) minus the (square of the summed values) / n*, or...
 
 $$\sum\limits_{i=1}^{k}(x^2) - \frac{(\sum\limits_{i=1}^{k} x)^2}{n}$$
 
@@ -173,9 +173,11 @@ plotDist("norm", mean=mu, sd=sigma, xlab="x", ylab="Frequency")
 
 In the following code block, we first set up a plot window to hold the results of our simulations and plot a line for the known population variance (i.e., the square of $\sigma$, the standard deviation). We then use nested `for` loops to iterate the process of drawing samples of a specific size, $n$, from the specified distribution. We do this for samples of size $n$ = 5, 10, 15... up to 100, and we draw out 50 replicates of each sample size. Recall from [**Module 11**](#module-11) that the structure for `for` loops is:
 
-    for (<index> in <range>){
-      <code to execute>
-    }
+````
+for (<index> in <range>){
+  <code to execute>
+}
+````
 
 ```{r}
 #| fig-height: 4
