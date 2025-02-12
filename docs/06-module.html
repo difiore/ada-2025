@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.548">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Applied Data Analysis - 6&nbsp; Reproducible Research</title>
+<title>6&nbsp; Reproducible Research – Applied Data Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -119,13 +119,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-module.html">Part I - Using <strong><em>R</em></strong> and <strong><em>RStudio</em></strong></a></li><li class="breadcrumb-item"><a href="./06-module.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Reproducible Research</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -135,7 +135,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Applied Data Analysis</a> 
     </div>
@@ -155,9 +155,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Preliminaries</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -202,9 +202,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Part I - Using <strong><em>R</em></strong> and <strong><em>RStudio</em></strong></span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -279,9 +279,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Part II - Statistics and Inference</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -344,9 +344,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
  <span class="menu-text">Exercises</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -379,9 +379,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">Assignments</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -396,9 +396,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
  <span class="menu-text">References</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -468,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="objectives" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="objectives"><span class="header-section-number">6.1</span> Objectives</h2>
 <blockquote class="blockquote">
-<p>In the last module, we introduced the concept of version control and looked at tools for interfacing between between a repository maintained remotely on <strong><em>GitHub</em></strong> and a local repository, using the version control system, <strong><em>git</em></strong>. Now, we are going to learn how we can use <strong><em>RStudio</em></strong> to manage the <strong><em>git/GitHub</em></strong> version control workflow. An additional objective of this module is to promote the ideas of <strong>reproducible research</strong> practice and <strong>literate programming</strong> by introducing you to <strong>RMarkdown</strong> and <strong>Quarto</strong>, which are both plain-text document formats that allow us to mix text and code in a flexible way and to generate a variety of nicely rendered outputs (e.g., websites, books, PDFs, presentations, and other media formats).</p>
+<p>In the last module, we introduced the concept of version control and looked at tools for interfacing between between a repository maintained remotely on <strong><em>GitHub</em></strong> and a local repository, using the version control system, <strong><em>git</em></strong>. Now, we are going to learn how we can use <strong><em>RStudio</em></strong> to manage the <strong><em>git/GitHub</em></strong> version control workflow. An additional objective of this module is to promote the ideas of <strong>reproducible research</strong> practice and <strong>literate programming</strong> by introducing you to <strong>Quarto</strong> and <strong>RMarkdown</strong>, which are both plain-text document formats that allow us to mix text and code in a flexible way and to generate a variety of nicely rendered outputs (e.g., websites, books, PDFs, presentations, and other media formats).</p>
 </blockquote>
 </section>
 <section id="preliminaries" class="level2" data-number="6.2">
@@ -490,13 +490,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Reproducible research</strong> refers to the practice of conducting and disseminating scientific research in a way that makes data analysis (and scientific claims more generally) more transparent and repeatable Academics already have means of sharing <em>methods</em> and <em>results</em> generally, through publications (although perhaps typically in less than complete detail), and we can share the data on which those our analyses are based by depositing them in some form of online repository (e.g., via “supplementary information” that accompanies an article or by posting datasets to repositories like the <a href="http://datadryad.org/"><strong>Dryad Digital Repository</strong></a> or <a href="https://figshare.com/"><strong>Figshare</strong></a>.</p>
 <p>But how do we share the details of exactly <em>how</em> we did an analysis? And how can we ensure that it is possible for us to go back, ourselves, and replicate a particular analysis or data transformation? One solution is to integrate detailed text describing a workflow and analytical source code (such as <strong><em>R</em></strong> scripts) <strong>together in the same document</strong>.</p>
 <p>This idea of tying together narrative, logic, specific code, and data (or references to them) in a single document stems from the principle of <a href="https://en.wikipedia.org/wiki/Literate_programming"><strong>literate programming</strong></a> developed by Donald Knuth. Applied to scientific practice, the concept of literate programming means documenting both the logic behind and analysis <strong><em>and</em></strong> the code used to implement that analysis using computer software. This documentation allows researchers to return to and re-examine their own thought processes at any later time, and also allows them to share their thought processes so that others can understand how an analysis was performed. The upshot is that our scholarship can be better understood, recreated, and independently verified.</p>
-<p>This is exactly the point of an <strong>RMarkdown</strong> or <strong>Quarto</strong> document and of other, similar document formats (e.g., <strong><em>R</em></strong> <strong>Notebooks</strong>, <strong>iPython Notebooks</strong>, or <strong>Julia Notebooks</strong>).</p>
+<p>This is exactly the point of a <strong>Quarto</strong> or <strong>RMarkdown</strong> document and of other, similar document formats (e.g., <strong><em>R</em></strong> <strong>Notebooks</strong>, <strong>iPython Notebooks</strong>, or <strong>Julia Notebooks</strong>).</p>
 <p>So, how does this work?</p>
 <p>First, as we saw in the last module, <a href="https://en.wikipedia.org/wiki/Markdown"><strong>Markdown</strong></a>, is simply a formal way of styling a plain text document so that it can be easily rendered into HTML or PDF files for sharing or publishing. It is based on using some simple formatting and special characters to tag pieces of text such that a parser knows how to convert a plain text document into HTML or PDF. <a href="https://daringfireball.net/projects/markdown/syntax">This link</a> takes you to a classic description of <strong>Markdown</strong>, its syntax, and the philosophy behind it written by John Gruber, <strong>Markdown</strong>’s creator. There are now several different “dialects” of <strong>Markdown</strong> that have been developed, derived from Gruber’s original suggestions, including a specific one used on <strong><em>GitHub</em></strong> called “GitHub Flavored Markdown”, or <strong><em>GFM</em></strong>. A guide to this dialect is provided as a PDF <a href="https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf">here</a> and is available online at <a href="https://github.github.com/gfm/">this link</a>.</p>
 <p><strong>RMarkdown</strong> and <strong>Quarto</strong> documents are very similar extensions of standard <strong>Markdown</strong> that allows you to embed chunks of <strong><em>R</em></strong> code (or code blocks of other programming languages, e.g., <strong><em>Python</em></strong>, <strong><em>Latex</em></strong>), along with additional parsing instructions and options for running code, in a plain text file. During the parsing and rendering (or “knitting”) stage, when the text file is being converted to HTML or PDF format, the output of running the embedded code can also be included.</p>
-<p><strong>RMarkdown</strong> uses the package {knitr} to produce intermediate files that can then be translated into a variety of formats, including HTML, traditional <strong>Markdown</strong>, PDFs, MS Word documents, web presentations, and others. A cheatsheet on <strong>RMarkdown</strong> syntax (which, again, is very similar to <strong>Markdown</strong>) can be found <a href="https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf">here</a>. <strong>Quarto</strong> documents use a separate piece of independent software, <strong>quarto</strong> (along with {knitr}, in some cases), to do the same thing. An overview and useful definitive guide to all you can do with <strong>Quarto</strong> can be found <a href="https://quarto.org/docs/guide/">here</a></p>
-<p>It is important to stress that <strong>Markdown</strong> (“.md”), <strong>RMarkdown</strong> (“.Rmd”) and <strong>Quarto</strong> (“.qmd”) files ARE JUST PLAIN TEXT files! They are easy to work with, easy to share, easy to edit, easy to put under version control, and robust to changes in proprietary file formats!</p>
-<p>As a demonstration of reproducible research workflow and best practices, we are going to create a new <strong><em>R</em></strong> project and corresponding repository that we will track with version control using <strong><em>git</em></strong>. Within that project, we then are going to create an <strong>RMarkdown</strong> document in which you can take notes or practice coding during class today.</p>
+<p><strong>RMarkdown</strong> uses the package {knitr} to produce intermediate files that can then be translated into a variety of formats, including HTML, traditional <strong>Markdown</strong>, PDFs, MS Word documents, web presentations, and others. A cheatsheet on <strong>RMarkdown</strong> syntax (which, again, is very similar to <strong>Markdown</strong>) can be found <a href="https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf">here</a>. <strong>Quarto</strong> documents use a separate piece of independent software, <strong>quarto</strong> (along with the <strong><em>R</em></strong> package {knitr}, in some cases), to do the same thing. An overview and useful definitive guide to all you can do with <strong>Quarto</strong> can be found <a href="https://quarto.org/docs/guide/">here</a></p>
+<p>It is important to stress that <strong>Markdown</strong> (“.md”), <strong>Quarto</strong> (“.qmd”), and <strong>RMarkdown</strong> (“.Rmd”) documents ARE JUST PLAIN TEXT files! They are easy to work with, easy to share, easy to edit, easy to put under version control, and robust to changes in proprietary file formats!</p>
+<p>As a demonstration of reproducible research workflow and best practices, we are going to create a new <strong><em>R</em></strong> project and corresponding repository that we will track with version control using <strong><em>git</em></strong>. Within that project, we then are going to create an <strong>Quarto</strong> document in which you can take notes or practice coding during class today.</p>
 <p>As we have seen already, <strong><em>git</em></strong>, at its heart, is a command-line tool, but both local (on your computer) and hosted (e.g., on <strong><em>GitHub</em></strong>) <strong><em>git</em></strong> repositories can be managed using a dedicated <strong><em>git</em></strong> <em>client GUI</em>, such as <strong><em>GitHub Desktop</em></strong>, <strong><em>GitUp</em></strong>, <strong><em>GitKraken</em></strong>, <strong><em>SourceTree</em></strong>, or a host of others. Importantly for us, though, <strong><em>RStudio</em></strong> is designed to also function as a powerful <strong><em>git</em></strong> client. We will explore several ways of setting up <strong><em>RStudio</em></strong> to manage both local and remote copies of a <strong><em>git</em></strong> repository and of keep them in sync.</p>
 <blockquote class="blockquote">
 <p><strong>NOTE:</strong> See also Chapters 8 and 12 of the web book <a href="https://happygitwithr.com/"><em>Happy Git and GitHub for the useR</em></a> for more information on managing <strong><em>git</em></strong> and <strong><em>GitHub</em></strong> through <strong><em>RStudio</em></strong>.</p>
@@ -792,9 +792,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>NOTE:</strong> It is important that you run these lines of code from within the directory that you wish to push to <strong><em>GitHub</em></strong>. When you open a new terminal or shell from within <strong><em>RStudio</em></strong>, you <strong>should</strong> be in the correct directory, as those processes open the shell in the current working directory. If not, though, use shell commands (i.e., <code>cd</code>) to navigate into the correct directory.</p>
 </blockquote>
 <p>At the shell prompt, enter the lines of code you copied.</p>
-<pre><code>git remote add origin https://github.com/&lt;your user name&gt;/&lt;your repository name&gt;.git
-git branch -M main
-git push -u origin main</code></pre>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/<span class="op">&lt;</span>your user name<span class="op">&gt;</span>/<span class="op">&lt;</span>your repository name<span class="op">&gt;</span>.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-M</span> main</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The first line tells <strong><em>git</em></strong> the remote URL that you are going to push to, the second makes sure you are on the <code>main</code> branch of the repository, and the third pushes your local repository <code>main</code> branch up to the remote <code>main</code> branch.</p>
 <p><strong>Congratulations!</strong> You have now pushed commits from a local repository to <strong><em>GitHub</em></strong>, and you should be able to see those files in your remote <strong><em>GitHub</em></strong> repository online. The “Pull” (blue down arrow) and “Push” (green up arrow) buttons in <strong><em>RStudio</em></strong> should now also work.</p>
 <blockquote class="blockquote">
@@ -821,7 +823,7 @@ git push -u origin main</code></pre>
 <section id="working-with-projects-in-rstudio" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="working-with-projects-in-rstudio"><span class="header-section-number">6.5</span> Working with Projects in <strong><em>RStudio</em></strong></h2>
 <p>Once you have a project set up in <strong><em>RStudio</em></strong> and under version control, <strong><em>git</em></strong> will be watching your local project directory for any changes that you might make to what is contained in that directory or to the files therein. For example, if you add a file to the directory, it will show up in the <em>Files</em> tab, and if you delete a file, it will disappear from that list. Thus, you can drag and drop files and directories into and out of the project repo and <strong><em>git</em></strong> will keep track of them.</p>
-<p>Now, you can edit existing files in the repository (e.g., the “README.md” file), create one or more new scripts (“.R”), <strong>RMarkdown</strong> (“.Rmd”) files, or <strong>Quarto</strong> (“.qmd”) documents, add other files and folders (e.g., data files) to your repository and <strong>git</strong> will keept track of them.</p>
+<p>Now, you can edit existing files in the repository (e.g., the “README.md” file), create one or more new scripts (“.R”), <strong>Quarto</strong> (“.qmd”) documents, <strong>RMarkdown</strong> (“.Rmd”) documents, or add other files and folders (e.g., data files) to your repository and <strong>git</strong> will keept track of them.</p>
 <section id="modifying-local-files" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="modifying-local-files">Modifying Files Locally</h3>
 <p>Within <strong><em>RStudio</em></strong>, click on the “README.md” file to open it in the text editor panel of the IDE. Make some changes to this file (e.g., add the line, “And here is some new text I am adding in the RStudio IDE.”) and then save your changes. When you do, the “README.md” file should show up in the <em>Git</em> tab with a blue “M” next to it, indicating that it has been “modified”.</p>
@@ -901,7 +903,36 @@ git push -u origin main</code></pre>
 </section>
 <section id="challenge" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="challenge">CHALLENGE</h3>
-<p>Create and save a completely new text document in your current working directory/test repository - the content does not matter… be creative and try some markdown formatting! Save it as a file with the extension “.md” (for “markdown”), then commit that file to the local clone of your repository and push it from your local repository up to the <code>main</code> branch on <strong><em>GitHub</em></strong>.</p>
+<p>Create and save a completely new <strong>Quarto</strong> (“.qmd”), <strong>RMarkdown</strong> (“.Rmd”), markdown, or plain text document in your current working directory/test repository by selecting <strong>File &gt; New File</strong> and then picking the file type of your choice. If you create a markdown or plain text file, a blank document will open, while if you create a <strong>Quarto</strong> or <strong>RMarkdown</strong> (“.Rmd”) document, a dialog box will open that allows you set such things as the title and author for your document and a choice of output format for when you choose to “render” (for <strong>Quarto</strong> documents) or “knit” (for <strong>RMarkdown</strong> documents) the file you create.</p>
+<blockquote class="blockquote">
+<p><strong>NOTE:</strong> The process of rendering/knitting converts your file, with notes and code, into nicely formatted output (e.g., a web page, PDF document, or <strong>MS Word</strong> document) that can include the output of running your code.</p>
+</blockquote>
+<p>The image below shows the dialog box for creating a new <strong>Quarto</strong> document. Minimally, provide a title for your document. I also always uncheck the box for “Use visual markdown editor” because I prefer to work on my documents in “Source” mode (you can toggle between these options using the buttons at the top left of the document pane in <strong><em>RStudio</em></strong>).</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/new-quarto.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Once you have created a document, keep the header section (the piece at the top of the file between the <code>---</code> lines) but feel free to erase the rest of the pre-populated content that <strong><em>RStudio</em></strong> provides as a template and to fill it with your own notes and/or code blocks. The content does not matter… be creative and try some markdown formatting! Code blocks begin and end with three backticks, and the the programming language for the block (<strong><em>R</em></strong>, <strong><em>python</em></strong>, <strong><em>bash</em></strong>) is indicated in braces immediately following the opening st of backticks. Anything outside of code blocks can be formatted using markdown styling.</p>
+<p>For example…</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "My document"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu"># This is **markdown** formatted content.</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>The block below is an **R** code block.</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>Here is some more **markdown** content</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>After you have made some edits to your file, save it, commit it to the local clone of your repository, and push it from your local repository up to the <code>main</code> branch of your repository on <strong><em>GitHub</em></strong>.</p>
 </section>
 </section>
 <section id="deleting-repositories" class="level2" data-number="6.6">
@@ -917,7 +948,7 @@ git push -u origin main</code></pre>
 <section id="concept-review" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="concept-review">Concept Review</h2>
 <ul>
-<li><strong>RMarkdown</strong> documents</li>
+<li><strong>Quarto</strong> and <strong>RMarkdown</strong> documents</li>
 <li>Creating <strong>R Projects</strong> (3 ways)
 <ul>
 <li>Creating a project from a remote repository under version control (<strong>Method 1</strong>)</li>
@@ -972,18 +1003,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1015,7 +1035,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -1067,6 +1109,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1101,7 +1161,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1377,403 +1441,436 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./05-module.html" class="pagination-link  aria-label=" &lt;span="" of="" version="" control&lt;="" span&gt;"="">
+      <a href="./05-module.html" class="pagination-link" aria-label="Basics of Version Control">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Basics of Version Control</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./07-module.html" class="pagination-link" aria-label="<span class='chapter-number'>7</span>&nbsp; <span class='chapter-title'>Additional Data Structures in ***R***</span>">
+      <a href="./07-module.html" class="pagination-link" aria-label="Additional Data Structures in ***R***">
         <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Additional Data Structures in <strong><em>R</em></strong></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Reproducible Research {#module-06}</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objectives</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In the last module, we introduced the concept of version control and looked at tools for interfacing between between a repository maintained remotely on ***GitHub*** and a local repository, using the version control system, ***git***. Now, we are going to learn how we can use ***RStudio*** to manage the ***git/GitHub*** version control workflow. An additional objective of this module is to promote the ideas of **reproducible research** practice and **literate programming** by introducing you to **RMarkdown** and **Quarto**, which are both plain-text document formats that allow us to mix text and code in a flexible way and to generate a variety of nicely rendered outputs (e.g., websites, books, PDFs, presentations, and other media formats).</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Preliminaries</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>As a first step, if you haven't done so already in <span class="co">[</span><span class="ot">**Module 02**</span><span class="co">](#module-02)</span>, open the **Preferences** pane in ***RStudio*** (MacOS), go to the *Git/SVN* section, and make sure that the checkbox "Enable version control interface for RStudio projects" is selected. Alternatively, you can access the same dialog box by choosing **Global Options** from the **Tools** menu (MacOS and PC).</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/r-global-options.png"</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>In this dialog box, also confirm that the path to your ***git*** executable is filled in and correct. If you have already successfully installed ***git***, this **should** be filled with something like "/usr/bin/git" (on MacOS or Linux) or "C:<span class="sc">\\</span>Program Files<span class="sc">\\</span>Git<span class="sc">\\</span>bin<span class="sc">\\</span>git.exe" on Windows). If it is not, then you can try troubleshooting by following the recommendations in Chapters 13 and 14 of the web book <span class="co">[</span><span class="ot">*Happy Git and GitHub for the useR*</span><span class="co">](https://happygitwithr.com)</span>.</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Backstory</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>**Reproducible research** refers to the practice of conducting and disseminating scientific research in a way that makes data analysis (and scientific claims more generally) more transparent and repeatable Academics already have means of sharing *methods* and *results* generally, through publications (although perhaps typically in less than complete detail), and we can share the data on which those our analyses are based by depositing them in some form of online repository (e.g., via "supplementary information" that accompanies an article or by posting datasets to repositories like the [**Dryad Digital Repository**](http://datadryad.org/) or [**Figshare**](https://figshare.com/).</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>But how do we share the details of exactly *how* we did an analysis? And how can we ensure that it is possible for us to go back, ourselves, and replicate a particular analysis or data transformation? One solution is to integrate detailed text describing a workflow and analytical source code (such as ***R*** scripts) **together in the same document**.</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>This idea of tying together narrative, logic, specific code, and data (or references to them) in a single document stems from the principle of <span class="co">[</span><span class="ot">**literate programming**</span><span class="co">](https://en.wikipedia.org/wiki/Literate_programming)</span> developed by Donald Knuth. Applied to scientific practice, the concept of literate programming means documenting both the logic behind and analysis ***and*** the code used to implement that analysis using computer software. This documentation allows researchers to return to and re-examine their own thought processes at any later time, and also allows them to share their thought processes so that others can understand how an analysis was performed. The upshot is that our scholarship can be better understood, recreated, and independently verified.</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>This is exactly the point of an **RMarkdown** or **Quarto** document and of other, similar document formats (e.g., ***R*** **Notebooks**, **iPython Notebooks**, or **Julia Notebooks**).</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>So, how does this work?</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>First, as we saw in the last module, <span class="co">[</span><span class="ot">**Markdown**</span><span class="co">](https://en.wikipedia.org/wiki/Markdown)</span>, is simply a formal way of styling a plain text document so that it can be easily rendered into HTML or PDF files for sharing or publishing. It is based on using some simple formatting and special characters to tag pieces of text such that a parser knows how to convert a plain text document into HTML or PDF. <span class="co">[</span><span class="ot">This link</span><span class="co">](https://daringfireball.net/projects/markdown/syntax)</span> takes you to a classic description of **Markdown**, its syntax, and the philosophy behind it written by John Gruber, **Markdown**'s creator. There are now several different "dialects" of **Markdown** that have been developed, derived from Gruber's original suggestions, including a specific one used on ***GitHub*** called "GitHub Flavored Markdown", or ***GFM***. A guide to this dialect is provided as a PDF <span class="co">[</span><span class="ot">here</span><span class="co">](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)</span> and is available online at <span class="co">[</span><span class="ot">this link</span><span class="co">](https://github.github.com/gfm/)</span>.</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>**RMarkdown** and **Quarto** documents are very similar extensions of standard **Markdown** that allows you to embed chunks of ***R*** code (or code blocks of other programming languages, e.g., ***Python***, ***Latex***), along with additional parsing instructions and options for running code, in a plain text file. During the parsing and rendering (or "knitting") stage, when the text file is being converted to HTML or PDF format, the output of running the embedded code can also be included.</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>**RMarkdown** uses the package {knitr} to produce intermediate files that can then be translated into a variety of formats, including HTML, traditional **Markdown**, PDFs, MS Word documents, web presentations, and others. A cheatsheet on **RMarkdown** syntax (which, again, is very similar to **Markdown**) can be found [here](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf). **Quarto** documents use a separate piece of independent software, **quarto** (along with {knitr}, in some cases), to do the same thing. An overview and useful definitive guide to all you can do with **Quarto** can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://quarto.org/docs/guide/)</span></span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>It is important to stress that **Markdown** (".md"), **RMarkdown** (".Rmd") and **Quarto** (".qmd") files ARE JUST PLAIN TEXT files! They are easy to work with, easy to share, easy to edit, easy to put under version control, and robust to changes in proprietary file formats!</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>As a demonstration of reproducible research workflow and best practices, we are going to create a new ***R*** project and corresponding repository that we will track with version control using ***git***. Within that project, we then are going to create an **RMarkdown** document in which you can take notes or practice coding during class today.</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>As we have seen already, ***git***, at its heart, is a command-line tool, but both local (on your computer) and hosted (e.g., on ***GitHub***) ***git*** repositories can be managed using a dedicated ***git*** *client GUI*, such as ***GitHub Desktop***, ***GitUp***, ***GitKraken***, ***SourceTree***, or a host of others. Importantly for us, though, ***RStudio*** is designed to also function as a powerful ***git*** client. We will explore several ways of setting up ***RStudio*** to manage both local and remote copies of a ***git*** repository and of keep them in sync.</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** See also Chapters 8 and 12 of the web book [*Happy Git and GitHub for the useR*](https://happygitwithr.com/) for more information on managing ***git*** and ***GitHub*** through ***RStudio***.</span></span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## Organizing Work with ***R*** Projects</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>The easiest way to get ***RStudio*** to play nicely with ***git*** and ***GitHub*** for version control - and a recommended best practice - is to organize your work in ***RStudio*** using *projects*. You can think of an ***R*** *project* as a convenient workspace that is associated with its own working directory, data files, scripts, images, history log, etc. We might, for example, create a separate ***R*** project for each manuscript that we are working on.</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** Not surprisingly, the idea of an ***RStudio*** "project" (i.e., an organizing workspace and its associated files) and a "repo" (a directory that is under version control) go together nicely. It is, however, totally possible to create ***RStudio*** projects without having them be under version control, and it is also quite possible to use ***git*** or another VCS to track changes to files in a directory without there being an associated ***RStudio*** project!</span></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>Basically, creating an ***RStudio*** project means creating a special text file ("&lt;project name&gt;.Rproj") that stores settings for particular ***RStudio*** setup and session. When we open an ".Rproj" file, the *working directory* is automatically set to the *root directory for the project* (i.e., the directory in which the actual ".Rproj" file is stored), which makes organizing and navigating around the computer's filesystem, either from the command line or in ***R*** scripts within the project, much easier.</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="fu">### Workflows for Creating Projects {.unnumbered}</span></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>For the sake of security, reproducibility, and collaboration, it makes a lot of sense for us to have all of our data science/data analysis projects both be *under version control* (e.g., using ***git***) and *hosted remotely* on a secure and reliable platform (e.g., ***GitHub***) that we and collaborators can access from different locations. There are multiple ways we can accomplish this.</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>For example, we could begin by setting up a new repository remotely, as we did in <span class="co">[</span><span class="ot">**Module 05**</span><span class="co">](#module-05)</span>, and then "clone" it to our local computer and establish it as a version-controlled ***RStudio*** project. Alternatively, we could first create a new version-controlled ***RStudio*** project in a local directory and then push it up to ***GitHub*** or some other hosting site. <span class="co">[</span><span class="ot">For either of these scenarios, we could also begin with either a new (empty) repository or with one that already has files in it.</span><span class="co">]</span> We will go through all of these methods below, but I personally think the first process - beginning with a remote repository - is the easiest and most intuitive, but I describe all of these approaches further below.</span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **Method 1**: Create a new ***RStudio*** project by cloning from a remote repository {.unnumbered}</span></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>Perhaps the easiest way to get ***RStudio*** working nicely with ***git*** and ***GitHub*** is by creating a new repository on ***GitHub*** and then "cloning" this remote repository to a local computer and placing it under version control.</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** Before completing the following, you should make sure to **delete** any existing local version of the remote repository that you might have cloned previously, e.g., by moving it to the </span><span class="in">`Trash`</span><span class="at"> on MacOS or the </span><span class="in">`Recycle Bin`</span><span class="at"> on Windows. This is because if you try to clone a remote repository into an existing directory, you will get an error!</span></span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Step 1 {.unnumbered}</span></span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>First, as described in <span class="co">[</span><span class="ot">**Module 05**</span><span class="co">](#module-05)</span>, go to your user profile in ***GitHub*** and create a new repository.</span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>You will need to specify a repository name (with no spaces), whether it is a public or private repository, and whether to initialize the repository with one or more files already in it. I recommend initializing with both a "README" file and with a ".gitignore" file. You can also choose to use an ***R*** template to follow for the ".gitignore" file. The ".gitignore" file is simply a text document the provides ***git*** with a list of files that you ask it NOT to track changes to. These are typically either very large files (e.g., data files) or various hidden files that are either unnecessary or undesirable to track every single change to.</span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Once your repository is created, go to the green "Code" popdown menu and click the clipboard icon to copy the repository's HTTPS URL. This is the same process we used in <span class="co">[</span><span class="ot">**Module 05**</span><span class="co">](#module-05)</span> for cloning a remote repository, and the URL is likely to be <span class="in">`https://github.com/`</span> followed by <span class="in">`&lt;your user name&gt;/&lt;your repository name&gt;`</span>).</span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Step 2 {.unnumbered}</span></span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>From the **File** menu in ***RStudio***, choose **New Project** and select to "Checkout a project from a version control repository"...</span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** This step can also be done from the popdown menu located at the top right of the ***RStudio*** IDE.</span></span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-project-version-control.png"</span>)</span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Choose the top item, "Clone a project from a Git repository"...</span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-project-from-git.png"</span>)</span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In the subsequent dialog box, paste in the "Repository URL:" you copied in **Step 1**.</span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>You can choose what parent folder to clone the repository into using the "Create project as a subdirectory of:" field (e.g., <span class="in">`~/Development/Repos`</span>). In most cases, the "Project directory name:" field will be filled in automatically, as the name of the remote repository you are cloning.</span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/clone-git-repo.png"</span>)</span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>Hitting the "Create Project" button will download the repository from ***GitHub*** into a new directory on your local computer. ***RStudio*** will close and reopen, after which the working directory will be set to the new local repository directory, which you can confirm by typing `getwd()` at the ***R*** console prompt. The local directory is now set up to be tracked by ***git*** on your local computer and should be connected to ***GitHub***.</span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>Selecting the *Files* tab in ***RStudio*** will then show you all of the files in the newly created local repository, which should now contain a ".gitignore" file and an ".Rproj" file with the name of your project (e.g., "test-repo.Rproj"), in addition to the "README.md" file you created on ***GitHub***.</span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>You should now also see a "Git" tab in the upper right pane of the ***RStudio*** IDE, and that tab should list the ".Rproj" file associated with the status <span class="in">`?`</span>, indicating that it has not yet been added, committed, or synced with the remote repository. The other two files (".gitignore" and "README.md") are already in sync.</span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
-<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-test-repo.png"</span>)</span>
-<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Other Notes {.unnumbered}</span></span>
-<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>This process works identically if you want to clone a repo from ***GitHub*** that already has other files in it besides ".gitignore" and "README.md". In that case, ***RStudio*** will simply just create the ".Rproj" file and modify any existing ".gitignore" file to also include one or more other files that it recommends that ***git*** not track, e.g., ".Rproj.user". The new ".Rproj" file and modified ".gitignore" file, which were created locally, should appear under the "Git" tab with with the status <span class="in">`?`</span> until you add, commit, and push them.</span>
-<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>The process also works the same if you set up an empty repo on ***GitHub***, in which case you will have seen the window below immediately upon creating the repository:</span>
-<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
-<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/empty-repo.png"</span>)</span>
-<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a>Here, grabbing the URL from the "Quick setup" section and using that to set up a new project is ***RStudio*** is exactly the same process as we followed above.</span>
-<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** You could also, in a terminal window, navigate to where you want the remote project to be cloned and follow either the "... or create" or "... or push" instructions listed. Doing so will link a local directory to the remote repo you created on ***GitHub*** BUT you will then not have created that as an ***RStudio*** project and would need to follow up with other instructions below about creating a new project from an existing local directory.</span></span>
-<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **Method 2**: Creating a new ***RStudio*** project under version control in a new directory {.unnumbered}</span></span>
-<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In ***RStudio***, select **File \&gt; New project** and click <span class="in">`New Directory`</span>.</span>
-<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-project-new-directory.png"</span>)</span>
-<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Choose the project type as "New Project", then name the directory and choose where you would like it to be stored, checking the box marked <span class="in">`Create a git repository`</span>, and pressing "Create Project".</span>
-<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-project-type.png"</span>)</span>
-<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-project-create-new.png"</span>)</span>
-<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>***RStudio*** will create a new directory for you with an ".Rproj" file (with the name of your project) and a ".gitignore" file inside of it. This directory is now being tracked by ***git*** and ***RStudio***. You can now create and edit files in this new directory and stage and commit them locally directly from ***RStudio***. See the section below on ["Modifying Files Locally"](#modifying-local-files) in ***RStudio***.</span>
-<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** It is important to remember that this project is still only under *local version control*... you will not yet be able to push changes up to ***GitHub***. To do that, see the section below on ["Connecting a Local Repo to ***GitHub***"](#connect-local-repo-to-github).</span></span>
-<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **Method 3**: Creating a new ***RStudio*** project in an existing directory {.unnumbered}</span></span>
-<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a>If you have an existing directory on your local computer that is already under ***git*** version control, then you can simply create a new ***RStudio*** project for that directory, and version control features will be automatically enabled. To do this:</span>
-<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Execute the **New Project** command (from the **File** menu)</span>
-<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Choose to create a new project from an <span class="in">`Existing Directory`</span></span>
-<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-project-existing-directory.png"</span>)</span>
-<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Select the appropriate directory and then click **Create Project**</span>
-<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a>New ".Rproj" and ".gitignore" files will be created inside of that directory, and ***RStudio***'s version control features will then be available for that directory. Now, you can edit files currently in the directory or create new ones, as well as stage and commit them to the local repository directly from ***RStudio***. See the section below on ["Modifying Files Locally"](#modifying-local-files) in ***RStudio***.</span>
-<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a>If you create a new project for a directory that was *not* already under version control, you can enable version control within ***RStudio*** by choosing **Tools &gt; Project Options** to open the *Project Options* dialog box. Once there, go to the *Git/SVN* section and choose "Git" from the "Version control system" popdown menu, and then confirm that you want to set up version control for the project. You can also enable version control for a new project in a directory not formerly under version control by running the `use_git()` command from the {usethis} package. In either case, again, new ".Rproj" and ".gitignore" files will be created inside that directory, and ***RStudio***'s version control features will then be available.</span>
-<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/project-options.png"</span>)</span>
-<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb2-211"><a href="#cb2-211" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/switch-to-git.png"</span>)</span>
-<span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** Again, it is important to remember that local projects created via **Method 2** and **Method 3** are still only under *local version control*... you will not yet be able to push any additional files you add to the project directory or changes to local files up to ***GitHub***. To do that, see the section below on ["Connecting a Local Repo to ***GitHub***"](#connect-local-repo-to-github).</span></span>
-<span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a><span class="fu">### Connecting a Local Repo to ***GitHub*** {#connect-local-repo-to-github .unnumbered}</span></span>
-<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a>To create a new remote repository on ***GitHub*** into which you can push the contents of an *existing* local repository, e.g., one created by **Method 2** or **Method 3** above, so that it is also backed-up off site and accessible to you or collaborators working at different locations, you have a couple of different options (see also Chapter 17 of the web book <span class="co">[</span><span class="ot">*Happy Git and GitHub for the userR*</span><span class="co">](https://happygitwithr.com)</span>).</span>
-<span id="cb2-219"><a href="#cb2-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **Option 1**: Use the {usethis} package to create a new remote repository on ***GitHub*** from within ***RStudio*** {.unnumbered}</span></span>
-<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Step 1 {.unnumbered}</span></span>
-<span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make sure you have configured a ***GitHub*** Personal Access Token (PAT) using the process outlined in [**Module 5**](#module-05). Briefly...</span>
-<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Login to your ***GitHub*** account and go to the *Settings* tab. Then select <span class="in">`Developer Settings`</span> and then <span class="in">`Personal Access Tokens`</span>.</span>
-<span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Select <span class="in">`Generate new token`</span>, create a new "classic" token, and give it a nickname that reminds you of the intended purpose (e.g., "GitHub Access from R").</span>
-<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Pick a *scope* that confers the privileges you need, e.g., <span class="in">`repo`</span>, and then press the green "Generate Token" button.</span>
-<span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Copy this token to a safe place, and register this credential with ***git*** using one of the methods outlined in [**Module 5**](#module-05)</span>
-<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Step 2 {.unnumbered}</span></span>
-<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create a remote repository on ***GitHub*** and push a local repository to it: </span>
-<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Open the ***RStudio*** project that you want to create a remote repository for. This project needs to be under version control already and include at least one commit.</span>
-<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>At the ***R*** console prompt within the project's working directory, type <span class="in">`usethis::use_github(protocol="https")`</span></span>
-<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Answer the question about whether the suggested name for the remote repository is adequate.</span>
-<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>This should create a new repository on ***GitHub***, add it as a remote <span class="in">`origin/main`</span>, set up a tracking branch, and open it in your browser.</span>
-<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a>From within ***RStudio***, you can now add or edit files to the project, locally commit any changes you make to those files, and push them up to ***GitHub*** as described above.</span>
-<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **Option 2**: Set up a dummy remote repository on ***GitHub*** and push to it from within ***RStudio*** {.unnumbered}</span></span>
-<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Go to the ***GitHub*** website and create a new, empty repository. You can use the same name as that of the ***RStudio*** project you want to push up, or you can create a different one.</span>
-<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
-<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/create-test-repo-2.png"</span>)</span>
-<span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-253"><a href="#cb2-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-254"><a href="#cb2-254" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** In setting up the repository on ***GitHub***, you should choose **not** to initialize the remote repository you are going to be pushing to with either a "README" or ".gitignore" file!</span></span>
-<span id="cb2-255"><a href="#cb2-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-256"><a href="#cb2-256" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>From the *Git* tab in ***RStudio***, select the **New Branch** icon.</span>
-<span id="cb2-257"><a href="#cb2-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-260"><a href="#cb2-260" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-261"><a href="#cb2-261" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-262"><a href="#cb2-262" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb2-263"><a href="#cb2-263" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-remote-branch.png"</span>)</span>
-<span id="cb2-264"><a href="#cb2-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-265"><a href="#cb2-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-266"><a href="#cb2-266" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Click "Add remote", paste in the URL for your dummy remote repository in the text field, and type in "origin" for the name of the remote branch.</span>
-<span id="cb2-267"><a href="#cb2-267" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Click "Add". We should be back in the "New Branch" dialog box. Enter <span class="in">`main`</span> as the branch name (to push from the local <span class="in">`main`</span> branch to a remote <span class="in">`main`</span>), and make sure "Sync branch with remote" button is checked.</span>
-<span id="cb2-268"><a href="#cb2-268" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Click "Create" and in the next dialog box, choose "Overwrite". This should push your local repository <span class="in">`main`</span> branch up to the remote <span class="in">`main`</span> branch.</span>
-<span id="cb2-269"><a href="#cb2-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-270"><a href="#cb2-270" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **Option 3**: Set up a dummy remote repository on ***GitHub*** and push to it from a terminal shell {.unnumbered}</span></span>
-<span id="cb2-271"><a href="#cb2-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-272"><a href="#cb2-272" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>As in **Option 2**, go to the ***GitHub*** website and create a new, empty repository. You can use the same name as that of the ***RStudio*** project you want to push up, or you can create a different one.</span>
-<span id="cb2-273"><a href="#cb2-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-276"><a href="#cb2-276" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-277"><a href="#cb2-277" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-278"><a href="#cb2-278" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
-<span id="cb2-279"><a href="#cb2-279" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/create-test-repo-2.png"</span>)</span>
-<span id="cb2-280"><a href="#cb2-280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-281"><a href="#cb2-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-282"><a href="#cb2-282" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** Here, again, you should choose **not** to initialize the remote repository you are going to be pushing to with either a "README" or ".gitignore" file!</span></span>
-<span id="cb2-283"><a href="#cb2-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-284"><a href="#cb2-284" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>From the next screen, select the desired transfer protocol you want to use under the <span class="in">`Quick setup...`</span> option at the top (HTTPS or SSH). Then, scroll down to the option: <span class="in">`...or push an existing repository from the command line`</span>.</span>
-<span id="cb2-285"><a href="#cb2-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-288"><a href="#cb2-288" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-289"><a href="#cb2-289" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-290"><a href="#cb2-290" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
-<span id="cb2-291"><a href="#cb2-291" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/setup-test-repo.png"</span>)</span>
-<span id="cb2-292"><a href="#cb2-292" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-293"><a href="#cb2-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-294"><a href="#cb2-294" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Copy the lines of code listed there and then return to ***RStudio***.</span>
-<span id="cb2-295"><a href="#cb2-295" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In ***RStudio***, open the project that you want to push to ***GitHub*** and click **Tools &gt; Terminal &gt; New Terminal** or **Tools &gt; Shell...** to open a terminal window. Alternatively, open a separate terminal window and navigate to the root of the directory of the repository you wish to push.</span>
-<span id="cb2-296"><a href="#cb2-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-297"><a href="#cb2-297" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** It is important that you run these lines of code from within the directory that you wish to push to ***GitHub***. When you open a new terminal or shell from within ***RStudio***, you **should** be in the correct directory, as those processes open the shell in the current working directory. If not, though, use shell commands (i.e., </span><span class="in">`cd`</span><span class="at">) to navigate into the correct directory.</span></span>
-<span id="cb2-298"><a href="#cb2-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-299"><a href="#cb2-299" aria-hidden="true" tabindex="-1"></a>At the shell prompt, enter the lines of code you copied.</span>
-<span id="cb2-300"><a href="#cb2-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-301"><a href="#cb2-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-302"><a href="#cb2-302" aria-hidden="true" tabindex="-1"></a><span class="in">git remote add origin https://github.com/&lt;your user name&gt;/&lt;your repository name&gt;.git</span></span>
-<span id="cb2-303"><a href="#cb2-303" aria-hidden="true" tabindex="-1"></a><span class="in">git branch -M main</span></span>
-<span id="cb2-304"><a href="#cb2-304" aria-hidden="true" tabindex="-1"></a><span class="in">git push -u origin main</span></span>
-<span id="cb2-305"><a href="#cb2-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-306"><a href="#cb2-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-307"><a href="#cb2-307" aria-hidden="true" tabindex="-1"></a>The first line tells ***git*** the remote URL that you are going to push to, the second makes sure you are on the <span class="in">`main`</span> branch of the repository, and the third pushes your local repository <span class="in">`main`</span> branch up to the remote <span class="in">`main`</span> branch.</span>
-<span id="cb2-308"><a href="#cb2-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-309"><a href="#cb2-309" aria-hidden="true" tabindex="-1"></a>**Congratulations!** You have now pushed commits from a local repository to ***GitHub***, and you should be able to see those files in your remote ***GitHub*** repository online. The "Pull" (blue down arrow) and "Push" (green up arrow) buttons in ***RStudio*** should now also work.</span>
-<span id="cb2-310"><a href="#cb2-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-311"><a href="#cb2-311" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **IMPORTANT:** Remember, after each commit you do via ***RStudio*** (or via the command line), you will have to push to ***GitHub*** manually. This does not happen automatically!</span></span>
-<span id="cb2-312"><a href="#cb2-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-313"><a href="#cb2-313" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** Additional information on using projects in ***RStudio*** is available </span><span class="co">[</span><span class="ot">here</span><span class="co">](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)</span><span class="at">.</span></span>
-<span id="cb2-314"><a href="#cb2-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-315"><a href="#cb2-315" aria-hidden="true" tabindex="-1"></a><span class="fu">### Troubleshooting {.unnumbered}</span></span>
-<span id="cb2-316"><a href="#cb2-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-317"><a href="#cb2-317" aria-hidden="true" tabindex="-1"></a>Most of the time, the installation and setup instructions provided in <span class="co">[</span><span class="ot">**Module 05**</span><span class="co">](#module-05)</span> and this module for getting ***git*** and ***RStudio*** to work together work just fine, but sometimes you may have issues. The most common problem I have seen is when ***RStudio*** is unable to find your proper ***git*** installation, either because the path to the correct ***git*** executable did not get written into your shell profile when you installed ***git*** or because the correct path to ***git*** has not be set properly in ***RStudio***.</span>
-<span id="cb2-318"><a href="#cb2-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-319"><a href="#cb2-319" aria-hidden="true" tabindex="-1"></a>Chapters 13 and 14 of the web book <span class="co">[</span><span class="ot">*Happy Git and GitHub R*</span><span class="co">](https://happygitwithr.com)</span> offer a number of suggestions for how to troubleshoot these problems, but some things to check are:</span>
-<span id="cb2-320"><a href="#cb2-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-321"><a href="#cb2-321" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Is ***git*** installed correctly? An easy way to test this is to enter `git` in a terminal shell. If you get a complaint about ***git*** not being found, it means either installation was unsuccessful or that the path to the ***git*** program is not on your `PATH` in your shell profile. Try reinstalling ***git*** and then either logging out of your computer and logging in again or restarting.</span>
-<span id="cb2-322"><a href="#cb2-322" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Is the proper path to ***git*** set in ***RStudio***? In***RStudio***, go to **Tools &gt; Global Options** and select the "Git/SVN" tab and make sure that the box "Git executable" points to the executably file for your ***git*** installation. On macOS and Linux operating systems, the path usually is "/usr/bin/git" (on MacOS or Linux) and on Windows operating systems it is usually "C:\\Program Files\\Git\\bin\\git.exe". Sometimes, ***git*** will be installed in a slightly different place, most commonly (on MacOS) in "/usr/local/bin/git", in which case you will need to change the path in the dialog box. To find the correct path, type <span class="in">`which git`</span> in a terminal shell and then enter that in the ""Git executable" box.</span>
-<span id="cb2-323"><a href="#cb2-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-324"><a href="#cb2-324" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** If you make any changes, e.g., if you reinstall ***git***, you will likely need to open a new shell window (so that your updated `PATH` gets read and your computer can find ***git***). You may also need to also either log out of your commputer and log in again or restart your computer. If you make changes in the ***RStudio*** IDE, e.g., if you change the path to your ***git*** executable via the **Tools &gt; Global Options &gt; Git/SVN** tab, you will need to completely **RESTART** ***RStudio***, and you may need to also log out and back in or restart your computer.</span></span>
-<span id="cb2-325"><a href="#cb2-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-326"><a href="#cb2-326" aria-hidden="true" tabindex="-1"></a><span class="fu">## Working with Projects in ***RStudio***</span></span>
-<span id="cb2-327"><a href="#cb2-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-328"><a href="#cb2-328" aria-hidden="true" tabindex="-1"></a>Once you have a project set up in ***RStudio*** and under version control, ***git*** will be watching your local project directory for any changes that you might make to what is contained in that directory or to the files therein. For example, if you add a file to the directory, it will show up in the *Files* tab, and if you delete a file, it will disappear from that list. Thus, you can drag and drop files and directories into and out of the project repo and ***git*** will keep track of them.</span>
-<span id="cb2-329"><a href="#cb2-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-330"><a href="#cb2-330" aria-hidden="true" tabindex="-1"></a>Now, you can edit existing files in the repository (e.g., the "README.md" file), create one or more new scripts (".R"), **RMarkdown** (".Rmd") files, or **Quarto** (".qmd") documents, add other files and folders (e.g., data files) to your repository and **git** will keept track of them.</span>
-<span id="cb2-331"><a href="#cb2-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-332"><a href="#cb2-332" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modifying Files Locally {#modifying-local-files .unnumbered}</span></span>
-<span id="cb2-333"><a href="#cb2-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-334"><a href="#cb2-334" aria-hidden="true" tabindex="-1"></a>Within ***RStudio***, click on the "README.md" file to open it in the text editor panel of the IDE. Make some changes to this file (e.g., add the line, "And here is some new text I am adding in the RStudio IDE.") and then save your changes. When you do, the "README.md" file should show up in the *Git* tab with a blue "M" next to it, indicating that it has been "modified".</span>
-<span id="cb2-335"><a href="#cb2-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-336"><a href="#cb2-336" aria-hidden="true" tabindex="-1"></a>We can commit these changes to the local repository and push them up to ***GitHub*** as follows:</span>
-<span id="cb2-337"><a href="#cb2-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-338"><a href="#cb2-338" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Click the *Git* tab in upper right pane.</span>
-<span id="cb2-339"><a href="#cb2-339" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Check the <span class="in">`Staged`</span> box next to the "README.md" file, which will get the file ready to commit to your local repository. If you have not already done so, you should also stage the ".gitignore" and ".Rproj" files.</span>
-<span id="cb2-340"><a href="#cb2-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-341"><a href="#cb2-341" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** The ".gitignore" file that was created when you activated version control is basically a list of files that you want ***git*** to ignore and not worry about tracking changes to. By default, it includes the names of several files, e.g., ".Rhistory" and ".RData", which can be quite large and are not necessarily that important to track all changes to. You can also add to the ".gitignore" document the names of any other files in your working directory that you do not want ***git*** to track. These files can sit in your local working directory, unstaged and uncommitted, with no problems.</span></span>
-<span id="cb2-342"><a href="#cb2-342" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-343"><a href="#cb2-343" aria-hidden="true" tabindex="-1"></a>After being staged, the status of the files should turn to a green <span class="in">`A`</span> (for "added").</span>
-<span id="cb2-344"><a href="#cb2-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-345"><a href="#cb2-345" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Click the "Commit" button. You will see a new, "Review Changes" window open up with the names of the files in your directory in the upper left pane. Selecting any of these will show you, in the lower pane, an overview of the differences between current version of the file and the version that was most recently previously committed.</span>
-<span id="cb2-346"><a href="#cb2-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-349"><a href="#cb2-349" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-350"><a href="#cb2-350" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-351"><a href="#cb2-351" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
-<span id="cb2-352"><a href="#cb2-352" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/review-changes.png"</span>)</span>
-<span id="cb2-353"><a href="#cb2-353" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-354"><a href="#cb2-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-355"><a href="#cb2-355" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Enter an identifying "Commit message" in the box in the upper right pane, e.g., "First commit from RStudio" and then click "Commit".</span>
-<span id="cb2-356"><a href="#cb2-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-357"><a href="#cb2-357" aria-hidden="true" tabindex="-1"></a>A window will pop up confirming what you have just done, which you can then close.</span>
-<span id="cb2-358"><a href="#cb2-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-361"><a href="#cb2-361" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-362"><a href="#cb2-362" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-363"><a href="#cb2-363" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb2-364"><a href="#cb2-364" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/successful-commit.png"</span>)</span>
-<span id="cb2-365"><a href="#cb2-365" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-366"><a href="#cb2-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-367"><a href="#cb2-367" aria-hidden="true" tabindex="-1"></a>If you now select the *History* tab in the "Review Changes" window, you can see the history of commits. Selecting any of the nodes in the commit history will show you (in the lower pane) the files involved in the commit and how the content of those files has changed since your last commit. For example, the node associated with your initial commit will show you the initial file contents, while subsequent nodes highlight where a new version differs from the previous one.</span>
-<span id="cb2-368"><a href="#cb2-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-369"><a href="#cb2-369" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pushing Changes to a Remote Repo {.unnumbered}</span></span>
-<span id="cb2-370"><a href="#cb2-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-371"><a href="#cb2-371" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>With your commits completed, the files disappear from the "Review Changes" window and from the *Git* tab in ***RStudio*** window (meaning they have all been committed locally). You should now be able to pass all of your local changes up to ***GitHub*** by clicking the green "Push" (up arrow) button. This updates the remote copy of your repository and makes it available to collaborators or to you, working on a different local computer.</span>
-<span id="cb2-372"><a href="#cb2-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-375"><a href="#cb2-375" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-376"><a href="#cb2-376" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-377"><a href="#cb2-377" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
-<span id="cb2-378"><a href="#cb2-378" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/push.png"</span>)</span>
-<span id="cb2-379"><a href="#cb2-379" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-380"><a href="#cb2-380" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-381"><a href="#cb2-381" aria-hidden="true" tabindex="-1"></a>You should see a dialog box like the following indicating success:</span>
-<span id="cb2-382"><a href="#cb2-382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-385"><a href="#cb2-385" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-386"><a href="#cb2-386" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-387"><a href="#cb2-387" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
-<span id="cb2-388"><a href="#cb2-388" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/successful-push.png"</span>)</span>
-<span id="cb2-389"><a href="#cb2-389" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-390"><a href="#cb2-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-391"><a href="#cb2-391" aria-hidden="true" tabindex="-1"></a><span class="fu">### Confirming Changes {.unnumbered}</span></span>
-<span id="cb2-392"><a href="#cb2-392" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-393"><a href="#cb2-393" aria-hidden="true" tabindex="-1"></a>Finally, you can confirm that the local changes were indeed sent up to the remote repository on ***GitHub*** by going back to the page for the repository in your web browser and hitting refresh... again, you should see that the "README.md" file has been updated with new text and, if you click on the "commits" tab, you should see one with the message "Commit from RStudio".</span>
-<span id="cb2-394"><a href="#cb2-394" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-397"><a href="#cb2-397" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-398"><a href="#cb2-398" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb2-399"><a href="#cb2-399" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
-<span id="cb2-400"><a href="#cb2-400" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/commit-from-RStudio.png"</span>)</span>
-<span id="cb2-401"><a href="#cb2-401" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-402"><a href="#cb2-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-403"><a href="#cb2-403" aria-hidden="true" tabindex="-1"></a><span class="fu">### CHALLENGE {.unnumbered}</span></span>
-<span id="cb2-404"><a href="#cb2-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-405"><a href="#cb2-405" aria-hidden="true" tabindex="-1"></a>Create and save a completely new text document in your current working directory/test repository - the content does not matter... be creative and try some markdown formatting! Save it as a file with the extension ".md" (for "markdown"), then commit that file to the local clone of your repository and push it from your local repository up to the <span class="in">`main`</span> branch on ***GitHub***.</span>
-<span id="cb2-406"><a href="#cb2-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-407"><a href="#cb2-407" aria-hidden="true" tabindex="-1"></a><span class="fu">## Deleting Repositories</span></span>
-<span id="cb2-408"><a href="#cb2-408" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-409"><a href="#cb2-409" aria-hidden="true" tabindex="-1"></a>If you want to get rid of a local repository, you can simply send it to the <span class="in">`Trash`</span> (on MacOS) or <span class="in">`Recycle Bin`</span> (on Windows) and throw it away. It is just a regular, self-contained directory, and your local ***git*** executable will no longer track it.</span>
-<span id="cb2-410"><a href="#cb2-410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-411"><a href="#cb2-411" aria-hidden="true" tabindex="-1"></a>If you want to get rid of a remote repository on ***GitHub***, navigate to the repository's web page in a browser, click on "Settings" tab, scroll down to bottom of the page in the "Danger Zone" section, and select the option "Delete this repository". You will be asked to type in the repository name to confirm that you want to delete it and will likely have to enter your ***GitHub*** password.</span>
-<span id="cb2-412"><a href="#cb2-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-413"><a href="#cb2-413" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional Resources</span></span>
-<span id="cb2-414"><a href="#cb2-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-415"><a href="#cb2-415" aria-hidden="true" tabindex="-1"></a>The web book <span class="co">[</span><span class="ot">*Happy Git and GitHub for the useR*</span><span class="co">](https://happygitwithr.com)</span> by Dr. Jenny Bryan (an important contributor to a number of key ***R*** packages) is an excellent source of information about how to set up and troubleshoot your ***RStudio/git/GitHub*** workflow... I encourage you to check it out!</span>
-<span id="cb2-416"><a href="#cb2-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-417"><a href="#cb2-417" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb2-418"><a href="#cb2-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-419"><a href="#cb2-419" aria-hidden="true" tabindex="-1"></a><span class="fu">## Concept Review {.unnumbered}</span></span>
-<span id="cb2-420"><a href="#cb2-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-421"><a href="#cb2-421" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**RMarkdown** documents</span>
-<span id="cb2-422"><a href="#cb2-422" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Creating **R Projects** (3 ways)</span>
-<span id="cb2-423"><a href="#cb2-423" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Creating a project from a remote repository under version control (**Method 1**)</span>
-<span id="cb2-424"><a href="#cb2-424" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Creating a brand new project locally (**Method 2**)</span>
-<span id="cb2-425"><a href="#cb2-425" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Creating a project from an existing local repository under version control (**Method 3**)</span>
-<span id="cb2-426"><a href="#cb2-426" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Connecting a local repository and a remote repository on ***GitHub*** (2 ways)</span>
-<span id="cb2-427"><a href="#cb2-427" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>*LESS COMPLICATED* (Corresponding to **Method 1**): Start by setting up a repository on ***GitHub*** and then clone the repository locally (see above). Once created, you can copy files into it, stage and commit those files, and push them to ***GitHub***</span>
-<span id="cb2-428"><a href="#cb2-428" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>*MORE COMPLICATED* (Corresponding to **Method 2** and **Method 3**): Start by setting up a local repository under version control and then set up and connect to a remote repository on ***GitHub***. See Chapter 17 of the web book [*Happy Git and GitHub for the useR*](https://happygitwithr.com) for additional instructions to use for following this workflow.</span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Reproducible Research {#module-06}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objectives</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; In the last module, we introduced the concept of version control and looked at tools for interfacing between between a repository maintained remotely on ***GitHub*** and a local repository, using the version control system, ***git***. Now, we are going to learn how we can use ***RStudio*** to manage the ***git/GitHub*** version control workflow. An additional objective of this module is to promote the ideas of **reproducible research** practice and **literate programming** by introducing you to **Quarto** and **RMarkdown**, which are both plain-text document formats that allow us to mix text and code in a flexible way and to generate a variety of nicely rendered outputs (e.g., websites, books, PDFs, presentations, and other media formats).</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Preliminaries</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>As a first step, if you haven't done so already in <span class="co">[</span><span class="ot">**Module 02**</span><span class="co">](#module-02)</span>, open the **Preferences** pane in ***RStudio*** (MacOS), go to the *Git/SVN* section, and make sure that the checkbox "Enable version control interface for RStudio projects" is selected. Alternatively, you can access the same dialog box by choosing **Global Options** from the **Tools** menu (MacOS and PC).</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/r-global-options.png"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>In this dialog box, also confirm that the path to your ***git*** executable is filled in and correct. If you have already successfully installed ***git***, this **should** be filled with something like "/usr/bin/git" (on MacOS or Linux) or "C:<span class="sc">\\</span>Program Files<span class="sc">\\</span>Git<span class="sc">\\</span>bin<span class="sc">\\</span>git.exe" on Windows). If it is not, then you can try troubleshooting by following the recommendations in Chapters 13 and 14 of the web book <span class="co">[</span><span class="ot">*Happy Git and GitHub for the useR*</span><span class="co">](https://happygitwithr.com)</span>.</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Backstory</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>**Reproducible research** refers to the practice of conducting and disseminating scientific research in a way that makes data analysis (and scientific claims more generally) more transparent and repeatable Academics already have means of sharing *methods* and *results* generally, through publications (although perhaps typically in less than complete detail), and we can share the data on which those our analyses are based by depositing them in some form of online repository (e.g., via "supplementary information" that accompanies an article or by posting datasets to repositories like the [**Dryad Digital Repository**](http://datadryad.org/) or [**Figshare**](https://figshare.com/).</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>But how do we share the details of exactly *how* we did an analysis? And how can we ensure that it is possible for us to go back, ourselves, and replicate a particular analysis or data transformation? One solution is to integrate detailed text describing a workflow and analytical source code (such as ***R*** scripts) **together in the same document**.</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>This idea of tying together narrative, logic, specific code, and data (or references to them) in a single document stems from the principle of <span class="co">[</span><span class="ot">**literate programming**</span><span class="co">](https://en.wikipedia.org/wiki/Literate_programming)</span> developed by Donald Knuth. Applied to scientific practice, the concept of literate programming means documenting both the logic behind and analysis ***and*** the code used to implement that analysis using computer software. This documentation allows researchers to return to and re-examine their own thought processes at any later time, and also allows them to share their thought processes so that others can understand how an analysis was performed. The upshot is that our scholarship can be better understood, recreated, and independently verified.</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>This is exactly the point of a **Quarto** or **RMarkdown** document and of other, similar document formats (e.g., ***R*** **Notebooks**, **iPython Notebooks**, or **Julia Notebooks**).</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>So, how does this work?</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>First, as we saw in the last module, <span class="co">[</span><span class="ot">**Markdown**</span><span class="co">](https://en.wikipedia.org/wiki/Markdown)</span>, is simply a formal way of styling a plain text document so that it can be easily rendered into HTML or PDF files for sharing or publishing. It is based on using some simple formatting and special characters to tag pieces of text such that a parser knows how to convert a plain text document into HTML or PDF. <span class="co">[</span><span class="ot">This link</span><span class="co">](https://daringfireball.net/projects/markdown/syntax)</span> takes you to a classic description of **Markdown**, its syntax, and the philosophy behind it written by John Gruber, **Markdown**'s creator. There are now several different "dialects" of **Markdown** that have been developed, derived from Gruber's original suggestions, including a specific one used on ***GitHub*** called "GitHub Flavored Markdown", or ***GFM***. A guide to this dialect is provided as a PDF <span class="co">[</span><span class="ot">here</span><span class="co">](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)</span> and is available online at <span class="co">[</span><span class="ot">this link</span><span class="co">](https://github.github.com/gfm/)</span>.</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>**RMarkdown** and **Quarto** documents are very similar extensions of standard **Markdown** that allows you to embed chunks of ***R*** code (or code blocks of other programming languages, e.g., ***Python***, ***Latex***), along with additional parsing instructions and options for running code, in a plain text file. During the parsing and rendering (or "knitting") stage, when the text file is being converted to HTML or PDF format, the output of running the embedded code can also be included.</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>**RMarkdown** uses the package {knitr} to produce intermediate files that can then be translated into a variety of formats, including HTML, traditional **Markdown**, PDFs, MS Word documents, web presentations, and others. A cheatsheet on **RMarkdown** syntax (which, again, is very similar to **Markdown**) can be found [here](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf). **Quarto** documents use a separate piece of independent software, **quarto** (along with the ***R*** package {knitr}, in some cases), to do the same thing. An overview and useful definitive guide to all you can do with **Quarto** can be found <span class="co">[</span><span class="ot">here</span><span class="co">](https://quarto.org/docs/guide/)</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>It is important to stress that **Markdown** (".md"), **Quarto** (".qmd"), and **RMarkdown** (".Rmd") documents ARE JUST PLAIN TEXT files! They are easy to work with, easy to share, easy to edit, easy to put under version control, and robust to changes in proprietary file formats!</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>As a demonstration of reproducible research workflow and best practices, we are going to create a new ***R*** project and corresponding repository that we will track with version control using ***git***. Within that project, we then are going to create an **Quarto** document in which you can take notes or practice coding during class today.</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>As we have seen already, ***git***, at its heart, is a command-line tool, but both local (on your computer) and hosted (e.g., on ***GitHub***) ***git*** repositories can be managed using a dedicated ***git*** *client GUI*, such as ***GitHub Desktop***, ***GitUp***, ***GitKraken***, ***SourceTree***, or a host of others. Importantly for us, though, ***RStudio*** is designed to also function as a powerful ***git*** client. We will explore several ways of setting up ***RStudio*** to manage both local and remote copies of a ***git*** repository and of keep them in sync.</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** See also Chapters 8 and 12 of the web book [*Happy Git and GitHub for the useR*](https://happygitwithr.com/) for more information on managing ***git*** and ***GitHub*** through ***RStudio***.</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## Organizing Work with ***R*** Projects</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>The easiest way to get ***RStudio*** to play nicely with ***git*** and ***GitHub*** for version control - and a recommended best practice - is to organize your work in ***RStudio*** using *projects*. You can think of an ***R*** *project* as a convenient workspace that is associated with its own working directory, data files, scripts, images, history log, etc. We might, for example, create a separate ***R*** project for each manuscript that we are working on.</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** Not surprisingly, the idea of an ***RStudio*** "project" (i.e., an organizing workspace and its associated files) and a "repo" (a directory that is under version control) go together nicely. It is, however, totally possible to create ***RStudio*** projects without having them be under version control, and it is also quite possible to use ***git*** or another VCS to track changes to files in a directory without there being an associated ***RStudio*** project!</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>Basically, creating an ***RStudio*** project means creating a special text file ("&lt;project name&gt;.Rproj") that stores settings for particular ***RStudio*** setup and session. When we open an ".Rproj" file, the *working directory* is automatically set to the *root directory for the project* (i.e., the directory in which the actual ".Rproj" file is stored), which makes organizing and navigating around the computer's filesystem, either from the command line or in ***R*** scripts within the project, much easier.</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="fu">### Workflows for Creating Projects {.unnumbered}</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>For the sake of security, reproducibility, and collaboration, it makes a lot of sense for us to have all of our data science/data analysis projects both be *under version control* (e.g., using ***git***) and *hosted remotely* on a secure and reliable platform (e.g., ***GitHub***) that we and collaborators can access from different locations. There are multiple ways we can accomplish this.</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>For example, we could begin by setting up a new repository remotely, as we did in <span class="co">[</span><span class="ot">**Module 05**</span><span class="co">](#module-05)</span>, and then "clone" it to our local computer and establish it as a version-controlled ***RStudio*** project. Alternatively, we could first create a new version-controlled ***RStudio*** project in a local directory and then push it up to ***GitHub*** or some other hosting site. <span class="co">[</span><span class="ot">For either of these scenarios, we could also begin with either a new (empty) repository or with one that already has files in it.</span><span class="co">]</span> We will go through all of these methods below, but I personally think the first process - beginning with a remote repository - is the easiest and most intuitive, but I describe all of these approaches further below.</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **Method 1**: Create a new ***RStudio*** project by cloning from a remote repository {.unnumbered}</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>Perhaps the easiest way to get ***RStudio*** working nicely with ***git*** and ***GitHub*** is by creating a new repository on ***GitHub*** and then "cloning" this remote repository to a local computer and placing it under version control.</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** Before completing the following, you should make sure to **delete** any existing local version of the remote repository that you might have cloned previously, e.g., by moving it to the </span><span class="in">`Trash`</span><span class="at"> on MacOS or the </span><span class="in">`Recycle Bin`</span><span class="at"> on Windows. This is because if you try to clone a remote repository into an existing directory, you will get an error!</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Step 1 {.unnumbered}</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>First, as described in <span class="co">[</span><span class="ot">**Module 05**</span><span class="co">](#module-05)</span>, go to your user profile in ***GitHub*** and create a new repository.</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>You will need to specify a repository name (with no spaces), whether it is a public or private repository, and whether to initialize the repository with one or more files already in it. I recommend initializing with both a "README" file and with a ".gitignore" file. You can also choose to use an ***R*** template to follow for the ".gitignore" file. The ".gitignore" file is simply a text document the provides ***git*** with a list of files that you ask it NOT to track changes to. These are typically either very large files (e.g., data files) or various hidden files that are either unnecessary or undesirable to track every single change to.</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Once your repository is created, go to the green "Code" popdown menu and click the clipboard icon to copy the repository's HTTPS URL. This is the same process we used in <span class="co">[</span><span class="ot">**Module 05**</span><span class="co">](#module-05)</span> for cloning a remote repository, and the URL is likely to be <span class="in">`https://github.com/`</span> followed by <span class="in">`&lt;your user name&gt;/&lt;your repository name&gt;`</span>).</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Step 2 {.unnumbered}</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>From the **File** menu in ***RStudio***, choose **New Project** and select to "Checkout a project from a version control repository"...</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** This step can also be done from the popdown menu located at the top right of the ***RStudio*** IDE.</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-project-version-control.png"</span>)</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Choose the top item, "Clone a project from a Git repository"...</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-project-from-git.png"</span>)</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In the subsequent dialog box, paste in the "Repository URL:" you copied in **Step 1**.</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>You can choose what parent folder to clone the repository into using the "Create project as a subdirectory of:" field (e.g., <span class="in">`~/Development/Repos`</span>). In most cases, the "Project directory name:" field will be filled in automatically, as the name of the remote repository you are cloning.</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/clone-git-repo.png"</span>)</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>Hitting the "Create Project" button will download the repository from ***GitHub*** into a new directory on your local computer. ***RStudio*** will close and reopen, after which the working directory will be set to the new local repository directory, which you can confirm by typing `getwd()` at the ***R*** console prompt. The local directory is now set up to be tracked by ***git*** on your local computer and should be connected to ***GitHub***.</span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>Selecting the *Files* tab in ***RStudio*** will then show you all of the files in the newly created local repository, which should now contain a ".gitignore" file and an ".Rproj" file with the name of your project (e.g., "test-repo.Rproj"), in addition to the "README.md" file you created on ***GitHub***.</span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>You should now also see a "Git" tab in the upper right pane of the ***RStudio*** IDE, and that tab should list the ".Rproj" file associated with the status <span class="in">`?`</span>, indicating that it has not yet been added, committed, or synced with the remote repository. The other two files (".gitignore" and "README.md") are already in sync.</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-test-repo.png"</span>)</span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Other Notes {.unnumbered}</span></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>This process works identically if you want to clone a repo from ***GitHub*** that already has other files in it besides ".gitignore" and "README.md". In that case, ***RStudio*** will simply just create the ".Rproj" file and modify any existing ".gitignore" file to also include one or more other files that it recommends that ***git*** not track, e.g., ".Rproj.user". The new ".Rproj" file and modified ".gitignore" file, which were created locally, should appear under the "Git" tab with with the status <span class="in">`?`</span> until you add, commit, and push them.</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>The process also works the same if you set up an empty repo on ***GitHub***, in which case you will have seen the window below immediately upon creating the repository:</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/empty-repo.png"</span>)</span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>Here, grabbing the URL from the "Quick setup" section and using that to set up a new project is ***RStudio*** is exactly the same process as we followed above.</span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** You could also, in a terminal window, navigate to where you want the remote project to be cloned and follow either the "... or create" or "... or push" instructions listed. Doing so will link a local directory to the remote repo you created on ***GitHub*** BUT you will then not have created that as an ***RStudio*** project and would need to follow up with other instructions below about creating a new project from an existing local directory.</span></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **Method 2**: Creating a new ***RStudio*** project under version control in a new directory {.unnumbered}</span></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In ***RStudio***, select **File &gt; New project** and click <span class="in">`New Directory`</span>.</span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-project-new-directory.png"</span>)</span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Choose the project type as "New Project", then name the directory and choose where you would like it to be stored, checking the box marked <span class="in">`Create a git repository`</span>, and pressing "Create Project".</span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-project-type.png"</span>)</span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-project-create-new.png"</span>)</span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>***RStudio*** will create a new directory for you with an ".Rproj" file (with the name of your project) and a ".gitignore" file inside of it. This directory is now being tracked by ***git*** and ***RStudio***. You can now create and edit files in this new directory and stage and commit them locally directly from ***RStudio***. See the section below on ["Modifying Files Locally"](#modifying-local-files) in ***RStudio***.</span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** It is important to remember that this project is still only under *local version control*... you will not yet be able to push changes up to ***GitHub***. To do that, see the section below on ["Connecting a Local Repo to ***GitHub***"](#connect-local-repo-to-github).</span></span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **Method 3**: Creating a new ***RStudio*** project in an existing directory {.unnumbered}</span></span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a>If you have an existing directory on your local computer that is already under ***git*** version control, then you can simply create a new ***RStudio*** project for that directory, and version control features will be automatically enabled. To do this:</span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Execute the **New Project** command (from the **File** menu)</span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Choose to create a new project from an <span class="in">`Existing Directory`</span></span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-project-existing-directory.png"</span>)</span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Select the appropriate directory and then click **Create Project**</span>
+<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>New ".Rproj" and ".gitignore" files will be created inside of that directory, and ***RStudio***'s version control features will then be available for that directory. Now, you can edit files currently in the directory or create new ones, as well as stage and commit them to the local repository directly from ***RStudio***. See the section below on ["Modifying Files Locally"](#modifying-local-files) in ***RStudio***.</span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a>If you create a new project for a directory that was *not* already under version control, you can enable version control within ***RStudio*** by choosing **Tools &gt; Project Options** to open the *Project Options* dialog box. Once there, go to the *Git/SVN* section and choose "Git" from the "Version control system" popdown menu, and then confirm that you want to set up version control for the project. You can also enable version control for a new project in a directory not formerly under version control by running the `use_git()` command from the {usethis} package. In either case, again, new ".Rproj" and ".gitignore" files will be created inside that directory, and ***RStudio***'s version control features will then be available.</span>
+<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/project-options.png"</span>)</span>
+<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/switch-to-git.png"</span>)</span>
+<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** Again, it is important to remember that local projects created via **Method 2** and **Method 3** are still only under *local version control*... you will not yet be able to push any additional files you add to the project directory or changes to local files up to ***GitHub***. To do that, see the section below on ["Connecting a Local Repo to ***GitHub***"](#connect-local-repo-to-github).</span></span>
+<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a><span class="fu">### Connecting a Local Repo to ***GitHub*** {#connect-local-repo-to-github .unnumbered}</span></span>
+<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a>To create a new remote repository on ***GitHub*** into which you can push the contents of an *existing* local repository, e.g., one created by **Method 2** or **Method 3** above, so that it is also backed-up off site and accessible to you or collaborators working at different locations, you have a couple of different options (see also Chapter 17 of the web book <span class="co">[</span><span class="ot">*Happy Git and GitHub for the userR*</span><span class="co">](https://happygitwithr.com)</span>).</span>
+<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **Option 1**: Use the {usethis} package to create a new remote repository on ***GitHub*** from within ***RStudio*** {.unnumbered}</span></span>
+<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Step 1 {.unnumbered}</span></span>
+<span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make sure you have configured a ***GitHub*** Personal Access Token (PAT) using the process outlined in [**Module 5**](#module-05). Briefly...</span>
+<span id="cb3-225"><a href="#cb3-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Login to your ***GitHub*** account and go to the *Settings* tab. Then select <span class="in">`Developer Settings`</span> and then <span class="in">`Personal Access Tokens`</span>.</span>
+<span id="cb3-227"><a href="#cb3-227" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Select <span class="in">`Generate new token`</span>, create a new "classic" token, and give it a nickname that reminds you of the intended purpose (e.g., "GitHub Access from R").</span>
+<span id="cb3-228"><a href="#cb3-228" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Pick a *scope* that confers the privileges you need, e.g., <span class="in">`repo`</span>, and then press the green "Generate Token" button.</span>
+<span id="cb3-229"><a href="#cb3-229" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Copy this token to a safe place, and register this credential with ***git*** using one of the methods outlined in [**Module 5**](#module-05)</span>
+<span id="cb3-230"><a href="#cb3-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-231"><a href="#cb3-231" aria-hidden="true" tabindex="-1"></a><span class="fu">##### Step 2 {.unnumbered}</span></span>
+<span id="cb3-232"><a href="#cb3-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-233"><a href="#cb3-233" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create a remote repository on ***GitHub*** and push a local repository to it: </span>
+<span id="cb3-234"><a href="#cb3-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Open the ***RStudio*** project that you want to create a remote repository for. This project needs to be under version control already and include at least one commit.</span>
+<span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>At the ***R*** console prompt within the project's working directory, type <span class="in">`usethis::use_github(protocol="https")`</span></span>
+<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Answer the question about whether the suggested name for the remote repository is adequate.</span>
+<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>This should create a new repository on ***GitHub***, add it as a remote <span class="in">`origin/main`</span>, set up a tracking branch, and open it in your browser.</span>
+<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-240"><a href="#cb3-240" aria-hidden="true" tabindex="-1"></a>From within ***RStudio***, you can now add or edit files to the project, locally commit any changes you make to those files, and push them up to ***GitHub*** as described above.</span>
+<span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **Option 2**: Set up a dummy remote repository on ***GitHub*** and push to it from within ***RStudio*** {.unnumbered}</span></span>
+<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Go to the ***GitHub*** website and create a new, empty repository. You can use the same name as that of the ***RStudio*** project you want to push up, or you can create a different one.</span>
+<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
+<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/create-test-repo-2.png"</span>)</span>
+<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** In setting up the repository on ***GitHub***, you should choose **not** to initialize the remote repository you are going to be pushing to with either a "README" or ".gitignore" file!</span></span>
+<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>From the *Git* tab in ***RStudio***, select the **New Branch** icon.</span>
+<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-remote-branch.png"</span>)</span>
+<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Click "Add remote", paste in the URL for your dummy remote repository in the text field, and type in "origin" for the name of the remote branch.</span>
+<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Click "Add". We should be back in the "New Branch" dialog box. Enter <span class="in">`main`</span> as the branch name (to push from the local <span class="in">`main`</span> branch to a remote <span class="in">`main`</span>), and make sure "Sync branch with remote" button is checked.</span>
+<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Click "Create" and in the next dialog box, choose "Overwrite". This should push your local repository <span class="in">`main`</span> branch up to the remote <span class="in">`main`</span> branch.</span>
+<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **Option 3**: Set up a dummy remote repository on ***GitHub*** and push to it from a terminal shell {.unnumbered}</span></span>
+<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>As in **Option 2**, go to the ***GitHub*** website and create a new, empty repository. You can use the same name as that of the ***RStudio*** project you want to push up, or you can create a different one.</span>
+<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
+<span id="cb3-279"><a href="#cb3-279" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/create-test-repo-2.png"</span>)</span>
+<span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** Here, again, you should choose **not** to initialize the remote repository you are going to be pushing to with either a "README" or ".gitignore" file!</span></span>
+<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>From the next screen, select the desired transfer protocol you want to use under the <span class="in">`Quick setup...`</span> option at the top (HTTPS or SSH). Then, scroll down to the option: <span class="in">`...or push an existing repository from the command line`</span>.</span>
+<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-288"><a href="#cb3-288" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-289"><a href="#cb3-289" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-290"><a href="#cb3-290" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
+<span id="cb3-291"><a href="#cb3-291" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/setup-test-repo.png"</span>)</span>
+<span id="cb3-292"><a href="#cb3-292" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-293"><a href="#cb3-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-294"><a href="#cb3-294" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Copy the lines of code listed there and then return to ***RStudio***.</span>
+<span id="cb3-295"><a href="#cb3-295" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In ***RStudio***, open the project that you want to push to ***GitHub*** and click **Tools &gt; Terminal &gt; New Terminal** or **Tools &gt; Shell...** to open a terminal window. Alternatively, open a separate terminal window and navigate to the root of the directory of the repository you wish to push.</span>
+<span id="cb3-296"><a href="#cb3-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-297"><a href="#cb3-297" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** It is important that you run these lines of code from within the directory that you wish to push to ***GitHub***. When you open a new terminal or shell from within ***RStudio***, you **should** be in the correct directory, as those processes open the shell in the current working directory. If not, though, use shell commands (i.e., </span><span class="in">`cd`</span><span class="at">) to navigate into the correct directory.</span></span>
+<span id="cb3-298"><a href="#cb3-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-299"><a href="#cb3-299" aria-hidden="true" tabindex="-1"></a>At the shell prompt, enter the lines of code you copied.</span>
+<span id="cb3-300"><a href="#cb3-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-303"><a href="#cb3-303" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb3-304"><a href="#cb3-304" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb3-305"><a href="#cb3-305" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/<span class="op">&lt;</span>your user name<span class="op">&gt;</span>/<span class="op">&lt;</span>your repository name<span class="op">&gt;</span>.git</span>
+<span id="cb3-306"><a href="#cb3-306" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-M</span> main</span>
+<span id="cb3-307"><a href="#cb3-307" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span>
+<span id="cb3-308"><a href="#cb3-308" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-309"><a href="#cb3-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-310"><a href="#cb3-310" aria-hidden="true" tabindex="-1"></a>The first line tells ***git*** the remote URL that you are going to push to, the second makes sure you are on the <span class="in">`main`</span> branch of the repository, and the third pushes your local repository <span class="in">`main`</span> branch up to the remote <span class="in">`main`</span> branch.</span>
+<span id="cb3-311"><a href="#cb3-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-312"><a href="#cb3-312" aria-hidden="true" tabindex="-1"></a>**Congratulations!** You have now pushed commits from a local repository to ***GitHub***, and you should be able to see those files in your remote ***GitHub*** repository online. The "Pull" (blue down arrow) and "Push" (green up arrow) buttons in ***RStudio*** should now also work.</span>
+<span id="cb3-313"><a href="#cb3-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-314"><a href="#cb3-314" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **IMPORTANT:** Remember, after each commit you do via ***RStudio*** (or via the command line), you will have to push to ***GitHub*** manually. This does not happen automatically!</span></span>
+<span id="cb3-315"><a href="#cb3-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-316"><a href="#cb3-316" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** Additional information on using projects in ***RStudio*** is available </span><span class="co">[</span><span class="ot">here</span><span class="co">](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)</span><span class="at">.</span></span>
+<span id="cb3-317"><a href="#cb3-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-318"><a href="#cb3-318" aria-hidden="true" tabindex="-1"></a><span class="fu">### Troubleshooting {.unnumbered}</span></span>
+<span id="cb3-319"><a href="#cb3-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-320"><a href="#cb3-320" aria-hidden="true" tabindex="-1"></a>Most of the time, the installation and setup instructions provided in <span class="co">[</span><span class="ot">**Module 05**</span><span class="co">](#module-05)</span> and this module for getting ***git*** and ***RStudio*** to work together work just fine, but sometimes you may have issues. The most common problem I have seen is when ***RStudio*** is unable to find your proper ***git*** installation, either because the path to the correct ***git*** executable did not get written into your shell profile when you installed ***git*** or because the correct path to ***git*** has not be set properly in ***RStudio***.</span>
+<span id="cb3-321"><a href="#cb3-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-322"><a href="#cb3-322" aria-hidden="true" tabindex="-1"></a>Chapters 13 and 14 of the web book <span class="co">[</span><span class="ot">*Happy Git and GitHub R*</span><span class="co">](https://happygitwithr.com)</span> offer a number of suggestions for how to troubleshoot these problems, but some things to check are:</span>
+<span id="cb3-323"><a href="#cb3-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-324"><a href="#cb3-324" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Is ***git*** installed correctly? An easy way to test this is to enter `git` in a terminal shell. If you get a complaint about ***git*** not being found, it means either installation was unsuccessful or that the path to the ***git*** program is not on your `PATH` in your shell profile. Try reinstalling ***git*** and then either logging out of your computer and logging in again or restarting.</span>
+<span id="cb3-325"><a href="#cb3-325" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Is the proper path to ***git*** set in ***RStudio***? In***RStudio***, go to **Tools &gt; Global Options** and select the "Git/SVN" tab and make sure that the box "Git executable" points to the executably file for your ***git*** installation. On macOS and Linux operating systems, the path usually is "/usr/bin/git" (on MacOS or Linux) and on Windows operating systems it is usually "C:\\Program Files\\Git\\bin\\git.exe". Sometimes, ***git*** will be installed in a slightly different place, most commonly (on MacOS) in "/usr/local/bin/git", in which case you will need to change the path in the dialog box. To find the correct path, type <span class="in">`which git`</span> in a terminal shell and then enter that in the ""Git executable" box.</span>
+<span id="cb3-326"><a href="#cb3-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-327"><a href="#cb3-327" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** If you make any changes, e.g., if you reinstall ***git***, you will likely need to open a new shell window (so that your updated `PATH` gets read and your computer can find ***git***). You may also need to also either log out of your commputer and log in again or restart your computer. If you make changes in the ***RStudio*** IDE, e.g., if you change the path to your ***git*** executable via the **Tools &gt; Global Options &gt; Git/SVN** tab, you will need to completely **RESTART** ***RStudio***, and you may need to also log out and back in or restart your computer.</span></span>
+<span id="cb3-328"><a href="#cb3-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-329"><a href="#cb3-329" aria-hidden="true" tabindex="-1"></a><span class="fu">## Working with Projects in ***RStudio***</span></span>
+<span id="cb3-330"><a href="#cb3-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-331"><a href="#cb3-331" aria-hidden="true" tabindex="-1"></a>Once you have a project set up in ***RStudio*** and under version control, ***git*** will be watching your local project directory for any changes that you might make to what is contained in that directory or to the files therein. For example, if you add a file to the directory, it will show up in the *Files* tab, and if you delete a file, it will disappear from that list. Thus, you can drag and drop files and directories into and out of the project repo and ***git*** will keep track of them.</span>
+<span id="cb3-332"><a href="#cb3-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-333"><a href="#cb3-333" aria-hidden="true" tabindex="-1"></a>Now, you can edit existing files in the repository (e.g., the "README.md" file), create one or more new scripts (".R"), **Quarto** (".qmd") documents, **RMarkdown** (".Rmd") documents, or add other files and folders (e.g., data files) to your repository and **git** will keept track of them.</span>
+<span id="cb3-334"><a href="#cb3-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-335"><a href="#cb3-335" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modifying Files Locally {#modifying-local-files .unnumbered}</span></span>
+<span id="cb3-336"><a href="#cb3-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-337"><a href="#cb3-337" aria-hidden="true" tabindex="-1"></a>Within ***RStudio***, click on the "README.md" file to open it in the text editor panel of the IDE. Make some changes to this file (e.g., add the line, "And here is some new text I am adding in the RStudio IDE.") and then save your changes. When you do, the "README.md" file should show up in the *Git* tab with a blue "M" next to it, indicating that it has been "modified".</span>
+<span id="cb3-338"><a href="#cb3-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-339"><a href="#cb3-339" aria-hidden="true" tabindex="-1"></a>We can commit these changes to the local repository and push them up to ***GitHub*** as follows:</span>
+<span id="cb3-340"><a href="#cb3-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-341"><a href="#cb3-341" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Click the *Git* tab in upper right pane.</span>
+<span id="cb3-342"><a href="#cb3-342" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Check the <span class="in">`Staged`</span> box next to the "README.md" file, which will get the file ready to commit to your local repository. If you have not already done so, you should also stage the ".gitignore" and ".Rproj" files.</span>
+<span id="cb3-343"><a href="#cb3-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-344"><a href="#cb3-344" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** The ".gitignore" file that was created when you activated version control is basically a list of files that you want ***git*** to ignore and not worry about tracking changes to. By default, it includes the names of several files, e.g., ".Rhistory" and ".RData", which can be quite large and are not necessarily that important to track all changes to. You can also add to the ".gitignore" document the names of any other files in your working directory that you do not want ***git*** to track. These files can sit in your local working directory, unstaged and uncommitted, with no problems.</span></span>
+<span id="cb3-345"><a href="#cb3-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-346"><a href="#cb3-346" aria-hidden="true" tabindex="-1"></a>After being staged, the status of the files should turn to a green <span class="in">`A`</span> (for "added").</span>
+<span id="cb3-347"><a href="#cb3-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-348"><a href="#cb3-348" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Click the "Commit" button. You will see a new, "Review Changes" window open up with the names of the files in your directory in the upper left pane. Selecting any of these will show you, in the lower pane, an overview of the differences between current version of the file and the version that was most recently previously committed.</span>
+<span id="cb3-349"><a href="#cb3-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-352"><a href="#cb3-352" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-353"><a href="#cb3-353" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-354"><a href="#cb3-354" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
+<span id="cb3-355"><a href="#cb3-355" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/review-changes.png"</span>)</span>
+<span id="cb3-356"><a href="#cb3-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-357"><a href="#cb3-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-358"><a href="#cb3-358" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Enter an identifying "Commit message" in the box in the upper right pane, e.g., "First commit from RStudio" and then click "Commit".</span>
+<span id="cb3-359"><a href="#cb3-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-360"><a href="#cb3-360" aria-hidden="true" tabindex="-1"></a>A window will pop up confirming what you have just done, which you can then close.</span>
+<span id="cb3-361"><a href="#cb3-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-364"><a href="#cb3-364" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-365"><a href="#cb3-365" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-366"><a href="#cb3-366" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-367"><a href="#cb3-367" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/successful-commit.png"</span>)</span>
+<span id="cb3-368"><a href="#cb3-368" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-369"><a href="#cb3-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-370"><a href="#cb3-370" aria-hidden="true" tabindex="-1"></a>If you now select the *History* tab in the "Review Changes" window, you can see the history of commits. Selecting any of the nodes in the commit history will show you (in the lower pane) the files involved in the commit and how the content of those files has changed since your last commit. For example, the node associated with your initial commit will show you the initial file contents, while subsequent nodes highlight where a new version differs from the previous one.</span>
+<span id="cb3-371"><a href="#cb3-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-372"><a href="#cb3-372" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pushing Changes to a Remote Repo {.unnumbered}</span></span>
+<span id="cb3-373"><a href="#cb3-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-374"><a href="#cb3-374" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>With your commits completed, the files disappear from the "Review Changes" window and from the *Git* tab in ***RStudio*** window (meaning they have all been committed locally). You should now be able to pass all of your local changes up to ***GitHub*** by clicking the green "Push" (up arrow) button. This updates the remote copy of your repository and makes it available to collaborators or to you, working on a different local computer.</span>
+<span id="cb3-375"><a href="#cb3-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-378"><a href="#cb3-378" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-379"><a href="#cb3-379" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-380"><a href="#cb3-380" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
+<span id="cb3-381"><a href="#cb3-381" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/push.png"</span>)</span>
+<span id="cb3-382"><a href="#cb3-382" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-383"><a href="#cb3-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-384"><a href="#cb3-384" aria-hidden="true" tabindex="-1"></a>You should see a dialog box like the following indicating success:</span>
+<span id="cb3-385"><a href="#cb3-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-388"><a href="#cb3-388" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-389"><a href="#cb3-389" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-390"><a href="#cb3-390" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-391"><a href="#cb3-391" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/successful-push.png"</span>)</span>
+<span id="cb3-392"><a href="#cb3-392" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-393"><a href="#cb3-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-394"><a href="#cb3-394" aria-hidden="true" tabindex="-1"></a><span class="fu">### Confirming Changes {.unnumbered}</span></span>
+<span id="cb3-395"><a href="#cb3-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-396"><a href="#cb3-396" aria-hidden="true" tabindex="-1"></a>Finally, you can confirm that the local changes were indeed sent up to the remote repository on ***GitHub*** by going back to the page for the repository in your web browser and hitting refresh... again, you should see that the "README.md" file has been updated with new text and, if you click on the "commits" tab, you should see one with the message "Commit from RStudio".</span>
+<span id="cb3-397"><a href="#cb3-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-400"><a href="#cb3-400" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-401"><a href="#cb3-401" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-402"><a href="#cb3-402" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "90%"</span></span>
+<span id="cb3-403"><a href="#cb3-403" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/commit-from-RStudio.png"</span>)</span>
+<span id="cb3-404"><a href="#cb3-404" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-405"><a href="#cb3-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-406"><a href="#cb3-406" aria-hidden="true" tabindex="-1"></a><span class="fu">### CHALLENGE {.unnumbered}</span></span>
+<span id="cb3-407"><a href="#cb3-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-408"><a href="#cb3-408" aria-hidden="true" tabindex="-1"></a>Create and save a completely new **Quarto** (".qmd"), **RMarkdown** (".Rmd"), markdown, or plain text document in your current working directory/test repository by selecting **File &gt; New File** and then picking the file type of your choice. If you create a markdown or plain text file, a blank document will open, while if you create a **Quarto** or **RMarkdown** (".Rmd") document, a dialog box will open that allows you set such things as the title and author for your document and a choice of output format for when you choose to "render" (for **Quarto** documents) or "knit" (for **RMarkdown** documents) the file you create.</span>
+<span id="cb3-409"><a href="#cb3-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-410"><a href="#cb3-410" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** The process of rendering/knitting converts your file, with notes and code, into nicely formatted output (e.g., a web page, PDF document, or **MS Word** document) that can include the output of running your code.</span></span>
+<span id="cb3-411"><a href="#cb3-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-412"><a href="#cb3-412" aria-hidden="true" tabindex="-1"></a>The image below shows the dialog box for creating a new **Quarto** document. Minimally, provide a title for your document. I also always uncheck the box for "Use visual markdown editor" because I prefer to work on my documents in "Source" mode (you can toggle between these options using the buttons at the top left of the document pane in ***RStudio***).</span>
+<span id="cb3-413"><a href="#cb3-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-416"><a href="#cb3-416" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-417"><a href="#cb3-417" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-418"><a href="#cb3-418" aria-hidden="true" tabindex="-1"></a><span class="co">#| out-width: "60%"</span></span>
+<span id="cb3-419"><a href="#cb3-419" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"img/new-quarto.png"</span>)</span>
+<span id="cb3-420"><a href="#cb3-420" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-421"><a href="#cb3-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-422"><a href="#cb3-422" aria-hidden="true" tabindex="-1"></a>Once you have created a document, keep the header section (the piece at the top of the file between the <span class="in">`---`</span> lines) but feel free to erase the rest of the pre-populated content that ***RStudio*** provides as a template and to fill it with your own notes and/or code blocks. The content does not matter... be creative and try some markdown formatting! Code blocks begin and end with three backticks, and the the programming language for the block (***R***, ***python***, ***bash***) is indicated in braces immediately following the opening st of backticks. Anything outside of code blocks can be formatted using markdown styling.</span>
+<span id="cb3-423"><a href="#cb3-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-424"><a href="#cb3-424" aria-hidden="true" tabindex="-1"></a>For example...</span>
+<span id="cb3-425"><a href="#cb3-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-426"><a href="#cb3-426" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb3-427"><a href="#cb3-427" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb3-428"><a href="#cb3-428" aria-hidden="true" tabindex="-1"></a><span class="in">title: "My document"</span></span>
+<span id="cb3-429"><a href="#cb3-429" aria-hidden="true" tabindex="-1"></a><span class="in">---</span></span>
+<span id="cb3-430"><a href="#cb3-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-431"><a href="#cb3-431" aria-hidden="true" tabindex="-1"></a><span class="in"># This is **markdown** formatted content.</span></span>
+<span id="cb3-432"><a href="#cb3-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-433"><a href="#cb3-433" aria-hidden="true" tabindex="-1"></a><span class="in">The block below is an **R** code block.</span></span>
+<span id="cb3-434"><a href="#cb3-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-435"><a href="#cb3-435" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-436"><a href="#cb3-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-437"><a href="#cb3-437" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-438"><a href="#cb3-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-439"><a href="#cb3-439" aria-hidden="true" tabindex="-1"></a><span class="in">Here is some more **markdown** content</span></span>
+<span id="cb3-440"><a href="#cb3-440" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb3-441"><a href="#cb3-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-442"><a href="#cb3-442" aria-hidden="true" tabindex="-1"></a>After you have made some edits to your file, save it, commit it to the local clone of your repository, and push it from your local repository up to the <span class="in">`main`</span> branch of your repository on ***GitHub***.</span>
+<span id="cb3-443"><a href="#cb3-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-444"><a href="#cb3-444" aria-hidden="true" tabindex="-1"></a><span class="fu">## Deleting Repositories</span></span>
+<span id="cb3-445"><a href="#cb3-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-446"><a href="#cb3-446" aria-hidden="true" tabindex="-1"></a>If you want to get rid of a local repository, you can simply send it to the <span class="in">`Trash`</span> (on MacOS) or <span class="in">`Recycle Bin`</span> (on Windows) and throw it away. It is just a regular, self-contained directory, and your local ***git*** executable will no longer track it.</span>
+<span id="cb3-447"><a href="#cb3-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-448"><a href="#cb3-448" aria-hidden="true" tabindex="-1"></a>If you want to get rid of a remote repository on ***GitHub***, navigate to the repository's web page in a browser, click on "Settings" tab, scroll down to bottom of the page in the "Danger Zone" section, and select the option "Delete this repository". You will be asked to type in the repository name to confirm that you want to delete it and will likely have to enter your ***GitHub*** password.</span>
+<span id="cb3-449"><a href="#cb3-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-450"><a href="#cb3-450" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional Resources</span></span>
+<span id="cb3-451"><a href="#cb3-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-452"><a href="#cb3-452" aria-hidden="true" tabindex="-1"></a>The web book <span class="co">[</span><span class="ot">*Happy Git and GitHub for the useR*</span><span class="co">](https://happygitwithr.com)</span> by Dr. Jenny Bryan (an important contributor to a number of key ***R*** packages) is an excellent source of information about how to set up and troubleshoot your ***RStudio/git/GitHub*** workflow... I encourage you to check it out!</span>
+<span id="cb3-453"><a href="#cb3-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-454"><a href="#cb3-454" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb3-455"><a href="#cb3-455" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-456"><a href="#cb3-456" aria-hidden="true" tabindex="-1"></a><span class="fu">## Concept Review {.unnumbered}</span></span>
+<span id="cb3-457"><a href="#cb3-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-458"><a href="#cb3-458" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Quarto** and **RMarkdown** documents</span>
+<span id="cb3-459"><a href="#cb3-459" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Creating **R Projects** (3 ways)</span>
+<span id="cb3-460"><a href="#cb3-460" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Creating a project from a remote repository under version control (**Method 1**)</span>
+<span id="cb3-461"><a href="#cb3-461" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Creating a brand new project locally (**Method 2**)</span>
+<span id="cb3-462"><a href="#cb3-462" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>Creating a project from an existing local repository under version control (**Method 3**)</span>
+<span id="cb3-463"><a href="#cb3-463" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Connecting a local repository and a remote repository on ***GitHub*** (2 ways)</span>
+<span id="cb3-464"><a href="#cb3-464" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>*LESS COMPLICATED* (Corresponding to **Method 1**): Start by setting up a repository on ***GitHub*** and then clone the repository locally (see above). Once created, you can copy files into it, stage and commit those files, and push them to ***GitHub***</span>
+<span id="cb3-465"><a href="#cb3-465" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>*MORE COMPLICATED* (Corresponding to **Method 2** and **Method 3**): Start by setting up a local repository under version control and then set up and connect to a remote repository on ***GitHub***. See Chapter 17 of the web book [*Happy Git and GitHub for the useR*](https://happygitwithr.com) for additional instructions to use for following this workflow.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

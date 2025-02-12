@@ -2,7 +2,7 @@
 
 ## Objectives
 
-> In the last module, we introduced the concept of version control and looked at tools for interfacing between between a repository maintained remotely on ***GitHub*** and a local repository, using the version control system, ***git***. Now, we are going to learn how we can use ***RStudio*** to manage the ***git/GitHub*** version control workflow. An additional objective of this module is to promote the ideas of **reproducible research** practice and **literate programming** by introducing you to **RMarkdown** and **Quarto**, which are both plain-text document formats that allow us to mix text and code in a flexible way and to generate a variety of nicely rendered outputs (e.g., websites, books, PDFs, presentations, and other media formats).
+> In the last module, we introduced the concept of version control and looked at tools for interfacing between between a repository maintained remotely on ***GitHub*** and a local repository, using the version control system, ***git***. Now, we are going to learn how we can use ***RStudio*** to manage the ***git/GitHub*** version control workflow. An additional objective of this module is to promote the ideas of **reproducible research** practice and **literate programming** by introducing you to **Quarto** and **RMarkdown**, which are both plain-text document formats that allow us to mix text and code in a flexible way and to generate a variety of nicely rendered outputs (e.g., websites, books, PDFs, presentations, and other media formats).
 
 ## Preliminaries
 
@@ -24,7 +24,7 @@ But how do we share the details of exactly *how* we did an analysis? And how can
 
 This idea of tying together narrative, logic, specific code, and data (or references to them) in a single document stems from the principle of [**literate programming**](https://en.wikipedia.org/wiki/Literate_programming) developed by Donald Knuth. Applied to scientific practice, the concept of literate programming means documenting both the logic behind and analysis ***and*** the code used to implement that analysis using computer software. This documentation allows researchers to return to and re-examine their own thought processes at any later time, and also allows them to share their thought processes so that others can understand how an analysis was performed. The upshot is that our scholarship can be better understood, recreated, and independently verified.
 
-This is exactly the point of an **RMarkdown** or **Quarto** document and of other, similar document formats (e.g., ***R*** **Notebooks**, **iPython Notebooks**, or **Julia Notebooks**).
+This is exactly the point of a **Quarto** or **RMarkdown** document and of other, similar document formats (e.g., ***R*** **Notebooks**, **iPython Notebooks**, or **Julia Notebooks**).
 
 So, how does this work?
 
@@ -32,11 +32,11 @@ First, as we saw in the last module, [**Markdown**](https://en.wikipedia.org/wik
 
 **RMarkdown** and **Quarto** documents are very similar extensions of standard **Markdown** that allows you to embed chunks of ***R*** code (or code blocks of other programming languages, e.g., ***Python***, ***Latex***), along with additional parsing instructions and options for running code, in a plain text file. During the parsing and rendering (or "knitting") stage, when the text file is being converted to HTML or PDF format, the output of running the embedded code can also be included.
 
-**RMarkdown** uses the package {knitr} to produce intermediate files that can then be translated into a variety of formats, including HTML, traditional **Markdown**, PDFs, MS Word documents, web presentations, and others. A cheatsheet on **RMarkdown** syntax (which, again, is very similar to **Markdown**) can be found [here](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf). **Quarto** documents use a separate piece of independent software, **quarto** (along with {knitr}, in some cases), to do the same thing. An overview and useful definitive guide to all you can do with **Quarto** can be found [here](https://quarto.org/docs/guide/)
+**RMarkdown** uses the package {knitr} to produce intermediate files that can then be translated into a variety of formats, including HTML, traditional **Markdown**, PDFs, MS Word documents, web presentations, and others. A cheatsheet on **RMarkdown** syntax (which, again, is very similar to **Markdown**) can be found [here](https://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf). **Quarto** documents use a separate piece of independent software, **quarto** (along with the ***R*** package {knitr}, in some cases), to do the same thing. An overview and useful definitive guide to all you can do with **Quarto** can be found [here](https://quarto.org/docs/guide/)
 
-It is important to stress that **Markdown** (".md"), **RMarkdown** (".Rmd") and **Quarto** (".qmd") files ARE JUST PLAIN TEXT files! They are easy to work with, easy to share, easy to edit, easy to put under version control, and robust to changes in proprietary file formats!
+It is important to stress that **Markdown** (".md"), **Quarto** (".qmd"), and **RMarkdown** (".Rmd") documents ARE JUST PLAIN TEXT files! They are easy to work with, easy to share, easy to edit, easy to put under version control, and robust to changes in proprietary file formats!
 
-As a demonstration of reproducible research workflow and best practices, we are going to create a new ***R*** project and corresponding repository that we will track with version control using ***git***. Within that project, we then are going to create an **RMarkdown** document in which you can take notes or practice coding during class today.
+As a demonstration of reproducible research workflow and best practices, we are going to create a new ***R*** project and corresponding repository that we will track with version control using ***git***. Within that project, we then are going to create an **Quarto** document in which you can take notes or practice coding during class today.
 
 As we have seen already, ***git***, at its heart, is a command-line tool, but both local (on your computer) and hosted (e.g., on ***GitHub***) ***git*** repositories can be managed using a dedicated ***git*** *client GUI*, such as ***GitHub Desktop***, ***GitUp***, ***GitKraken***, ***SourceTree***, or a host of others. Importantly for us, though, ***RStudio*** is designed to also function as a powerful ***git*** client. We will explore several ways of setting up ***RStudio*** to manage both local and remote copies of a ***git*** repository and of keep them in sync.
 
@@ -130,7 +130,7 @@ Here, grabbing the URL from the "Quick setup" section and using that to set up a
 
 #### **Method 2**: Creating a new ***RStudio*** project under version control in a new directory {.unnumbered}
 
-- In ***RStudio***, select **File \> New project** and click `New Directory`.
+- In ***RStudio***, select **File > New project** and click `New Directory`.
 
 ```{r}
 #| echo: false
@@ -266,7 +266,8 @@ knitr::include_graphics("img/setup-test-repo.png")
 
 At the shell prompt, enter the lines of code you copied.
 
-```
+```{bash}
+#| eval: false
 git remote add origin https://github.com/<your user name>/<your repository name>.git
 git branch -M main
 git push -u origin main
@@ -295,7 +296,7 @@ Chapters 13 and 14 of the web book [*Happy Git and GitHub R*](https://happygitwi
 
 Once you have a project set up in ***RStudio*** and under version control, ***git*** will be watching your local project directory for any changes that you might make to what is contained in that directory or to the files therein. For example, if you add a file to the directory, it will show up in the *Files* tab, and if you delete a file, it will disappear from that list. Thus, you can drag and drop files and directories into and out of the project repo and ***git*** will keep track of them.
 
-Now, you can edit existing files in the repository (e.g., the "README.md" file), create one or more new scripts (".R"), **RMarkdown** (".Rmd") files, or **Quarto** (".qmd") documents, add other files and folders (e.g., data files) to your repository and **git** will keept track of them.
+Now, you can edit existing files in the repository (e.g., the "README.md" file), create one or more new scripts (".R"), **Quarto** (".qmd") documents, **RMarkdown** (".Rmd") documents, or add other files and folders (e.g., data files) to your repository and **git** will keept track of them.
 
 ### Modifying Files Locally {#modifying-local-files .unnumbered}
 
@@ -360,7 +361,39 @@ knitr::include_graphics("img/commit-from-RStudio.png")
 
 ### CHALLENGE {.unnumbered}
 
-Create and save a completely new text document in your current working directory/test repository - the content does not matter... be creative and try some markdown formatting! Save it as a file with the extension ".md" (for "markdown"), then commit that file to the local clone of your repository and push it from your local repository up to the `main` branch on ***GitHub***.
+Create and save a completely new **Quarto** (".qmd"), **RMarkdown** (".Rmd"), markdown, or plain text document in your current working directory/test repository by selecting **File > New File** and then picking the file type of your choice. If you create a markdown or plain text file, a blank document will open, while if you create a **Quarto** or **RMarkdown** (".Rmd") document, a dialog box will open that allows you set such things as the title and author for your document and a choice of output format for when you choose to "render" (for **Quarto** documents) or "knit" (for **RMarkdown** documents) the file you create.
+
+> **NOTE:** The process of rendering/knitting converts your file, with notes and code, into nicely formatted output (e.g., a web page, PDF document, or **MS Word** document) that can include the output of running your code.
+
+The image below shows the dialog box for creating a new **Quarto** document. Minimally, provide a title for your document. I also always uncheck the box for "Use visual markdown editor" because I prefer to work on my documents in "Source" mode (you can toggle between these options using the buttons at the top left of the document pane in ***RStudio***).
+
+```{r}
+#| echo: false
+#| out-width: "60%"
+knitr::include_graphics("img/new-quarto.png")
+```
+
+Once you have created a document, keep the header section (the piece at the top of the file between the `---` lines) but feel free to erase the rest of the pre-populated content that ***RStudio*** provides as a template and to fill it with your own notes and/or code blocks. The content does not matter... be creative and try some markdown formatting! Code blocks begin and end with three backticks, and the the programming language for the block (***R***, ***python***, ***bash***) is indicated in braces immediately following the opening st of backticks. Anything outside of code blocks can be formatted using markdown styling.
+
+For example...
+
+````
+---
+title: "My document"
+---
+
+# This is **markdown** formatted content.
+
+The block below is an **R** code block.
+
+```{{r}}
+
+```
+
+Here is some more **markdown** content
+````
+
+After you have made some edits to your file, save it, commit it to the local clone of your repository, and push it from your local repository up to the `main` branch of your repository on ***GitHub***.
 
 ## Deleting Repositories
 
@@ -376,7 +409,7 @@ The web book [*Happy Git and GitHub for the useR*](https://happygitwithr.com) by
 
 ## Concept Review {.unnumbered}
 
-- **RMarkdown** documents
+- **Quarto** and **RMarkdown** documents
 - Creating **R Projects** (3 ways)
     - Creating a project from a remote repository under version control (**Method 1**)
     - Creating a brand new project locally (**Method 2**)

@@ -302,7 +302,7 @@ Note that each time we select a sample and calculate summary statistics, such as
 
 The code below allows us to generate a sampling distribution virtually. The `do() *` construction from {mosaic}, in combination with one of the {mosaic} package's aggregating functions (e.g., `mean()`, `median()`, etc.), can be used to repeat sampling from the population a user-specified number of times, calculate a summary statistic, and then bundle the results into a vector all in the same line. [Of course, we could also write a loop to do the same thing... and there are other ways we could do this as well (see examples below).]
 
-This process of *simulating* samples drawn from a population and then generating statistics on the basis of each of our virtual samples is a very powerful tool that we will apply over and over again as we talk about statistical inference. This process is the basis for bootstrapping confidence intervals (see [**Module 14**](#module-14)) and for conducting randomization/permutation tests (see [**Module 16**](#module-16).
+This process of *simulating* samples drawn from a population and then generating statistics on the basis of each of our virtual samples is a very powerful tool that we will apply over and over again as we talk about statistical inference. This process is the basis for bootstrapping confidence intervals (see [**Module 14**](#module-14)) and for conducting randomization/permutation tests (see [**Module 16**](#module-16)).
 
 #### Using the {mosaic} Package {.unnumbered}
 
