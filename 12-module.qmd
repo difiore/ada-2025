@@ -377,14 +377,14 @@ median_plot <-
 
 #### Using the {purrr} Package {.unnumbered}
 ```{r}
-# using `rerun()` from {purrr} to generate a sampling distribution
+library(purrr)
+# using `map()` from {purrr} to generate a sampling distribution
 samp_dist_mean_alt1 <-
-  rerun(reps, mean(~ averageRating,
-    data=sample_n(d, size=n, replace=FALSE))) |>
-    unlist()
+  map(1:reps, ~ mean( ~ averageRating, data = sample_n(d, size = n, replace = FALSE))) |>
+  unlist()
 mean_plot_alt1 <-
-  histogram(samp_dist_mean_alt1,
-  xlab = "Sampling Distribution for the\nMean of Average Rating")
+  histogram(samp_dist_mean_alt1, xlab = "Sampling Distribution for the\nMean of Average Rating")
+detach(package:purrr)
 ```
 
 #### Using the {infer} Package {.unnumbered}
@@ -419,13 +419,11 @@ The **mean of the sampling distribution** (i.e., the mean of $\bar{x}$) for a pa
 
 ```{r}
 #| message: false
-mean(~ mean, data=samp_dist_mean)
-# this is the estimated population mean calculated as the
-# mean of the sampling distribution of sample means
+mean( ~ mean, data = samp_dist_mean)
+# this is the estimated population mean calculated as the mean of the sampling distribution of sample means
 pop_stats$mean # true population mean
-mean(~ median, data=samp_dist_median)
-# this is the estimated population median calculated as the
-# mean of the sampling distribution of sample medians
+mean( ~ median, data = samp_dist_median)
+# this is the estimated population median calculated as the mean of the sampling distribution of sample medians
 pop_stats$median # true population median
 ```
 
@@ -433,7 +431,7 @@ pop_stats$median # true population median
 
 So, just how reliable or unreliable are these estimates of a population parameter based on the mean of the sampling distribution for a statistic of interest? That is, how far off is a statistic that we calculate based on a sampling distribution likely to be from the true POPULATION value of the parameter of interest?
 
-One way to quantify the uncertainty is by calculating the variability of the summary statistic of interest across replicate samples drawn from the population. For example, we could calculate the *variance of the sampling distribution*. More commonly, because variance is expressed in *units squared*, we take the square root of this variance to calculate the *standard deviation of the sampling distribution* and thus express our uncertainly in *units* of the original measurement. Formally, this value is referred to as the **standard error** (**SE**) of measurement for any given summary statistic of interest. [Typically, that statistic is the *mean*, and we thus are calculating the *standard error of the mean*.]
+One way to quantify the uncertainty is by calculating the variability of the summary statistic of interest across replicate samples drawn from the population. For example, we could calculate the *variance of the sampling distribution*. More commonly, because variance is expressed in *units squared*, we take the square root of this variance to calculate the *standard deviation of the sampling distribution* and thus express our uncertainly in *units* of the original measurement. Formally, this value is referred to as the **standard error** (**SE**) of measurement for any given summary statistic of interest. [Typically, that statistic is the *mean*, and we thus are often calculating the *standard error of the mean*.]
 
 The **SE** is, in effect, the *average deviation* between statistic values calculated from different and incomplete sets of samples drawn from a population and the average statistic value calculated across that set of samples (which should converge on the true population value for that statistic). The SE of the mean is thus a measure of *how dispersed sample means (*$\bar{x}$) are expected to be around the estimated population mean ($\mu$) (i.e., how far off from the true population mean an estimate based on a sample of size $n$ is likely to be). Similarly, the SE of the median would be a measure of how dispersed sample medians are expected to be, on average, around the estimated population median, and so forth.
 
@@ -466,51 +464,53 @@ As we might expect for any measure of uncertainty or error, the **SE** [1] incre
 - How does changing the **size of our samples** (**n**) impact the **mean** and **SE** of our estimate of the population parameter?
 - How does changing the **number of replicate samples** (**reps**) impact the **mean** and **SE** of our estimate of the population parameter?
 
-We can explore these two questions with the following code... note that we just take one set of 2000 replicates and then resample from that randomly to explore the impact of different, smaller numbers of replicates:
+We can explore these two questions with the following code... note that we just take one set of 2000 replicates and then resample from that set randomly to explore the impact of different, smaller numbers of replicates:
 
 ```{r}
 #| message: false
 reps <- 2000
-s <- tibble("n"=numeric(),
-  "mean"=numeric(),
-  ".index"=numeric())
+s <- tibble("n" = numeric(),
+            "mean" = numeric(),
+            ".index" = numeric())
 
-for (n in seq(from=20, to=200, by=20)){
-  samp_dist <- {do(reps) * sample_n(d, size=n, replace=FALSE)} |>
+for (n in seq(from = 20, to = 200, by = 20)) {
+  samp_dist <- {
+    do(reps) * sample_n(d, size = n, replace = FALSE)
+  } |>
     group_by(.index) |>
-    dplyr::summarise(mean=mean(averageRating)) |>
-    mutate(n=n)
-    s <- bind_rows(s,
-       samp_dist)
+    dplyr::summarise(mean = mean(averageRating)) |>
+    mutate(n = n)
+  s <- bind_rows(s, samp_dist)
 }
 
-output <- tibble("n"=numeric(),
-  "reps"=numeric(),
-  "samp_dist_mean"=numeric(),
-  "samp_dist_se"=numeric())
+output <- tibble(
+  "n" = numeric(),
+  "reps" = numeric(),
+  "samp_dist_mean" = numeric(),
+  "samp_dist_se" = numeric()
+)
 
-for (reps in c(10,25,50,100,250,500,1000,2000)){
-  subsample <- s |> 
+for (reps in c(10, 25, 50, 100, 250, 500, 1000, 2000)) {
+  subsample <- s |>
     group_by(n) |>
     sample_n(reps, replace = FALSE) |>
-    dplyr::summarise(samp_dist_mean=mean(mean),
-      samp_dist_se=sd(mean)) |>
-    mutate(reps=reps)
-  output <- bind_rows(output,
-    subsample)
+    dplyr::summarise(samp_dist_mean = mean(mean),
+                     samp_dist_se = sd(mean)) |>
+    mutate(reps = reps)
+  output <- bind_rows(output, subsample)
 }
 ```
 
 ```{r}
-p1 <- ggplot(data=output, aes(x=n, y=samp_dist_mean)) +
+p1 <- ggplot(data = output, aes(x = n, y = samp_dist_mean)) +
   geom_line() +
-  facet_grid(~ reps) +
+  facet_grid( ~ reps) +
   xlab("Sample Size") +
   ylab("Mean") +
   ylim(6.0, 6.5)
-p2 <- ggplot(data=output, aes(x=n, y=samp_dist_se)) +
+p2 <- ggplot(data = output, aes(x = n, y = samp_dist_se)) +
   geom_line() +
-  facet_grid(~ reps) +
+  facet_grid( ~ reps) +
   xlab("Sample Size") +
   ylab("SE") +
   ylim(0, 0.5)
@@ -518,7 +518,7 @@ p3 <- ggplot(data = output, aes(x = n)) +
   geom_line(aes(y = samp_dist_mean + samp_dist_se), color = "blue") +
   geom_line(aes(y = samp_dist_mean)) +
   geom_line(aes(y = samp_dist_mean - samp_dist_se), color = "blue") +
-  facet_grid( ~ reps) +
+  facet_grid(~ reps) +
   xlab("Sample Size") +
   ylab("Mean ± SE") +
   ylim(5.8, 6.7)
