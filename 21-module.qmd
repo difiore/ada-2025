@@ -423,7 +423,7 @@ In general, the width of a confidence interval for $\hat{y}$ increases as the va
 We can see this by generating CIs and PIs for a range of data using the `predict()` function. Below, we pass `predict()` a new set of 1000 values ranging from the minimum to the maximum male age in our original data set...
 
 ```{r}
-males <- d %>% filter(gender == "Male")
+males <- d |> filter(gender == "Male")
 new_x <- seq(from = min(males$age), to = max(males$age), length.out = 1000)
 ci <- predict(
   m,
@@ -441,7 +441,7 @@ pi <- as_tibble(pi)
 pi <- tibble(
   x = new_x, as_tibble(pi))
 
-p <- ggplot(data = d %>% filter(gender == "Male"),
+p <- ggplot(data = d |> filter(gender == "Male"),
   aes(x = age, y = height)) +
   geom_point() +
   geom_line(data = ci, aes(x = x, y = fit), color = "red") +
@@ -466,10 +466,10 @@ pi <- augment(
   interval = c("prediction")
 )
 
-p <- ggplot(data = ci %>% filter(gender == "Male"), aes(x = age, y = height)) + geom_point() +
+p <- ggplot(data = ci |> filter(gender == "Male"), aes(x = age, y = height)) + geom_point() +
   geom_line(aes(x = age, y = .fitted), color = "red") +
   geom_ribbon(aes(x = age, ymin = .lower, ymax=.upper), alpha = 0.5) +
-  geom_ribbon(data = pi %>% filter(gender == "Male"), aes(x = age, ymin = .lower, ymax=.upper), alpha = 0.1)
+  geom_ribbon(data = pi |> filter(gender == "Male"), aes(x = age, ymin = .lower, ymax=.upper), alpha = 0.1)
 p
 ```
 

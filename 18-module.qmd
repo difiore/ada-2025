@@ -431,14 +431,14 @@ degrees_of_freedom <- nrow(d) - 2
 critical_value <- qt(p_upper, df = degrees_of_freedom)
 
 # original slope
-original.slope <- lm(data = d, height ~ weight) %>%
+original.slope <- lm(data = d, height ~ weight) |>
   # tidy the model and add the CI based on the t distribution
-  tidy(conf.int=TRUE, conf.level=confidence_level) %>%
+  tidy(conf.int=TRUE, conf.level=confidence_level) |>
   # or manually calculate the CI based on the t distribution
   mutate(
     lower = estimate - std.error * critical_value,
     upper = estimate + std.error * critical_value
-  ) %>%
+  ) |>
   filter(term == "weight")
 original.slope # show model results for slope of weight
 ```
@@ -513,7 +513,7 @@ p.value
 
 # the function `get_p_value()` returns this value directly...
 
-(p.value <- permuted.slope %>%
+(p.value <- permuted.slope |>
   get_p_value(obs_stat = original.slope$estimate, direction="two_sided"))
 ```
 
@@ -588,8 +588,8 @@ As shown above, estimating our regression coefficients is pretty straightforward
 #| code-fold: true
 #| code-summary: "Show Code"
 #| attr.output: '.details summary="Show Output"'
-beta0 <- m.summary %>% filter(term == "(Intercept)") %>% pull(estimate)
-beta1 <- m.summary %>% filter(term == "weight") %>% pull(estimate)
+beta0 <- m.summary |> filter(term == "(Intercept)") |> pull(estimate)
+beta1 <- m.summary |> filter(term == "weight") |> pull(estimate)
 (h.hat <- beta1 * 150 + beta0)
 ```
 
@@ -659,7 +659,7 @@ g
 This can be also be done by hand using the data from the `augment()`ed model:
 
 ```{r}
-df <- df %>% 
+df <- df |> 
   # calculate a confidence interval for the predicted values
   mutate(
     c.lwr = .fitted - qt(1-alpha/2, nrow(df) - 2) * .se.fit,
@@ -695,9 +695,9 @@ g
 Again, this can be also be done by hand using the data from the `augment()`ed model:
 
 ```{r}
-sd <- glance(m) %>% pull(sigma) # sd deviation of residuals
+sd <- glance(m) |> pull(sigma) # sd deviation of residuals
 
-df <- df %>% 
+df <- df |> 
   # calculate a confidence interval for the predicted values
   mutate(se.prediction = sqrt(sd ^ 2 + .se.fit ^ 2),
     p.lower = .fitted - qt(1-alpha/2, nrow(df) - 2) * se.prediction,
@@ -819,13 +819,13 @@ set.seed(1)
 alpha <- 0.05
 p_lower <- alpha/2
 p_upper <- 1 - (alpha/2)
-boot.slope <- d %>%
+boot.slope <- d |>
   # specify model
-  specify(height ~ age) %>%
+  specify(height ~ age) |>
   # generate bootstrap replicates
-  generate(reps = 1000, type = "bootstrap") %>%
+  generate(reps = 1000, type = "bootstrap") |>
   # calculate the slope statistic
-  calculate(stat = "slope") %>%
+  calculate(stat = "slope") |>
   summarize(
     boot.mean = mean(stat),
     boot.lower = quantile(stat, p_lower),
@@ -833,9 +833,9 @@ boot.slope <- d %>%
   )
 
 set.seed(1)
-boot.slope <- d %>%
+boot.slope <- d |>
   # specify model
-  specify(height ~ age) %>%
+  specify(height ~ age) |>
   # generate bootstrap replicates
   generate(reps = 20, type = "bootstrap")
 

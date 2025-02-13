@@ -122,8 +122,8 @@ library(patchwork)
 p + q
 detach(package:patchwork)
 pairs(d)
-(t <- group_by(d, admit, rank) %>%
-  summarize(n=n()) %>%
+(t <- group_by(d, admit, rank) |>
+  summarize(n=n()) |>
   pivot_wider(names_from = rank, values_from = n))
 ```
 
