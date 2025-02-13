@@ -405,11 +405,76 @@ If you want to get rid of a remote repository on ***GitHub***, navigate to the r
 
 The web book [*Happy Git and GitHub for the useR*](https://happygitwithr.com) by Dr. Jenny Bryan (an important contributor to a number of key ***R*** packages) is an excellent source of information about how to set up and troubleshoot your ***RStudio/git/GitHub*** workflow... I encourage you to check it out!
 
+## Customizing Execution of **Quarto** and **RMardown** Documents
+
+It is possible to set various options for how **Quarto** and **RMardown** documents are rendered, either for an entire document or on a code chunk-by-code chunk basis. For example, for **Quarto** documents, we can set the following options to either TRUE or FALSE by including these either in the header of the document or at the start of a chunk:
+
+|Option |Description |
+|:--------|:-----|
+|`eval`| Evaluate the code (TRUE) or just echo code (FALSE) in the output|
+|`echo`| Include (TRUE) or omit (FALSE) the code in output|
+|`output`|Include (TRUE) or omit (FALSE) the results of executing the code in the output |
+|`warnings`| Include (TRUE) or suppress warnings (FALSE) in the output|
+|`error`|	Include (TRUE) or suppress (FALSE) errors in the output (If TRUE, errors executing code will not halt rendering of the document)|
+|`include`|FALSE prevents any output (code or results) from being included|
+
+For example, to apply to the whole document, we place the option under execute in the header...
+
+````
+---
+title: "My Document"
+execute:
+  echo: false
+---
+````
+
+... and to apply to a specific code chunk, we preface the line with `#|`...
+
+````
+```{{r}}
+#| echo: false
+```
+````
+
+We can also set options in either document header to or in a given code chunk to include code folding. For example, to produce an HTML document that shows code as folded, we can use...
+
+````
+---
+title: "My Document"
+format:
+  html:
+    code-fold: TRUE
+---
+````
+
+... and for a specific chunk, we can use...
+
+````
+```{{r}}
+#| code-fold: TRUE
+```
+````
+
+Typically, when rendering to HTML, **Quarto** will produce a separate folder of output images that is linked to from the HTML file that is produced, but it is possible to create a self-contained HTML file that embeds those (and any other) resources by specifying `embed-resource: TRUE` in the header. Note that this can result in very large files being created!
+
+````
+---
+title: "My Document"
+format:
+  html:
+    embed-resources: TRUE
+---
+````
+
+Additional information on **Quarto** HTML options can be found at [https://quarto.org/docs/reference/formats/html.html#rendering]([https://quarto.org/docs/reference/formats/html.html#rendering])
+
+Details on rendering and chunk options for knitting **RMarkdown** documents can be found at [https://yihui.org/knitr/options/](https://yihui.org/knitr/options/).
+
 ---
 
 ## Concept Review {.unnumbered}
 
-- **Quarto** and **RMarkdown** documents
+- **Quarto** and **RMarkdown** documents and execution options
 - Creating **R Projects** (3 ways)
     - Creating a project from a remote repository under version control (**Method 1**)
     - Creating a brand new project locally (**Method 2**)

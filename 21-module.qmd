@@ -665,7 +665,7 @@ detach(package:broom)
 detach(package:tidyverse)
 ```
 
-<hr>
+---
 
 ## Concept Review {.unnumbered}
 

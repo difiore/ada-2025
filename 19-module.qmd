@@ -516,7 +516,7 @@ detach(package:car)
 detach(package:tidyverse)
 ```
 
-<hr>
+---
 
 ## Concept Review {.unnumbered}
 

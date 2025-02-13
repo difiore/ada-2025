@@ -70,6 +70,7 @@
 ### Module 12 {.unnumbered}
 
 - **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{moments}**: @R-moments
 - **{mosaic}**: @R-mosaic, @mosaic2017
 - **{radiant}**: @R-radiant
 - **{sciplot}**: @R-sciplot
@@ -259,6 +260,7 @@
 - **{magrittr}**: @R-magrittr
 - **{manipulate}**: @R-manipulate
 - **{MASS}**: @R-MASS, @MASS2002
+- **{moments}**: @R-moments
 - **{mosaic}**: @R-mosaic, @mosaic2017
 - **{MuMIn}**: @R-MuMIn
 - **{pastecs}**: @R-pastecs

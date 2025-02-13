@@ -1,12 +1,19 @@
-# Central Tendency, Spread, and Sampling {#module-12}
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Descriptive Statisics and Sampling {#module-12}
 
 ## Objectives
 
-> The objective of this module is to review some key terms and ideas that form the foundation of statistics and statistical inference. In particular, this module considers ways for describing distributions of data, particularly measures of *central tendency* and *spread* (i.e., variation) in our observations of a variable, which play an important role in both descriptive statistics and in various approaches to statistical hypothesis testing.
+> The objective of this module is to review some key terms and ideas that form the foundation of statistics and statistical inference. In particular, this module considers ways for describing distributions of data, particularly measures of *central tendency*, *spread* (i.e., variation), and *shape* in our observations of a variable, which play an important role in both descriptive statistics and in various approaches to statistical hypothesis testing.
 
 ## Preliminaries
 
-- Install these packages in ***R***: [{mosiac}](https://cran.r-project.org/web/packages/mosaic/mosaic), [{radiant}](https://cran.r-project.org/web/packages/radiant/radiant.pdf), [{sciplot}](https://cran.r-project.org/web/packages/sciplot/sciplot.pdf), and [{infer}](https://cran.r-project.org/web/packages/infer/infer.pdf)
+- Install these packages in ***R***: [{mosiac}](https://cran.r-project.org/web/packages/mosaic/mosaic), [{radiant}](https://cran.r-project.org/web/packages/radiant/radiant.pdf),
+[{moments}](https://cran.r-project.org/web/packages/moments/moments.pdf),
+[{sciplot}](https://cran.r-project.org/web/packages/sciplot/sciplot.pdf), [{infer}](https://cran.r-project.org/web/packages/infer/infer.pdf)
 - Load {tidyverse}
 
 ```{r}
@@ -40,7 +47,7 @@ Regardless, we should always keep in mind that the process of trying to draw con
 
 ## Describing Sets of Observations
 
-It is important for us to be able to describe the general characteristics of the distribution of a set of observations or measurements about a **population** or a **sample**, and we often do this by calculating some *measure(s) of central tendency* and some *measure(s) of spread* around that statistic. The "five-number summary" that we have talked about previously is doing basically just this.
+It is important for us to be able to describe the general characteristics of the distribution of a set of observations or measurements about a **population** or a **sample**, and we often do this by calculating some *measure(s) of central tendency*, some *measure(s) of spread* around that statistic, and some measure of the *shape* of a distribution. The "five-number summary" that we have talked about previously provides some such statistics. 
 
 ### Measures of Central Tendency {.unnumbered}
 
@@ -151,6 +158,48 @@ Compare the results of your function to the built-in ***R*** function, `var()`, 
 #| code-summary: "Show Code"
 #| attr.output: '.details summary="Show Output"'
 var(x)
+```
+
+### Measures of Shape {.unnumbered}
+
+Two common measures of the **shape** of a distribution include its **skewness** and **kurtosis**.
+
+**Skewness** measures the asymmetry of a distribution. Symmetrical distributions have zero skewness. Those with a longer or fatter tail on the right-hand side are called "right-skewed" (and have positive skewness), while those with a longer or fatter tail on the left-hand side are called "left-skewed" (and have negative skewness). One measure of skewness is
+
+$$\frac{\sum\limits_{i=1}^{N}(x_i-\bar{x})^3}{(N-1)\sigma^3}$$
+... where $N$ is the number of observations, $\bar{x}$ is the mean, and $\sigma$ is the standard deviation. That is, skewness is based on the cube of deviations of each observation from the mean, whereas variance is based on squared deviations from the mean. Generally, a distribution with a skewness value of between -0.5 and +0.5 is not considered to be far from symmetrical.
+
+EXAMPLES
+
+```{r}
+x <- rnorm(100000, 0, 1) # draw a random sample from a normal distribution with mean = 0 and stdev = 1
+hist(x, main = "Normal: Symmetrical", freq = FALSE) # plot as a histogram
+(skewness <- sum((x-mean(x))^3)/((length(x)-1)*sd(x)^3))
+
+x <- rbeta(100000, 9, 3) # draw a random sample from a beta distribution with alpha = 9 and beta = 2
+hist(x, main = "Beta: Left-Skewed", freq = FALSE) # plot as a histogram
+(skewness <- sum((x-mean(x))^3)/((length(x)-1)*sd(x)^3))
+```
+
+**Kurtosis** measures the peakedness or flatness of a distribution compared to a normal distribution. Distributions with high kurtosis have a sharper peak and fatter tails, while those with low kurtosis have a flatter, wider peak and thinner tails. The formula for kurtosis is...
+
+$$\frac{\sum\limits_{i=1}^{N}(x_i-\bar{x})^4}{(N-1)\sigma^4}$$
+
+That is, kurtosis is based on deviations of each observation raised to the fourth power. Data drawn from a normal distribution have an expected kurtosis of three, while those with "negative" kurtosis have a value of greater than three and those with "postive" kurtosis have values of less than three.
+
+```{r}
+x <- rnorm(100000, 0, 1) # draw a random sample from a normal distribution with mean = 0 and stdev = 1
+(kurtosis <- sum((x-mean(x))^4)/((length(x)-1)*sd(x)^4))
+```
+
+The {moments} package has functions for `skewness()` and `kurtosis()`.
+
+```{r}
+library(moments)
+x <- rnorm(100000, 0, 1)
+skewness(x)
+kurtosis(x)
+detach(package:moments)
 ```
 
 ### Questions to Explore {.unnumbered}
@@ -341,6 +390,7 @@ mean_plot_alt1 <-
 #### Using the {infer} Package {.unnumbered}
 
 ```{r}
+#| message: false
 # using `rep_sample_n()` from {infer} to generate a sampling distribution
 library(infer)
 samp_dist_mean_alt2 <- d |>
@@ -557,7 +607,7 @@ detach(package:sciplot)
 detach(package:mosaic)
 ```
 
-<hr>
+---
 
 ## Concept Review {.unnumbered}
 

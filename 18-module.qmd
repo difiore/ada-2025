@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Introduction to Linear Modeling {#module-18}
 
 ## Objectives
@@ -25,6 +30,7 @@ library(manipulate)
 So far, we have looked principally at single variables, but one of the main things we are often interested in is the relationships among two or more variables. **Regression modeling** is one of the most powerful and important set of tools for looking at relationships among more than one variable. With our zombie apocalypse survivors dataset, we started to do this using simple bivariate scatterplots... let's look at those data again and do a simple bivariate plot of height by weight.
 
 ```{r}
+#| message: false
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 d <- read_csv(f, col_names = TRUE)
 head(d)
@@ -270,8 +276,13 @@ The {lmodel2} package allows us to do **Model II** regression easily (as well as
 ```{r}
 library(lmodel2) # load the lmodel2 package
 # Run the regression
-mII <- lmodel2( height ~ weight, data = d, range.y = "relative",
-  range.x = "relative", nperm = 1000)
+mII <- lmodel2(
+  height ~ weight,
+  data = d,
+  range.y = "relative",
+  range.x = "relative",
+  nperm = 1000
+)
 mII
 par(mfrow = c(2, 2))
 plot(mII, "OLS")
@@ -289,7 +300,10 @@ summary(mI) # show lm() results
 # show lmodel2() OLS results
 filter(mII$regression.results, Method == "OLS")
 par(mfrow = c(1, 2))
-plot(mII, main = "lmodel2() OLS", xlab = "weight", ylab = "height")
+plot(mII,
+     main = "lmodel2() OLS",
+     xlab = "weight",
+     ylab = "height")
 plot(data = d, height ~ weight, main = "lm()")
 abline(mI, col = "red")
 ```
@@ -348,9 +362,10 @@ m.summary <- tidy(m)
 We can confirm the t statistic and p value output by `lm()` by hand by calculating t and p based on the regression coefficient estimates and the standard errors of those estimates. The t statistic is simply the value of the estimated regression coefficient divided by the estimate of the standard error for that coefficient (i.e., $\beta/SE_\beta$)
 
 ```{r}
-m.summary$calc.statistic <- (m.summary$estimate-0)/m.summary$std.error 
+m.summary$calc.statistic <- (m.summary$estimate - 0) / m.summary$std.error
 m.summary$calc.p.value <- 2 * pt(m.summary$calc.statistic,
-  df=nrow(d)-2, lower.tail = FALSE)
+                                 df = nrow(d) - 2,
+                                 lower.tail = FALSE)
 # we use 2 * pt to get the 2-tailed p value
 # alternatively, we could do...
 # m.summary$calc.p.value <- pt(-1*abs(m.summary$calc.statistic),
@@ -446,18 +461,13 @@ head(permuted.slope) # slopes from first few permutation replicates
 # create confidence intervals
 
 permuted.slope.summary <- permuted.slope |>
-  # summarize the mean, t distribution based CI, and quantile-based CI
+  # summarize the mean (which should be very close to zero), standard error,
+  # CI based on the SE and t distribution, and CI based on the quantile (percentile) method
   summarize(
-    # mean of stat
     estimate = mean(stat),
-    # should be very close to ZERO
-    # std error of stat
     std.error = sd(stat),
-    # calculate the CI based on the SE and t distribution
-    # could use 0 in place of estimate here...
     lower = estimate - std.error * critical_value,
     upper = estimate + std.error * critical_value,
-    # calculate the CI based on the quantile (percentile) method
     perm.lower = quantile(stat, p_lower),
     perm.upper = quantile(stat, p_upper)
   )
@@ -489,14 +499,13 @@ visualize(permuted.slope) +
 Finally, to determine the two-sided p value associated with our observed slope coefficient, we determine the proportion of permuted simulations that yielded a slope estimate as great or greater than the the one based on our original data:
 
 ```{r}
-p.value <- permuted.slope %>% 
+p.value <- permuted.slope |> 
   # add a column of the absolute value of the slope
-  mutate(abs_stat=abs(stat)) %>%
-  # calculate a summary statistic
+  mutate(abs_stat=abs(stat)) |>
+  # calculate a summary statistic as the proportion of cases where the
+  # absolute value of the permuted slope is greater than or equal to the 
+  # absolute value of the observed slope
   summarize(
-    # calculate proportion of cases where the absolute value
-    # of the permuted slope is greater than or equal to the 
-    # absolute value of the observed slope
     estimate = mean(abs_stat >= abs(pull(original.slope, estimate)))
   )
 
@@ -513,11 +522,11 @@ p.value
 We can also use the {infer} package to generate CIs around our regression coefficient estimates using bootstrapping.
 
 ```{r}
-boot.slope <- d %>%
+boot.slope <- d |>
   # specify model
-  specify(height ~ weight) %>%
+  specify(height ~ weight) |>
   # generate bootstrap replicates
-  generate(reps = 1000, type = "bootstrap") %>%
+  generate(reps = 1000, type = "bootstrap") |>
   # calculate the slope statistic
   calculate(stat = "slope")
 
@@ -525,17 +534,14 @@ head(boot.slope) # slopes from first few bootstrap replicates
 
 # create confidence intervals for regression coefficients
 
-boot.slope.summary <- boot.slope %>%
-  # summarize the mean, t distribution based CI, and quantile-based CI
+boot.slope.summary <- boot.slope |>
+  # summarize the mean, standard error, CI based on the SE and t distribution,
+  # and CI based on the quantile (percentile) method
   summarize(
-    # mean of stat
     estimate = mean(stat),
-    # std error of stat
     std.error = sd(stat),
-    # calculate the CI based on the SE and t distribution
     lower = estimate - std.error * critical_value,
     upper = estimate + std.error * critical_value,
-    # calculate the CI based on the quantile (percentile)  method
     boot.lower = quantile(stat, p_lower),
     boot.upper = quantile(stat, p_upper)
   )
@@ -739,7 +745,6 @@ df <- augment(m, newdata = data.frame(age = v), se_fit = TRUE) |>
 #    interval = "confidence", level = 1 - alpha)
 #  pi <- predict(m, newdata = data.frame(age = v),
 #    interval = "prediction", 1 - alpha)
-
 plot(data=d, height ~ age)
 lines(x = df$age,
       y = df$.fitted,
@@ -773,24 +778,19 @@ g1 <- g1 + geom_line(data = df, aes(x = age, y = p.upper),
 g1
 
 # or
+
 g2 <- ggplot() +
   geom_point(data = d, aes(x = age, y = height), alpha = 0.5) +
-  # add regression line
   geom_line(data = df, aes(x = age, y = .fitted), color = "black",
     lwd = 1) +
-  # add a ribbon layer
   geom_ribbon(
     data = df, aes(x = age, ymin = c.lower, ymax = c.upper),
-    # ... with transparency set to 0.2
     alpha = 0.2, 
-    # ... and fill color blue
     fill = "blue"
   ) +
   geom_ribbon(
     data = df, aes(x = age, ymin = p.lower, ymax = p.upper),
-    # ... with transparency set to 0.2
     alpha = 0.2, 
-    # ... and fill color red
     fill = "red"
   )
 g2
@@ -860,7 +860,7 @@ detach(package:patchwork)
 detach(package:tidyverse)
 ```
 
-<hr>
+---
 
 ## Concept Review {.unnumbered}
 

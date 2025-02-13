@@ -259,7 +259,7 @@ detach(package:MuMIn)
 detach(package:tidyverse)
 ```
 
-<hr>
+---
 
 ## Concept Review {.unnumbered}
 

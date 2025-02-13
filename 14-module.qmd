@@ -742,7 +742,7 @@ detach(package:mosaic)
 detach(package:tidyverse)
 ```
 
-<hr>
+---
 
 ## Concept Review {.unnumbered}
 

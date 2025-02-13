@@ -620,7 +620,7 @@ detach(package:manipulate)
 detach(package:tidyverse)
 ```
 
-<hr>
+---
 
 ## Concept Review {.unnumbered}
 

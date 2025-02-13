@@ -737,7 +737,7 @@ detach(package:redres)
 detach(package:tidyverse)
 ```
 
-<hr>
+---
 
 ## Concept Review {.unnumbered}
 
