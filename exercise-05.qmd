@@ -17,7 +17,7 @@
 ## Challenge 1 {.unnumbered}
 
 ### Step 1 {.unnumbered}
-- Using the {tidyverse} `read_csv()` function, load the "IMDB-movies.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/IMDB-movies.csv) as a "tibble" named **d**
+- Using the {tidyverse} `read_csv()` function, load the "IMDB-movies.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-datasets/main/IMDB-movies.csv) as a "tibble" named **d**
 
 ### Step 2 {.unnumbered}
 - Use a one-line statement to filter the dataset to include just movies from 1920 to 1979 and movies that are between 1 and 3 hours long (**runtimeMinutes** >= 60 and **runtimeMinutes** <= 180), and add a new column that codes the **startYear** into a new variable, **decade** ("20s", "30s", ..."70s"). If you do this correctly, there should be 5651 movies remaining in the dataset.
@@ -66,7 +66,7 @@
 
 ### Step 1 {.unnumbered}
 
-- Using the {tidyverse} `read_csv()` function, load the "zombies.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/zombies.csv) as a "tibble" named **z**. This dataset includes the first and last name and gender of the **entire** population of 1000 people who have survived the zombie apocalypse and are now ekeing out an existence somewhere on the Gulf Coast, along with several other variables (height, weight, age, number of years of education, number of zombies they have killed, and college major). [See here for info on important post-zombie apocalypse majors!](http://www.thebestschools.org/magazine/best-majors-surviving-zombie-apocalypse/)
+- Using the {tidyverse} `read_csv()` function, load the "zombies.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv) as a "tibble" named **z**. This dataset includes the first and last name and gender of the **entire** population of 1000 people who have survived the zombie apocalypse and are now ekeing out an existence somewhere on the Gulf Coast, along with several other variables (height, weight, age, number of years of education, number of zombies they have killed, and college major). [See here for info on important post-zombie apocalypse majors!](http://www.thebestschools.org/magazine/best-majors-surviving-zombie-apocalypse/)
 
 ### Step 2 {.unnumbered}
 
