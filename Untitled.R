@@ -69,3 +69,10 @@ pt(q = 2, df = 99, ncp = 2)
 dt(x = 2, df = 99, ncp = 2)
 
 qnorm(p = c(0.025, 0.975), mean = 0, sd = 1)
+
+x <- rbeta(n = 1000, shape1 = 0.3, shape2 = 4)
+histogram(x)
+reps <- 1000
+samp_dist_mean <-
+  do(reps) * mean(rbeta(n = 1000, shape1 = 0.3, shape2 = 4))
+histogram(~ mean, data = samp_dist_mean, xlab = "Samp Dist for the Mean", ylab = "Frequency")
