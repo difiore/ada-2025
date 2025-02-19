@@ -1,4 +1,24 @@
 library(mosaic)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+library(mosaic)
+
 mu <-10 # for "mean" parameter!
 sigma <- 2 # for "sd" parameter!
 plotDist("norm", mean=mu, sd=sigma, xlab="x", ylab="Frequency")
@@ -7,14 +27,46 @@ s1 <- rnorm(n = 10, mean = 10, sd = 2)
 mean(s1)
 sd(s1)
 
+
+
+
+
+
+
+
+
+s2 <- rpois(n = 10, lambda = 10)
+s2
+
+mean(s1)
+
+
+
+
+
+
+
+
+
+
+sd(s1)
+
 s2 <- rnorm(n = 1000, mean = 10, sd = 2)
 mean(s2)
 sd(s2)
+
+histogram(s2)
+
+
+
 
 reps <- 500
 
 samp_dist_mean <-
   do(reps) * mean(rnorm(n = 10, mean = 10, sd = 2))
+
+histogram(samp_dist_mean$mean)
+
 str(samp_dist_mean)
 # generates a sampling distribution for the mean of our sample
 
@@ -28,17 +80,50 @@ sd(samp_dist_mean$mean)
 
 library(plotrix)
 x <- rnorm(n = 10, mean = 10, sd = 2)
+
+
+
+sd(samp_dist_mean$mean)
+
+
+
+
+
+
+
+
 std.error(x)
+
+
 sd(x)/sqrt(length(x))
 
-x <- rnorm(n = 1000, mean = 10, sd = 2)
+x <- rnorm(n = 10, mean = 10, sd = 2)
+
+
 std.error(x)
+
+
+
+
 sd(x)/sqrt(length(x))
 
-samp_dist_mean <-
-  do(reps) * mean(rnorm(n = 10, mean = 10, sd = 2))
+
+
+
+reps <- 1000
+s <-
+  do(reps) * mean(rnorm(n = 100, mean = 2, sd = 4))
+(se <- sd(s$mean))
+histogram(s$mean)
+
+
+
+
 histogram(~ mean, data = samp_dist_mean, xlab = "Samp Dist for the Mean")
 se_mean <- sd(samp_dist_mean$mean)
+
+
+
 
 plotDist("t", df = 99, xlab="x", ylab="Frequency", col = "red")
 plotDist("t", df = 50, add = TRUE)
@@ -76,3 +161,13 @@ reps <- 1000
 samp_dist_mean <-
   do(reps) * mean(rbeta(n = 1000, shape1 = 0.3, shape2 = 4))
 histogram(~ mean, data = samp_dist_mean, xlab = "Samp Dist for the Mean", ylab = "Frequency")
+
+
+
+
+plotDist("beta", shape1 = .3, shape2 = 4)
+reps <- 1000
+s <- do(reps) * mean(rbeta(n=100, shape1 = .3, shape2 = 4))
+histogram(s$mean)
+
+
