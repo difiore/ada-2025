@@ -1,65 +1,6 @@
 library(mosaic)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-library(mosaic)
-
-mu <-10 # for "mean" parameter!
-sigma <- 2 # for "sd" parameter!
-plotDist("norm", mean=mu, sd=sigma, xlab="x", ylab="Frequency")
-
-s1 <- rnorm(n = 10, mean = 10, sd = 2)
-mean(s1)
-sd(s1)
-
-
-
-
-
-
-
-
-
-s2 <- rpois(n = 10, lambda = 10)
-s2
-
-mean(s1)
-
-
-
-
-
-
-
-
-
-
-sd(s1)
-
-s2 <- rnorm(n = 1000, mean = 10, sd = 2)
-mean(s2)
-sd(s2)
-
-histogram(s2)
-
-
-
-
 reps <- 500
 
 samp_dist_mean <-
@@ -123,7 +64,7 @@ histogram(~ mean, data = samp_dist_mean, xlab = "Samp Dist for the Mean")
 se_mean <- sd(samp_dist_mean$mean)
 
 
-
+# t distribution
 
 plotDist("t", df = 99, xlab="x", ylab="Frequency", col = "red")
 plotDist("t", df = 50, add = TRUE)
@@ -132,9 +73,6 @@ plotDist("t", df = 12, add = TRUE)
 plotDist("t", df = 6, add = TRUE)
 plotDist("t", df = 3, add = TRUE)
 plotDist("t", df = 1, add = TRUE, col = "green")
-
-plotDist("t", df=50, xlab="x", ylab="Frequency", col="red")
-plotDist("norm", mu=0, sd=1, add=TRUE)
 
 
 plotDist("t", df=99, ncp = 2, xlab="x", ylab="Frequency", col="red")
@@ -155,13 +93,23 @@ dt(x = 2, df = 99, ncp = 2)
 
 qnorm(p = c(0.025, 0.975), mean = 0, sd = 1)
 
-x <- rbeta(n = 1000, shape1 = 0.3, shape2 = 4)
-histogram(x)
-reps <- 1000
+
+x1 <- rnorm(n = 1000, mean = 0, sd = 1)
+x2 <- rbeta(n = 1000, shape1 = 0.3, shape2 = 4) * 100
+x3 <- x1 + x2
+histogram(x1)
+histogram(x2)
+histogram(x3)
+
+reps <- 10000
 samp_dist_mean <-
-  do(reps) * mean(rbeta(n = 1000, shape1 = 0.3, shape2 = 4))
+  do(reps) * mean(rnorm(n = 1000, mean = 0, sd = 1) +
+                  rbeta(n = 1000, shape1 = 0.3, shape2 = 4)
+                  )
 histogram(~ mean, data = samp_dist_mean, xlab = "Samp Dist for the Mean", ylab = "Frequency")
 
+qqnorm(samp_dist_mean$mean)
+qqline(samp_dist_mean$mean)
 
 
 
