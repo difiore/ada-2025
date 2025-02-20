@@ -136,7 +136,41 @@ x <- c(2.9, 4.8, 8.9, -3.2, 9.1, -2.5, -0.9, -0.1, 2.8, -1.7)
 m <- mean(x)
 se <- sd(x)/sqrt(length(x))
 
-ci <- m + c(-1,1) * qnorm(c(0.025, 0.975)) * se
+alpha <- 0.05
+
+ci <- m + qnorm(c(alpha/2, (1 - (alpha/2)))) * se
+
+
+ci <- m + qnorm(c(0.025, 0.975)) * se
+ci <- m + c(-1,1) * qnorm(0.975) * se
+
+n_boot <- 10000
+boot <- vector(length=n_boot) # set up a dummy variable to hold our simulations
+n <- length(x) # bootstrap sample size will be the same length as our sample data
+for (i in 1:n_boot){
+  boot[[i]] <- mean(sample(x, n, replace=TRUE))
+}
+
+ci <- quantile(boot, probs = c(0.025, 0.975))
+
+
+library(tidyverse)
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/vervet-weights.csv"
+d <- read_csv(f, col_names = TRUE)
+head(d)
+# mean
+m <- mean(d$weight)
+# se of sample
+se <- sd(d$weight)/sqrt(length(d$weight))
+# ci around estimate of the mean based on st normal
+ci <- m + qnorm(c(0.025,0.975))* se
+# expected mean
+mu <- 5
+# does CI include expected mean?
+z <- (m - mu)/se
+p <- 1 - pnorm(z)
+t_stat <- t.test(x = d$weight, mu = mu, alternative = "greater")
+
 
 
 s <- do(reps) * mean(rbeta(n=100, shape1 = .3, shape2 = 4))
