@@ -112,10 +112,103 @@ qqnorm(samp_dist_mean$mean)
 qqline(samp_dist_mean$mean)
 
 
+plotDist("norm", mean = 0, sd = 1)
+abline( h = .2)
+abline(v = qnorm(p = c(0.025, 0.975), mean = 0, sd = 1))
 
+library(mosaic)
+
+# Plot a normal distribution
+plotDist("norm", mean = 0, sd = 1, col = "blue")
+ladd(panel.abline(v = qnorm(c(0.025, 0.975), mean = 0, sd = 1)))
+
+# Plot a beta distribution
+plotDist("beta", shape1 = 2, shape2 = 4)
+ladd(panel.abline(v = qbeta(p = c(0.025, 0.975), shape1 = 2, shape2 = 4)))
+
+# Plot a beta distribution
 plotDist("beta", shape1 = .3, shape2 = 4)
-reps <- 1000
+ladd(panel.abline(v = qbeta(p = c(0.025, 0.975), shape1 = 0.3, shape2 = 4)))
+
+x <- rnorm(n = 10, mean = 2, sd = 4)
+
+x <- c(2.9, 4.8, 8.9, -3.2, 9.1, -2.5, -0.9, -0.1, 2.8, -1.7)
+m <- mean(x)
+se <- sd(x)/sqrt(length(x))
+
+ci <- m + c(-1,1) * qnorm(c(0.025, 0.975)) * se
+
+
 s <- do(reps) * mean(rbeta(n=100, shape1 = .3, shape2 = 4))
 histogram(s$mean)
 
+
+
+
+
+library(manipulate)
+manipulate(
+  ggplot(data = data.frame(
+    x = c(
+      sampling_dist_mean - 4 * sampling_dist_sd,
+      sampling_dist_mean + 4 * sampling_dist_sd
+    )
+  ), aes(x)) + stat_function(
+    fun = dnorm,
+    args = list(mean = sampling_dist_mean, sd = sampling_dist_sd),
+    n = 1000
+  ) + xlab("Sampling Distribution Mean") +
+    ylab("") + labs(
+      title = "Exploring Confidence Intervals",
+      subtitle = paste0(
+        "Sampling Distribution SD (= SE): ",
+        sampling_dist_sd,
+        "\n",
+        round(percent_CI, 2),
+        "% CI: ",
+        round(sampling_dist_mean -
+                qnorm((1 - percent_CI /
+                         100) / 2) * sampling_dist_sd, 2),
+        " to ",
+        round(sampling_dist_mean +
+                qnorm((1 - percent_CI /
+                         100) / 2) * sampling_dist_sd, 2)
+      )
+    ) + geom_vline(
+      xintercept = sampling_dist_mean -
+        qnorm((1 - percent_CI /
+                 100) / 2) * sampling_dist_sd,
+      color = "blue",
+      linetype = "dashed"
+    ) +
+    geom_vline(
+      xintercept = sampling_dist_mean + qnorm((1 - percent_CI / 100) / 2) *
+        sampling_dist_sd,
+      color = "blue",
+      linetype = "dashed"
+    ) + geom_vline(
+      xintercept = sampling_dist_mean,
+      color = "black",
+      linetype = "solid"
+    ) + stat_function(
+      fun = dnorm,
+      xlim = c(
+        sampling_dist_mean -
+          qnorm((1 - percent_CI /
+                   100) / 2) * sampling_dist_sd,
+        sampling_dist_mean + qnorm((1 -
+                                      percent_CI /
+                                      100) / 2) * sampling_dist_sd
+      ),
+      args = list(mean = sampling_dist_mean, sd = sampling_dist_sd),
+      n = 1000,
+      geom = "area",
+      fill = "red",
+      alpha = 0.5,
+      color = "red"
+    ),
+  sampling_dist_mean = slider(-100, 100, initial = 0, step = 10),
+  sampling_dist_sd = slider(0, 100, initial = 1, step = 1),
+  percent_CI = slider(0, 99, initial = 95, step = 1)
+)
 
