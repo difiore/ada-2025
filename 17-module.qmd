@@ -1,3 +1,8 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Error, Power, and Effect Size {#module-17}
 
 ## Objectives
@@ -416,8 +421,7 @@ The code below lets you explore power and effect size interactively. You can use
 First, we define a function that plots the relationship between these factors and power:
 
 ```{r}
-power.plot <- function(mu0, muA, n, sigma, alpha,
-  alternative = "two.tailed"){
+power.plot <- function(mu0, muA, n, sigma, alpha, alternative = "two.tailed"){
   pow <- 0
   z <- (muA - mu0) / (sigma / sqrt(n))
   g <- ggplot(data.frame(mu = c(

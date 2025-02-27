@@ -34,7 +34,7 @@ sd_pop <- function(x, na.rm = TRUE) {
 - Using the {tidyverse} `read_csv()` function, load the "IMDB-movies.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-datasets/main/IMDB-movies.csv) as a "tibble" named **d**.
 
 ```{r}
-f <- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/IMDB-movies.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/IMDB-movies.csv"
 d <- read_csv(f, col_names = TRUE)
 ```
 
@@ -623,7 +623,7 @@ kable(compare_CIs, digits = 3) |>
 
 > **NOTE:** This was already done in Step 6, where we ran the custom `CI_boot()` function, and the results are included in the **Samp 1 CI boot** column in the table above.
 
-The CI based on the sampling distribution generated via **resampling** is comparable to those based on the first sample using parametric estimates from a normal and t distribution as well as that based on bootstrapping using just the first sample for all of the normally distributed variables (age, height, weight). Even for the Poisson-distributed variables (zombies killed, years of education), the lower and upper bounds for the sampling distribution-based CIs are pretty comparable to those estimated from the first sample by either parametric methods or from bootstrap estimation.
+The CI based on the sampling distribution generated via **resampling** is comparable to those based on the first sample using parametric estimates from a normal and a t distribution, as well as that based on bootstrapping using just the first sample for all of the normally distributed variables (age, height, weight). Even for the Poisson-distributed variables (zombies killed, years of education), the lower and upper bounds for the sampling distribution-based CIs are pretty comparable to those estimated from the first sample by either parametric methods or via bootstrap estimation.
 
 ```{r}
 #| include: false
