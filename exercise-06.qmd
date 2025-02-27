@@ -1,4 +1,4 @@
-# Exercise 07 {.unnumbered}
+# Exercise 06 {.unnumbered}
 
 # Practice Simulation-Based Inference {.unnumbered}
 
