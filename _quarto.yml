@@ -65,11 +65,11 @@ book:
       - exercise-02.qmd
       - exercise-03.qmd
       - exercise-04.qmd
-    #  - exercise-04-solution.qmd
+      - exercise-04-solution.qmd
       - exercise-05.qmd
     #  - exercise-05-solution.qmd
-    #  - exercise-07.qmd
-    #  - exercise-07-solution.qmd
+      - exercise-06.qmd
+      - exercise-06-solution.qmd
     #  - exercise-08.qmd
     #  - exercise-09.qmd
     #  - exercise-09-solution.qmd

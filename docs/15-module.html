@@ -406,8 +406,26 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./exercise-04-solution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 04 Solution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./exercise-05.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 05</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercise-06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 07</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercise-06-solution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 07 Solution</span></a>
   </div>
 </li>
       </ul>
@@ -1254,7 +1272,7 @@ window.Quarto = {
 <p><span class="math display">\[T=\frac{\bar{x_2}-\bar{x_1}-\mu}{\sqrt{s_p^2(1/n_1+1/n_2)}}\]</span></p>
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(s_p^2=\frac{(n-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}\)</span></li>
+<li><span class="math inline">\(s_p^2=\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}\)</span></li>
 <li><span class="math inline">\(\bar{x_1}\)</span> and <span class="math inline">\(\bar{x_2}\)</span> = means of observations in each sample group</li>
 <li><span class="math inline">\(\mu\)</span> = expected difference in means between sample groups (usually set to zero)</li>
 <li><span class="math inline">\(s_p\)</span> = pooled sample standard deviation</li>
@@ -1428,12 +1446,12 @@ window.Quarto = {
 <span id="cb97-8"><a href="#cb97-8" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
 <span id="cb97-9"><a href="#cb97-9" aria-hidden="true" tabindex="-1"></a>m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 0.4878</code></pre>
+<pre><code>## [1] 0.4957</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
 <span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 0.1660082</code></pre>
+<pre><code>## [1] 0.155034</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(pi <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> pi)<span class="sc">/</span>n)</span>
 <span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>se  <span class="co"># the SE is an estimate of the SD of the sampling distribution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1454,12 +1472,12 @@ window.Quarto = {
 <span id="cb103-9"><a href="#cb103-9" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
 <span id="cb103-10"><a href="#cb103-10" aria-hidden="true" tabindex="-1"></a>m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 0.2005</code></pre>
+<pre><code>## [1] 0.2053</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
 <span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 0.1250015</code></pre>
+<pre><code>## [1] 0.1303799</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb107"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(pi <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> pi)<span class="sc">/</span>n)</span>
 <span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>se  <span class="co"># the SE is an estimate of the SD of the sampling distribution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2721,7 +2739,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb139-606"><a href="#cb139-606" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb139-607"><a href="#cb139-607" aria-hidden="true" tabindex="-1"></a>where:</span>
 <span id="cb139-608"><a href="#cb139-608" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb139-609"><a href="#cb139-609" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$s_p^2=\frac{(n-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}$</span>
+<span id="cb139-609"><a href="#cb139-609" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$s_p^2=\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}$</span>
 <span id="cb139-610"><a href="#cb139-610" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\bar{x_1}$ and $\bar{x_2}$ = means of observations in each sample group</span>
 <span id="cb139-611"><a href="#cb139-611" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\mu$ = expected difference in means between sample groups (usually set to zero)</span>
 <span id="cb139-612"><a href="#cb139-612" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$s_p$ = pooled sample standard deviation</span>

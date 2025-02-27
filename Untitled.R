@@ -99,3 +99,61 @@ p <- ggplot(data = boot) +
   stat_function(fun = dnorm,
                 args = list(mean = f_mean,
                             sd = f_sd))
+
+t_stat_num <- (mean_m$mean - mean_f$mean) - 0
+
+s2 <- ((nrow(males) - 1) * sd(males$kernel95)^2 + (nrow(females) - 1) * sd(females$kernel95)^2)/(nrow(males) + nrow(females) - 2)
+
+t_stat_denom <- sqrt(s2 * (1/nrow(males) + 1/nrow(females)))
+
+t_stat <- t_stat_num/t_stat_denom
+
+df <- nrow(males) + nrow(females) - 2
+
+l <- pt(-1 * abs(t_stat), df, lower.tail = TRUE)
+u <- pt(1 * abs(t_stat), df, lower.tail = FALSE)
+p <- l + u
+
+t.test(x = males$kernel95, y = females$kernel95, alternative = "two.sided", var.equal = TRUE)
+
+# Permutation Test
+d <- d |>
+  select(id, sex, kernel95)
+
+summary <- d |>
+  group_by(sex) |>
+  summarize(mean = mean(kernel95))
+
+obs <- filter(summary, sex == "F") |> pull(mean) -
+       filter(summary, sex == "M") |> pull(mean)
+
+reps <- 10000
+
+perm <- vector()
+for (i in 1:reps){
+  temp <- d
+  temp$sex <- sample(temp$sex)
+  summary <- temp |>
+    group_by(sex) |>
+    summarize(mean = mean(kernel95))
+  perm[[i]] <- filter(summary, sex == "F") |> pull(mean) -
+    filter(summary, sex == "M") |> pull(mean)
+}
+
+hist(perm)
+
+p <- sum(perm < -1 * abs(obs) | perm > abs(obs))/reps
+
+library(infer)
+d <- d |> specify(formula = kernel95 ~ sex)
+d <- d |> hypothesize(null = "independence")
+perm <- d |> generate(reps = 10000, type = "permute")
+perm <- perm |> calculate(stat = "diff in means", order = c("M", "F"))
+perm
+visualize(perm, bins = 20)
+obs <- d |>
+  specify(kernel95 ~ sex) |>
+  calculate(stat = "diff in means", order = c("F", "M"))
+visualize(perm, bins = 20) +
+  shade_p_value(obs_stat = obs, direction = "both")
+get_p_value(perm, obs, direction = "both")

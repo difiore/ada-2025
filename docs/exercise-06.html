@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Applied Data Analysis - Structure</title>
+<title>Applied Data Analysis - Exercise 07</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./00-course-schedule.html" rel="next">
-<link href="./00-logistics.html" rel="prev">
+<link href="./exercise-06-solution.html" rel="next">
+<link href="./exercise-05.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-logistics.html">Preliminaries</a></li><li class="breadcrumb-item"><a href="./00-structure.html">Structure</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./exercise-01.html">Exercises</a></li><li class="breadcrumb-item"><a href="./exercise-06.html">Exercise 07</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -170,7 +170,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00-structure.html" class="sidebar-item-text sidebar-link active">
+  <a href="./00-structure.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Structure</span></a>
   </div>
 </li>
@@ -389,7 +389,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./exercise-06.html" class="sidebar-item-text sidebar-link">
+  <a href="./exercise-06.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Exercise 07</span></a>
   </div>
 </li>
@@ -441,14 +441,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#practice-simulation-based-inference" id="toc-practice-simulation-based-inference" class="nav-link active" data-scroll-target="#practice-simulation-based-inference">Practice Simulation-Based Inference</a>
+  <ul class="collapse">
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#background-on-the-dataset" id="toc-background-on-the-dataset" class="nav-link" data-scroll-target="#background-on-the-dataset">Background on the Dataset</a>
+  <ul class="collapse">
+  <li><a href="#preliminaries" id="toc-preliminaries" class="nav-link" data-scroll-target="#preliminaries">Preliminaries</a></li>
+  <li><a href="#step-1" id="toc-step-1" class="nav-link" data-scroll-target="#step-1">Step 1</a></li>
+  <li><a href="#step-2" id="toc-step-2" class="nav-link" data-scroll-target="#step-2">Step 2</a></li>
+  <li><a href="#step-3" id="toc-step-3" class="nav-link" data-scroll-target="#step-3">Step 3</a></li>
+  <li><a href="#step-4" id="toc-step-4" class="nav-link" data-scroll-target="#step-4">Step 4</a></li>
+  <li><a href="#step-5" id="toc-step-5" class="nav-link" data-scroll-target="#step-5">Step 5</a></li>
+  <li><a href="#step-6" id="toc-step-6" class="nav-link" data-scroll-target="#step-6">Step 6</a></li>
+  <li><a href="#step-7" id="toc-step-7" class="nav-link" data-scroll-target="#step-7">Step 7</a></li>
+  <li><a href="#step-8" id="toc-step-8" class="nav-link" data-scroll-target="#step-8">Step 8</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00-logistics.html">Preliminaries</a></li><li class="breadcrumb-item"><a href="./00-structure.html">Structure</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./exercise-01.html">Exercises</a></li><li class="breadcrumb-item"><a href="./exercise-06.html">Exercise 07</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Structure</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Exercise 07</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -465,14 +486,90 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This course is divided into three main sections.</p>
-<p>In <strong>Part I</strong>, we will introduce and practice using the statistical programming software <strong><em>R</em></strong>, the <strong><em>RStudio</em></strong> integrated development environment, and the <strong><em>R</em></strong> package ecosystem. We will also cover programming/scripting fundamentals as implemented in <strong><em>R</em></strong> (functions, flow control) and practice using version control systems (e.g., <strong><em>git</em></strong> and <strong><em>GitHub</em></strong>) as we build up our skills for conducting reproducible research. We will use all of these tools to practice data wrangling and perform exploratory data analysis and visualizations.</p>
-<p>In <strong>Part II</strong>, we will cover basic statistical and probability theory and methods of statistical inference. We will discuss classical null hypothesis significance testing and more contemporary methods based on permutation methods and, if time permits, I may also introduce alternative Bayesian approaches to inference. In this section, we will cover a variety of linear modeling topics, including simple and multivariate regression, ANOVA and ANCOVA, generalized linear modeling, and mixed effects modeling, as well as regression diagnostics and tools for model selection.</p>
-<p>Finally, in <strong><em>Part III</em></strong>, I hope to introduce a few additional and more specialized data analysis and visualization topics. Assuming we get there, <strong><em>Part III</em></strong> will introduce a mish-mash of (hopefully useful and interesting!) topics and tools, e.g., working with geospatial data and phylogenetic trees, network analysis, machine learning, natural language processing, image analysis, etc. Past experience suggests that I am proposing an ambitious amount of material to cover, so we likely will not get to some of these more specialized kinds of analyses. Still, if there’s a topic you are particularly excited about exploring, let me know and I will see what we can do!</p>
+<section id="practice-simulation-based-inference" class="level1 unnumbered">
+<h1 class="unnumbered">Practice Simulation-Based Inference</h1>
+<section id="learning-objectives" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<ul>
+<li>Use a real data set to practice…
+<ul>
+<li>generating confidence intervals around sample statistics by bootstrapping</li>
+<li>doing permutation-based tests of independence</li>
+</ul></li>
+</ul>
+</section>
+<section id="background-on-the-dataset" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="background-on-the-dataset">Background on the Dataset</h2>
+<p>Spider monkeys (genus <em>Ateles</em>) live in large multimale-multifemale social groups containing a total of ~20-30 adult individuals. Association patterns among the members of these group are very flexible. It is rare to see more than a handful of the adult members of the group together at any given time, and, instead, group members organize themselves in multiple smaller subgroups, or “parties”, that travel separately from one another. Individuals and parties may come together (“fuse”), re-assort their membership, and break apart from one another (“fission”) multiple times per day. Each individual, then, shows a different pattern of association with other group members and its own pattern of home range use.</p>
+<p>My research group has collected data on the ranging patterns of one species of spider monkeys (<em>Ateles belzebuth</em>) in Amazonian Ecuador by following focal individuals and recording their location at regular intervals throughout the day using a GPS. We also record information on the other animals associated with focal individuals at those same intervals. This process yields a large set of location records for each individual based on both when those animals are the focus of focal follows and when they are present in subgroups containing a different focal individual.</p>
+<p>Using location records collected over several years, we have generated several measures of home range size for 9 adult males and 11 adult females who are members of one social group of <em>Ateles belzebuth</em>.</p>
+<section id="preliminaries" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="preliminaries">Preliminaries</h3>
+<ul>
+<li>Using the {tidyverse} <code>read_csv()</code> function, load <a href="https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/tbs-2006-2008-ranges.csv">this dataset</a> into <strong><em>R</em></strong> as a “tibble” named <strong>d</strong> and look at the variables it contains. For this exercise, we are interested in two variables in particular: <strong>sex</strong> (“M” or “F”, for male versus female) and <strong>kernel95</strong>, which represents the size of a polygon summarizing the location records for an individual as a 95% utilization density kernel.</li>
+</ul>
+</section>
+<section id="step-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="step-1">Step 1</h3>
+<ul>
+<li>Reduce the dataset to just the two variables of interest.</li>
+</ul>
+</section>
+<section id="step-2" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="step-2">Step 2</h3>
+<ul>
+<li>Determine the mean, standard deviation, and standard error in “kernel95” home range size for each sex.</li>
+</ul>
+</section>
+<section id="step-3" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="step-3">Step 3</h3>
+<ul>
+<li>Create boxplots comparing “kernel95” home range size by sex.</li>
+</ul>
+</section>
+<section id="step-4" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="step-4">Step 4</h3>
+<ul>
+<li>For each sex, generate a bootstrap distribution for mean kernel95 home range size. To do this, for each sex, you will want to generate a set of 10,000 bootstrap samples (i.e., sampling with replacement), calculate the mean kernel95 home range size for each of these samples, and plot the resulting bootstrap sampling distribution.</li>
+</ul>
+</section>
+<section id="step-5" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="step-5">Step 5</h3>
+<ul>
+<li>Plot an appropriate normal distribution over the bootstrap sampling distribution.</li>
+</ul>
+</section>
+<section id="step-6" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="step-6">Step 6</h3>
+<ul>
+<li><p>Calculate a 95% confidence interval around for the mean kernel95 home range size for each sex…</p>
+<ul>
+<li><p>Using the <code>quantile()</code> method applied directly to your bootstrap sampling distribution, and…</p></li>
+<li><p>Using the theory-based “standard error” method, based on <code>qnorm()</code> and the standard deviation of your bootstrap sampling distribution.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="step-7" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="step-7">Step 7</h3>
+<ul>
+<li><p>Use simulation-based permutation to evaluate the difference in mean kernel95 home range size for males versus females. To do this, you will want to shuffle either the variable “sex” or “kernel95” home range size a total of 10,000 times, recalculating mean kernel95 size by sex for each permuted sample and then compare the difference in male and female kernel95 means from your original sample to the permutation distribution for the difference in means.</p>
+<ul>
+<li>Under this approach, what is the “null” hypothesis? What is the test statistic? Is the difference in mean kernel95 home range size “significant”?</li>
+</ul></li>
+</ul>
+</section>
+<section id="step-8" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="step-8">Step 8</h3>
+<ul>
+<li>Finally, use a theory-based parametric test (e.g., a t-test) to also calculate an appropriate test statistic and associated p value for the comparison of male and female mean kernel95 home range size. Under this approach, what is the test statistic? Is the difference in mean kernel95 home range size “significant”?</li>
+</ul>
 
 
 <!-- -->
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -915,25 +1012,74 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./00-logistics.html" class="pagination-link  aria-label=" course="" logistics"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Course Logistics</span>
+      <a href="./exercise-05.html" class="pagination-link  aria-label=" exercise="" 05"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exercise 05</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./00-course-schedule.html" class="pagination-link" aria-label="Course Schedule">
-        <span class="nav-page-text">Course Schedule</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./exercise-06-solution.html" class="pagination-link" aria-label="Exercise 07 Solution">
+        <span class="nav-page-text">Exercise 07 Solution</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Structure {.unnumbered}</span></span>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Exercise 07 {.unnumbered}</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>This course is divided into three main sections.</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu"># Practice Simulation-Based Inference {.unnumbered}</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>In **Part I**, we will introduce and practice using the statistical programming software ***R***, the ***RStudio*** integrated development environment, and the ***R*** package ecosystem. We will also cover programming/scripting fundamentals as implemented in ***R*** (functions, flow control) and practice using version control systems (e.g., ***git*** and ***GitHub***) as we build up our skills for conducting reproducible research. We will use all of these tools to practice data wrangling and perform exploratory data analysis and visualizations.</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Learning Objectives {.unnumbered}</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>In **Part II**, we will cover basic statistical and probability theory and methods of statistical inference. We will discuss classical null hypothesis significance testing and more contemporary methods based on permutation methods and, if time permits, I may also introduce alternative Bayesian approaches to inference. In this section, we will cover a variety of linear modeling topics, including simple and multivariate regression, ANOVA and ANCOVA, generalized linear modeling, and mixed effects modeling, as well as regression diagnostics and tools for model selection.</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Finally, in ***Part III***, I hope to introduce a few additional and more specialized data analysis and visualization topics. Assuming we get there, ***Part III*** will introduce a mish-mash of (hopefully useful and interesting!) topics and tools, e.g., working with geospatial data and phylogenetic trees, network analysis, machine learning, natural language processing, image analysis, etc. Past experience suggests that I am proposing an ambitious amount of material to cover, so we likely will not get to some of these more specialized kinds of analyses. Still, if there’s a topic you are particularly excited about exploring, let me know and I will see what we can do!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use a real data set to practice...</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>generating confidence intervals around sample statistics by bootstrapping</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>doing permutation-based tests of independence</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Background on the Dataset {.unnumbered}</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>Spider monkeys (genus *Ateles*) live in large multimale-multifemale social groups containing a total of ~20-30 adult individuals. Association patterns among the members of these group are very flexible. It is rare to see more than a handful of the adult members of the group together at any given time, and, instead, group members organize themselves in multiple smaller subgroups, or "parties", that travel separately from one another. Individuals and parties may come together ("fuse"), re-assort their membership, and break apart from one another ("fission") multiple times per day. Each individual, then, shows a different pattern of association with other group members and  its own pattern of home range use.</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>My research group has collected data on the ranging patterns of one species of spider monkeys (*Ateles belzebuth*) in Amazonian Ecuador by following focal individuals and recording their location at regular intervals throughout the day using a GPS. We also record information on the other animals associated with focal individuals at those same intervals. This process yields a large set of location records for each individual based on both when those animals are the focus of focal follows and when they are present in subgroups containing a different focal individual.</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Using location records collected over several years, we have generated several measures of home range size for 9 adult males and 11 adult females who are members of one social group of *Ateles belzebuth*.</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### Preliminaries {.unnumbered}</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Using the {tidyverse} <span class="in">`read_csv()`</span> function, load <span class="co">[</span><span class="ot">this dataset</span><span class="co">](https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/tbs-2006-2008-ranges.csv)</span> into ***R*** as a "tibble" named **d** and look at the variables it contains. For this exercise, we are interested in two variables in particular: **sex** ("M" or "F", for male versus female) and **kernel95**, which represents the size of a polygon summarizing the location records for an individual as a 95% utilization density kernel.</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 1 {.unnumbered}</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Reduce the dataset to just the two variables of interest.</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 2 {.unnumbered}</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Determine the mean, standard deviation, and standard error in “kernel95” home range size for each sex.</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 3 {.unnumbered}</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Create boxplots comparing “kernel95” home range size by sex.</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 4 {.unnumbered}</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>For each sex, generate a bootstrap distribution for mean kernel95 home range size. To do this, for each sex, you will want to generate a set of 10,000 bootstrap samples (i.e., sampling with replacement), calculate the mean kernel95 home range size for each of these samples, and plot the resulting bootstrap sampling distribution.</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 5 {.unnumbered}</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Plot an appropriate normal distribution over the bootstrap sampling distribution.</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 6 {.unnumbered}</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Calculate a 95% confidence interval around for the mean kernel95 home range size for each sex...</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Using the <span class="in">`quantile()`</span> method applied directly to your bootstrap sampling distribution, and...</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Using the theory-based "standard error" method, based on <span class="in">`qnorm()`</span> and the standard deviation of your bootstrap sampling distribution.</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 7 {.unnumbered}</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Use simulation-based permutation to evaluate the difference in mean kernel95 home range size for males versus females. To do this, you will want to shuffle either the variable "sex" or "kernel95" home range size a total of 10,000 times, recalculating mean kernel95 size by sex for each permuted sample and then compare the difference in male and female kernel95 means from your original sample to the permutation distribution for the difference in means.</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Under this approach, what is the "null" hypothesis? What is the test statistic? Is the difference in mean kernel95 home range size "significant"?</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 8 {.unnumbered}</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Finally, use a theory-based parametric test (e.g., a t-test) to also calculate an appropriate test statistic and associated p value for the comparison of male and female mean kernel95 home range size. Under this approach, what is the test statistic? Is the difference in mean kernel95 home range size "significant"?</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
