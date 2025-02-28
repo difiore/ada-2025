@@ -20,7 +20,7 @@ head(d)
 - Reduce the dataset to just the two variables of interest.
 
 ```{r}
-d <- d %>% select(sex, kernel95)
+d <- d |> select(sex, kernel95)
 head(d)
 ```
 
@@ -29,8 +29,8 @@ head(d)
 - Determine the mean, standard deviation, and standard error in “kernel95” home range size for each sex.
 
 ```{r}
-hr_summary <- d %>%
-  group_by(sex) %>%
+hr_summary <- d |>
+  group_by(sex) |>
   summarize(mean = mean(kernel95),
             sd = sd(kernel95),
             n = n(),
@@ -57,7 +57,7 @@ p
 ```{r}
 # ci in mean HR size
 n_boot <- 10000
-s <- d %>% filter(sex == "M")
+s <- d |> filter(sex == "M")
 
 # option 1 - using {base} R
 boot <- vector()
@@ -76,8 +76,8 @@ boot <- boot$mean # pull out mean column as vector
 boot <- s %>%
   rep_sample_n(replace = TRUE,
                size = nrow(.),
-               reps = 10000) %>%
-  group_by(replicate) %>%
+               reps = 10000) |>
+  group_by(replicate) |>
   summarize(mean = mean(kernel95))
 boot <- boot$mean # pull out mean column as vector
 ```
@@ -119,16 +119,16 @@ We can also do all of the above using the {infer} package's `specify()` → `gen
 
 ```{r}
 # option 4 - using {infer}
-boot <- s %>%
-  specify(response = kernel95) %>%
-  generate(reps = n_boot, type = "bootstrap") %>%
+boot <- s |>
+  specify(response = kernel95) |>
+  generate(reps = n_boot, type = "bootstrap") |>
   calculate(stat = "mean")
 
-ci_boot <- boot %>%
+ci_boot <- boot |>
   get_confidence_interval(
     type = "percentile", level = 0.95)
 
-ci_theory <- boot %>%
+ci_theory <- boot |>
   get_confidence_interval(
     type = "se", level = 0.95,
     point_estimate = mean(s$kernel95))
@@ -147,8 +147,7 @@ permuted_diff <- vector()
 permuted_data <- d
 for (i in 1:n_perm) {
   # scramble the sex vector:
-  # `sample()` with a vector as an argument yields a
-  # random permutation of the vector
+  # `sample()` with a vector as an argument yields a random permutation of the vector
   permuted_data$sex <- sample(permuted_data$sex)
   m <- permuted_data[permuted_data$sex == "M",]$kernel95
   f <- permuted_data[permuted_data$sex == "F",]$kernel95
@@ -168,18 +167,18 @@ ladd(
 Again, we can do this whole process using the {infer} package workflow...
 
 ```{r}
-null_distribution <- d %>%
-  specify(formula = kernel95 ~ sex) %>%
-  hypothesize(null = "independence") %>%
-  generate(reps = n_perm, type = "permute") %>%
+null_distribution <- d |>
+  specify(formula = kernel95 ~ sex) |>
+  hypothesize(null = "independence") |>
+  generate(reps = n_perm, type = "permute") |>
   calculate(stat = "diff in means", order = c("M", "F"))
 
-actual_diff <- d %>%
-  specify(formula = kernel95 ~ sex) %>%
+actual_diff <- d |>
+  specify(formula = kernel95 ~ sex) |>
   calculate(stat = "diff in means", order = c("M", "F"))
 actual_diff
 
-null_distribution %>%
+null_distribution |>
   get_p_value(obs_stat = actual_diff, direction = "both")
 
 visualize(null_distribution) +
@@ -188,15 +187,15 @@ visualize(null_distribution) +
 
   - Under this approach, what is the "null" hypothesis? What is the test statistic? Is the difference in mean kernel95 home range size "significant"?
 
-The null hypothesis here is that the difference in mean kernel95 home range size for males versus females is zero. The test statistic is the actual difference in mean kernel95 home range size for males versus females, and it is evaluated relative to a permutation distribution for this statistic. Based on our very low p value (less than 0.001), under a null hypothesis significance testing framework, we would conclude that the difference is "significant" (assuming that p is less than the alpha level we specify).
+The null hypothesis here is that the difference in mean kernel95 home range size for males versus females is zero. The test statistic is the **actual difference in mean kernel95 home range size for males versus females**, and it is evaluated relative to a permutation distribution for this statistic. Based on our very low p value (less than 0.001), under a null hypothesis significance testing framework, we would conclude that the difference is "significant" (assuming that p is less than the alpha level we specify).
 
 ### Step 8 {.unnumbered}
 
 - Finally, use a theory-based parametric test (e.g., a t-test) to also calculate an appropriate test statistic and associated p value for the comparison of male and female mean kernel95 home range size. Is the difference in mean kernel95 home range size "significant"?
 
 ``` {r}
-f <- d %>% filter(sex == "F")
-m <- d %>% filter(sex == "M")
+f <- d |> filter(sex == "F")
+m <- d |> filter(sex == "M")
 
 # first, what is ratio of variances in our two samples?
 var_f <- var(f$kernel95)
@@ -210,7 +209,7 @@ num_m <- nrow(m)
 mean_f <- mean(f$kernel95)
 mean_m <- mean(m$kernel95)
 
-# hand-calculate test statistic and p value...
+# hand-calculate the test statistic and p value...
 s2 <- ((num_m-1) * var_m + (num_f-1) * var_f)/(num_m + num_f - 2)
 t_stat <- (mean_m - mean_f) / sqrt(s2 * (1/num_m + 1/num_f))
 t_stat
@@ -219,7 +218,7 @@ df <- num_m + num_f - 2
 p <- 2 * (1 - pt(t_stat, df))
 p
 
-# or use t.test() function
+# or use the t.test() function
 t_test <- t.test(x=m$kernel95, y = f$kernel95, var.equal = TRUE)
 t_test
 ```
