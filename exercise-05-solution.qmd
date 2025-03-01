@@ -1,9 +1,3 @@
----
-author: "Anthony Di Fiore"
-format:
-  html:
-    embed-resources: TRUE
----
 # Exercise 05 Solution {.unnumbered}
 
 # • Solution {.unnumbered}
