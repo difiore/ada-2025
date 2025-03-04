@@ -141,10 +141,10 @@ Let's explore this dataset, first with single and then with multivariate regress
 
 ### CHALLENGE {.unnumbered}
 
-Start off by making three bivariate scatterplots in {ggplot2} using the dataframe of three predictor variables (**X1**, **X2**, and **X3**) and one response variable (**Y**) that we generated above (or download it from "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/multiple_regression.csv")
+Start off by making three bivariate scatterplots in {ggplot2} using the dataframe of three predictor variables (**X1**, **X2**, and **X3**) and one response variable (**Y**) that we generated above (or download it from "https://raw.githubusercontent.com/difiore/ada-datasets/main/multiple_regression.csv")
 
 ```{r}
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/multiple_regression.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/multiple_regression.csv"
 d <- read_csv(f, col_names = TRUE)
 ```
 
@@ -267,7 +267,7 @@ Load up the "zombies.csv" dataset with the characteristics of zombie apocalypse 
 #| code-fold: true
 #| code-summary: "Show Code"
 #| attr.output: '.details summary="Show Output"'
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/zombies.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 d <- read_csv(f, col_names = TRUE)
 head(d)
 m <- lm(data = d, height ~ weight + age)
@@ -540,7 +540,7 @@ plot(predictorEffects(m, predictors = ~ gender, xlevels = list(age = c(10, 15, 2
 #| code-fold: true
 #| code-summary: "Show Code"
 #| attr.output: '.details summary="Show Output"'
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/KamilarAndCooperData.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/KamilarAndCooperData.csv"
 d <- read_csv(f, col_names = TRUE)
 d$Family <- factor(d$Family)
 head(d)
@@ -619,7 +619,7 @@ Let's return to working with the zombie apocaluypse survivors dataset...
 ```{r}
 #| message: false
 #| fig-width: 4
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/zombies.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 d <- read_csv(f, col_names = TRUE)
 library(jtools)
 m1 <- lm(data = d,
