@@ -2,7 +2,7 @@ library(tidyverse)
 library(broom)
 library(lmtest)
 library(effects)
-f <- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/titanic_train.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/titanic_train.csv"
 
 d <- read_csv(f, col_names = TRUE)
 d$Sex <- factor(d$Sex)
@@ -31,17 +31,8 @@ y <- predict(m, newdata = x, type = "response")
 results <- tibble(Sex = c("male","female"), logOR = logOR, OR = OR, Pr_Survival = y)
 head(results)
 
-
-
-
 m <- glm(Survived ~ Age, data = d, family="binomial")
 summary(m)
-
-
-
-
-
-
 
 x <- data.frame(Age = c(seq(from = min(d$Age, na.rm = TRUE), to = max(d$Age, na.rm = TRUE), by = 1)))
 logOR <- predict(m, newdata = x)
@@ -59,7 +50,6 @@ p
 
 CI <- confint(m)
 
-
 reduced <- glm(Survived ~ Pclass, data = d, family="binomial")
 summary(m)
 x <- data.frame(Pclass = c("1","2","3"))
@@ -68,7 +58,6 @@ OR <- exp(logOR)
 y <- predict(m, newdata = x, type = "response")
 results <- tibble(Pclass = c("1","2","3"), logOR = logOR, OR = OR, Pr_Survival = y)
 head(results)
-
 
 library(effects)
 plot(allEffects(m))
@@ -79,12 +68,10 @@ newdata <- data.frame(Sex= "female", Pclass="2")
 
 newdata <- data.frame(Sex= "male", Pclass="3")
 
-
 pred_y <- predict(m, newdata = newdata, type="response")
 logOR <- predict(m, newdata=newdata)
 pred_Y <- predict(m, newdata=newdata, type="response")
 OR <- exp(logOR)
-
 
 plot(allEffects(m))
 
@@ -92,7 +79,7 @@ m <- glm(Survived ~ Sex * Pclass, data = d, family="binomial")
 summary(m)
 plot(allEffects(m))
 
-f <- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/woollydata.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/woollydata.csv"
 d <- read_csv(f, col_names = TRUE)
 (p <- ggplot(data = d, aes(x = age, y = success)) + geom_point() + xlab("Age") +
     ylab("Mating Success"))
@@ -129,25 +116,22 @@ x2 <- D_reduced - D_proposed
 (x2 <- D_reduced - D_proposed)
 (p <- 1 - pchisq(x2, df = 1))
 
-
 # mixed effects
-
 library(lmtest)
 library(tidyverse)
 library(lme4)
-f <- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/chimpgrooming.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/chimpgrooming.csv"
 d <- read_csv(f, col_names = TRUE)
 
 # random intercept
 m <- lmer(data = d, duration ~ reprocondition + parity + (1 | subject))
 summary(m)
-vcoefficients(m)
+coefficients(m)
 full <- lmer(data = d, duration ~ reprocondition + parity + (1 | subject), REML = FALSE)
 summary(full)
 reduced <- lmer(data=d, duration~parity+(1|subject), REML=FALSE)
 summary(reduced)
 lrtest(full, reduced)
-
 
 # random slope
 m <- lmer(data = d, duration ~ reprocondition + parity +
@@ -182,3 +166,4 @@ anova(minusRC, full, test = "Chisq")
 library(AICcmodavg)
 aic_table <- aictab(list(full, minusRC, minusP, null),
                     modnames = c("full", "minusRC", "minusP", "null"))
+aic_table

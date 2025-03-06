@@ -1,10 +1,10 @@
 library(tidyverse)
-f <- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/AVONETdataset1.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
 
 d <- read_csv(f, col_names = TRUE)
-d <- d %>% select(Species1, Family1, Order1, Beak.Length_Culmen, Beak.Width, Beak.Depth, Tarsus.Length, Wing.Length, Tail.Length, Mass, Habitat, Migration, Trophic.Level, Trophic.Niche, Min.Latitude, Max.Latitude, Centroid.Latitude, Range.Size, Primary.Lifestyle)
+d <- d |> select(Species1, Family1, Order1, Beak.Length_Culmen, Beak.Width, Beak.Depth, Tarsus.Length, Wing.Length, Tail.Length, Mass, Habitat, Migration, Trophic.Level, Trophic.Niche, Min.Latitude, Max.Latitude, Centroid.Latitude, Range.Size, Primary.Lifestyle)
 
-d <- d %>% mutate(logMass = log(Mass),
+d <- d |> mutate(logMass = log(Mass),
                   logRS = log(Range.Size),
                   logBeak = log(Beak.Length_Culmen),
                   logTarsus = log(Tarsus.Length),
@@ -12,7 +12,7 @@ d <- d %>% mutate(logMass = log(Mass),
 
 relBeak <- lm(logBeak ~ logMass, data = d, na.action=na.exclude)
 relTarsus <- lm(logTarsus ~ logMass, data = d, na.action=na.exclude)
-d <- d %>% mutate(
+d <- d |> mutate(
   relBeak = residuals(relBeak),
   relTarsus = residuals(relTarsus))
 
@@ -25,7 +25,7 @@ m5 <- lm(data = d, logBeak ~ 1) # intercept only model
 anova(m2, m1, test ="F")
 anova(m3, m1, test = "F")
 
-d_new <- d %>% drop_na(logRS, Migration)
+d_new <- d |> drop_na(logRS, Migration)
 m1 <- lm(data = d_new, logBeak ~ logRS * Migration) # full model
 m2 <- lm(data = d_new, logBeak ~ logRS + Migration) # model without interaction
 m3 <- lm(data = d_new, logBeak ~ logRS) # model with one predictor
@@ -43,9 +43,9 @@ library(tidyverse)
 f <- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/AVONETdataset1.csv"
 
 d <- read_csv(f, col_names = TRUE)
-d <- d %>% select(Species1, Family1, Order1, Beak.Length_Culmen, Beak.Width, Beak.Depth, Tarsus.Length, Wing.Length, Tail.Length, Mass, Habitat, Migration, Trophic.Level, Trophic.Niche, Min.Latitude, Max.Latitude, Centroid.Latitude, Range.Size, Primary.Lifestyle)
+d <- d |> select(Species1, Family1, Order1, Beak.Length_Culmen, Beak.Width, Beak.Depth, Tarsus.Length, Wing.Length, Tail.Length, Mass, Habitat, Migration, Trophic.Level, Trophic.Niche, Min.Latitude, Max.Latitude, Centroid.Latitude, Range.Size, Primary.Lifestyle)
 
-d <- d %>% mutate(logMass = log(Mass),
+d <- d |> mutate(logMass = log(Mass),
                   logRS = log(Range.Size),
                   logBeak = log(Beak.Length_Culmen),
                   logTarsus = log(Tarsus.Length),
@@ -53,11 +53,11 @@ d <- d %>% mutate(logMass = log(Mass),
 
 relBeak <- lm(logBeak ~ logMass, data = d)
 relTarsus <- lm(logTarsus ~ logMass, data = d)
-d <- d %>% mutate(
+d <- d |> mutate(
   relBeak = relBeak$residuals,
   relTarsus = relTarsus$residuals)
 
-d_new <- d %>% drop_na(logRS, logTarsus, Migration, Trophic.Level,  Primary.Lifestyle)
+d_new <- d |> drop_na(logRS, logTarsus, Migration, Trophic.Level,  Primary.Lifestyle)
 
 m_full <- lm(data = d_new, relBeak ~ logRS + logTarsus + Migration + Trophic.Level + Primary.Lifestyle) # full model
 m2 <- lm(data = d_new, relBeak ~ logRS + Trophic.Level) # reduced model
@@ -112,12 +112,12 @@ aictab(models, mod.names)
 library(naniar)
 library(skimr)
 library(tidyverse)
-f <- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/Mammal_lifehistories_v2.txt"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/Mammal_lifehistories_v2.txt"
 d <- read_tsv(f, col_names = TRUE)
-d <- d %>%
-  replace_with_na_all(~.x == -999) %>%
+d <- d |>
+  replace_with_na_all(~.x == -999) |>
   select(-c(refs, `litter size`))
-d <- d %>% mutate(logMass = log(`mass(g)`),
+d <- d |> mutate(logMass = log(`mass(g)`),
                   logGestation = log(`gestation(mo)`),
                   logNewbornMass = log(`newborn(g)`),
                   logWeaning = log(`weaning(mo)`),
@@ -133,7 +133,7 @@ relWeaningMass <- lm(logWeaningMass ~ logMass, data = d, na.action=na.exclude)
 relAFR <- lm(logAFR ~ logMass, data = d, na.action=na.exclude)
 relMaxLife <- lm(logMaxLife ~ logMass, data = d, na.action=na.exclude)
 
-d <- d %>% mutate(
+d <- d |> mutate(
   relGestation = residuals(relGestation),
   relNewbornMass = residuals(relNewbornMass),
   relWeaning = residuals(relWeaning),
@@ -157,7 +157,6 @@ p
 
 m_full <- lm(relMaxLife ~ relGestation + `litter size` + `litters/year` + order, data = d)
 summary(m_full)
-
 
 skim(d)
 str(relMaxLife$residuals)

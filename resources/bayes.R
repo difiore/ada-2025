@@ -65,43 +65,42 @@ prior <- ifelse(p_grid < 0.5, 0, 1)
 likelihood <- 0.5 * 1 + 0.5 * (1-0.7) * (0.7)
 
 
-
 library(rethinking)
 data(Howell1)
 d <- Howell1
 precis(d)
-curve( dnorm( x , 178 , 20 ) , from=100 , to=250 )
-curve( dunif( x , 0 , 50 ) , from=-10 , to=60 )
+curve(dnorm( x , 178 , 20 ) , from=100 , to=250 )
+curve(dunif( x , 0 , 50 ) , from=-10 , to=60 )
 
 # sample heights from prior
-sample_mu <- rnorm( 1e4 , 178 , 20 )
-sample_sigma <- runif( 1e4 , 0 , 50 )
-prior_h <- rnorm( 1e4 , sample_mu , sample_sigma )
-dens( prior_h )
+sample_mu <- rnorm(1e4, 178 , 20 )
+sample_sigma <- runif(1e4, 0 , 50 )
+prior_h <- rnorm(1e4 , sample_mu , sample_sigma )
+dens(prior_h)
 
 # too wide prior on height
-sample_mu <- rnorm( 1e4 , 178 , 100 )
-prior_h <- rnorm( 1e4 , sample_mu , sample_sigma )
+sample_mu <- rnorm(1e4, 178, 100)
+prior_h <- rnorm(1e4, sample_mu, sample_sigma)
 dens( prior_h )
 
-d2 <- d[ d$age >= 18 , ]
+d2 <- d[d$age >= 18,]
 
-mu.list <- seq( from=140, to=160 , length.out=500 )
-sigma.list <- seq( from=4 , to=9 , length.out=500 )
-post <- expand.grid( mu=mu.list , sigma=sigma.list )
-post$LL <- sapply( 1:nrow(post) , function(i) sum( dnorm(
+mu.list <- seq(from=140, to=160, length.out=500 )
+sigma.list <- seq(from=4, to=9, length.out=500 )
+post <- expand.grid(mu=mu.list, sigma=sigma.list )
+post$LL <- sapply(1:nrow(post), function(i) sum(dnorm(
   d2$height ,
   mean=post$mu[i] ,
   sd=post$sigma[i] ,
-  log=TRUE ) ) )
+  log=TRUE)))
 head(post)
-post$prod <- post$LL + dnorm( post$mu , 178 , 20 , TRUE ) +
-  dunif( post$sigma , 0 , 50 , TRUE )
+post$prod <- post$LL + dnorm(post$mu, 178, 20, TRUE) +
+  dunif( post$sigma, 0, 50, TRUE)
 head(post)
-post$prob <- exp( post$prod - max(post$prod) )
+post$prob <- exp(post$prod - max(post$prod))
 head(post,100)
-contour_xyz( post$mu , post$sigma , post$prob )
-image_xyz( post$mu , post$sigma , post$prob )
+contour_xyz( post$mu, post$sigma , post$prob)
+image_xyz( post$mu, post$sigma , post$prob)
 
 sample.rows <- sample(1:nrow(post) , size=10000 , replace=TRUE , prob=post$prob )
 sample.mu <- post$mu[ sample.rows ]
@@ -131,7 +130,6 @@ plot( sample2.mu , sample2.sigma , cex=0.5 ,
       col=col.alpha(rangi2,0.1) ,
       xlab="mu" , ylab="sigma" , pch=16 )
 dens( sample2.sigma , norm.comp=TRUE )
-
 
 # quadratic approximation
 flist <- alist(

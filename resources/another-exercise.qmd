@@ -1,8 +1,8 @@
----
+ ---
 title: "Another Exercise"
 ---
 
-In the ADA datasets repository, there are two new datafiles... [data9b_w.txt](https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/data9b_m.txt) and [data9b_m.txt](https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/data9b_m.txt).
+In the ADA datasets repository, there are two new datafiles... [data9b_w.txt](https://raw.githubusercontent.com/difiore/ada-datasets/main/data9b_m.txt) and [data9b_m.txt](https://raw.githubusercontent.com/difiore/ada-datasets/main/data9b_m.txt).
 
 Each row in both files contains, for one person (women in "data9b_w.txt", men in "data9b_m.txt9") the *number of steps* that this person took on a particular day (**steps**) and their body mass index (**bmi**).
 

@@ -1,7 +1,7 @@
 library(tidyverse)
 library(mosaic)
 library(ggpubr)
-f <- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/zombies.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 d <- read_csv(f, col_names = TRUE)
 m <- lm(height ~ weight + age, data = d)
 

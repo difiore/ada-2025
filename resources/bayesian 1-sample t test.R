@@ -6,7 +6,6 @@ new_yield_80 <- d$yield_61_to_80[d$world == "new"]
 new_yield_01 <- d$yield_81_to_01[d$world == "new"]
 t.test(new_yield_01, new_yield_80, paired = TRUE, alternative = "greater")
 
-
 # ...
 
 #'Bayesian First Aid alternative to the t-test

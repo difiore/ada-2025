@@ -140,8 +140,6 @@ You can install new ***Julia*** packages from a ***Julia*** code cell or console
 
 The command `Pkg.status()` can be used to list installed ***Julia*** packages.
 
-
-
 You can install the Quarto JupyterLab extension one of two ways:
 
 In the JupyterLab UI: Search for ‘Quarto’ in the Extension Manager and install the jupyterlab-quarto extension. You’ll be prompted to refresh the page when complete.
