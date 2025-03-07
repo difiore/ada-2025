@@ -1,11 +1,3 @@
----
-title: "Packages"
-format: html
-editor: source
-editor_options: 
-  chunk_output_type: console
----
-
 ## Working with Packages
 
 For MacOS users, there are two typical locations where new packages can be installed, a **System Library** and a **User Library**.
