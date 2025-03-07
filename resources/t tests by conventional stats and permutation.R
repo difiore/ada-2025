@@ -1,4 +1,6 @@
+# One Sample T Test
 library(tidyverse)
+library(mosaic)
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/woolly-weights.csv"
 d <- read_csv(f, col_names = TRUE)
 head(d)
@@ -56,7 +58,7 @@ females <- d |>
 (mean_f <- females |>
   summarize(mean = mean(kernel95)))
 
-library(mosaic)
+# Bootstrapping
 n_boot <- 10000
 boot_m <- do(n_boot) * mean (sample(males$kernel95, length(males$kernel95), replace = TRUE))
 (ci_m <- quantile(boot_m$mean, probs = c(0.025, 0.975)))
@@ -118,7 +120,7 @@ u <- pt(1 * abs(t_stat), df, lower.tail = FALSE)
 
 t.test(x = males$kernel95, y = females$kernel95, alternative = "two.sided", var.equal = TRUE)
 
-# Permutation Test
+# Permutation-Based T Test
 d <- d |>
   select(id, sex, kernel95)
 
@@ -161,7 +163,7 @@ hist(perm)
 # two-tailed p value
 (p <- sum(perm < -1 * abs(obs) | perm > abs(obs))/reps)
 
-# using {infer}... much faster
+# Permutation Using {infer} - much faster
 library(infer)
 test <- d |> specify(formula = kernel95 ~ sex)
 test <- test |> hypothesize(null = "independence")
@@ -170,7 +172,7 @@ perm <- perm |> calculate(stat = "diff in means", order = c("M", "F"))
 perm
 obs <- test |>
   specify(kernel95 ~ sex) |>
-  calculate(stat = "diff in means", order = c("F", "M"))
+  calculate(stat = "diff in means", order = c("M", "F"))
 visualize(perm, bins = 20) +
   shade_p_value(obs_stat = obs, direction = "both")
 get_p_value(perm, obs, direction = "both")
