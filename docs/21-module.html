@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.4.548">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>21&nbsp; Multiple Regression and ANCOVA – Applied Data Analysis</title>
+<title>Applied Data Analysis - 21&nbsp; Multiple Regression and ANCOVA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -148,13 +148,13 @@ window.Quarto = {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12-module.html">Part II - Statistics and Inference</a></li><li class="breadcrumb-item"><a href="./21-module.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Multiple Regression and ANCOVA</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -164,7 +164,7 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Applied Data Analysis</a> 
     </div>
@@ -184,9 +184,9 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
  <span class="menu-text">Preliminaries</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -231,9 +231,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
  <span class="menu-text">Part I - Using <strong><em>R</em></strong> and <strong><em>RStudio</em></strong></span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -308,9 +308,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
  <span class="menu-text">Part II - Statistics and Inference</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -379,9 +379,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
  <span class="menu-text">Exercises</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -424,6 +424,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./exercise-05-solution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 05 Solution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./exercise-06.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exercise 06</span></a>
   </div>
@@ -450,9 +456,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
  <span class="menu-text">Assignments</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -467,9 +473,9 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
  <span class="menu-text">References</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -601,21 +607,21 @@ window.Quarto = {
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(original) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Y"</span>, <span class="st">"X1"</span>, <span class="st">"X2"</span>, <span class="st">"X3"</span>)</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(original)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>##           Y       X1         X2       X3
-## 1  9.489962 41.16613  0.6875096 19.14851
-## 2 18.750821 37.55854 11.0368206 13.04901
-## 3 26.611795 70.38400  3.5558157 13.06270
-## 4 10.221560 29.33076  8.0863711 25.17490
-## 5 15.604351 28.53449  0.3793355 31.87557
-## 6 19.582619 55.78848  6.9764309 45.10041</code></pre>
+<pre><code>##           Y        X1        X2       X3
+## 1 10.972406 57.718261 9.7334794 12.56854
+## 2 20.653048  7.829656 1.8375123 50.26044
+## 3  5.916808 26.288132 2.2950477 44.89222
+## 4  3.619986 16.595580 0.2926995 18.29614
+## 5 21.554209 55.944547 9.4528990 42.28733
+## 6 15.500588 37.189594 4.0440745 38.38101</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(original)  <span class="co"># variables are uncorrelated</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>##              Y          X1           X2           X3
-## Y   1.00000000 -0.02976610 -0.068755783 -0.015454938
-## X1 -0.02976610  1.00000000  0.051509280  0.051740030
-## X2 -0.06875578  0.05150928  1.000000000  0.008194431
-## X3 -0.01545494  0.05174003  0.008194431  1.000000000</code></pre>
+<pre><code>##              Y           X1           X2           X3
+## Y   1.00000000 -0.065638877 -0.032173312  0.044376797
+## X1 -0.06563888  1.000000000 -0.001999607  0.030686140
+## X2 -0.03217331 -0.001999607  1.000000000 -0.003606504
+## X3  0.04437680  0.030686140 -0.003606504  1.000000000</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make quick bivariate plots for each pair of variables</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(original)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -635,7 +641,7 @@ window.Quarto = {
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##         Y        X1        X2        X3 
-## 14.868751 40.448643  5.117017 23.329357</code></pre>
+## 15.160470 39.125620  5.029444 23.341036</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">summarize</span>(original, <span class="at">ymean =</span> <span class="fu">mean</span>(Y), <span class="at">x1mean =</span> <span class="fu">mean</span>(X1), <span class="at">x2mean =</span> <span class="fu">mean</span>(X2),</span>
@@ -653,33 +659,33 @@ window.Quarto = {
 ##         period(minute = out["M", ], second = out["S", ])
 ##     }
 ## }
-## &lt;bytecode: 0x7fed1bffc408&gt;
+## &lt;bytecode: 0x12f7e0c90&gt;
 ## &lt;environment: namespace:lubridate&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>stdevs <span class="ot">&lt;-</span> <span class="fu">apply</span>(original, <span class="dv">2</span>, <span class="at">FUN =</span> <span class="st">"sd"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>stdevs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##         Y        X1        X2        X3 
-##  4.946836 19.929317  4.059801 15.251659</code></pre>
+##  5.126651 19.320771  4.096066 14.955199</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>stdevs <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">summarize</span>(original, <span class="at">ySD =</span> <span class="fu">sd</span>(Y), <span class="at">x1SD =</span> <span class="fu">sd</span>(X1), <span class="at">x2SD =</span> <span class="fu">sd</span>(X2), <span class="at">x3SD =</span> <span class="fu">sd</span>(X3)))</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>stdevs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##       ySD      x1SD      x2SD      x3SD 
-##  4.946836 19.929317  4.059801 15.251659</code></pre>
+##  5.126651 19.320771  4.096066 14.955199</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>normalized <span class="ot">&lt;-</span> <span class="fu">sweep</span>(original, <span class="dv">2</span>, <span class="at">STATS =</span> means, <span class="at">FUN =</span> <span class="st">"-"</span>)  <span class="co"># 2nd dimension is columns, removing array of means, function = subtract</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>normalized <span class="ot">&lt;-</span> <span class="fu">sweep</span>(normalized, <span class="dv">2</span>, <span class="at">STATS =</span> stdevs, <span class="at">FUN =</span> <span class="st">"/"</span>)  <span class="co"># 2nd dimension is columns, scaling by array of sds, function = divide</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(normalized)  <span class="co"># now a dataframe of Z scores</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>##            Y          X1         X2         X3
-## 1 -1.0873191  0.03600173 -1.0910650 -0.2741242
-## 2  0.7847580 -0.14501747  1.4581511 -0.6740478
-## 3  2.3738492  1.50207643 -0.3845511 -0.6731499
-## 4 -0.9394270 -0.55786560  0.7314038  0.1210060
-## 5  0.1487011 -0.59782052 -1.1669737  0.5603462
-## 6  0.9529055  0.76971205  0.4580061  1.4274547</code></pre>
+<pre><code>##           Y         X1         X2         X3
+## 1 -0.816920  0.9623136  1.1484275 -0.7203178
+## 2  1.071377 -1.6198092 -0.7792677  1.8000033
+## 3 -1.803060 -0.6644397 -0.6675665  1.4410494
+## 4 -2.251077 -1.1661045 -1.1564131 -0.3373338
+## 5  1.247157  0.8705101  1.0799275  1.2668700
+## 6  0.066343 -0.1002044 -0.2405649  1.0056688</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(normalized)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -702,10 +708,10 @@ window.Quarto = {
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(new)  <span class="co"># note that is correlation matrix is what we are aiming for!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##              Y         X1         X2          X3
-## Y   1.00000000  0.7935607 -0.5426312 -0.06403194
-## X1  0.79356070  1.0000000 -0.3083296  0.27958898
-## X2 -0.54263117 -0.3083296  1.0000000  0.62386810
-## X3 -0.06403194  0.2795890  0.6238681  1.00000000</code></pre>
+## Y   1.00000000  0.7857767 -0.5284095 -0.02482443
+## X1  0.78577668  1.0000000 -0.3163617  0.29800373
+## X2 -0.52840950 -0.3163617  1.0000000  0.59701657
+## X3 -0.02482443  0.2980037  0.5970166  1.00000000</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(original)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -730,21 +736,21 @@ window.Quarto = {
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">sweep</span>(d, <span class="dv">2</span>, <span class="at">STATS =</span> means, <span class="at">FUN =</span> <span class="st">"+"</span>)  <span class="co"># and standard deviation</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>##           Y       X1          X2       X3
-## 1  9.489962 23.54352  3.58416933 10.90856
-## 2 18.750821 51.22634  8.45677809 29.40360
-## 3 26.611795 96.25721 -0.01207173 24.88623
-## 4 10.221560 18.80021  9.16995558 26.99528
-## 5 15.604351 35.67096  0.38440805 13.22074
-## 6 19.582619 64.84515  5.28372440 46.87323</code></pre>
+<pre><code>##           Y        X1         X2         X3
+## 1 10.972406 37.654385 11.3571348 34.3345488
+## 2 20.653048 36.907908 -0.9831998 20.7461554
+## 3  5.916808  3.553912  5.9447835 25.5947597
+## 4  3.619986 -9.186432  4.8181910  0.9956208
+## 5 21.554209 68.493803  6.8287171 51.3544279
+## 6 15.500588 38.989443  3.9877611 29.6804472</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##              Y         X1         X2          X3
-## Y   1.00000000  0.7935607 -0.5426312 -0.06403194
-## X1  0.79356070  1.0000000 -0.3083296  0.27958898
-## X2 -0.54263117 -0.3083296  1.0000000  0.62386810
-## X3 -0.06403194  0.2795890  0.6238681  1.00000000</code></pre>
+## Y   1.00000000  0.7857767 -0.5284095 -0.02482443
+## X1  0.78577668  1.0000000 -0.3163617  0.29800373
+## X2 -0.52840950 -0.3163617  1.0000000  0.59701657
+## X3 -0.02482443  0.2980037  0.5970166  1.00000000</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d)  <span class="co"># note the change to the axis scales</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1820,7 +1826,7 @@ window.Quarto = {
 <span id="cb126-5"><a href="#cb126-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summ</span>(m1, <span class="at">confint =</span> <span class="cn">TRUE</span>, <span class="at">ci.width =</span> <span class="fl">0.95</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="table-responsive">
-<table class="table table-striped table-hover table-condensed caption-top table-sm small" data-quarto-postprocess="true">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
 <tbody>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold;">Observations</td>
@@ -1837,9 +1843,8 @@ window.Quarto = {
 </tbody>
 </table>
 </div>
- 
 <div class="table-responsive">
-<table class="table table-striped table-hover table-condensed caption-top table-sm small" data-quarto-postprocess="true">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
 <tbody>
 <tr class="odd">
 <td style="text-align: left; font-weight: bold;">F(4,995)</td>
@@ -1856,9 +1861,8 @@ window.Quarto = {
 </tbody>
 </table>
 </div>
- 
 <div class="table-responsive">
-<table class="table table-striped table-hover table-condensed caption-top table-sm small" data-quarto-postprocess="true">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
 <th style="text-align: left;" data-quarto-table-cell-role="th"></th>
@@ -2046,7 +2050,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const onCopySuccess = function(e) {
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2078,29 +2093,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
   });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -2152,24 +2145,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -2204,11 +2179,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -2484,7 +2455,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./20-module.html" class="pagination-link" aria-label="Categorical Data Analysis">
+      <a href="./20-module.html" class="pagination-link  aria-label=" &lt;span="" data="" analysis&lt;="" span&gt;"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Categorical Data Analysis</span></span>
       </a>          
   </div>
@@ -3168,7 +3139,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb135-752"><a href="#cb135-752" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Multiple regression and ANCOVA are further extensions of simple linear regression/ANOVA to cases where we have more than one predictor variable</span>
 <span id="cb135-753"><a href="#cb135-753" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"Multiple regression" refers to where we have 2 or more continuous predictor variables</span>
 <span id="cb135-754"><a href="#cb135-754" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>"ANCOVA" refers to cases where we have one or more continuous predictor variables and one or more categorical predictor variables</span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
