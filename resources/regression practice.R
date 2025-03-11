@@ -53,3 +53,118 @@ f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/Street_et_al_2
 d <- read_csv(f, col_names = TRUE)
 m <- lm(formula = ECV ~ Group_size, data = d)
 summary(m)
+
+
+# Regression - ANOVA tables
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
+d <- read_csv(f, col_names = TRUE)
+
+# Regression model with our zombie apocalypse survivor dataset
+m <- lm(data = d, height ~ weight)
+
+# SSY = height - mean(height)
+SSY <- sum((m$model$height - mean(m$model$height)) ^ 2)
+
+# SSR = predicted height - mean height
+SSR <- sum((m$fitted.values - mean(m$model$height)) ^ 2)
+
+# SSE = height - predicted height
+SSE <- sum((m$model$height - m$fitted.values) ^ 2)
+
+# mean overall variance
+MSY <- SSY/(nrow(d) - 1)
+
+# mean variance explained by the regression equation
+MSR <- SSR/(1)
+
+# mean remaining variance
+MSE <- SSE/(nrow(d) - 1 - 1)
+
+# Fratio
+fratio <- MSR/MSE
+
+# P value - proportion of F distribution between 0 and fratio
+pf(q = fratio, df1 = 1, df2 = 998, lower.tail = FALSE)
+1 - pf(q = fratio, df1 = 1, df2 = 998)
+
+summary(m)
+rsq <- SSR/SSY
+
+library(mosaic)
+plotDist("f", df1 = 1, df2 = 998)
+plotDist("f", df1 = 30, df2 = 30)
+
+new_d <- tibble(x = rnorm(1000, mean = 100, sd = 25),
+                y = rnorm(1000, mean = 10, sd = 2))
+plot(new_d$x, new_d$y)
+m <- lm(y ~ x, data = new_d)
+
+# SSY
+SSY <- sum((m$model$y - mean(m$model$y)) ^ 2)
+
+# SSR
+SSR <- sum((m$fitted.values - mean(m$model$y)) ^ 2)
+
+# SSE
+SSE <- sum((m$model$y - m$fitted.values) ^ 2)
+
+# mean overall variance
+MSY <- SSY/(nrow(new_d) - 1)
+
+# mean variance explained by the regression equation
+MSR <- SSR/(1)
+
+# mean remaining variance
+MSE <- SSE/(nrow(new_d) - 1 - 1)
+
+# Fratio
+fratio <- MSR/MSE
+
+anova(m)
+pf(q = fratio, df1 = 1, df2 = 998, lower.tail = FALSE)
+plotDist("f", df1 = 1, df2 = 998)
+
+
+# Simple linear regression using permutation
+library(mosaic)
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
+d <- read_csv(f, col_names = TRUE)
+m <- lm(data = d, height ~ weight)
+broom::tidy(m)
+obs_slope <- broom::tidy(m) |>
+  filter(term == "weight") |>
+  pull(estimate)
+
+# using do loop to get a permutation distribution for slope
+nperm <- 1000
+perm <- do(nperm) * {
+  d_new <- d
+  d_new$weight <- sample(d_new$weight)
+  m <- lm(data = d_new, height ~ weight)
+  broom::tidy(m) |>
+    filter(term == "weight") |>
+    pull(estimate)
+}
+# calculate se as sd of permutation distribution
+(perm.se <- sd(perm$result))
+# visualize
+ggplot(data = perm) +
+  geom_histogram(aes(x = result)) +
+  geom_vline(xintercept = obs_slope, color = "red")
+p <- sum(perm$result > abs(obs_slope) | perm$result < -1 * abs(obs_slope))/nperm
+
+library(infer)
+# or, using the {infer} workflow...
+perm <- d |>
+  # specify model
+  specify(height ~ weight) |>
+  # use a null hypothesis of independence
+  hypothesize(null = "independence") |>
+  # generate permutation replicates
+  generate(reps = nperm, type = "permute") |>
+  # calculate the slope statistic
+  calculate(stat = "slope")
+# calculate se as sd of permutation distribution
+perm.se <- sd(perm$stat)
+# visualize
+visualize(perm) + shade_p_value(obs_stat = obs_slope, direction = "two_sided")

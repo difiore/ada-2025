@@ -1,0 +1,119 @@
+```{r}
+library(tidyverse)
+library(bbmle)
+```
+
+# MLE can be defined as a method for estimating population parameters (such as the mean and variance for a normal distribution, rate parameter (lambda) for Poisson distribution, etc.) from sample data such that the probability (likelihood) of obtaining the observed data is maximized
+
+# PDF for normal distribution
+
+$$P(x | \mu, \sigma) = \frac{1}{\sqrt{2\pi\sigma^2}}e^\frac{-(x-\mu)^2}{2\sigma^2}$$
+
+```{r}
+d <- tibble(val = rnorm(50, mean = 50, sd = 10))
+ggplot(d) +
+  geom_histogram(aes(x = val, y = after_stat(density))) +
+  stat_function(fun = function(x) dnorm(x, mean = 50, sd = 10),
+                color = "red", linewidth = 1) +
+  stat_function(fun = function(x) dnorm(x, mean = 65, sd = 10),
+                color = "blue", linewidth = 1)
+(mean <- mean(d$val))
+(sd <- sd(d$val))
+
+# likelihood of seeing value of 41 if mean = 50 and sd = 10
+val <- 41
+mean <- 50
+sd <- 10
+(likelihood <- 1/sqrt(2 * pi * sd^2) * exp((-(val - mean)^2)/(2 * sd^2)))
+# or
+(likelihood <- dnorm(val, mean, sd))
+nll <- -1 * log(likelihood) # natural log
+(summed_nll <- sum(nll))
+
+# likelihood of seeing value of 99 if mean = 50 and sd = 10
+val <- 99
+mean <- 50
+sd <- 10
+(likelihood <- 1/sqrt(2 * pi * sd^2) * exp((-(val - mean)^2)/(2 * sd^2)))
+# or
+(likelihood <- dnorm(val, mean, sd))
+nll <- -1 * log(likelihood) # natural log
+(summed_nll <- sum(nll))
+
+# likelihood of seeing value of 50 if mean = 50 and sd = 10
+val <- 50
+mean <- 50
+sd <- 10
+(likelihood <- 1/sqrt(2 * pi * sd^2) * exp((-(val - mean)^2)/(2 * sd^2)))
+# or
+(likelihood <- dnorm(val, mean, sd))
+nll <- -1 * log(likelihood) # natural log
+(summed_nll <- sum(nll))
+
+# likelihood of seeing value of 50 if mean = 50 and sd = 10
+val <- 50
+mean <- 50
+sd <- 10
+(likelihood <- 1/sqrt(2 * pi * sd^2) * exp((-(val - mean)^2)/(2 * sd^2)))
+# or
+(likelihood <- dnorm(val, mean, sd))
+nll <- -1 * log(likelihood) # natural log
+(summed_nll <- sum(nll))
+
+# likelihood of seeing value of 99 if mean = 100 and sd = 10
+val <- 99
+mean <- 100
+sd <- 10
+(likelihood <- 1/sqrt(2 * pi * sd^2) * exp((-(val - mean)^2)/(2 * sd^2)))
+# or
+(likelihood <- dnorm(val, mean, sd))
+(ll <- log(likelihood)) # natural log
+(ll <- sum(ll))
+(nll <- -1 * ll)
+
+# create negative log likelihood functions
+# maximizing likelihood same as maximizing log likelihood
+# and same as minimizing negative log likelihood
+verbose_nll <- function(val, mu, sigma) {
+  likelihood <- 0
+  for (i in 1:length(val)){
+    likelihood[[i]] = dnorm(val[[i]], mean = mu, sd = sigma)
+    ll <- log(likelihood)
+    message(paste0(val[[i]], " ", mean, " ", sd, " ", ll[[i]]))
+  }
+  nll <- -1 * sum(ll)
+  return(nll)
+}
+
+verbose_nll(val, mean, sd)
+
+simple_nll <- function(mu, sigma, verbose = FALSE) {
+  ll = sum(dnorm(val, mean = mu, sd = sigma, log = TRUE))
+  nll <- -1 * ll
+  if (verbose == TRUE) {
+    message(paste0("mu=", mean, " sd=", sigma, " nll= ", nll))
+    }
+  return(nll)
+}
+simple_nll(mean, sd)
+
+# so far, we've just CALCULATED likelihoods...
+# Now want to find values for mu and sigma with highest likelihood
+# using {optim} package, and L-BFGS-B algorithm so as to constrain sigma to be positive by setting the lower bound at zero
+
+val <- rnorm(100, mean = 50, sd = 10)
+simple_nll(50, 10)
+simple_nll(51, 10)
+simple_nll(51, 11)
+simple_nll(49, 10)
+simple_nll(100, 10)
+
+mle_norm <- bbmle::mle2(
+  minuslogl = simple_nll,
+  start  = list(mu = 0, sigma = 1),
+  method = "SANN", # simulated annealing method of optimization
+  trace = TRUE
+)
+
+mle_norm
+```
