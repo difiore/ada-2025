@@ -53,8 +53,9 @@ book:
     #   - 22-module.qmd
     #   - 23-module.qmd
     #   - 24-module.qmd
-    # - part: "Part III - Miscellany"
-    #   chapters:
+    - part: "Part III - Miscellany"
+      chapters:
+      - maximum_likelihood.qmd
     #   - 25-r-packages.qmd
     #   - 26-python-from-R.qmd
     #   - 27-shiny.qmd

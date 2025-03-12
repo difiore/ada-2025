@@ -137,6 +137,7 @@ obs_slope <- broom::tidy(m) |>
 
 # using do loop to get a permutation distribution for slope
 nperm <- 1000
+library(mosaic)
 perm <- do(nperm) * {
   d_new <- d
   d_new$weight <- sample(d_new$weight)
@@ -145,6 +146,7 @@ perm <- do(nperm) * {
     filter(term == "weight") |>
     pull(estimate)
 }
+histogram(perm$result)
 # calculate se as sd of permutation distribution
 (perm.se <- sd(perm$result))
 # visualize
