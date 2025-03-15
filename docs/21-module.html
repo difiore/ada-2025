@@ -389,7 +389,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./maximum_likelihood.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation Example</span></span></a>
+ <span class="menu-text">Maximum Likelihood Estimation Example</span></a>
   </div>
 </li>
       </ul>
@@ -624,21 +624,21 @@ window.Quarto = {
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(original) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Y"</span>, <span class="st">"X1"</span>, <span class="st">"X2"</span>, <span class="st">"X3"</span>)</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(original)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>##           Y       X1        X2        X3
-## 1 20.372498 32.16490  1.641936 25.101063
-## 2 11.035930 46.50011 -2.232105 12.859342
-## 3 19.074992 46.79068  7.553672 18.771677
-## 4 17.467254 76.21649  7.052573 19.358755
-## 5 15.842305 24.18338  7.117205 25.506423
-## 6  7.468329 57.92763 -2.329924  9.514052</code></pre>
+<pre><code>##          Y       X1        X2       X3
+## 1 16.30663 18.78485  1.264014 47.59784
+## 2 10.47400 38.42302  9.466753 33.93093
+## 3 16.03693 72.25465  6.363018 21.98350
+## 4 11.78896 36.45203 -1.742675 32.68559
+## 5 19.90090 76.94162  1.621427 13.68945
+## 6  4.23949 60.75167  5.638830 23.15640</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(original)  <span class="co"># variables are uncorrelated</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>##               Y           X1          X2          X3
-## Y   1.000000000 -0.009224942  0.02932623  0.03483224
-## X1 -0.009224942  1.000000000 -0.02391135 -0.02447748
-## X2  0.029326229 -0.023911349  1.00000000 -0.08199543
-## X3  0.034832241 -0.024477482 -0.08199543  1.00000000</code></pre>
+<pre><code>##             Y            X1          X2           X3
+## Y  1.00000000  0.0143023356  0.01057006 0.0247560801
+## X1 0.01430234  1.0000000000 -0.01308686 0.0002732691
+## X2 0.01057006 -0.0130868637  1.00000000 0.0022717200
+## X3 0.02475608  0.0002732691  0.00227172 1.0000000000</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make quick bivariate plots for each pair of variables</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(original)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -658,7 +658,7 @@ window.Quarto = {
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##         Y        X1        X2        X3 
-## 14.884200 40.362219  4.788228 23.313678</code></pre>
+## 15.046121 40.318279  5.005462 23.194665</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">summarize</span>(original, <span class="at">ymean =</span> <span class="fu">mean</span>(Y), <span class="at">x1mean =</span> <span class="fu">mean</span>(X1), <span class="at">x2mean =</span> <span class="fu">mean</span>(X2),</span>
@@ -676,33 +676,33 @@ window.Quarto = {
 ##         period(minute = out["M", ], second = out["S", ])
 ##     }
 ## }
-## &lt;bytecode: 0x12c5adee0&gt;
+## &lt;bytecode: 0x131379388&gt;
 ## &lt;environment: namespace:lubridate&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>stdevs <span class="ot">&lt;-</span> <span class="fu">apply</span>(original, <span class="dv">2</span>, <span class="at">FUN =</span> <span class="st">"sd"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>stdevs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##         Y        X1        X2        X3 
-##  4.967753 20.603313  4.134423 15.078604</code></pre>
+##  4.810582 19.650000  3.890293 14.504681</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>stdevs <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">summarize</span>(original, <span class="at">ySD =</span> <span class="fu">sd</span>(Y), <span class="at">x1SD =</span> <span class="fu">sd</span>(X1), <span class="at">x2SD =</span> <span class="fu">sd</span>(X2), <span class="at">x3SD =</span> <span class="fu">sd</span>(X3)))</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>stdevs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##       ySD      x1SD      x2SD      x3SD 
-##  4.967753 20.603313  4.134423 15.078604</code></pre>
+##  4.810582 19.650000  3.890293 14.504681</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>normalized <span class="ot">&lt;-</span> <span class="fu">sweep</span>(original, <span class="dv">2</span>, <span class="at">STATS =</span> means, <span class="at">FUN =</span> <span class="st">"-"</span>)  <span class="co"># 2nd dimension is columns, removing array of means, function = subtract</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>normalized <span class="ot">&lt;-</span> <span class="fu">sweep</span>(normalized, <span class="dv">2</span>, <span class="at">STATS =</span> stdevs, <span class="at">FUN =</span> <span class="st">"/"</span>)  <span class="co"># 2nd dimension is columns, scaling by array of sds, function = divide</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(normalized)  <span class="co"># now a dataframe of Z scores</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>##            Y         X1         X2         X3
-## 1  1.1047848 -0.3978642 -0.7609989  0.1185378
-## 2 -0.7746501  0.2979078 -1.6980198 -0.6933226
-## 3  0.8435992  0.3120110  0.6688827 -0.3012216
-## 4  0.5199642  1.7402187  0.5476809 -0.2622871
-## 5  0.1928647 -0.7852544  0.5633136  0.1454210
-## 6 -1.4928021  0.8525529 -1.7216795 -0.9151794</code></pre>
+<pre><code>##            Y          X1         X2           X3
+## 1  0.2620280 -1.09584882 -0.9617394  1.682434495
+## 2 -0.9504292 -0.09645058  1.1467753  0.740192792
+## 3  0.2059642  1.62526050  0.3489600 -0.083501334
+## 4 -0.6770831 -0.19675546 -1.7346088  0.654335517
+## 5  1.0091882  1.86378335 -0.8698663 -0.655320507
+## 6 -2.2464289  1.03986715  0.1628074 -0.002638166</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(normalized)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -725,10 +725,10 @@ window.Quarto = {
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(new)  <span class="co"># note that is correlation matrix is what we are aiming for!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##              Y         X1         X2         X3
-## Y   1.00000000  0.7980064 -0.4839688 0.03639755
-## X1  0.79800644  1.0000000 -0.2965184 0.32659700
-## X2 -0.48396877 -0.2965184  1.0000000 0.55873249
-## X3  0.03639755  0.3265970  0.5587325 1.00000000</code></pre>
+## Y   1.00000000  0.8030869 -0.4923584 0.02893389
+## X1  0.80308691  1.0000000 -0.3021048 0.31720675
+## X2 -0.49235840 -0.3021048  1.0000000 0.58611550
+## X3  0.02893389  0.3172067  0.5861155 1.00000000</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(original)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -753,21 +753,21 @@ window.Quarto = {
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">sweep</span>(d, <span class="dv">2</span>, <span class="at">STATS =</span> means, <span class="at">FUN =</span> <span class="st">"+"</span>)  <span class="co"># and standard deviation</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>##           Y       X1         X2        X3
-## 1 20.372498 53.65361 -0.4435864 14.440215
-## 2 11.035930 31.27666  0.6287376  3.545882
-## 3 19.074992 58.12405  5.6095032 28.996503
-## 4 17.467254 70.44517  6.8368085 39.015195
-## 5 15.842305 33.83384  5.8276898 23.909793
-## 6  7.468329 26.29613  2.4123689  5.447406</code></pre>
+<pre><code>##          Y       X1         X2       X3
+## 1 16.30663 31.51730  0.6056307 21.81706
+## 2 10.47400 24.24038 10.5830175 39.22937
+## 3 16.03693 62.71786  6.8123225 37.31184
+## 4 11.78896 27.35479  0.4601018 12.32505
+## 5 19.90090 78.15672  1.3750102 23.17837
+## 6  4.23949 17.26445 10.5875857 32.14821</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##              Y         X1         X2         X3
-## Y   1.00000000  0.7980064 -0.4839688 0.03639755
-## X1  0.79800644  1.0000000 -0.2965184 0.32659700
-## X2 -0.48396877 -0.2965184  1.0000000 0.55873249
-## X3  0.03639755  0.3265970  0.5587325 1.00000000</code></pre>
+## Y   1.00000000  0.8030869 -0.4923584 0.02893389
+## X1  0.80308691  1.0000000 -0.3021048 0.31720675
+## X2 -0.49235840 -0.3021048  1.0000000 0.58611550
+## X3  0.02893389  0.3172067  0.5861155 1.00000000</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d)  <span class="co"># note the change to the axis scales</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -2477,8 +2477,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./maximum_likelihood.html" class="pagination-link" aria-label="<span class='chapter-number'>22</span>&nbsp; <span class='chapter-title'>Maximum Likelihood Estimation Example</span>">
-        <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Maximum Likelihood Estimation Example</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./maximum_likelihood.html" class="pagination-link" aria-label="Maximum Likelihood Estimation Example">
+        <span class="nav-page-text">Maximum Likelihood Estimation Example</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

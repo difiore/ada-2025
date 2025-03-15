@@ -125,19 +125,28 @@ pf(q = fratio, df1 = 1, df2 = 998, lower.tail = FALSE)
 plotDist("f", df1 = 1, df2 = 998)
 
 
-# Simple linear regression using permutation
+library(tidyverse)
+# Simple linear regression
 library(mosaic)
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 d <- read_csv(f, col_names = TRUE)
 m <- lm(data = d, height ~ weight)
-broom::tidy(m)
-obs_slope <- broom::tidy(m) |>
+(tidy_m <- broom::tidy(m))
+# get just slope coefficient
+(obs_slope <- tidy_m |>
   filter(term == "weight") |>
-  pull(estimate)
+  pull(estimate))
 
-# using do loop to get a permutation distribution for slope
-nperm <- 1000
+# calculate 95% CI by hand
+(tidy_m <- tidy_m |>
+  mutate(lower = estimate + qt(0.025, df = nrow(d)-2) * std.error,
+         upper = estimate + qt(0.975, df = nrow(d) - 2) * std.error))
+# last 2 columns should match confint(m) function
+confint(m)
+
+# Using do() loop to get a permutation distribution for slope
 library(mosaic)
+nperm <- 1000
 perm <- do(nperm) * {
   d_new <- d
   d_new$weight <- sample(d_new$weight)
@@ -149,14 +158,17 @@ perm <- do(nperm) * {
 histogram(perm$result)
 # calculate se as sd of permutation distribution
 (perm.se <- sd(perm$result))
+# calculate 95% CI based on permutation distribution
+ci <- stats::quantile(c(0.025, 0.975), perm$result)
 # visualize
 ggplot(data = perm) +
   geom_histogram(aes(x = result)) +
   geom_vline(xintercept = obs_slope, color = "red")
 p <- sum(perm$result > abs(obs_slope) | perm$result < -1 * abs(obs_slope))/nperm
 
-library(infer)
 # or, using the {infer} workflow...
+library(infer)
+nperm <- 1000
 perm <- d |>
   # specify model
   specify(height ~ weight) |>
@@ -170,3 +182,4 @@ perm <- d |>
 perm.se <- sd(perm$stat)
 # visualize
 visualize(perm) + shade_p_value(obs_stat = obs_slope, direction = "two_sided")
+
