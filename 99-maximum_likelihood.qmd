@@ -1,13 +1,18 @@
-# Maximum Likelihood Estimation Example {.unnumbered}
+# Maximum Likelihood Estimation {#maximum-likelihood .unnumbered}
+
+## Objectives {.unnumbered}
+
+> This module provides a simple introduction to Maximum Likelihood Estimation.
 
 **Maximum Likelihood Estimation** (MLE) is a method for estimating population parameters (such as the mean and variance for a normal distribution, the rate parameter (lambda) for a Poisson distribution, the regression coefficients for a linear model) from sample data such that the combined probability (likelihood) of obtaining the observed data is maximized. Here, we first explore the calculation of likelihood values generally and then use MLE to estimate the best parameters for defining from what particular normal distribution a set of data is most likely drawn.
 
-## Preliminaries
+## Preliminaries {.unnumbered}
 
-- Install and load the following packages: {bbmle} and {maxLik}
-- Load the {tidyverse} and {mosaic} libraries
+- Install and load these packages in ***R***: [{bbmle}](https://cran.r-project.org/web/packages/devtools/bblme.pdf) and [{maxLik}](https://cran.r-project.org/web/packages/roxygen2/maxLik.pdf)
+- Load {tidyverse} and {mosaic}
 
 ```{r}
+#| include: false
 library(bbmle)
 library(maxLik)
 library(tidyverse)

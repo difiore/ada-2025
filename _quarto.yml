@@ -50,16 +50,16 @@ book:
       - 19-module.qmd
       - 20-module.qmd
       - 21-module.qmd
-    #   - 22-module.qmd
-    #   - 23-module.qmd
-    #   - 24-module.qmd
+      - 22-module.qmd
+      - 23-module.qmd
+      - 24-module.qmd
     - part: "Part III - Miscellany"
       chapters:
-      - maximum_likelihood.qmd
-    #   - 25-r-packages.qmd
-    #   - 26-python-from-R.qmd
-    #   - 27-shiny.qmd
-    #   - 28-geospatial-data.qmd
+      - 99-maximum_likelihood.qmd
+      - 99-geospatial-data.qmd
+      - 99-r-packages.qmd
+      - 99-python-from-R.qmd
+      - 99-shiny.qmd
     - part: "Exercises"
       chapters:
       - exercise-01.qmd

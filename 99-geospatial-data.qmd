@@ -1,4 +1,4 @@
-# Introduction to Spatial Data {#spatial-data}
+# Basic Geospatial Data Analysis {#geospatial-data .unnumbered}
 
 ## Objectives {.unnumbered}
 
@@ -37,7 +37,7 @@ In this module we will work primarily with a dataset of the ranging patterns for
 
 ```{r}
 #| message: false
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/spatial_data/spider_monkeys.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/spatial_data/spider_monkeys.csv"
 d <- read_csv(f, col_names = TRUE)
 head(d)
 ```
@@ -140,7 +140,7 @@ Now let’s try importing and projecting two other spatial datasets. The first c
 ```{r}
 #| message: false
 # point data for trees through 2012
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/spatial_data/trees_2012.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/spatial_data/trees_2012.csv"
 trees <- read_csv(f, col_names = TRUE)
 coordinates(trees) <- c("FINAL_LON", "FINAL_LAT")
 proj4string(trees) <- CRS(proj_original)
@@ -148,7 +148,7 @@ trees_sp <- spTransform(trees, CRS(proj_new))
 trees_sf <- st_as_sf(trees_sp, CRS(proj_new))
 
 # point data for TBS field station
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/spatial_data/station.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/spatial_data/station.csv"
 station <- read_csv(f, col_names = TRUE)
 coordinates(station) <- c("Longitude", "Latitude")
 proj4string(station) <- CRS(proj_original)
@@ -161,7 +161,7 @@ Sometimes we'll have spatial data in a data frame already provided in projected 
 ```{r}
 #| message: false
 # point data for the mineral lick
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/spatial_data/mineral_lick.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/spatial_data/mineral_lick.csv"
 mineral_lick <- read_csv(f, col_names = TRUE)
 mineral_lick_sf <- st_as_sf(mineral_lick, coords = c("x_proj", "y_proj"), crs = 32718)
 ```

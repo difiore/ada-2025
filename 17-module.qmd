@@ -63,32 +63,27 @@ typeI <- function(mu0, sigma, n, alternative = "two.tailed",
     m <- mean(x) # calculates the mean
     s <- sd(x) # calculates the standard deviation
     z <- (m - mu0) / (s / sqrt(n))
-    # calculates the Z statistic for the sample drawn from the
-    #   null distribution relative to the null distribution
+    # calculates the Z statistic for the sample drawn from the null distribution relative to the null distribution
     # alternatively use t <- (m-mu0)/(s/sqrt(n))
     if (alternative == "less") {
       p[[i]] <- pnorm(z, lower.tail = TRUE)
       # calculates the associated p value
-      # alternatively, use p[[i]] <- pt(t, df = n-1,
-      #   lower.tail = TRUE)
+      # alternatively, use p[[i]] <- pt(t, df = n-1, lower.tail = TRUE)
     }
     if (alternative == "greater") {
       p[[i]] <- pnorm(z, lower.tail = FALSE)
       # calculates the associated p value
-      # alternatively, use p[[i]] <- pt(t, df = n-1,
-      #   lower.tail=FALSE)
+      # alternatively, use p[[i]] <- pt(t, df = n-1, lower.tail=FALSE)
     }
     if (alternative == "two.tailed") {
       if (z > 0) {
         p[[i]] <- 2 * pnorm(z, lower.tail = FALSE)
       }
-      # alternatively, use if (t > 0) {p[[i]] <-
-      #   pt(t, df = n-1, lower.tail = FALSE)}
+      # alternatively, use if (t > 0) {p[[i]] <- pt(t, df = n-1, lower.tail = FALSE)}
       if (z < 0) {
         p[[i]] <- 2 * pnorm(z, lower.tail = TRUE)
       }
-      # alternatively, use if (t < 0) {p[[i]] <-
-      #   pt(t, df = n-1, lower.tail = TRUE)}
+      # alternatively, use if (t < 0) {p[[i]] <- pt(t, df = n-1, lower.tail = TRUE)}
     }
   }
 

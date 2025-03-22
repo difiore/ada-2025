@@ -71,7 +71,7 @@ Let's explore these idea using some actual data. First, load in the dataset "chi
 
 ```{r}
 #| message: false
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/chimpgrooming.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/chimpgrooming.csv"
 d <- read_csv(f, col_names = TRUE)
 head(d)
 summary(d)
@@ -590,7 +590,7 @@ Boden-Parry et al. (2020) studied the effect of food type and abundance on the b
 
 ```{r}
 #| message: false
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/Bowden-ParryOtterdata.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/Bowden-ParryOtterdata.csv"
 d <- read_csv(f, col_names = TRUE)
 head(d)
 ```

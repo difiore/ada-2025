@@ -36,7 +36,7 @@ where:
 After we calculate this F statistic, we compare it to an $F$ distribution with "df1 = q-p" and "df2 = n-q" to derive a p value. The `lm()` function will do this for us automatically, but we can also do it by hand.
 
 ```{r}
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/zombies.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 z <- read_csv(f, col_names = TRUE)
 z$gender <- factor(z$gender)
 m1 <- lm(data = z, height ~ age * gender) # full model

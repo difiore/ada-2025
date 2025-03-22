@@ -60,7 +60,7 @@ The `glm()` function in ***R*** can be used for many types of generalized linear
 
 ```{r}
 #| code-fold: true
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/zombies.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 z <- read_csv(f, col_names = TRUE)
 lm <- lm(data = z, height ~ weight + age)
 summary(lm)
@@ -107,7 +107,7 @@ Load in the "graddata.csv" dataset, which comes from [this website](https://stat
 
 ```{r}
 #| code-fold: true
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/graddata.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/graddata.csv"
 # or f <- "https://stats.idre.ucla.edu/stat/data/binary.csv"
 d <- read_csv(f, col_names = TRUE)
 d$rank <- factor(d$rank)
@@ -429,7 +429,7 @@ Our regression model formulation is the same as in logistic regression, above, e
 Researchers studied the reproductive success of a set of male woolly monkeys over a period of 8 years. The age of each monkey at the beginning of the study and the number of successful matings they had during the 8 years were recorded, and they were also scored into ranks of "high", "medium", and "low". We assume the number of matings follows a Poisson distribution, and we are interested in exploring whether mating success depends on the age of the monkey in question.
 
 ```{r}
-f <- "https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/woollydata.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/woollydata.csv"
 d <- read_csv(f, col_names = TRUE)
 head(d)
 d$name <- factor(d$name)
