@@ -1,4 +1,4 @@
-# Exercise 9 {.unnumbered}
+# Exercise 09 {.unnumbered}
 
 # Check Assumptions of Regression {.unnumbered}
 
