@@ -1,0 +1,44 @@
+# Exercise 9 {.unnumbered}
+
+# Check Assumptions of Regression {.unnumbered}
+
+## Learning Objectives {.unnumbered}
+
+- Conduct additional simple linear regression analyses using a comparative dataset on primate group size, brain size, and life history variables
+- Compare regression results using untransformed and transformed variables
+- Perform residual analysis to consider whether certain assumptions of linear regression are met
+
+### Preliminaries {.unnumbered}
+
+- Set up a new ***GitHub*** repo in your ***GitHub*** workspace named "exercise-10" and clone that down to your computer as a new ***RStudio*** project. The instructions outlined as **Method 1** in [**Module 6**](#module-06) will be helpful.
+
+### Step 1 {.unnumbered}
+
+- Using the {tidyverse} `read_csv()` function, load the "KamilarAndCooperData.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/KamilarAndCooperData.csv) as a "tibble" named **d**.
+
+### Step 2 {.unnumbered}
+
+- From this dataset, plot lifespan (scored as **MaxLongevity_m** in the dataset) versus female body mass (scored as **Body_mass_female_mean**). Is the relationship linear? If not, how might you transform one or both variable to more closely approximate a linear relationship?
+
+### Step 3 {.unnumbered}
+
+- Run linear models of:
+  - lifespan ~ female body mass
+  - lifespan ~ log(female body mass)
+  - log(lifespan) ~ log(female body mass)
+
+### Step 4 {.unnumbered}
+
+- Generate residuals for all three linear models, plot them by hand in relation to the corresponding explanatory variable, and make histograms of the residuals. Do they appear to be normally distributed?
+
+### Step 5 {.unnumbered}
+
+- Generate Q-Q plots for all three linear models. Based on visual inspection of these plots, do the residual appear to deviate from being normally distributed?
+
+### Step 6 {.unnumbered}
+
+- Run the `plot()` command for all three models and visually inspect the resultant plots. What do the plots suggest about whether the assumptions for regression are met for any of these models?
+
+### Step 7 {.unnumbered}
+
+- Run Shapiro-Wilks tests (e.g., using the function `shapiro.test()` on the residuals for all three models. What do the results of these test suggest about the whether your data meet the assumptions for using simple linear regression?

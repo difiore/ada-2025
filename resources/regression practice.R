@@ -164,5 +164,68 @@ MSE <- SSE/(nrow(new_d) - 1 - 1)
 # Fratio
 fratio <- MSR/MSE
 
-pf(q = fratio, df1 = 1, df2 = nrow(new_d) - 1, lower.tail = FALSE)
+pf(q = fratio, df1 = 1, df2 = nrow(new_d) - 1 - 1, lower.tail = FALSE)
 anova(m)
+
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/Street_et_al_2017.csv"
+d <- read_csv(f, col_names = TRUE)
+m <- lm(log(ECV) ~ log(Body_mass), d)
+B1 <- broom::tidy(m) |> filter(term == "log(Body_mass)") |> pull(estimate)
+summary(m)
+a <- aov(log(ECV) ~ log(Body_mass), d)
+summary(a)
+SSY <- sum((m$model$`log(ECV)` - mean(m$model$`log(ECV)`)) ^ 2)
+SSX <- sum((m$model$`log(Body_mass)` - mean(m$model$`log(Body_mass)`)) ^ 2)
+SSR <- sum((m$fitted.values - mean(m$model$`log(ECV)`)) ^ 2)
+SSE <- sum((m$model$`log(ECV)` - m$fitted.values) ^ 2)
+df_y <- nrow(m$model) - 1
+df_r <- 1
+df_e <- nrow(m$model) - df_r - 1
+(MSY <- SSY/df_y)
+(MSR <- SSR/df_r)
+(MSE <- SSE/df_e)
+(fratio <- MSR/MSE)
+(pf(q = fratio, df1 = df_r, df2 = df_e, lower.tail = FALSE))
+(SEB1 <- sqrt(MSE/SSX))
+(t <- B1/SEB1)
+(p <- 2 * pt(abs(t), df = df_e, lower.tail = FALSE))
+par(mfrow = c(2, 2))
+plot(m)
+par(mfrow = c(1, 1))
+car::qqPlot(m, distribution = "norm")
+ggpubr::ggqqplot(m$residuals)
+s <- shapiro.test(m$residuals)
+
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/KamilarAndCooperData.csv"
+d <- read_csv(f, col_names = TRUE)
+plot(d$Body_mass_female_mean, d$MaxLongevity_m)
+plot(log(d$Body_mass_female_mean, log(d$MaxLongevity_m)))
+m1 <- lm(MaxLongevity_m ~ Body_mass_female_mean, d)
+m2 <- lm(MaxLongevity_m ~ log(Body_mass_female_mean), d)
+m3 <- lm(log(MaxLongevity_m) ~ log(Body_mass_female_mean), d)
+car::qqPlot(m1)
+car::qqPlot(m2)
+car::qqPlot(m3)
+par(mfrow = c(2, 2))
+plot(m1)
+plot(m2)
+plot(m3)
+shapiro.test(m1$residuals)
+shapiro.test(m2$residuals)
+shapiro.test(m3$residuals)
+
+# ANOVA
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
+d <- read_csv(f, col_names = TRUE)
+d <- d |> select(Species1, Family1, Order1,
+                 Beak.Width, Beak.Depth, Tarsus.Length, Wing.Length, Tail.Length, Mass,
+                 Habitat, Migration, Trophic.Level, Trophic.Niche,
+                 Min.Latitude, Max.Latitude, Centroid.Latitude, Range.Size)
+glimpse(d)
+table(d$Habitat)
+table(d$Trophic.Level)
+table(d$Trophic.Niche)
+table(d$Migration)
+ggplot(data = d |> drop_na(Habitat), aes(x = Habitat, y = log(Mass))) + geom_boxplot() + geom_jitter()
+
+ggplot(data = d |> drop_na(Trophic.Level), aes(x = Trophic.Level, y = log(Mass))) + geom_boxplot() + geom_jitter()

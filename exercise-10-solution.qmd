@@ -2,107 +2,411 @@
 
 # • Solution {.unnumbered}
 
-- Using the {tidyverse} `read_csv()` function, load the "KamilarAndCooperData.csv" dataset as a "tibble" named **d**.
+- Using the {tidyverse} `read_csv()` function, load the "AVONETdataset1.csv" dataset as a "tibble" named **d**.
+
+```{r message=FALSE}
+library(tidyverse)
+library(skimr)
+library(cowplot)
+library(broom)
+library(infer)
+library(mosaic)
+library(ggpubr)
+
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
+d <- read_csv(f, col_names = TRUE)
+```
+
+- Winnow the dataset to variables of interest.
+
+```{r}
+d <- d |> select(Species1, Family1, Order1, Beak.Length_Culmen, Beak.Width, Beak.Depth, Tarsus.Length, Wing.Length, Tail.Length, Mass, Habitat, Migration, Trophic.Level, Trophic.Niche, Min.Latitude, Max.Latitude, Centroid.Latitude, Range.Size, Primary.Lifestyle)
+```
+
+- Do a bit of exploratory data analysis.
+
+```{r}
+skim(d)
+```
+
+The taxomic variables, along with **Habitat**, **Trophic.Level**, **Trophic.Niche**, and **Migration**, are categorical, although **Migration** is scored using integer factors as "1", "2", or "3". The remaining variables are numeric.
+
+## Challenge 1 {.unnumbered}
 
 ### Step 1 {.unnumbered}
 
-```{r warning=FALSE, message=FALSE}
-library(tidyverse)
-library(cowplot)
-library(mosaic)
-f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/KamilarAndCooperData.csv"
-d <- read_csv(f, col_names = TRUE)
+- Make boxplots of log(**Mass**) in relation to **Trophic.Level** and **Migration** and convert the variable **Migration** into a factor.
+
+```{r}
+d <- d |> mutate(
+  logMass = log(Mass),
+  logRS = log(Range.Size),
+  logBeak = log(Beak.Length_Culmen),
+  logTarsus = log(Tarsus.Length),
+  Migration = as.factor(Migration))
+
+p1 <- ggplot(data = d |> drop_na(Trophic.Level), aes(x = Trophic.Level, y = log(Mass))) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.05)
+
+p2 <- ggplot(data = d |> drop_na(Migration) , aes(x = Migration, y = log(Mass))) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.05)
+plot_grid(p1, p2, nrow = 1)
 ```
 
 ### Step 2 {.unnumbered}
 
-- From this dataset, plot lifespan (scored as **MaxLongevity_m** in the dataset) versus female body mass (scored as **Body_mass_female_mean**). Is the relationship linear? If not, how might you transform one or both variable to more closely approximate a linear relationship?
+- Run linear models using the `lm()` function to look at the relationship between log(**Mass**) and **Trophic.Level** and between log(**Mass**) and **Migration**.
 
 ```{r}
-p1 <- ggplot(data = d, aes(x=Body_mass_female_mean, y=MaxLongevity_m)) + geom_point()
-p2 <- ggplot(data = d, aes(x=log(Body_mass_female_mean), y=MaxLongevity_m)) + geom_point()
-p3 <- ggplot(data = d, aes(x=log(Body_mass_female_mean), y=log(MaxLongevity_m))) + geom_point()
-plot_grid(p1, p2, p3, nrow = 1)
+m1 <- lm(logMass ~ Trophic.Level, data = d)
+m2 <- lm(logMass ~ Migration, data = d)
 ```
 
-We see the cleanest linear relationship between the two variables when both are log transformed.
+- Examine the output of the resultant linear models. Is log(**Mass**) associated with either **Trophic.Level** or **Migration** category? That is, in the global test of significance, is the F statistic large enough to reject the null hypothesis of an F value of zero?
+
+```{r}
+summary(m1)
+summary(m2)
+```
+
+In both cases, the global test is significant.
+
+- Given the regression coefficients returned for your **Migration** model, which **Migration** categor(ies) are different than the reference level? What level is the reference level?
+
+In m2, **Migration** levels 2 and 3 are both different from **Migration** level 1, which is the reference level.
+
+- Relevel and assess differences among the remaining pair of **Migration** categories.
+
+```{r}
+d <- d |> mutate(Migration = relevel(Migration, ref = "3"))
+m2 <- lm(logMass ~ Migration, data = d)
+summary(m2)
+```
+
+Based on the re-leveled model results, **Migration** levels 2 and 3 are also different from one another.
 
 ### Step 3 {.unnumbered}
 
-- Run linear models of:
-  - lifespan ~ female body mass
-  - lifespan ~ log(female body mass)
-  - log(lifespan) ~ log(female body mass)
+- Conduct a post-hoc Tukey Significant Differences test to also evaluate which **Migration** categories differ "significantly" from one another.
 
 ```{r}
-m1 <- lm(MaxLongevity_m ~ Body_mass_female_mean, data = d)
-m2 <- lm(MaxLongevity_m ~ log(Body_mass_female_mean), data = d)
-m3 <- lm(log(MaxLongevity_m) ~ log(Body_mass_female_mean), data = d)
+# we need an ANOVA object to run a Tukey test
+m2 <- aov(logMass ~ Migration, data = d)
+(posthoc <- TukeyHSD(m2, which = "Migration", conf.level = 0.95))
+plot(posthoc)
+```
+
+Comparisons among all pairs of levels are significant.
+
+### Step 4 {.unnumbered}
+
+- Use a permutation approach to inference to generate a null distribution of F statistic values for the model of log(**Mass**) in relation to **Trophic.Level** and calculate a p value for your original F statistic.
+
+```{r}
+#| warning: false
+original.F <- aov(logMass ~ Trophic.Level, data = d) |>
+  tidy() |>
+  filter(term == "Trophic.Level") |>
+  pull(statistic)
+# show aov results for F statistic and p value for omnibus F test
+original.F
+
+# using {infer}
+permuted.F <- d |>
+  specify(logMass ~ Trophic.Level) |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "F")
+
+visualize(permuted.F) + shade_p_value(obs_stat = original.F, direction = "greater")
+
+p.value <- permuted.F |>
+  get_p_value(obs_stat = original.F, direction = "greater")
+
+# or...
+# using {mosaic}
+reps <- 1000
+permuted.F <- do(reps) * {
+  d |>
+    mutate(Trophic.Level = sample(Trophic.Level)) %>%
+    # note the use of the %>% pipe operator in the line above... for some reason, the native pipe operator (`|>`) throws an error!
+    aov(logMass ~ Trophic.Level, data = .) |>
+    tidy() |>
+    filter(term == "Trophic.Level") |>
+    pull(statistic)
+}
+
+permuted.F <- as_tibble(permuted.F) |>
+  rename(stat = "result")
+
+p.value <- permuted.F |>
+  get_p_value(obs_stat = original.F, direction = "greater")
+p.value
+```
+
+## Challenge 2 {.unnumbered}
+
+### Step 1 {.unnumbered}
+
+- Create the following two new variables and add them to AVONET dataset:
+  - **Relative beak length**, which you should calculate as the *residual* of log(**Beak.Length_Culmen**) on log(**Mass**).
+  - **Relative tarsus length**, which you should calculate as the *residual* of log(**Tarsus.Length**) on log(**Mass**).
+
+```{r}
+relBeak <- lm(logBeak ~ logMass, data = d)
+relTarsus <- lm(logTarsus ~ logMass, data = d)
+d <- d |> mutate(
+  relBeak = relBeak$residuals,
+  relTarsus = relTarsus$residuals)
+```
+
+### Step 2 {.unnumbered}
+
+- Make a boxplot or violin plot of your new relative tarsus length variable in relation to **Primary.Lifestyle** and of your new relative beak length variable in relation to **Trophic.Niche**
+
+```{r}
+p1 <- ggplot(data = d |> drop_na(Primary.Lifestyle), aes(x=Primary.Lifestyle, y=relTarsus)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.05) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust=1))
+
+p2 <- ggplot(data = d |> drop_na(Trophic.Niche), aes(x=Trophic.Niche, y=relBeak)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.05) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust=1))
+plot_grid(p1, p2, nrow = 1)
+```
+
+### Step 3 {.unnumbered}
+
+- Run ANOVA analyses to look at the association between geographic range size and the variable **Migration**. You should first drop those observations for which **Migration** is not scored and also look at the distribution of the variable **Range.Size** to decide whether and how it might need to be transformed.
+
+```{r}
+migration <- d |> drop_na(Migration)
+histogram(migration$Range.Size)
+histogram(migration$logRS)
+```
+
+It looks like **Range.Size** should be log transformed.
+
+```{r}
+#| message: false
+#| warning: false
+# look at distribution of the data across levels
+ggplot(data = migration, aes(x = Migration, y = logRS)) +
+  geom_violin() +
+    geom_jitter(alpha = 0.05, width = 0.5) 
+```
+
+```{r}
+m3 <- lm(logRS ~ Migration, data = migration)
+summary(m3)
+```
+
+- Based on the global model, is range size associated with form of migration? How much of the variance in your measure of range size is associated with **Migration** behavior level?
+
+From the model `summary()`, we can see that the F statistic is significant, although the R-squared value suggests that only ~9% of the variation in log(range size) is associated with **Migration** behavior style.
+
+> **NOTE:** We can calculate the amount of variance explained by the model (i.e., R-squared, or, a.k.a. $\eta$-squared) ourselves from the ANOVA table output from running `aov()`. To do so, we calculate the ratio of the *regression sum of squares* to the *total sum of squares*. The code below pulls these value from a `tidy()` table of the model coefficients...
+
+```{r}
+m3 <- aov(logRS ~ Migration, data = migration)
+summary(m3)
+
+coefs <- m3 |> tidy() %>% select(term, sumsq)
+(r2 <- 1 - (coefs |> filter(term == "Residuals") |> pull(sumsq)) / (coefs |> summarize(totalSS = sum(sumsq)) |> pull(totalSS)))
+```
+
+- Given the regression coefficients returned in the output of the model, which **Migration** categor(ies) are different than the reference level? What level is the reference level?
+
+In the `summary()` of the m3 linear model, **Migration** levels 1 and 2 are both different from **Migration** level 3, which is the reference level (because that is what we releveled to above).
+
+- Re-level and assess differences among the remaining pair of **Migration** categories.
+
+```{r}
+migration <- migration |> mutate(Migration = relevel(Migration, ref = "1"))
+m3 <- lm(logRS ~ Migration, data = migration)
+summary(m3)
+```
+
+After re-leveling, we can see that **Migration** levels 1 and 2 are also different from one another.
+
+- Also conduct a post-hoc Tukey Honest Significant Differences test to also evaluate which **Migration** categories differ "significantly" from one another.
+
+```{r}
+(posthoc <- TukeyHSD(m3, which = "Migration", conf.level = 0.95))
+plot(posthoc)
 ```
 
 ### Step 4 {.unnumbered}
 
-- Generate residuals for all three linear models, plot them by hand in relation to the corresponding explanatory variable, and make histograms of the residuals. Do they appear to be normally distributed?
+- Winnow your original data to just consider birds from the Infraorder "Passeriformes" (song birds).
 
 ```{r}
-p1 <- ggplot(data = NULL, aes(x=m1$model$Body_mass_female_mean, y=m1$residuals)) + geom_point()
-p2 <- ggplot(data = NULL, aes(x=m2$model$`log(Body_mass_female_mean)`, y=m2$residuals)) + geom_point()
-p3 <- ggplot(data = NULL, aes(x=m3$model$`log(Body_mass_female_mean)`, y=m3$residuals)) + geom_point()
-p4 <- histogram(m1$residuals, nint = 20)
-p5 <- histogram(m2$residuals, nint = 20)
-p6 <- histogram(m3$residuals, nint = 20)
-plot_grid(p1, p4, p2, p5, p3, p6, nrow = 3)
+pass <- d |> filter(Order1 == "Passeriformes")
 ```
 
-Based on these plots, the m3 residuals appear to be most closely to normally distributed. The m1 residuals are clearly not, and the m2 residuals seems to show increasing variable with log(female body mass)
+- Run separate one-factor ANOVA analyses to look at the association between [1] relative beak length and **Primary.Lifestyle** and between [2] relative beak length and **Trophic.Level**. In doing so...
+
+Make boxplots of the response variable by each predictor and by the combination of predictors...
+
+```{r}
+#| fig-height: 12
+p1 <- ggplot(data=pass, aes(x=Primary.Lifestyle, y=relBeak)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.05) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust=1))
+p2 <- ggplot(data=pass, aes(x=Trophic.Level, y=relBeak)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.05) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust=1))
+p3 <- ggplot(data = pass, aes(x=Primary.Lifestyle, y=relBeak)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.05) +
+  facet_wrap(~Trophic.Level) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust=1))
+p4 <- ggplot(data = pass, aes(x=Trophic.Level, y=relBeak)) +
+  geom_boxplot() +
+  geom_jitter(alpha = 0.05) +
+  facet_wrap(~Primary.Lifestyle) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust=1))
+plot_grid(plot_grid(p1, p2, nrow = 1), p3, p4, nrow = 3)
+```
+
+... and run linear models for each predictor separately and interpret the model output.
+
+```{r}
+m5 <- aov(relBeak ~ Primary.Lifestyle, data = pass)
+# or
+# m5 <- lm(relBeak ~ Primary.Lifestyle, data = pass)
+summary(m5)
+```
+
+```{r}
+m6 <- aov(relBeak ~ Trophic.Level, data = pass)
+# or
+# m6 <- lm(relBeak ~ Trophic.Level, data = pass)
+summary(m6)
+```
+
+Relative beak length is significantly associated with both variables, but the R-squared (or eta- squared) values are quite modest.
 
 ### Step 5 {.unnumbered}
 
-- Generate QQ plots for all three linear models. Based on visual inspection of these plots, do the residual appear to deviate from being normally distributed?
+- Run a two-factor model to look at the association between relative beak length and both **Primary.Lifestyle** and **Trophic.Level** among the passeriforms. Based on the model output, what would you conclude about how relative beak length is related to these two variables?
 
 ```{r}
-par(mfrow = c(3, 1))
-car::qqPlot(m1$residuals)
-car::qqPlot(m2$residuals)
-car::qqPlot(m3$residuals)
-
+m7 <- aov(relBeak ~ Primary.Lifestyle + Trophic.Level, data = pass)
 # or
-par(mfrow = c(1, 1))
-p1 <- ggpubr::ggqqplot(m1$residuals)
-p2 <- ggpubr::ggqqplot(m2$residuals)
-p3 <- ggpubr::ggqqplot(m3$residuals)
-plot_grid(p1, p2, p3, nrow = 1)
+# m7 <- lm(relBeak ~ Primary.Lifestyle + Trophic.Level, data = pass)
+summary(m7)
 ```
 
-Again, the m3 residuals look as if they do not deviate substantively from normal. Residuals for m1 and m2, by contrast, do appear to deviate from normal, with a large number of points falling outside of the confidence band in the QQ plots.
+Both variables are important predictors of relative beak length.
 
 ### Step 6 {.unnumbered}
 
-- Run the `plot()` command for all three models and visually inspect the resultant plots. What do the plots suggest about whether the assumptions for regression are met for any of these models?
+- Finally, run an additional two-way model with the same dataset and predictors, but adding the possibility of an interaction term. Based on the model output, what would you now conclude about how relative beak length is related to these two variables?
 
 ```{r}
-par(mfrow = c(2, 2))
-plot(m1)
-plot(m2)
-plot(m3)
+m8 <- aov(relBeak ~ Primary.Lifestyle + Trophic.Level + Primary.Lifestyle:Trophic.Level, data = pass)
+# or
+# m8 <- lm(relBeak ~ Primary.Lifestyle + Trophic.Level + Primary.Lifestyle:Trophic.Level, data = pass)
+summary(m8)
 ```
 
-The plots suggest that m1 and m2 residuals deviate quite markedly from normality,
+**Primary.Lifestyle**, **Trophic.Level**, and the interaction of these two variables are all significant predictors of relative beak length.
 
 ### Step 7 {.unnumbered}
 
-- Run Shapiro-Wilks tests (e.g., using the function `shapiro.test()` on the residuals for all three models. What do the results of these test suggest about the whether your data meet the assumptions for using simple linear regression?
+- Use the `interaction.plot()` function to visualize the interaction between **Primary.Lifestyle** and **Trophic.Level**.
 
 ```{r}
-shapiro.test(m1$residuals)
-shapiro.test(m2$residuals)
-shapiro.test(m3$residuals)
+#| fig-height: 8
+par(mfrow=c(2,1))
+interaction.plot(
+  x.factor = pass$Primary.Lifestyle,
+  xlab = "Primary Lifestyle",
+  trace.factor = pass$Trophic.Level,
+  trace.label = "Trophic Level",
+  response = pass$relBeak,
+  fun = base::mean, # make sure we use {base} version
+  ylab = "Mean Relative Beak Length"
+)
+
+interaction.plot(
+  x.factor = pass$Trophic.Level,
+  xlab = "Trophic Level",
+  trace.factor = pass$Primary.Lifestyle,
+  trace.label = "Primary Lifestyle",
+  response = pass$relBeak,
+  fun = base::mean, # make sure we use {base} version
+  ylab = "Mean Relative Beak Length"
+)
 ```
 
-The p value for the Shapiro-Wilk test is less than 0.05 for both the m1 and m2 residuals, leading us to **reject** the null hypothesis that that they are normally distributed (or, better put, that they do not deviate more than expected from normality). The p value for the test of the m3 residuals is >> 0.05, leading us to **not reject** the null hypothesis that that they are normally distributed. 
+## Additional Steps? {.unnumbered}
 
-```{r include=FALSE}
+Let's look at the model of **relative beak size ~ trophic level**.
+
+First, we check the ratio of variances among different levels of the predictor...
+
+```{r}
+sd_ratio <- pass |> group_by(Trophic.Level) |>
+  summarize(sd = sd(relBeak, na.rm = TRUE)) |> pull(sd)
+(sd_ratio <- max(sd_ratio) / min(sd_ratio))
+```
+
+Then, we do visual checks for normality of observations and residuals within groups... all seem to deviate from normality!
+
+```{r}
+#| message: false
+#| warning: false
+p1 <- ggplot(data = pass, aes(x=relBeak)) + geom_histogram() + facet_wrap(~Trophic.Level)
+m6data <- tibble(residuals = m6$residuals, Trophic.Level = m6$model$Trophic.Level)
+p2 <- ggqqplot(data = m6data, x = "residuals") + facet_wrap(~Trophic.Level)
+plot_grid(p1, p2, nrow=2)
+```
+
+We can do the same for our model of log(range size) ~ migration level.
+
+Ratio of variances...
+
+```{r}
+sd_ratio <- migration |>
+  group_by(Migration) |>
+  summarize(sd = sd(logRS, na.rm = TRUE)) |> pull(sd)
+(sd_ratio <- max(sd_ratio) / min(sd_ratio))
+```
+
+Visual checks... again all seem to deviate from normality!
+
+```{r}
+#| message: false
+#| warning: false
+p1 <- ggplot(data = migration, aes(x=logRS)) + geom_histogram() + facet_wrap(~Migration)
+m3data <- tibble(residuals = m3$residuals, Migration = m3$model$Migration)
+p2 <- ggqqplot(data = m3data, x = "residuals") + facet_wrap(~Migration)
+plot_grid(p1, p2, nrow=2)
+```
+
+Although the variance ratios are under 2, given the clear deviation from normality for the residuals, we are not **really** justified in using standard (or general) linear regression for the analyses done above.
+
+```{r}
+#| include: false
+detach(package:ggpubr)
 detach(package:mosaic)
+detach(package:infer)
+detach(package:broom)
 detach(package:cowplot)
+detach(package:skimr)
 detach(package:tidyverse)
 ```
