@@ -14,7 +14,7 @@
 
 ### Step 1 {.unnumbered}
 
-- Using the {tidyverse} `read_csv()` function, load the "KamilarAndCooperData.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/KamilarAndCooperData.csv) as a "tibble" named **d**.
+- Using the {tidyverse} `read_csv()` function, load the "KamilarAndCooperData.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-datasets/main/KamilarAndCooperData.csv) as a "tibble" named **d**.
 
 ### Step 2 {.unnumbered}
 

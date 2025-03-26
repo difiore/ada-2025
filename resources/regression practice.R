@@ -100,6 +100,7 @@ perm.se <- sd(perm$stat)
 # visualize
 visualize(perm) + shade_p_value(obs_stat = obs_slope, direction = "two_sided")
 
+library(tidyverse)
 # Regression - ANOVA tables
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 d <- read_csv(f, col_names = TRUE)
@@ -129,19 +130,25 @@ MSE <- SSE/(nrow(d) - 1 - 1)
 fratio <- MSR/MSE
 
 # p value - proportion of F distribution that lies between 0 and fratio
+
 pf(q = fratio, df1 = 1, df2 = 998, lower.tail = FALSE)
 # or
 1 - pf(q = fratio, df1 = 1, df2 = 998)
+
+# F dist with 1 and 998 df
+mosaic::plotDist("f", df1 =1, df2=998)
 
 (rsq <- SSR/SSY)
 summary(m) # looks at multiple R-squared value
 anova(m)
 
 # Practice on UNCORRELATED random data drawn from 2 different normal distributions
-new_d <- tibble(x = rnorm(1000, mean = 100, sd = 25),
-                y = rnorm(1000, mean = 10, sd = 2))
+new_d <- tibble(
+  x = rnorm(1000, mean = 100, sd = 25),
+  y = rnorm(1000, mean = 10, sd = 2))
 plot(new_d$x, new_d$y)
 m <- lm(y ~ x, data = new_d)
+summary(m)
 
 # SSY
 SSY <- sum((m$model$y - mean(m$model$y)) ^ 2)
@@ -163,8 +170,8 @@ MSE <- SSE/(nrow(new_d) - 1 - 1)
 
 # Fratio
 fratio <- MSR/MSE
-
 pf(q = fratio, df1 = 1, df2 = nrow(new_d) - 1 - 1, lower.tail = FALSE)
+
 anova(m)
 
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/Street_et_al_2017.csv"
@@ -189,13 +196,13 @@ df_e <- nrow(m$model) - df_r - 1
 (SEB1 <- sqrt(MSE/SSX))
 (t <- B1/SEB1)
 (p <- 2 * pt(abs(t), df = df_e, lower.tail = FALSE))
-par(mfrow = c(2, 2))
-plot(m)
+
 par(mfrow = c(1, 1))
 car::qqPlot(m, distribution = "norm")
 ggpubr::ggqqplot(m$residuals)
-s <- shapiro.test(m$residuals)
+(s <- shapiro.test(m$residuals))
 
+library(tidyverse)
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/KamilarAndCooperData.csv"
 d <- read_csv(f, col_names = TRUE)
 plot(d$Body_mass_female_mean, d$MaxLongevity_m)
@@ -203,29 +210,36 @@ plot(log(d$Body_mass_female_mean, log(d$MaxLongevity_m)))
 m1 <- lm(MaxLongevity_m ~ Body_mass_female_mean, d)
 m2 <- lm(MaxLongevity_m ~ log(Body_mass_female_mean), d)
 m3 <- lm(log(MaxLongevity_m) ~ log(Body_mass_female_mean), d)
+
 car::qqPlot(m1)
 car::qqPlot(m2)
 car::qqPlot(m3)
+
 par(mfrow = c(2, 2))
 plot(m1)
 plot(m2)
 plot(m3)
-shapiro.test(m1$residuals)
-shapiro.test(m2$residuals)
-shapiro.test(m3$residuals)
+
+(shapiro.test(m1$residuals))
+(shapiro.test(m2$residuals))
+(shapiro.test(m3$residuals))
 
 # ANOVA
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
 d <- read_csv(f, col_names = TRUE)
-d <- d |> select(Species1, Family1, Order1,
-                 Beak.Width, Beak.Depth, Tarsus.Length, Wing.Length, Tail.Length, Mass,
-                 Habitat, Migration, Trophic.Level, Trophic.Niche,
-                 Min.Latitude, Max.Latitude, Centroid.Latitude, Range.Size)
+d <- d |> select(
+  Species1, Family1, Order1,
+  Beak.Width, Beak.Depth, Tarsus.Length,
+  Wing.Length, Tail.Length, Mass,
+  Habitat, Migration, Trophic.Level,
+  Trophic.Niche, Min.Latitude, Max.Latitude,
+  Centroid.Latitude, Range.Size)
 glimpse(d)
-table(d$Habitat)
-table(d$Trophic.Level)
+
 table(d$Trophic.Niche)
-table(d$Migration)
+xtabs(~ Trophic.Niche, data = d)
+xtabs(~ Habitat + Trophic.Level, data = d)
+
 ggplot(data = d |> drop_na(Habitat), aes(x = Habitat, y = log(Mass))) + geom_boxplot() + geom_jitter()
 
 ggplot(data = d |> drop_na(Trophic.Level), aes(x = Trophic.Level, y = log(Mass))) + geom_boxplot() + geom_jitter()
