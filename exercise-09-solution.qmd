@@ -2,7 +2,7 @@
 
 # • Solution {.unnumbered}
 
-- Using the {tidyverse} `read_csv()` function, load the "KamilarAndCooperData.csv" dataset as a "tibble" named **d**.
+- Using the {tidyverse} `read_csv()` function, load the "KamilarAndCooperData.csv" dataset from ***GitHub*** as a "tibble" named **d**.
 
 ### Step 1 {.unnumbered}
 
