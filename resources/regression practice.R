@@ -224,6 +224,9 @@ plot(m3)
 (shapiro.test(m2$residuals))
 (shapiro.test(m3$residuals))
 
+library(tidyverse)
+library(car)
+library(jtools)
 # ANOVA
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
 d <- read_csv(f, col_names = TRUE)
@@ -243,3 +246,77 @@ xtabs(~ Habitat + Trophic.Level, data = d)
 ggplot(data = d |> drop_na(Habitat), aes(x = Habitat, y = log(Mass))) + geom_boxplot() + geom_jitter()
 
 ggplot(data = d |> drop_na(Trophic.Level), aes(x = Trophic.Level, y = log(Mass))) + geom_boxplot() + geom_jitter()
+d <- d |> mutate(Migration = as.factor(Migration))
+
+m1 <- lm(log(Mass) ~ Trophic.Level, data = d)
+m2 <- lm(log(Mass) ~ Migration, data = d)
+summary(m1)
+summary(m2)
+d <- d |> mutate(Migration = relevel(Migration, ref = "3"))
+m2 <- lm(log(Mass) ~ Migration, data = d)
+summary(m2)
+
+(pairwise.t.test(log(d$Mass), d$Trophic.Level, p.adj = "bonferroni"))
+m1 <- aov(log(Mass) ~ Trophic.Level, data = d)
+(posthoc <- TukeyHSD(m1, which = "Trophic.Level",
+                     conf.level = 0.95))
+
+original.F <- aov(log(Mass) ~ Trophic.Level, data = d) |>
+  broom::tidy() |>
+  filter(term == "Trophic.Level")
+
+library(infer)
+d <- d |> mutate(logMass = log(Mass))
+permuted.F <- d |>
+  specify(logMass ~ Trophic.Level) |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "F")
+visualize(permuted.F) +
+  shade_p_value(obs_stat = 	original.F$statistic, direction = "greater")
+p.value <- permuted.F |>
+  get_p_value(obs_stat = original.F$statistic, direction = "greater")
+original.F$p.value
+
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
+z <- read_csv(f, col_names = TRUE)
+m <- lm(height ~ weight + age, data = z)
+summary(m)
+plot(m$model$weight, residuals(m))
+plot(m$model$age, residuals(m))
+plot(fitted(m), residuals(m))
+summary(aov(m))
+(f <- (summary(m)$r.squared*(nrow(z)-2-1))/((1-summary(m)$r.squared) * 2))
+(p <- pf(f, df1 = 2, df2 = 997, lower.tail = FALSE))
+
+m <- lm(height ~ weight + age + gender , data = z)
+summary(m)
+
+plot(m$model$weight, residuals(m))
+plot(m$model$age, residuals(m))
+boxplot(residuals(m) ~ m$model$gender)
+plot(fitted(m), residuals(m))
+vif(m)
+
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
+a <- read_csv(f, col_names = TRUE)
+a <- a |> filter(Order1 == "Accipitriformes")
+m <- lm(log(Range.Size) ~ log(Mass) + Primary.Lifestyle, data = a)
+summary(m)
+
+m <- lm(height ~ weight + age + gender, data = z)
+(ci <- predict(m, newdata = data.frame(age = 29, gender = "Male", weight = 132), interval = "confidence", level = 0.95))
+(pi <- predict(m, newdata = data.frame(age = 29, gender = "Male", weight = 132), interval = "prediction", level = 0.95))
+
+p <- ggplot(data = z, aes(x = weight, y = height)) +
+  geom_point() +
+  geom_smooth(method = lm)
+
+effect_plot(m, pred = weight,
+            interval = TRUE, int.type = "confidence", int.width = 0.95,
+            plot.points = TRUE)
+effect_plot(m, pred = weight,
+            interval = TRUE, int.type = "prediction", int.width = 0.95,
+            plot.points = TRUE)
+plot_summs(m)
+plot_summs(m, plot.distributions = TRUE, rescale.distributions = TRUE)
