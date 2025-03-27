@@ -11,7 +11,7 @@
 
 - Set up a new ***GitHub*** repo in your ***GitHub*** workspace named "exercise-11" and clone that down to your computer as a new ***RStudio*** project. The instructions outlined as **Method 1** in [**Module 6**](#module-06) will be helpful.
 
-- Using the {tidyverse} `read_csv()` function, load the "AVONETdataset1.csv" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/AVONETdataset1.csv) as a "tibble" named **d**. As discussed in class, this is a recently published dataset that compiles morphological measurements and information on various ecological variables and geographic range data for more than 11,000 species of birds.
+- Using the {tidyverse} `read_csv()` function, load the "AVONETdataset1.csv" dataset from [this URL](https://github.com/difiore/ada-datasets/blob/main/AVONETdataset1.csv) as a "tibble" named **d**. As discussed in class, this is a recently published dataset that compiles morphological measurements and information on various ecological variables and geographic range data for more than 11,000 species of birds.
 
 > **Data source**:
 >
@@ -47,7 +47,7 @@
 
 ## Challenge 2 {.unnumbered}
 
-### Data Wrangling, One- and Two-Factor ANOVA {.unnumbered}
+### Data Wrangling plus One- and Two-Factor ANOVA {.unnumbered}
 
 ### Step 1 {.unnumbered}
 
@@ -87,7 +87,7 @@
 
 - Use the `interaction.plot()` function to visualize the interaction between **Primary.Lifestyle** and **Trophic.Level** (see [**Module 20**](#module-20)).
 
-## Additional Steps? {.unnumbered}
+### Step 8 {.unnumbered}
 
 In the exercise above, we really did not do any checking with this dataset to see if the data meet the primary assumptions for standard linear regression and ANOVA, which are that variables/residuals within each grouping level are roughly normally distributed and have roughly equal variances. Sample sizes within each grouping level should also be roughly equal. As noted in [**Module 20**](#module-20), a general rule of thumb for "equal" variances is to compare the largest and smallest within-grouping level standard deviations and, if this value is less than 2, then it is often reasonable to presume the assumption may not be violated.
 

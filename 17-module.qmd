@@ -63,17 +63,14 @@ typeI <- function(mu0, sigma, n, alternative = "two.tailed",
     m <- mean(x) # calculates the mean
     s <- sd(x) # calculates the standard deviation
     z <- (m - mu0) / (s / sqrt(n))
-    # calculates the Z statistic for the sample drawn from the null distribution relative to the null distribution
-    # alternatively use t <- (m-mu0)/(s/sqrt(n))
+    # calculates the Z statistic for the sample drawn from the null distribution relative to the null distribution; alternatively use t <- (m-mu0)/(s/sqrt(n))
     if (alternative == "less") {
       p[[i]] <- pnorm(z, lower.tail = TRUE)
-      # calculates the associated p value
-      # alternatively, use p[[i]] <- pt(t, df = n-1, lower.tail = TRUE)
+      # calculates the associated p value; alternatively, use p[[i]] <- pt(t, df = n-1, lower.tail = TRUE)
     }
     if (alternative == "greater") {
       p[[i]] <- pnorm(z, lower.tail = FALSE)
-      # calculates the associated p value
-      # alternatively, use p[[i]] <- pt(t, df = n-1, lower.tail=FALSE)
+      # calculates the associated p value; alternatively, use p[[i]] <- pt(t, df = n-1, lower.tail=FALSE)
     }
     if (alternative == "two.tailed") {
       if (z > 0) {
@@ -152,11 +149,9 @@ typeI <- function(mu0, sigma, n, alternative = "two.tailed",
       sd = sigma / sqrt(n))- pnorm(mu0 + qnorm(1 - alpha / 2) *
      sigma / sqrt(n), mean = mu0, sd = sigma / sqrt(n))
   }
-  # print(round(q,digits=3))
-  #   this prints area in the shaded portion(s) of the curve
+  # print(round(q,digits=3)); this prints area in the shaded portion(s) of the curve
   return(length(p[p < alpha]) / k)
-  # returns the proportion of simulations where p < alpha
-  # or `return(mean(p<alpha))`
+  # returns the proportion of simulations where p < alpha; alternatively, use `return(mean(p<alpha))`
 }
 ```
 

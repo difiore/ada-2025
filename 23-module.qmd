@@ -443,9 +443,8 @@ table(d$rank, d$success)
 # glm of success ~ age
 glm <- glm(data=d, success ~ age, family="poisson")
 summary(glm)
-# we can generate a nice summary table of results with `tidy()`
-# setting "conf.int = TRUE" uses an ML approach to estimate the CI
-results <- tidy(glm, conf.int = TRUE, conf.level = 0.95)
+# we can generate a nice summary table of results with `tidy()` and by setting "conf.int = TRUE" we use an ML approach to estimate the CI
+(results <- tidy(glm, conf.int = TRUE, conf.level = 0.95))
 ```
 
 In the `summary()`, note that the residual deviance is slighly higher than the residual degrees of freedom, which suggests that our data are slightly overdispersed (i.e., there is some extra, unexplained variation in the response, where the variance is greater than the mean). If this were dramatic, we might use "quasipoisson" for the family instead, but we will stick with "poisson".

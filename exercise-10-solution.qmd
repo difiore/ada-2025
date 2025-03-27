@@ -199,7 +199,7 @@ It looks like **Range.Size** should be log transformed.
 # look at distribution of the data across levels
 ggplot(data = migration, aes(x = Migration, y = logRS)) +
   geom_violin() +
-    geom_jitter(alpha = 0.05, width = 0.5) 
+  geom_jitter(alpha = 0.05, width = 0.5) 
 ```
 
 ```{r}
