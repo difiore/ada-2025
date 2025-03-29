@@ -227,6 +227,7 @@ plot(m3)
 library(tidyverse)
 library(car)
 library(jtools)
+
 # ANOVA
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
 d <- read_csv(f, col_names = TRUE)
@@ -243,40 +244,65 @@ table(d$Trophic.Niche)
 xtabs(~ Trophic.Niche, data = d)
 xtabs(~ Habitat + Trophic.Level, data = d)
 
-ggplot(data = d |> drop_na(Habitat), aes(x = Habitat, y = log(Mass))) + geom_boxplot() + geom_jitter()
+ggplot(data = d |> drop_na(Habitat),
+       aes(x = Habitat, y = log(Mass))) +
+  geom_boxplot() +
+  geom_jitter()
 
-ggplot(data = d |> drop_na(Trophic.Level), aes(x = Trophic.Level, y = log(Mass))) + geom_boxplot() + geom_jitter()
+ggplot(data = d |> drop_na(Trophic.Level),
+       aes(x = Trophic.Level, y = log(Mass))) +
+  geom_boxplot() +
+  geom_jitter()
+
 d <- d |> mutate(Migration = as.factor(Migration))
 
 m1 <- lm(log(Mass) ~ Trophic.Level, data = d)
 m2 <- lm(log(Mass) ~ Migration, data = d)
 summary(m1)
+summary(m1)$fstatistic
 summary(m2)
-d <- d |> mutate(Migration = relevel(Migration, ref = "3"))
-m2 <- lm(log(Mass) ~ Migration, data = d)
-summary(m2)
+summary(m2)$fstatistic
+
+pf(summary(m1)$fstatistic[1], df1 = summary(m1)$fstatistic[2], df2=summary(m1)$fstatistic[3], lower.tail = FALSE)
+
+pf(summary(m2)$fstatistic[1], df1 = summary(m2)$fstatistic[2], df2=summary(m2)$fstatistic[3], lower.tail = FALSE)
+
+mosaic::plotDist("f", df1 = summary(m1)$fstatistic[2], df2=summary(m1)$fstatistic[3])
+
+d <- d |> mutate(Trophic.Level = relevel(as.factor(Trophic.Level), ref = "Omnivore"))
 
 (pairwise.t.test(log(d$Mass), d$Trophic.Level, p.adj = "bonferroni"))
-m1 <- aov(log(Mass) ~ Trophic.Level, data = d)
-(posthoc <- TukeyHSD(m1, which = "Trophic.Level",
+
+# extract aov table from the model either by running aov() on the original model or on the output of lm()
+m1aov <- aov(log(Mass) ~ Trophic.Level, data = d)
+# or
+m1aov <- aov(m1)
+
+# note: posthoc Tukey test can be run on either m1 or m1aov
+(posthoc <- TukeyHSD(m1,
+                     which = "Trophic.Level",
                      conf.level = 0.95))
 
-original.F <- aov(log(Mass) ~ Trophic.Level, data = d) |>
-  broom::tidy() |>
-  filter(term == "Trophic.Level")
+# permutation approach to anova... compare original f statistic to permutation distribution
+
+original.F <- summary(m1)$fstatistic[1]
 
 library(infer)
 d <- d |> mutate(logMass = log(Mass))
+# create a variable that is the log of body mass because cannot call specify() with an operation on the LHS of a formula
 permuted.F <- d |>
   specify(logMass ~ Trophic.Level) |>
   hypothesize(null = "independence") |>
   generate(reps = 1000, type = "permute") |>
   calculate(stat = "F")
+
 visualize(permuted.F) +
-  shade_p_value(obs_stat = 	original.F$statistic, direction = "greater")
+  shade_p_value(obs_stat = 	original.F,
+                direction = "greater")
+
 p.value <- permuted.F |>
-  get_p_value(obs_stat = original.F$statistic, direction = "greater")
-original.F$p.value
+  get_p_value(obs_stat = original.F,
+              direction = "greater")
 
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 z <- read_csv(f, col_names = TRUE)
@@ -288,6 +314,9 @@ plot(fitted(m), residuals(m))
 summary(aov(m))
 (f <- (summary(m)$r.squared*(nrow(z)-2-1))/((1-summary(m)$r.squared) * 2))
 (p <- pf(f, df1 = 2, df2 = 997, lower.tail = FALSE))
+(p <- pf(f, df1 = summary(m)$fstatistic[2],
+         df2 = summary(m)$fstatistic[3],
+         lower.tail = FALSE))
 
 m <- lm(height ~ weight + age + gender , data = z)
 summary(m)
@@ -298,25 +327,71 @@ boxplot(residuals(m) ~ m$model$gender)
 plot(fitted(m), residuals(m))
 vif(m)
 
+m <- lm(height ~ weight + age + gender, data = z)
+(ci <- predict(m,
+               newdata = data.frame(age = 29, gender = "Male", weight = 132),
+               interval = "confidence",
+               level = 0.95))
+
+(pi <- predict(m,
+               newdata = data.frame(age = 29, gender = "Male", weight = 132),
+               interval = "prediction",
+               level = 0.95))
+
+(p <- ggplot(data = z, aes(x = age, y = height)) +
+  geom_point() +
+  geom_smooth(method = lm, ))
+
+m <- lm(height ~ weight, data = z)
+
+effect_plot(m,
+            pred = weight,
+            interval = TRUE,
+            int.type = "confidence",
+            int.width = 0.95,
+            plot.points = TRUE)
+
+m1 <- lm(height ~ weight + age + gender, data = z)
+
+effect_plot(m1,
+            pred = weight,
+            interval = TRUE,
+            int.type = "confidence",
+            int.width = 0.95,
+            plot.points = TRUE)
+
+effect_plot(m1, pred = weight,
+            interval = TRUE,
+            int.type = "prediction",
+            int.width = 0.95,
+            plot.points = TRUE)
+
+effect_plot(m1, pred = age,
+            interval = TRUE,
+            int.type = "prediction",
+            int.width = 0.95,
+            plot.points = TRUE)
+
+effect_plot(m1, pred = gender,
+            interval = TRUE,
+            int.type = "prediction",
+            int.width = 0.95,
+            plot.points = TRUE)
+
+plot_summs(m1)
+plot_summs(m1,
+           plot.distributions = TRUE,
+           rescale.distributions = TRUE)
+
+plot_summs(m, m1,
+           plot.distributions = TRUE,
+           rescale.distributions = TRUE)
+
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
 a <- read_csv(f, col_names = TRUE)
 a <- a |> filter(Order1 == "Accipitriformes")
 m <- lm(log(Range.Size) ~ log(Mass) + Primary.Lifestyle, data = a)
 summary(m)
-
-m <- lm(height ~ weight + age + gender, data = z)
-(ci <- predict(m, newdata = data.frame(age = 29, gender = "Male", weight = 132), interval = "confidence", level = 0.95))
-(pi <- predict(m, newdata = data.frame(age = 29, gender = "Male", weight = 132), interval = "prediction", level = 0.95))
-
-p <- ggplot(data = z, aes(x = weight, y = height)) +
-  geom_point() +
-  geom_smooth(method = lm)
-
-effect_plot(m, pred = weight,
-            interval = TRUE, int.type = "confidence", int.width = 0.95,
-            plot.points = TRUE)
-effect_plot(m, pred = weight,
-            interval = TRUE, int.type = "prediction", int.width = 0.95,
-            plot.points = TRUE)
-plot_summs(m)
-plot_summs(m, plot.distributions = TRUE, rescale.distributions = TRUE)
+plot_summs(m,
+           plot.distributions = TRUE,
+           rescale.distributions = TRUE)
