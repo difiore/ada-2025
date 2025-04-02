@@ -20,7 +20,12 @@ d <- read_csv(f, col_names = TRUE)
 - Winnow the dataset to variables of interest.
 
 ```{r}
-d <- d |> select(Species1, Family1, Order1, Beak.Length_Culmen, Beak.Width, Beak.Depth, Tarsus.Length, Wing.Length, Tail.Length, Mass, Habitat, Migration, Trophic.Level, Trophic.Niche, Min.Latitude, Max.Latitude, Centroid.Latitude, Range.Size, Primary.Lifestyle)
+d <- d |> select(Species1, Family1, Order1,
+                 Beak.Length_Culmen, Beak.Width, Beak.Depth,
+                 Tarsus.Length, Wing.Length, Tail.Length, Mass,
+                  Habitat, Migration, Trophic.Level, Trophic.Niche,
+                 Min.Latitude, Max.Latitude, Centroid.Latitude, Range.Size,
+                 Primary.Lifestyle)
 ```
 
 - Do a bit of exploratory data analysis.
@@ -168,7 +173,9 @@ d <- d |> mutate(
 
 ```{r}
 d <- d |> mutate(
-  Primary.Lifestyle = factor(Primary.Lifestyle, levels = c("Aerial", "Aquatic", "Insessorial", "Terrestrial", "Generalist"))
+  Primary.Lifestyle = factor(Primary.Lifestyle,
+                             levels = c("Aerial", "Aquatic", "Insessorial",
+                                        "Terrestrial", "Generalist"))
 )
 p1 <- ggplot(data = d |> drop_na(Primary.Lifestyle), aes(x=Primary.Lifestyle, y=relTarsus)) +
   geom_boxplot() +
@@ -177,7 +184,11 @@ p1 <- ggplot(data = d |> drop_na(Primary.Lifestyle), aes(x=Primary.Lifestyle, y=
     axis.text.x = element_text(angle = 45, hjust=1))
 
 d <- d |> mutate(
-  Trophic.Niche = factor(Trophic.Niche, levels = c("Nectarivore", "Herbivore aquatic", "Frugivore", "Granivore", "Herbivore terrestrial", "Aquatic predator", "Invertivore", "Vertivore", "Scavenger", "Omnivore"))
+  Trophic.Niche = factor(Trophic.Niche,
+                         levels = c("Nectarivore", "Herbivore aquatic", "Frugivore",
+                                    "Granivore", "Herbivore terrestrial",
+                                    "Aquatic predator", "Invertivore", "Vertivore",
+                                    "Scavenger", "Omnivore"))
 )
 p2 <- ggplot(data = d |> drop_na(Trophic.Niche), aes(x=Trophic.Niche, y=relBeak)) +
   geom_boxplot() +
@@ -197,7 +208,7 @@ histogram(migration$Range.Size)
 histogram(migration$logRS)
 ```
 
-It looks like **Range.Size** should be log transformed.
+It looks like **Range.Size** should be log transformed!
 
 ```{r}
 #| message: false
@@ -272,8 +283,6 @@ p2 <- ggplot(data=pass, aes(x=Trophic.Level, y=relBeak)) +
   geom_jitter(alpha = 0.05) +
   theme(
     axis.text.x = element_text(angle = 45, hjust=1))
-p2
-
 p3 <- ggplot(data = pass, aes(x=Primary.Lifestyle, y=relBeak)) +
   geom_boxplot() +
   geom_jitter(alpha = 0.05) +
@@ -294,7 +303,7 @@ plot_grid(plot_grid(p1, p2, nrow = 1), p3, p4, nrow = 3)
 ```{r}
 m5 <- aov(relBeak ~ Primary.Lifestyle, data = pass)
 # or
-m5 <- lm(relBeak ~ Primary.Lifestyle, data = pass)
+# m5 <- lm(relBeak ~ Primary.Lifestyle, data = pass)
 summary(m5)
 ```
 
@@ -329,7 +338,7 @@ m8 <- aov(relBeak ~ Primary.Lifestyle + Trophic.Level + Primary.Lifestyle:Trophi
 # or
 # m8 <- lm(relBeak ~ Primary.Lifestyle + Trophic.Level + Primary.Lifestyle:Trophic.Level, data = pass)
 # or
-# m8 <- aov(relBeak ~ Primary.Lifestyle* Trophic.Level, data = pass)
+# m8 <- lm(relBeak ~ Primary.Lifestyle * Trophic.Level, data = pass)
 summary(m8)
 ```
 
@@ -363,7 +372,7 @@ interaction.plot(
 )
 ```
 
-## Additional Steps? {.unnumbered}
+## Step 8 {.unnumbered}
 
 Let's look at the model of **relative beak size ~ trophic level**.
 
