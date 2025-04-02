@@ -304,15 +304,20 @@ p.value <- permuted.F |>
   get_p_value(obs_stat = original.F,
               direction = "greater")
 
+# Multiple Regression/ANCOVA
+
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 z <- read_csv(f, col_names = TRUE)
 m <- lm(height ~ weight + age, data = z)
+
 summary(m)
 plot(m$model$weight, residuals(m))
 plot(m$model$age, residuals(m))
 plot(fitted(m), residuals(m))
 summary(aov(m))
+
 (f <- (summary(m)$r.squared*(nrow(z)-2-1))/((1-summary(m)$r.squared) * 2))
+
 (p <- pf(f, df1 = 2, df2 = 997, lower.tail = FALSE))
 (p <- pf(f, df1 = summary(m)$fstatistic[2],
          df2 = summary(m)$fstatistic[3],
@@ -325,9 +330,13 @@ plot(m$model$weight, residuals(m))
 plot(m$model$age, residuals(m))
 boxplot(residuals(m) ~ m$model$gender)
 plot(fitted(m), residuals(m))
+library(car)
 vif(m)
 
-m <- lm(height ~ weight + age + gender, data = z)
+temp <- lm(weight ~ age + gender, data = z)
+s <- summary(temp)
+1/(1-s$r.squared)
+
 (ci <- predict(m,
                newdata = data.frame(age = 29, gender = "Male", weight = 132),
                interval = "confidence",

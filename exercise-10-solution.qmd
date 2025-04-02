@@ -167,15 +167,21 @@ d <- d |> mutate(
 - Make a boxplot or violin plot of your new relative tarsus length variable in relation to **Primary.Lifestyle** and of your new relative beak length variable in relation to **Trophic.Niche**
 
 ```{r}
+d <- d |> mutate(
+  Primary.Lifestyle = factor(Primary.Lifestyle, levels = c("Aerial", "Aquatic", "Insessorial", "Terrestrial", "Generalist"))
+)
 p1 <- ggplot(data = d |> drop_na(Primary.Lifestyle), aes(x=Primary.Lifestyle, y=relTarsus)) +
   geom_boxplot() +
-  geom_jitter(alpha = 0.05) +
+  #geom_jitter(alpha = 0.05) +
   theme(
     axis.text.x = element_text(angle = 45, hjust=1))
 
+d <- d |> mutate(
+  Trophic.Niche = factor(Trophic.Niche, levels = c("Nectarivore", "Herbivore aquatic", "Frugivore", "Granivore", "Herbivore terrestrial", "Aquatic predator", "Invertivore", "Vertivore", "Scavenger", "Omnivore"))
+)
 p2 <- ggplot(data = d |> drop_na(Trophic.Niche), aes(x=Trophic.Niche, y=relBeak)) +
   geom_boxplot() +
-  geom_jitter(alpha = 0.05) +
+  # geom_jitter(alpha = 0.05) +
   theme(
     axis.text.x = element_text(angle = 45, hjust=1))
 plot_grid(p1, p2, nrow = 1)
@@ -229,7 +235,7 @@ In the `summary()` of the m3 linear model, **Migration** levels 1 and 2 are both
 
 ```{r}
 migration <- migration |> mutate(Migration = relevel(Migration, ref = "1"))
-m3 <- lm(logRS ~ Migration, data = migration)
+m3 <- aov(logRS ~ Migration, data = migration)
 summary(m3)
 ```
 
@@ -266,6 +272,8 @@ p2 <- ggplot(data=pass, aes(x=Trophic.Level, y=relBeak)) +
   geom_jitter(alpha = 0.05) +
   theme(
     axis.text.x = element_text(angle = 45, hjust=1))
+p2
+
 p3 <- ggplot(data = pass, aes(x=Primary.Lifestyle, y=relBeak)) +
   geom_boxplot() +
   geom_jitter(alpha = 0.05) +
@@ -286,7 +294,7 @@ plot_grid(plot_grid(p1, p2, nrow = 1), p3, p4, nrow = 3)
 ```{r}
 m5 <- aov(relBeak ~ Primary.Lifestyle, data = pass)
 # or
-# m5 <- lm(relBeak ~ Primary.Lifestyle, data = pass)
+m5 <- lm(relBeak ~ Primary.Lifestyle, data = pass)
 summary(m5)
 ```
 
@@ -320,6 +328,8 @@ Both variables are important predictors of relative beak length.
 m8 <- aov(relBeak ~ Primary.Lifestyle + Trophic.Level + Primary.Lifestyle:Trophic.Level, data = pass)
 # or
 # m8 <- lm(relBeak ~ Primary.Lifestyle + Trophic.Level + Primary.Lifestyle:Trophic.Level, data = pass)
+# or
+# m8 <- aov(relBeak ~ Primary.Lifestyle* Trophic.Level, data = pass)
 summary(m8)
 ```
 
