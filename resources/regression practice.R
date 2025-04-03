@@ -100,7 +100,6 @@ perm.se <- sd(perm$stat)
 # visualize
 visualize(perm) + shade_p_value(obs_stat = obs_slope, direction = "two_sided")
 
-library(tidyverse)
 # Regression - ANOVA tables
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 d <- read_csv(f, col_names = TRUE)
@@ -130,7 +129,6 @@ MSE <- SSE/(nrow(d) - 1 - 1)
 fratio <- MSR/MSE
 
 # p value - proportion of F distribution that lies between 0 and fratio
-
 pf(q = fratio, df1 = 1, df2 = 998, lower.tail = FALSE)
 # or
 1 - pf(q = fratio, df1 = 1, df2 = 998)
@@ -172,8 +170,7 @@ MSE <- SSE/(nrow(new_d) - 1 - 1)
 fratio <- MSR/MSE
 pf(q = fratio, df1 = 1, df2 = nrow(new_d) - 1 - 1, lower.tail = FALSE)
 
-anova(m)
-
+# With Street et al 2017 data
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/Street_et_al_2017.csv"
 d <- read_csv(f, col_names = TRUE)
 m <- lm(log(ECV) ~ log(Body_mass), d)
@@ -284,7 +281,6 @@ m1aov <- aov(m1)
                      conf.level = 0.95))
 
 # permutation approach to anova... compare original f statistic to permutation distribution
-
 original.F <- summary(m1)$fstatistic[1]
 
 library(infer)
@@ -305,7 +301,6 @@ p.value <- permuted.F |>
               direction = "greater")
 
 # Multiple Regression/ANCOVA
-
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/zombies.csv"
 z <- read_csv(f, col_names = TRUE)
 m <- lm(height ~ weight + age, data = z)
@@ -337,6 +332,7 @@ temp <- lm(weight ~ age + gender, data = z)
 s <- summary(temp)
 1/(1-s$r.squared)
 
+# Confidence and Prediction Intervals
 (ci <- predict(m,
                newdata = data.frame(age = 29, gender = "Male", weight = 132),
                interval = "confidence",
@@ -353,6 +349,7 @@ s <- summary(temp)
 
 m <- lm(height ~ weight, data = z)
 
+# Effect Plots
 effect_plot(m,
             pred = weight,
             interval = TRUE,
@@ -393,14 +390,5 @@ plot_summs(m1,
            rescale.distributions = TRUE)
 
 plot_summs(m, m1,
-           plot.distributions = TRUE,
-           rescale.distributions = TRUE)
-
-f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
-a <- read_csv(f, col_names = TRUE)
-a <- a |> filter(Order1 == "Accipitriformes")
-m <- lm(log(Range.Size) ~ log(Mass) + Primary.Lifestyle, data = a)
-summary(m)
-plot_summs(m,
            plot.distributions = TRUE,
            rescale.distributions = TRUE)
