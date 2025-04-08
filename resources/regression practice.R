@@ -392,3 +392,90 @@ plot_summs(m1,
 plot_summs(m, m1,
            plot.distributions = TRUE,
            rescale.distributions = TRUE)
+
+# Model Selection
+library(tidyverse)
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
+d <- read_csv(f, col_names = TRUE)
+d <- d |> select(Species1, Family1, Order1,
+                 Beak.Length_Culmen, Beak.Width,
+                 Beak.Depth, Tarsus.Length, Wing.Length,
+                 Tail.Length, Mass, Habitat, Migration,
+                 Trophic.Level, Trophic.Niche,
+                 Min.Latitude, Max.Latitude, Centroid.Latitude,
+                 Range.Size, Primary.Lifestyle)
+
+d <- d |> mutate(logMass = log(Mass),
+                 logRS = log(Range.Size),
+                 logBeak = log(Beak.Length_Culmen),
+                 logTarsus = log(Tarsus.Length),
+                 Migration = as.factor(Migration))
+
+relBeak <- lm(logBeak ~ logMass, data = d)
+relTarsus <- lm(logTarsus ~ logMass, data = d)
+d <- d |>
+  mutate(relBeak = relBeak$residuals, relTarsus = relTarsus$residuals)
+
+m1 <- lm(data = d, logBeak ~ logRS * Migration) # most complex (full) model
+m2 <- lm(data = d, logBeak ~ logRS + Migration) # model without interaction term
+m3 <- lm(data = d, logBeak ~ logRS) # model with one predictor
+m4 <- lm(data = d, logBeak ~ Migration) # model with one predictor
+m5 <- lm(data = d, logBeak ~ 1) # intercept only model
+anova(m2, m1, test = "F")
+anova(m3, m2, test = "F")
+
+d_drop <- drop_na(d, any_of(c("logRS", "logTarsus", "Migration")))
+m1 <- lm(data = d_drop, logBeak ~ logRS * Migration) # most complex (full) model
+m2 <- lm(data = d_drop, logBeak ~ logRS + Migration) # model without interaction term
+m3 <- lm(data = d_drop, logBeak ~ logRS) # model with one predictor
+m4 <- lm(data = d_drop, logBeak ~ Migration) # model with one predictor
+m5 <- lm(data = d_drop, logBeak ~ 1) # intercept only model
+anova(m2, m1, test = "F")
+anova(m3, m2, test = "F")
+
+d_new <- drop_na(d, any_of(c("logRS", "Migration", "relTarsus", "Migration", "Trophic.Level", "Primary.Lifestyle")))
+
+m_null <- lm(data = d_new, relBeak ~ 1)
+
+add1(m_null, scope = .~. + logRS + relTarsus + Migration + Trophic.Level +
+         Primary.Lifestyle, test = "F")
+
+m1 <- update(m_null, formula = .~. + Primary.Lifestyle)
+add1(m1, scope = .~. + logRS + relTarsus + Migration + Trophic.Level, test = "F")
+
+# start with…
+m_full <- lm(data = d_new,
+                 relBeak ~ logRS + relTarsus +
+                 Migration + Trophic.Level +
+                 Primary.Lifestyle)
+drop1(m_full, test = "F")
+m1 <- update(m_full, formula = .~. - logRS)
+drop1(m1, test = "F")
+
+m2 <- update(m1, formula = .~. - relTarsus)
+drop1(m2, test = "F")
+
+library(MASS)
+m_full <- lm(data = d_new,
+             relBeak ~ logRS + relTarsus +
+               Migration + Trophic.Level +
+               Primary.Lifestyle)
+s <- stepAIC(m_full, scope = .~., direction = "both")
+
+m_null <- lm(data = d_new, relBeak ~ 1)
+
+s <- stepAIC(m_null,
+               scope = .~. + logRS + relTarsus +
+                 Migration +
+                 Trophic.Level +
+                 Primary.Lifestyle,
+               direction = "both")
+library(MuMIn)
+
+m_full <- lm(data = d_new, relBeak ~ logRS + Migration +
+                 Trophic.Level + logTarsus +
+                 Primary.Lifestyle,
+               na.action = na.fail)
+
+mods <- dredge(m_full)
+mods

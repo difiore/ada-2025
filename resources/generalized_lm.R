@@ -9,24 +9,25 @@ d$Sex <- factor(d$Sex)
 d$Pclass <- factor(d$Pclass)
 d$Embarked <- factor(d$Embarked)
 
-d <- d %>% dplyr::select(-c(PassengerId, Name, Ticket, Cabin))
-(p <- ggplot() + geom_point(data = d, aes(x = Age, y = Survived), color = "green") +
-  xlab("Age") + ylab("Survived") + ggtitle("Pr(Y) versus Age"))
+d <- d |> dplyr::select(-c(PassengerId, Name, Ticket, Cabin))
+(p <- ggplot() +
+    geom_point(data = d, aes(x = Age, y = Survived), color = "green") +
+    xlab("Age") + ylab("Survived") + ggtitle("Pr(Y) versus Age"))
 pairs(d)
 
-(t <- group_by(d, Survived, Sex) %>%
-    summarize(n = n()) %>%
+(t <- group_by(d, Survived, Sex) |>
+    summarize(n = n()) |>
     pivot_wider(names_from = Sex, values_from = n))
 
-(t <- group_by(d, Survived, Pclass) %>%
+(t <- group_by(d, Survived, Pclass) |>
     summarize(n = n()) %>%
     pivot_wider(names_from = Pclass, values_from = n))
 
 m <- glm(Survived ~ Sex, data = d, family="binomial")
 summary(m)
 x <- data.frame(Sex = c("male","female"))
-logOR <- predict(m, newdata = x)
-OR <- exp(logOR)
+(logOR <- predict(m, newdata = x))
+(OR <- exp(logOR))
 y <- predict(m, newdata = x, type = "response")
 results <- tibble(Sex = c("male","female"), logOR = logOR, OR = OR, Pr_Survival = y)
 head(results)
@@ -50,7 +51,10 @@ p
 
 CI <- confint(m)
 
-reduced <- glm(Survived ~ Pclass, data = d, family="binomial")
+library(effects)
+plot(allEffects(m))
+
+m <- glm(Survived ~ Pclass, data = d, family="binomial")
 summary(m)
 x <- data.frame(Pclass = c("1","2","3"))
 logOR <- predict(m, newdata = x)
@@ -59,7 +63,6 @@ y <- predict(m, newdata = x, type = "response")
 results <- tibble(Pclass = c("1","2","3"), logOR = logOR, OR = OR, Pr_Survival = y)
 head(results)
 
-library(effects)
 plot(allEffects(m))
 
 proposed <- glm(Survived ~ Sex + Pclass, data = d, family="binomial")
