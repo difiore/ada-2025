@@ -1,4 +1,4 @@
-# Exercise 12 {.unnumbered}
+# Exercise 11 {.unnumbered}
 
 # Practice Model Selection {.unnumbered}
 
@@ -8,8 +8,8 @@
 
 #### Preliminaries {.unnumbered}
 
-- Set up a new ***GitHub*** repo in your ***GitHub*** workspace named "exercise-12" and clone that down to your computer as a new ***RStudio*** project. The instructions outlined as **Method 1** in [**Module 6**](#module-06) will be helpful.
-- Using the {tidyverse} `read_tsv()` function, load the "Mammal_lifehistories_v2.txt" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-2024-datasets/main/Mammal_lifehistories_v2.txt) as a "tibble" named **d**. As discussed in class, this is dataset that compiles life history and other variables for over 1400 species of placental mammals from 17 different Orders.
+- Set up a new ***GitHub*** repo in your ***GitHub*** workspace named "exercise-11" and clone that down to your computer as a new ***RStudio*** project. The instructions outlined as **Method 1** in [**Module 6**](#module-06) will be helpful.
+- Using the {tidyverse} `read_tsv()` function, load the "Mammal_lifehistories_v2.txt" dataset from [this URL](https://raw.githubusercontent.com/difiore/ada-datasets/main/Mammal_lifehistories_v2.txt) as a "tibble" named **d**. As discussed in class, this is dataset that compiles life history and other variables for over 1400 species of placental mammals from 17 different Orders.
 
 > **Data source**:
 >

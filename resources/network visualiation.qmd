@@ -43,7 +43,6 @@ For the purposes of this document, we downloaded a Twitter dataset from the web 
 
 But before we go ahead and deal with the real world data, we will demonstrate ***R***'s graphing powers on dummy and small datasets. 
 
-
 ### Preparing Nodes and Edges
 
 We are exploring the package {visNetwork}, which is based on the visualization java script library ***vis.js***, to generate some interesting interactive graph visuals. But before that, we need to generate some data that we will feed to this pacakage.

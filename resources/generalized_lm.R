@@ -9,7 +9,7 @@ d$Sex <- factor(d$Sex)
 d$Pclass <- factor(d$Pclass)
 d$Embarked <- factor(d$Embarked)
 
-d <- d %>% select(-c(PassengerId, Name, Ticket, Cabin))
+d <- d %>% dplyr::select(-c(PassengerId, Name, Ticket, Cabin))
 (p <- ggplot() + geom_point(data = d, aes(x = Age, y = Survived), color = "green") +
   xlab("Age") + ylab("Survived") + ggtitle("Pr(Y) versus Age"))
 pairs(d)
