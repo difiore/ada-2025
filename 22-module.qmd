@@ -79,7 +79,9 @@ summary(m0)
 add1(m0, scope = .~. + age + weight + zombies_killed + years_of_education, test = "F")
 ```
 
-Looking at the output of `add1()`, we see that adding **weight**, **age**, or **years_of_education** all would add explanatory power to our model, but **weight** is associated with the highest new F statistic and the lowest new RSS, so we should update our model by adding it as a new predictor. We do this with the `update()` function, passing it the old model and a "formula=" argument of ".~." (what is already there) "+ weight" (the new predictor).
+Looking at the output of `add1()`, we see that adding **weight**, **age**, or **years_of_education** all would add explanatory power to our model, but **weight** is associated with the *highest new F statistic* and the *lowest new RSS*, so we should update our model by adding it as a new predictor. We do this with the `update()` function, passing it the old model and a "formula=" argument of ".~." (what is already there) "+ weight" (the new predictor).
+
+> NOTE: The "formula=" and "scope=" arguments work by first identifying what was on the left-hand side (LHS) and right-hand side (RHS) of the old model. It then examines the new model and substitutes the LHS of the old model for any occurrence of "." on the LHS of the new model, substitutes the RHS of the old formula for any occurrence of "." on the RHS of new, and adds new terms to the RHS.
 
 ```{r}
 m1 <- update(m0, formula = .~. + weight)
@@ -90,6 +92,7 @@ We then repeat this process until adding additional predictors no longer improve
 
 ```{r}
 add1(m1, scope = .~. + age + weight + zombies_killed + years_of_education, test = "F")
+# note: here, weight has already been added to m1, so having including it on the RHS of the .~. operator is not essential... I've just kept it there for ease in copying and pasting in successive `add1()` steps
 m2 <- update(m1, formula = .~. + age)
 summary(m2)
 add1(m2, scope = .~. + age + weight + zombies_killed + years_of_education, test = "F")
@@ -147,11 +150,11 @@ Let's try `stepAIC()` with our **m0** from above. In the call for the function, 
 library(MASS)
 # start with full model...
 m <- lm(data = z, height ~ age + weight + zombies_killed + years_of_education)
-(s <- stepAIC(m, scope = . ~ ., direction = "both"))
+(s <- stepAIC(m, scope = .~., direction = "both"))
 summary(s)
 # ... or start with minimal model
 m <- lm(data = z, height ~ 1)
-(s <- stepAIC(m, scope = ~ . + age + weight + zombies_killed +
+(s <- stepAIC(m, scope = .~. + age + weight + zombies_killed +
   years_of_education, direction = "both"))
 summary(s)
 detach(package:MASS)
@@ -242,7 +245,7 @@ The code below averages beta coefficients for models in the 95% confidence set, 
 confint(mods.avg)
 ```
 
-With the {MuMIn} package loaded, we can use the `plot()` function to make a plot of averaged model coefficients, similar to `plot_summs()` from {jtools}.
+With the {MuMIn} package loaded, we can use the `plot()` function to make a plot of averaged model coefficients, similar to `plot_summs()` from {jtools} (which unfortunately does not work on "summary.averaging" objects).
 
 ```{r}
 plot(mods.avg, full = TRUE, intercept = FALSE)
@@ -267,3 +270,5 @@ detach(package:tidyverse)
 - There are various criteria for evaluating alternative models, but all rely on comparing the "explanatory value" of more complex models versus less complex models
 - Forward selection evaluates whether adding a variable or interaction among variables to a less complex model increases the explanatory value of the model significantly
 - Backwards selection evaluates whether removing a variable or interaction among variables from a more complex model results in a significant loss of explanatory power
+- In comparison to F ratio tests, AIC based model selection penalizes more complex models
+- The `dredge()` command from the {MuMIn} package can be used to automate aspects of model selection
