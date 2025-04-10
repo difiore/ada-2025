@@ -56,9 +56,9 @@ book:
     - part: "Part III - Miscellany"
       chapters:
       - 99-maximum_likelihood.qmd
-      - 99-geospatial-data.qmd
-      - 99-r-packages.qmd
       - 99-python-from-R.qmd
+      # - 99-geospatial-data.qmd
+      - 99-r-packages.qmd
       - 99-shiny.qmd
     - part: "Exercises"
       chapters:
@@ -84,8 +84,8 @@ book:
       chapters:
       - data-analysis-replication-assignment.qmd
     #  - data-analysis-replication-assignment-template.qmd
-    #  - collaborative-data-science-assignment.qmd
-    #  - creative-dataviz-assignment.qmd
+      - collaborative-data-science-assignment.qmd
+      - creative-dataviz-assignment.qmd
     - part: "References"
       chapters:
         - packages.qmd

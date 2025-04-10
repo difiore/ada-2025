@@ -36,11 +36,8 @@ anova(m2, m1, test = "F")
 anova(m3, m2, test = "F")
 anova(m4, m2, test = "F")
 
-# add trophic level
-
-
 library(tidyverse)
-f <- "https://raw.githubusercontent.com/difiore/ada-2022-datasets/main/AVONETdataset1.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
 
 d <- read_csv(f, col_names = TRUE)
 d <- d |> select(Species1, Family1, Order1, Beak.Length_Culmen, Beak.Width, Beak.Depth, Tarsus.Length, Wing.Length, Tail.Length, Mass, Habitat, Migration, Trophic.Level, Trophic.Niche, Min.Latitude, Max.Latitude, Centroid.Latitude, Range.Size, Primary.Lifestyle)
@@ -58,7 +55,6 @@ d <- d |> mutate(
   relTarsus = relTarsus$residuals)
 
 d_new <- d |> drop_na(logRS, logTarsus, Migration, Trophic.Level,  Primary.Lifestyle)
-
 m_full <- lm(data = d_new, relBeak ~ logRS + logTarsus + Migration + Trophic.Level + Primary.Lifestyle) # full model
 m2 <- lm(data = d_new, relBeak ~ logRS + Trophic.Level) # reduced model
 m3 <- lm(data = d_new, relBeak ~ Migration + Trophic.Level) # reduced model
@@ -90,20 +86,31 @@ drop1(m_full, test = "F")
 m5 <- update(m_full, formula = . ~ . -logRS)
 drop1(m5, test = "F")
 
-# settle on m1
+# settle on m5
 
 # AICc
 m_full <- lm(data = d_new, relBeak ~ logRS + logTarsus + Migration + Trophic.Level + Primary.Lifestyle)
-
-s <- MASS::stepAIC(m_full, scope = .~., direction = "both")
-
+best_mod <- MASS::stepAIC(m_full, scope = .~., direction = "both")
+summary(best_mod)
 
 library(MuMIn)
 library(AICcmodavg)
-m_full <- lm(data = d_new, relBeak ~ logRS + Migration + Trophic.Level + logTarsus + Primary.Lifestyle, na.action = na.fail)
-s <- dredge(m_full)
-coef(s)
-m.avg <- summary(model.avg(s, subset = delta < 4, fit = TRUE))
+m_full <- lm(data = d_new, relBeak ~ logRS + logTarsus + Migration + Trophic.Level  + Primary.Lifestyle, na.action = na.fail)
+mods <- dredge(m_full)
+
+m.avg <- summary(model.avg(mods))
+m.avg
+# full average includes 0 as coefficients for models where parameter doesn't appear
+# while conditional average only averages coefficients for model in which the parameter appears
+# averaging of coefficients is based on a WEIGHTED AVERAGE for each model, e.g., based on AICc
+
+# averaging for subsets of models
+m.avg <- summary(model.avg(mods, subset = delta < 4, fit = TRUE)) # subset specifies which models to average coefficients for
+m.avg
+m.avg <- summary(model.avg(mods, subset = cumsum(weight) <= 0.99, fit = TRUE)) # subset specifies which models to average coefficients for
+m.avg
+
+# Print nice table of select models
 models <- list(m_full, m2, m3, m4, m5, m6, m7, m_null)
 #specify model names
 mod.names <- c("full", "m2", "m3", "m4", "m5", "m6",  "m7", "m_null")
@@ -155,8 +162,10 @@ p <- ggplot(data = d, aes(x=order, y = relWeaningMass)) +
 
 p
 
-m_full <- lm(relMaxLife ~ relGestation + `litter size` + `litters/year` + order, data = d)
+d_new <- d |> drop_na(relGestation, relNewbornMass, relWeaningMass, `litters/year`, logMass)
+m_full <- lm(relMaxLife ~ relGestation + relNewbornMass + relWeaningMass + `litters/year` + logMass, data = d_new)
 summary(m_full)
 
+library(skimr)
 skim(d)
-str(relMaxLife$residuals)
+hist(relMaxLife$residuals)

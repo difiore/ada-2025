@@ -22,4 +22,4 @@ By the due date for this assignment, you should post to your code along with the
 
 If your visualization cannot be done entirely with code (i.e., if you produce "something else" with your data after wrangling/transforming with code: a recording, painting, physical object, text or graphic representation of a process/algorithm for visualization that you cannot yet implement), please follow the same instructions above, but then also take a photo/video/recording of your finished product or a sketch of your (unrealized) ideas and include it in your renders ".Rmd" or ".qmd" file.
 
-> **NOTE:** I should be able to CLONE whatever is in your repository and render your associated ".Rmd" or ".qmd" file to show all of the work for this creative data visualization.
+> **NOTE:** I should be able to CLONE whatever is in your repository and render your associated ".qmd" or ".Rmd" file to show all of the work for this creative data visualization.

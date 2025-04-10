@@ -412,20 +412,14 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./99-geospatial-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Basic Geospatial Data Analysis</span></a>
+  <a href="./99-python-from-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Using <strong><em>Python</em></strong> from <strong><em>R</em></strong></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./99-r-packages.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Building Custom <strong><em>R</em></strong> Packages</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./99-python-from-R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Using <strong><em>Python</em></strong> from <strong><em>R</em></strong></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -562,6 +556,18 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./data-analysis-replication-assignment.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Data Analysis Replication</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./collaborative-data-science-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Collaborative Data Science Project</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./creative-dataviz-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creative Data Visualization</span></a>
   </div>
 </li>
       </ul>
@@ -900,15 +906,15 @@ window.Quarto = {
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>## 
-## 6 message(s): boundary (singular) fit: see help('isSingular')</code></pre>
+## 5 message(s): boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##                        2.5 %    97.5 %
-## .sig01              4.944250  42.21452
-## .sigma             24.821797  33.37301
-## (Intercept)       101.114325 160.44526
-## reproconditionPOP   8.695153  31.85622
-## parityP            70.328010 150.68535</code></pre>
+## .sig01              4.779001  40.22198
+## .sigma             24.501578  34.04895
+## (Intercept)       104.500860 163.13397
+## reproconditionPOP   9.186273  34.04042
+## parityP            68.902232 148.75187</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -1331,16 +1337,16 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m, <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">method =</span> <span class="st">"boot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##                           2.5 %    97.5 %
-## .sig01             0.000000e+00  20.14797
+## .sig01             0.000000e+00  20.04953
 ## .sig02            -1.000000e+00   1.00000
-## .sig03             9.467500e-05  16.51904
-## .sig04             0.000000e+00  44.93774
+## .sig03             1.044303e-04  17.54101
+## .sig04             0.000000e+00  41.85265
 ## .sig05            -1.000000e+00   0.00000
-## .sig06             1.194763e-04  42.26380
-## .sigma             2.404612e+01  33.00728
-## (Intercept)        1.008362e+02 165.20048
-## reproconditionPOP  8.533399e+00  31.26963
-## parityP            7.377263e+01 145.08119</code></pre>
+## .sig06             1.934945e-04  41.85305
+## .sigma             2.402884e+01  32.22042
+## (Intercept)        1.020943e+02 165.31101
+## reproconditionPOP  7.676115e+00  30.96764
+## parityP            7.886806e+01 145.25192</code></pre>
 </div>
 </div>
 <p>Finally, effects plots of how the expected amount of grooming received varies with the fixed effects (<strong>reprocondition</strong> and <strong>parity</strong>) under our new random slope model is the same as that under the random intercept model.</p>
