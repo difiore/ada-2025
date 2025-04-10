@@ -1,8 +1,16 @@
+# Model Selection
+
 library(tidyverse)
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
 
 d <- read_csv(f, col_names = TRUE)
-d <- d |> select(Species1, Family1, Order1, Beak.Length_Culmen, Beak.Width, Beak.Depth, Tarsus.Length, Wing.Length, Tail.Length, Mass, Habitat, Migration, Trophic.Level, Trophic.Niche, Min.Latitude, Max.Latitude, Centroid.Latitude, Range.Size, Primary.Lifestyle)
+d <- d |> select(Species1, Family1, Order1,
+                 Beak.Length_Culmen, Beak.Width,
+                 Beak.Depth, Tarsus.Length, Wing.Length,
+                 Tail.Length, Mass, Habitat, Migration,
+                 Trophic.Level, Trophic.Niche,
+                 Min.Latitude, Max.Latitude, Centroid.Latitude,
+                 Range.Size, Primary.Lifestyle)
 
 d <- d |> mutate(logMass = log(Mass),
                   logRS = log(Range.Size),
@@ -16,45 +24,29 @@ d <- d |> mutate(
   relBeak = residuals(relBeak),
   relTarsus = residuals(relTarsus))
 
-m1 <- lm(data = d, logBeak ~ logRS * Migration) # full model
-m2 <- lm(data = d, logBeak ~ logRS + Migration) # model without interaction
+m1 <- lm(data = d, logBeak ~ logRS * Migration) # most complex (full) model
+m2 <- lm(data = d, logBeak ~ logRS + Migration) # model without interaction term
 m3 <- lm(data = d, logBeak ~ logRS) # model with one predictor
 m4 <- lm(data = d, logBeak ~ Migration) # model with one predictor
 m5 <- lm(data = d, logBeak ~ 1) # intercept only model
+anova(m2, m1, test = "F")
+anova(m3, m2, test = "F")
 
-anova(m2, m1, test ="F")
-anova(m3, m1, test = "F")
-
-d_new <- d |> drop_na(logRS, Migration)
-m1 <- lm(data = d_new, logBeak ~ logRS * Migration) # full model
-m2 <- lm(data = d_new, logBeak ~ logRS + Migration) # model without interaction
+d_new <- drop_na(d, any_of(c("logRS", "logTarsus", "Migration")))
+m1 <- lm(data = d_new, logBeak ~ logRS * Migration) # most complex (full) model
+m2 <- lm(data = d_new, logBeak ~ logRS + Migration) # model without interaction term
 m3 <- lm(data = d_new, logBeak ~ logRS) # model with one predictor
 m4 <- lm(data = d_new, logBeak ~ Migration) # model with one predictor
 m5 <- lm(data = d_new, logBeak ~ 1) # intercept only model
-
 anova(m2, m1, test = "F")
 anova(m3, m2, test = "F")
 anova(m4, m2, test = "F")
 
-library(tidyverse)
-f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
 
-d <- read_csv(f, col_names = TRUE)
-d <- d |> select(Species1, Family1, Order1, Beak.Length_Culmen, Beak.Width, Beak.Depth, Tarsus.Length, Wing.Length, Tail.Length, Mass, Habitat, Migration, Trophic.Level, Trophic.Niche, Min.Latitude, Max.Latitude, Centroid.Latitude, Range.Size, Primary.Lifestyle)
 
-d <- d |> mutate(logMass = log(Mass),
-                  logRS = log(Range.Size),
-                  logBeak = log(Beak.Length_Culmen),
-                  logTarsus = log(Tarsus.Length),
-                  Migration = as.factor(Migration))
+d_new <- drop_na(d, any_of(c("logRS", "Migration", "relTarsus", "Migration", "Trophic.Level", "Primary.Lifestyle")))
 
-relBeak <- lm(logBeak ~ logMass, data = d)
-relTarsus <- lm(logTarsus ~ logMass, data = d)
-d <- d |> mutate(
-  relBeak = relBeak$residuals,
-  relTarsus = relTarsus$residuals)
-
-d_new <- d |> drop_na(logRS, logTarsus, Migration, Trophic.Level,  Primary.Lifestyle)
+# start with…
 m_full <- lm(data = d_new, relBeak ~ logRS + logTarsus + Migration + Trophic.Level + Primary.Lifestyle) # full model
 m2 <- lm(data = d_new, relBeak ~ logRS + Trophic.Level) # reduced model
 m3 <- lm(data = d_new, relBeak ~ Migration + Trophic.Level) # reduced model
@@ -89,7 +81,9 @@ drop1(m5, test = "F")
 # settle on m5
 
 # AICc
-m_full <- lm(data = d_new, relBeak ~ logRS + logTarsus + Migration + Trophic.Level + Primary.Lifestyle)
+m_full <- lm(data = d_new,
+               relBeak ~ logRS + logTarsus + Migration +
+               Trophic.Level + Primary.Lifestyle)
 best_mod <- MASS::stepAIC(m_full, scope = .~., direction = "both")
 summary(best_mod)
 
