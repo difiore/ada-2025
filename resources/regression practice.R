@@ -393,89 +393,48 @@ plot_summs(m, m1,
            plot.distributions = TRUE,
            rescale.distributions = TRUE)
 
-# Model Selection
+# GLM
 library(tidyverse)
-f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/titanic_train.csv"
 d <- read_csv(f, col_names = TRUE)
-d <- d |> select(Species1, Family1, Order1,
-                 Beak.Length_Culmen, Beak.Width,
-                 Beak.Depth, Tarsus.Length, Wing.Length,
-                 Tail.Length, Mass, Habitat, Migration,
-                 Trophic.Level, Trophic.Niche,
-                 Min.Latitude, Max.Latitude, Centroid.Latitude,
-                 Range.Size, Primary.Lifestyle)
+d <- d |> select(-c(PassengerId, Ticket, Cabin))
+d <- d |> mutate(Sex = factor(Sex),
+                 Pclass = factor(Pclass),
+                 Embarked = factor(Embarked))
+(p1 <- ggplot(data = d, aes(x = Age, y = Survived)) +
+    geom_point())
+(p2 <- ggplot(data = d, aes(x = Sex, y = Survived)) +
+    geom_violin() +
+    geom_jitter())
+(p3 <- ggplot(data = d, aes(x = Pclass, y = Survived)) +
+    geom_violin() +
+    geom_jitter())
 
-d <- d |> mutate(logMass = log(Mass),
-                 logRS = log(Range.Size),
-                 logBeak = log(Beak.Length_Culmen),
-                 logTarsus = log(Tarsus.Length),
-                 Migration = as.factor(Migration))
+m <- glm(Survived ~ Sex, data = d, family = "binomial")
+summary(m)
 
-relBeak <- lm(logBeak ~ logMass, data = d)
-relTarsus <- lm(logTarsus ~ logMass, data = d)
-d <- d |>
-  mutate(relBeak = relBeak$residuals, relTarsus = relTarsus$residuals)
+coefs <- broom::tidy(m) |> select(estimate)
+logOR_female_survival <- coefs$estimate[1] + coefs$estimate[2] * 0
+logOR_male_survival <- coefs$estimate[1] + coefs$estimate[2] * 1
 
-m1 <- lm(data = d, logBeak ~ logRS * Migration) # most complex (full) model
-m2 <- lm(data = d, logBeak ~ logRS + Migration) # model without interaction term
-m3 <- lm(data = d, logBeak ~ logRS) # model with one predictor
-m4 <- lm(data = d, logBeak ~ Migration) # model with one predictor
-m5 <- lm(data = d, logBeak ~ 1) # intercept only model
-anova(m2, m1, test = "F")
-anova(m3, m2, test = "F")
+OR_female_survival <- exp(logOR_female_survival) # odds of females surviving versus not
+OR_male_survival <- exp(logOR_male_survival) # odds of males surviving versus not
 
-d_drop <- drop_na(d, any_of(c("logRS", "logTarsus", "Migration")))
-m1 <- lm(data = d_drop, logBeak ~ logRS * Migration) # most complex (full) model
-m2 <- lm(data = d_drop, logBeak ~ logRS + Migration) # model without interaction term
-m3 <- lm(data = d_drop, logBeak ~ logRS) # model with one predictor
-m4 <- lm(data = d_drop, logBeak ~ Migration) # model with one predictor
-m5 <- lm(data = d_drop, logBeak ~ 1) # intercept only model
-anova(m2, m1, test = "F")
-anova(m3, m2, test = "F")
+PR_male_survival <- OR_male_survival/(1 + OR_male_survival)
+PR_female_survival <- OR_female_survival/(1 + OR_female_survival)
 
-d_new <- drop_na(d, any_of(c("logRS", "Migration", "relTarsus", "Migration", "Trophic.Level", "Primary.Lifestyle")))
+table(d$Survived, d$Sex)
 
-m_null <- lm(data = d_new, relBeak ~ 1)
+x <- data.frame(Sex = c("male","female"))
+logOR <- predict(m, newdata = x)
+OR <- exp(logOR)
 
-add1(m_null, scope = .~. + logRS + relTarsus + Migration + Trophic.Level +
-         Primary.Lifestyle, test = "F")
+logOR <- predict(m, newdata = x, type = "response", se.fit = TRUE)
 
-m1 <- update(m_null, formula = .~. + Primary.Lifestyle)
-add1(m1, scope = .~. + logRS + relTarsus + Migration + Trophic.Level, test = "F")
+m <- glm(Survived ~ Age, data = d, family = "binomial")
 
-# start with…
-m_full <- lm(data = d_new,
-                 relBeak ~ logRS + relTarsus +
-                 Migration + Trophic.Level +
-                 Primary.Lifestyle)
-drop1(m_full, test = "F")
-m1 <- update(m_full, formula = .~. - logRS)
-drop1(m1, test = "F")
-
-m2 <- update(m1, formula = .~. - relTarsus)
-drop1(m2, test = "F")
-
-library(MASS)
-m_full <- lm(data = d_new,
-             relBeak ~ logRS + relTarsus +
-               Migration + Trophic.Level +
-               Primary.Lifestyle)
-s <- stepAIC(m_full, scope = .~., direction = "both")
-
-m_null <- lm(data = d_new, relBeak ~ 1)
-
-s <- stepAIC(m_null,
-               scope = .~. + logRS + relTarsus +
-                 Migration +
-                 Trophic.Level +
-                 Primary.Lifestyle,
-               direction = "both")
-library(MuMIn)
-
-m_full <- lm(data = d_new, relBeak ~ logRS + Migration +
-                 Trophic.Level + logTarsus +
-                 Primary.Lifestyle,
-               na.action = na.fail)
-
-mods <- dredge(m_full)
-mods
+summary(m)
+coef(m)
+coef <- broom::tidy(m)
+coef$estimate[2]
+exp(coef$estimate[2])
