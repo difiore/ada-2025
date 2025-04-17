@@ -38,7 +38,7 @@
 
 - Regress the (now log transformed) *age* [**gestation(mo)**, **weaning(mo)**, **AFR(mo)** (i.e., age at first reproduction), and **max. life(mo)** (i.e., maximum lifespan)] and *mass* [**newborn(g)** and **wean mass(g)**] variables on (now log transformed) overall body **mass(g)** and add the residuals to the dataframe as new variables [**relGest**, **relWean**, **relAFR**, **relLife**, **relNewbornMass**, and **relWeaningMass**].
 
-> **HINT:** Use "na.action=na.exclude" in your`lm()` calls. With this argument set, the residuals will be padded to the correct length by inserting NAs for cases with missing data.
+> **HINT:** Use "na.action=na.exclude" in your`lm()` calls. With this argument set, the residuals will be padded to the correct length by inserting NAs for cases with missing data. To access these correctly, however, where the length of the vector of residuals is equal in length to the length of your original vector (i.e., where missing residuals are padded out as NAs) you will need to call the `resid(m)` function on the model object (assuming the model is named **m**) rather than by calling `m$residuals`. The former function returns a vector of residuals with "NA" for cases where the value of one of the formula variables is missing, while the latter returns a vector with the NAs dropped, which may be shorter than the length of the original data frame!
 
 #### Step 5 {.unnumbered}
 
