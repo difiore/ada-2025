@@ -423,7 +423,7 @@ OR_male_survival <- exp(logOR_male_survival) # odds of males surviving versus no
 PR_male_survival <- OR_male_survival/(1 + OR_male_survival)
 PR_female_survival <- OR_female_survival/(1 + OR_female_survival)
 
-table(d$Survived, d$Sex)
+table(d$Survived, d$Pclass)
 
 x <- data.frame(Sex = c("male","female"))
 logOR <- predict(m, newdata = x)
@@ -438,3 +438,217 @@ coef(m)
 coef <- broom::tidy(m)
 coef$estimate[2]
 exp(coef$estimate[2])
+
+# How is survival related to passenger class (Pclass)? What is the equation that results from the model? # Is survival significantly associated with passenger class?
+
+# Yes!
+
+# How is survival related to both Sex and Pclass? What is the equation that results from the model? What are the predicted odds of survival for a second class woman traveler? What is the estimated probability of survival for a male in third class?
+
+
+
+m1 <- glm(Survived ~ Pclass, data = d, family = "binomial")
+summary(m1)
+
+coefs <- broom::tidy(m1) |> select(estimate)
+
+logOR_class1 <- coefs$estimate[1] + coefs$estimate[2] * 0 + coefs$estimate[3] * 0
+
+logOR_class2 <- coefs$estimate[1] + coefs$estimate[2] * 1 + coefs$estimate[3] * 0
+
+logOR_class3 <- coefs$estimate[1] + coefs$estimate[2] * 0 + coefs$estimate[3] * 1
+
+x <- data.frame(Pclass = c("1", "2", "3"))
+logOR <- predict(m1, newdata = x)
+
+# What is the predicted odds of survival for a traveler in first class? What is the estimated probability of survival for a first class passenger?
+
+OR <- exp(logOR)
+
+PrS_C1 <- OR[1]/(1 + OR[1])
+PrS_C2 <- OR[2]/(1 + OR[2])
+PrS_C3 <- OR[3]/(1 + OR[3])
+
+PrS <- predict(m1, newdata = x, type = "response")
+
+# How is survival related to both Sex and Pclass? What is the equation that results from the model? What are the predicted odds of survival for a second class woman traveler? What is the estimated probability of survival for a male in third class?
+
+
+m2 <- glm(Survived ~ Sex + Pclass, data = d, family = "binomial")
+summary(m2)
+
+
+
+x <- data.frame(Sex = c("male", "female", "male", "female", "male", "female"), Pclass = c("1", "1",
+"2", "2", "3", "3"))
+
+PrS <- predict(m2, newdata = x, type = "response")
+
+
+
+
+
+x <- data.frame(Sex = c("male"), Pclass = c("3"))
+OR <- predict(m2, newdata = x)
+PrS <- predict(m2, newdata = x, type = "response")
+
+library(lmtest)
+lrtest(m1, m2)
+
+
+anova(m1, m2, test = "Chisq")
+
+
+
+
+Gsq <- m1$deviance - m2$deviance
+p <- 1 - pchisq(Gsq, df = 1)
+# where df = difference in number of parameters in the proposed versus reduced model
+
+# log-linear
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/refs/heads/main/woollydata.csv"
+
+d <- read_csv(f, col_names = TRUE)
+d
+p <- ggplot(data = d, aes(x = age, y = success)) +
+  geom_point()
+
+m1 <- glm(data =d, success ~ age + rank, family = "poisson")
+summary(m1)
+
+m2 <- glm(data =d, success ~ age, family = "poisson")
+summary(m2)
+
+
+lrtest(m1)
+
+
+
+
+
+
+
+
+# GLMM
+library(tidyverse)
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/chimpgrooming.csv"
+
+d <- read_csv(f, col_names = TRUE)
+
+ggplot(data = d, aes(y = duration, x = subject)) +
+  geom_boxplot()
+ggplot(data = d, aes(y = duration, x = reprocondition, fill = parity)) +
+  geom_boxplot()
+ggplot(data = d, aes(y = duration, x = reprocondition, fill = subject)) +
+  geom_boxplot()
+
+library(lme4)
+m <- lmer(data = d, duration ~ reprocondition + parity + (1|subject))
+
+summary(m)
+
+fuller <- lmer(data=d, duration ~ reprocondition + parity + (1|subject), REML=FALSE)
+
+reduced <- lmer(data=d, duration ~ parity + (1|subject), REML=FALSE)
+
+anova(reduced, fuller, test = "Chisq")
+
+
+
+full <- lme4::lmer(data = d, duration ~ reprocondition + parity +
+            (1 + reprocondition|subject) +
+            (1 + parity|subject), REML = FALSE)
+
+minusRC <- lme4::lmer(data = d, duration ~ parity +
+               (1 + reprocondition|subject) +
+               (1 + parity|subject), REML = FALSE)
+
+minusP <- lme4::lmer(data = d, duration ~ reprocondition +
+                  (1 + reprocondition|subject) +
+                  (1 + parity|subject), REML = FALSE)
+
+anova(minusP, full, test = "Chisq")
+
+
+
+
+summary(m)
+# https://stats.stackexchange.com/questions/378939/dealing-with-singular-fit-in-mixed-models
+# "When you obtain a singular fit, this is often indicating that the model is overfitted – that is, the random effects structure is too complex to be supported by the data, which naturally leads to the advice to remove the most complex part of the random effects structure (usually random slopes). The benefit of this approach is that it leads to a more parsimonious model that is not over-fitted."
+
+
+library(lmerTest)
+fuller <- lmer(data=d, duration ~ reprocondition + parity + (1|subject), REML=FALSE)
+
+# full model with both fixed effects
+full <- lme4::lmer(data = d,
+             duration ~
+               reprocondition +
+               parity +
+               (1 + reprocondition|subject) +
+               (1 + parity|subject), REML = FALSE)
+# model without reproductive condition
+minusRC <- lme4::lmer(data = d,
+                  duration ~ parity +
+                    (1 + reprocondition|subject) +
+                    (1 + parity|subject), REML = FALSE)
+# model without parity
+minusP <- lme4::lmer(data = d,
+                 duration ~ reprocondition +
+                   (1 + reprocondition|subject) +
+                   (1 + parity|subject), REML = FALSE)
+# p value for reproductive condition
+anova(minusRC, full, test = "Chisq")
+# p value for parity
+anova(minusP, full, test = "Chisq")
+
+null <- lme4::lmer(data = d,
+                   duration ~
+                     (1 + reprocondition | subject) +
+                     (1 + parity | subject), REML = FALSE)
+
+library(AICcmodavg)
+aictab(list(full, minusRC, minusP, null),
+       modnames = c("full", "minusRC", "minusP", "null"))
+
+
+
+library(MuMIn)
+r.squaredGLMM(full)
+
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/Bowden-ParryOtterdata.csv"
+d <- read_csv(f, col_names = TRUE)
+d <- d |>
+  mutate(trial = paste0(zoo, trialorder)) |>
+  rename(Shared = TotalSharebothharasspro) |>
+  rename(BegRec = begreceived)
+
+d <- d |>
+  rowid_to_column() |>
+  mutate(obs = rowid)
+
+m <- glmer(Shared ~ BegRec +
+             offset(log(trialduration/60)) +
+                      (1 | ID) +
+                      (1 | trial) +
+                      (1 | obs),
+           data = d,
+           family = poisson(link = "log"))
+summary(m)
+
+
+
+
+full <- lme4::lmer(data = d,
+                   duration ~ reprocondition + parity +
+                     (1 | subject), REML = FALSE)
+
+
+minusRC <- lme4::lmer(data = d,
+                   duration ~  parity +
+                     (1 | subject), REML = FALSE)
+
+minusP <- lme4::lmer(data = d,
+                      duration ~  reprocondition +
+                        (1 | subject), REML = FALSE)
+null <- lme4::lmer(data = d, duration ~ (1|subject), REML = FALSE)
