@@ -884,7 +884,7 @@ window.Quarto = {
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 1.6707</code></pre>
+<pre><code>## [1] 2.282207</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># close to, but not the same, as the population mean</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(x))</span>
@@ -960,23 +960,23 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">ci.boot.quantiles</td>
-<td style="text-align: right;">1.011</td>
-<td style="text-align: right;">2.254</td>
+<td style="text-align: right;">1.554</td>
+<td style="text-align: right;">3.123</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ci.boot.theory</td>
-<td style="text-align: right;">1.041</td>
-<td style="text-align: right;">2.301</td>
+<td style="text-align: right;">1.498</td>
+<td style="text-align: right;">3.067</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ci.norm.theory</td>
-<td style="text-align: right;">1.007</td>
-<td style="text-align: right;">2.334</td>
+<td style="text-align: right;">1.459</td>
+<td style="text-align: right;">3.106</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ci.t.theory</td>
-<td style="text-align: right;">0.905</td>
-<td style="text-align: right;">2.436</td>
+<td style="text-align: right;">1.332</td>
+<td style="text-align: right;">3.233</td>
 </tr>
 </tbody>
 </table>

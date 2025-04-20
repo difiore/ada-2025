@@ -169,7 +169,7 @@ What patterns do you see? There is, again, lots of apparent variation, and some 
 
 We will now perform an initial mixed effects analysis where we look in more detail at how reproductive condition and parity (as fixed effects) affect grooming duration, where we include individual subject ID as a random effect.
 
-Here is a first mixed effects model that we will fit, using one extension of formula notation that is commonly used in ***R***.
+Here is a first mixed effects model that we will fit, using one extension of formula notation that is commonly used in ***R***:
 
 $$grooming\ duration \sim reproductive\ condition + parity + (1|subject) + \epsilon$$
 
@@ -179,7 +179,7 @@ We can think of this formula as saying that we expect our dataset to include mul
 
 The {lme4} package in **R** is commonly used for mixed effects modeling, and the function `lmer()` is the mixed model equivalent of the function `lm()`. In the formula syntax for mixed effects models using the {lme4} package, fixed effects are included without parentheses while random effects are included in parentheses (the error, $\epsilon$, is understood and is not included explicitly).
 
-> **NOTE:** We could also use the package {nlme} for mixed effects modeling (which requires a slightly different formula syntax than that used here). That same package also allows us to do **nonlinear** mixed effects modeling, which we will not be talking about. It is important to note that {lme4} uses, by default, a slightly different parameter estimation algorithm than {nlme}. Unless otherwise specified, {lme4} uses "restricted maximum likelihood" (REML) rather than ordinary maximum likelihood estimation, which is what is used in {nlme}. In practice, these give very similar results. We will see below that when we want to compare different models using {lme4}, we will need to tell {lme4} to use ordinary maximum likelihood.
+> **NOTE:** We could also use the package {nlme} for mixed effects modeling (which requires a slightly different formula syntax than that used here). That same package also allows us to do **nonlinear** mixed effects modeling, which we will not be talking about. It is important to note that {lme4} uses, by default, a slightly different parameter estimation algorithm than {nlme}. Unless otherwise specified, {lme4} uses "restricted maximum likelihood" (REML) rather than ordinary maximum likelihood estimation, which is what is used in {nlme}. In practice, these often give very similar results. We will see below that when we want to compare different models using {lme4}, we will need to tell {lme4} to use ordinary maximum likelihood.
 
 The code block below implements this first "mixed effects" model:
 
@@ -192,7 +192,7 @@ m <- lmer(data = d,
 summary(m)
 ```
 
-Let's focus on the output for the random effects first. Have a look at the column standard deviation. The entry for *subject* shows us how much variability in grooming duration (apart from that explained by the fixed effects) is due to subject ID. The entry for *Residual* summarizes the remaining variability in grooming duration that is not due to *subject* or to our fixed effects. The latter is our $\epsilon$, the "random" deviations from the predicted values that are not due to either subject or our fixed effects.
+Let's focus on the output for the random effects first. Have a look at the column **Std.Dev.**. The entry for *subject* shows us how much variability in grooming duration (apart from that explained by the fixed effects) is due to subject ID. The entry for *Residual* summarizes the remaining variability in grooming duration that is not due to *subject* or to our fixed effects. The latter is our $\epsilon$, the "random" deviations from the predicted values that are not due to either subject or our fixed effects.
 
 The fixed effects output mirrors the coefficient tables that we have seen previously in our linear models that have focused only on fixed effects. The coefficient "reproconditionPOP" is the $\beta$ coefficient for the categorical effect of reproductive condition. The positive sign for the coefficient means that grooming duration is GREATER by 20.293 units for POP than for NONPOP females. Then, there is a standard error associated with this slope, and a t value, which is simply the estimate divided by the standard error.
 
@@ -209,15 +209,15 @@ coefficients(m)
 confint(m, level = 0.95, method = "boot")
 ```
 
-> **NOTE**: For the `confint()` function, we can set `method =` argument to "boot" (to generate a CI based on bootstrapping), "profile" (to generate a CI based on likelihoods), or "Wald" (which generates a CI for the fixed effects only). Also, in the output from running `confint()`, ".sigXX" is the square root of the variance associated with each of the random parameter levels and ".sigma" is the square root of the variance associated with the residuals of the model
+> **NOTE**: For the `confint()` function, we can set `method =` argument to "boot" (to generate a CI based on bootstrapping), "profile" (to generate a CI based on likelihoods), or "Wald" (which generates a CI for the fixed effects only). Also, in the output from running `confint()`, ".sigXX" is the square root of the variance associated with each of the random parameter levels and ".sigma" is the square root of the variance associated with the residuals of the model.
 
-We can see the separate intercepts, or "baseline" level of grooming received, associated with each female when they are (presumably) nulliparous and in a NONPOP reproductive condition.
+We can see the separate intercepts, i.e., the "baseline" level of grooming received, for each female when they are (presumably) nulliparous and in a NONPOP reproductive condition.
 
-> **NOTE:** Not all females are, necessarily, ever seen in a particular parity or reproductive condition!
+> **NOTE:** Some females may not ever be seen both parity or reproductive conditions!
 
 ### Visualizing Model Results
 
-As in earlier modules, we can use the `predictorEffect()` function from the {effects} package to visualize our mixed model results in terms of how the response variable is expected to differ across levels of each predictor variable when the other predictor and the random effect of **subject** are controlled for.
+As in earlier modules, we can use the `predictorEffects()` function from the {effects} package to visualize our mixed model results in terms of how the response variable is expected to differ across levels of each predictor variable when the other predictor and the random effect of **subject** are controlled for.
 
 ```{r}
 plot(predictorEffects(m, partial.residuals = TRUE))
@@ -231,7 +231,7 @@ p2 <- plot_model(m, type = "eff", terms = c("parity"))
 cowplot::plot_grid(p1, p2, ncol = 2)
 ```
 
-We can also `plot_model()` to visualize estimates and confidence intervals for the fixed effect coefficients and for the random effects.
+We can also use `plot_model()` to visualize estimates and confidence intervals for the fixed effect coefficients and for the random effects.
 
 ```{r}
 p1 <- plot_model(m, type = "est")

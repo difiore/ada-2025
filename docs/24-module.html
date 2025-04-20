@@ -844,13 +844,13 @@ window.Quarto = {
 <section id="random-intercept-models" class="level2" data-number="24.4">
 <h2 data-number="24.4" class="anchored" data-anchor-id="random-intercept-models"><span class="header-section-number">24.4</span> Random Intercept Models</h2>
 <p>We will now perform an initial mixed effects analysis where we look in more detail at how reproductive condition and parity (as fixed effects) affect grooming duration, where we include individual subject ID as a random effect.</p>
-<p>Here is a first mixed effects model that we will fit, using one extension of formula notation that is commonly used in <strong><em>R</em></strong>.</p>
+<p>Here is a first mixed effects model that we will fit, using one extension of formula notation that is commonly used in <strong><em>R</em></strong>:</p>
 <p><span class="math display">\[grooming\ duration \sim reproductive\ condition + parity + (1|subject) + \epsilon\]</span></p>
 <p>Here, the 1 refers to the fact that we want to estimate an <em>intercept</em> and the pipe operator(“|”) following the “1” signifies that we want to estimate a <em>different intercept for each subject</em>. Note that this generic formula still contains a general error term, <span class="math inline">\(\epsilon\)</span>, to highlight that there will still be unexplained “error” variance after accounting for both fixed and random effects in the model.</p>
 <p>We can think of this formula as saying that we expect our dataset to include multiple observations of the response variable per subject, and these responses will depend, in part, on each subject’s baseline level. This effectively accounts the nonindependence that stems from having multiple responses by the same subject.</p>
 <p>The {lme4} package in <strong>R</strong> is commonly used for mixed effects modeling, and the function <code>lmer()</code> is the mixed model equivalent of the function <code>lm()</code>. In the formula syntax for mixed effects models using the {lme4} package, fixed effects are included without parentheses while random effects are included in parentheses (the error, <span class="math inline">\(\epsilon\)</span>, is understood and is not included explicitly).</p>
 <blockquote class="blockquote">
-<p><strong>NOTE:</strong> We could also use the package {nlme} for mixed effects modeling (which requires a slightly different formula syntax than that used here). That same package also allows us to do <strong>nonlinear</strong> mixed effects modeling, which we will not be talking about. It is important to note that {lme4} uses, by default, a slightly different parameter estimation algorithm than {nlme}. Unless otherwise specified, {lme4} uses “restricted maximum likelihood” (REML) rather than ordinary maximum likelihood estimation, which is what is used in {nlme}. In practice, these give very similar results. We will see below that when we want to compare different models using {lme4}, we will need to tell {lme4} to use ordinary maximum likelihood.</p>
+<p><strong>NOTE:</strong> We could also use the package {nlme} for mixed effects modeling (which requires a slightly different formula syntax than that used here). That same package also allows us to do <strong>nonlinear</strong> mixed effects modeling, which we will not be talking about. It is important to note that {lme4} uses, by default, a slightly different parameter estimation algorithm than {nlme}. Unless otherwise specified, {lme4} uses “restricted maximum likelihood” (REML) rather than ordinary maximum likelihood estimation, which is what is used in {nlme}. In practice, these often give very similar results. We will see below that when we want to compare different models using {lme4}, we will need to tell {lme4} to use ordinary maximum likelihood.</p>
 </blockquote>
 <p>The code block below implements this first “mixed effects” model:</p>
 <div class="cell" data-layout-align="center">
@@ -885,7 +885,7 @@ window.Quarto = {
 ## parityP     -0.692  0.000</code></pre>
 </div>
 </div>
-<p>Let’s focus on the output for the random effects first. Have a look at the column standard deviation. The entry for <em>subject</em> shows us how much variability in grooming duration (apart from that explained by the fixed effects) is due to subject ID. The entry for <em>Residual</em> summarizes the remaining variability in grooming duration that is not due to <em>subject</em> or to our fixed effects. The latter is our <span class="math inline">\(\epsilon\)</span>, the “random” deviations from the predicted values that are not due to either subject or our fixed effects.</p>
+<p>Let’s focus on the output for the random effects first. Have a look at the column <strong>Std.Dev.</strong>. The entry for <em>subject</em> shows us how much variability in grooming duration (apart from that explained by the fixed effects) is due to subject ID. The entry for <em>Residual</em> summarizes the remaining variability in grooming duration that is not due to <em>subject</em> or to our fixed effects. The latter is our <span class="math inline">\(\epsilon\)</span>, the “random” deviations from the predicted values that are not due to either subject or our fixed effects.</p>
 <p>The fixed effects output mirrors the coefficient tables that we have seen previously in our linear models that have focused only on fixed effects. The coefficient “reproconditionPOP” is the <span class="math inline">\(\beta\)</span> coefficient for the categorical effect of reproductive condition. The positive sign for the coefficient means that grooming duration is GREATER by 20.293 units for POP than for NONPOP females. Then, there is a standard error associated with this slope, and a t value, which is simply the estimate divided by the standard error.</p>
 <p>The coefficient “parityP” is the <span class="math inline">\(\beta\)</span> coefficient for the categorical effect of parity. The grooming duration associated with being parous versus nulliparous is GREATER by 109.65 units.</p>
 <p>The INTERCEPT in this case is the grooming duration associated with being an average, nulliparous, NONPOP female. Like the <code>lm()</code> function, the <code>lmer()</code> took whatever factor level came first in the alphabet to be the reference level for each fixed effect variable.</p>
@@ -912,27 +912,27 @@ window.Quarto = {
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>## 
-## 6 message(s): boundary (singular) fit: see help('isSingular')</code></pre>
+## 8 message(s): boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##                        2.5 %    97.5 %
-## .sig01              4.914299  44.46604
-## .sigma             24.623969  33.63127
-## (Intercept)       103.737642 160.62453
-## reproconditionPOP   5.964941  32.70404
-## parityP            74.637496 149.51382</code></pre>
+## .sig01              3.131323  41.38169
+## .sigma             24.650165  34.02539
+## (Intercept)       105.027886 164.12782
+## reproconditionPOP   7.084909  32.54883
+## parityP            68.588781 149.08500</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
-<p><strong>NOTE</strong>: For the <code>confint()</code> function, we can set <code>method =</code> argument to “boot” (to generate a CI based on bootstrapping), “profile” (to generate a CI based on likelihoods), or “Wald” (which generates a CI for the fixed effects only). Also, in the output from running <code>confint()</code>, “.sigXX” is the square root of the variance associated with each of the random parameter levels and “.sigma” is the square root of the variance associated with the residuals of the model</p>
+<p><strong>NOTE</strong>: For the <code>confint()</code> function, we can set <code>method =</code> argument to “boot” (to generate a CI based on bootstrapping), “profile” (to generate a CI based on likelihoods), or “Wald” (which generates a CI for the fixed effects only). Also, in the output from running <code>confint()</code>, “.sigXX” is the square root of the variance associated with each of the random parameter levels and “.sigma” is the square root of the variance associated with the residuals of the model.</p>
 </blockquote>
-<p>We can see the separate intercepts, or “baseline” level of grooming received, associated with each female when they are (presumably) nulliparous and in a NONPOP reproductive condition.</p>
+<p>We can see the separate intercepts, i.e., the “baseline” level of grooming received, for each female when they are (presumably) nulliparous and in a NONPOP reproductive condition.</p>
 <blockquote class="blockquote">
-<p><strong>NOTE:</strong> Not all females are, necessarily, ever seen in a particular parity or reproductive condition!</p>
+<p><strong>NOTE:</strong> Some females may not ever be seen both parity or reproductive conditions!</p>
 </blockquote>
 <section id="visualizing-model-results" class="level3" data-number="24.4.1">
 <h3 data-number="24.4.1" class="anchored" data-anchor-id="visualizing-model-results"><span class="header-section-number">24.4.1</span> Visualizing Model Results</h3>
-<p>As in earlier modules, we can use the <code>predictorEffect()</code> function from the {effects} package to visualize our mixed model results in terms of how the response variable is expected to differ across levels of each predictor variable when the other predictor and the random effect of <strong>subject</strong> are controlled for.</p>
+<p>As in earlier modules, we can use the <code>predictorEffects()</code> function from the {effects} package to visualize our mixed model results in terms of how the response variable is expected to differ across levels of each predictor variable when the other predictor and the random effect of <strong>subject</strong> are controlled for.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">predictorEffects</span>(m, <span class="at">partial.residuals =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -956,7 +956,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>We can also <code>plot_model()</code> to visualize estimates and confidence intervals for the fixed effect coefficients and for the random effects.</p>
+<p>We can also use <code>plot_model()</code> to visualize estimates and confidence intervals for the fixed effect coefficients and for the random effects.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">plot_model</span>(m, <span class="at">type =</span> <span class="st">"est"</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">plot_model</span>(m, <span class="at">type =</span> <span class="st">"re"</span>)</span>
@@ -1343,16 +1343,16 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m, <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">method =</span> <span class="st">"boot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##                           2.5 %    97.5 %
-## .sig01             0.000000e+00  20.06759
-## .sig02            -1.000000e+00   1.00000
-## .sig03             1.111503e-04  17.09399
-## .sig04             0.000000e+00  44.29257
-## .sig05            -1.000000e+00   0.00000
-## .sig06             9.853269e-05  43.03446
-## .sigma             2.365855e+01  32.53623
-## (Intercept)        1.022663e+02 161.70109
-## reproconditionPOP  7.792328e+00  33.78521
-## parityP            7.812055e+01 142.99880</code></pre>
+## .sig01             0.0000000000  23.09244
+## .sig02            -1.0000000000   1.00000
+## .sig03             0.0001431318  19.16187
+## .sig04             0.0000000000  39.02997
+## .sig05            -1.0000000000   0.00000
+## .sig06             0.0002255319  39.59155
+## .sigma            24.0178153427  32.57168
+## (Intercept)       97.7591071292 164.06676
+## reproconditionPOP  8.6733772590  32.71411
+## parityP           74.0972213462 147.82499</code></pre>
 </div>
 </div>
 <p>Finally, effects plots of how the expected amount of grooming received varies with the fixed effects (<strong>reprocondition</strong> and <strong>parity</strong>) under our new random slope model is the same as that under the random intercept model.</p>
@@ -2534,7 +2534,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb117-181"><a href="#cb117-181" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb117-182"><a href="#cb117-182" aria-hidden="true" tabindex="-1"></a>We will now perform an initial mixed effects analysis where we look in more detail at how reproductive condition and parity (as fixed effects) affect grooming duration, where we include individual subject ID as a random effect.</span>
 <span id="cb117-183"><a href="#cb117-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-184"><a href="#cb117-184" aria-hidden="true" tabindex="-1"></a>Here is a first mixed effects model that we will fit, using one extension of formula notation that is commonly used in ***R***.</span>
+<span id="cb117-184"><a href="#cb117-184" aria-hidden="true" tabindex="-1"></a>Here is a first mixed effects model that we will fit, using one extension of formula notation that is commonly used in ***R***:</span>
 <span id="cb117-185"><a href="#cb117-185" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb117-186"><a href="#cb117-186" aria-hidden="true" tabindex="-1"></a>$$grooming\ duration \sim reproductive\ condition + parity + (1|subject) + \epsilon$$</span>
 <span id="cb117-187"><a href="#cb117-187" aria-hidden="true" tabindex="-1"></a></span>
@@ -2544,7 +2544,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb117-191"><a href="#cb117-191" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb117-192"><a href="#cb117-192" aria-hidden="true" tabindex="-1"></a>The {lme4} package in **R** is commonly used for mixed effects modeling, and the function <span class="in">`lmer()`</span> is the mixed model equivalent of the function <span class="in">`lm()`</span>. In the formula syntax for mixed effects models using the {lme4} package, fixed effects are included without parentheses while random effects are included in parentheses (the error, $\epsilon$, is understood and is not included explicitly).</span>
 <span id="cb117-193"><a href="#cb117-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-194"><a href="#cb117-194" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** We could also use the package {nlme} for mixed effects modeling (which requires a slightly different formula syntax than that used here). That same package also allows us to do **nonlinear** mixed effects modeling, which we will not be talking about. It is important to note that {lme4} uses, by default, a slightly different parameter estimation algorithm than {nlme}. Unless otherwise specified, {lme4} uses "restricted maximum likelihood" (REML) rather than ordinary maximum likelihood estimation, which is what is used in {nlme}. In practice, these give very similar results. We will see below that when we want to compare different models using {lme4}, we will need to tell {lme4} to use ordinary maximum likelihood.</span></span>
+<span id="cb117-194"><a href="#cb117-194" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** We could also use the package {nlme} for mixed effects modeling (which requires a slightly different formula syntax than that used here). That same package also allows us to do **nonlinear** mixed effects modeling, which we will not be talking about. It is important to note that {lme4} uses, by default, a slightly different parameter estimation algorithm than {nlme}. Unless otherwise specified, {lme4} uses "restricted maximum likelihood" (REML) rather than ordinary maximum likelihood estimation, which is what is used in {nlme}. In practice, these often give very similar results. We will see below that when we want to compare different models using {lme4}, we will need to tell {lme4} to use ordinary maximum likelihood.</span></span>
 <span id="cb117-195"><a href="#cb117-195" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb117-196"><a href="#cb117-196" aria-hidden="true" tabindex="-1"></a>The code block below implements this first "mixed effects" model:</span>
 <span id="cb117-197"><a href="#cb117-197" aria-hidden="true" tabindex="-1"></a></span>
@@ -2557,7 +2557,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb117-206"><a href="#cb117-206" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span>
 <span id="cb117-207"><a href="#cb117-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb117-208"><a href="#cb117-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-209"><a href="#cb117-209" aria-hidden="true" tabindex="-1"></a>Let's focus on the output for the random effects first. Have a look at the column standard deviation. The entry for *subject* shows us how much variability in grooming duration (apart from that explained by the fixed effects) is due to subject ID. The entry for *Residual* summarizes the remaining variability in grooming duration that is not due to *subject* or to our fixed effects. The latter is our $\epsilon$, the "random" deviations from the predicted values that are not due to either subject or our fixed effects.</span>
+<span id="cb117-209"><a href="#cb117-209" aria-hidden="true" tabindex="-1"></a>Let's focus on the output for the random effects first. Have a look at the column **Std.Dev.**. The entry for *subject* shows us how much variability in grooming duration (apart from that explained by the fixed effects) is due to subject ID. The entry for *Residual* summarizes the remaining variability in grooming duration that is not due to *subject* or to our fixed effects. The latter is our $\epsilon$, the "random" deviations from the predicted values that are not due to either subject or our fixed effects.</span>
 <span id="cb117-210"><a href="#cb117-210" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb117-211"><a href="#cb117-211" aria-hidden="true" tabindex="-1"></a>The fixed effects output mirrors the coefficient tables that we have seen previously in our linear models that have focused only on fixed effects. The coefficient "reproconditionPOP" is the $\beta$ coefficient for the categorical effect of reproductive condition. The positive sign for the coefficient means that grooming duration is GREATER by 20.293 units for POP than for NONPOP females. Then, there is a standard error associated with this slope, and a t value, which is simply the estimate divided by the standard error.</span>
 <span id="cb117-212"><a href="#cb117-212" aria-hidden="true" tabindex="-1"></a></span>
@@ -2574,15 +2574,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb117-225"><a href="#cb117-225" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m, <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">method =</span> <span class="st">"boot"</span>)</span>
 <span id="cb117-226"><a href="#cb117-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb117-227"><a href="#cb117-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-228"><a href="#cb117-228" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE**: For the </span><span class="in">`confint()`</span><span class="at"> function, we can set </span><span class="in">`method =`</span><span class="at"> argument to "boot" (to generate a CI based on bootstrapping), "profile" (to generate a CI based on likelihoods), or "Wald" (which generates a CI for the fixed effects only). Also, in the output from running </span><span class="in">`confint()`</span><span class="at">, ".sigXX" is the square root of the variance associated with each of the random parameter levels and ".sigma" is the square root of the variance associated with the residuals of the model</span></span>
+<span id="cb117-228"><a href="#cb117-228" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE**: For the </span><span class="in">`confint()`</span><span class="at"> function, we can set </span><span class="in">`method =`</span><span class="at"> argument to "boot" (to generate a CI based on bootstrapping), "profile" (to generate a CI based on likelihoods), or "Wald" (which generates a CI for the fixed effects only). Also, in the output from running </span><span class="in">`confint()`</span><span class="at">, ".sigXX" is the square root of the variance associated with each of the random parameter levels and ".sigma" is the square root of the variance associated with the residuals of the model.</span></span>
 <span id="cb117-229"><a href="#cb117-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-230"><a href="#cb117-230" aria-hidden="true" tabindex="-1"></a>We can see the separate intercepts, or "baseline" level of grooming received, associated with each female when they are (presumably) nulliparous and in a NONPOP reproductive condition.</span>
+<span id="cb117-230"><a href="#cb117-230" aria-hidden="true" tabindex="-1"></a>We can see the separate intercepts, i.e., the "baseline" level of grooming received, for each female when they are (presumably) nulliparous and in a NONPOP reproductive condition.</span>
 <span id="cb117-231"><a href="#cb117-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-232"><a href="#cb117-232" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** Not all females are, necessarily, ever seen in a particular parity or reproductive condition!</span></span>
+<span id="cb117-232"><a href="#cb117-232" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** Some females may not ever be seen both parity or reproductive conditions!</span></span>
 <span id="cb117-233"><a href="#cb117-233" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb117-234"><a href="#cb117-234" aria-hidden="true" tabindex="-1"></a><span class="fu">### Visualizing Model Results</span></span>
 <span id="cb117-235"><a href="#cb117-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-236"><a href="#cb117-236" aria-hidden="true" tabindex="-1"></a>As in earlier modules, we can use the <span class="in">`predictorEffect()`</span> function from the {effects} package to visualize our mixed model results in terms of how the response variable is expected to differ across levels of each predictor variable when the other predictor and the random effect of **subject** are controlled for.</span>
+<span id="cb117-236"><a href="#cb117-236" aria-hidden="true" tabindex="-1"></a>As in earlier modules, we can use the <span class="in">`predictorEffects()`</span> function from the {effects} package to visualize our mixed model results in terms of how the response variable is expected to differ across levels of each predictor variable when the other predictor and the random effect of **subject** are controlled for.</span>
 <span id="cb117-237"><a href="#cb117-237" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb117-240"><a href="#cb117-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb117-241"><a href="#cb117-241" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">predictorEffects</span>(m, <span class="at">partial.residuals =</span> <span class="cn">TRUE</span>))</span>
@@ -2596,7 +2596,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb117-251"><a href="#cb117-251" aria-hidden="true" tabindex="-1"></a>cowplot<span class="sc">::</span><span class="fu">plot_grid</span>(p1, p2, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
 <span id="cb117-252"><a href="#cb117-252" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb117-253"><a href="#cb117-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb117-254"><a href="#cb117-254" aria-hidden="true" tabindex="-1"></a>We can also <span class="in">`plot_model()`</span> to visualize estimates and confidence intervals for the fixed effect coefficients and for the random effects.</span>
+<span id="cb117-254"><a href="#cb117-254" aria-hidden="true" tabindex="-1"></a>We can also use <span class="in">`plot_model()`</span> to visualize estimates and confidence intervals for the fixed effect coefficients and for the random effects.</span>
 <span id="cb117-255"><a href="#cb117-255" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb117-258"><a href="#cb117-258" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb117-259"><a href="#cb117-259" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">plot_model</span>(m, <span class="at">type =</span> <span class="st">"est"</span>)</span>
