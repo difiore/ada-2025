@@ -1,5 +1,4 @@
-# Model Selection
-
+# model selection
 library(tidyverse)
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
 
@@ -41,8 +40,6 @@ m5 <- lm(data = d_new, logBeak ~ 1) # intercept only model
 anova(m2, m1, test = "F")
 anova(m3, m2, test = "F")
 anova(m4, m2, test = "F")
-
-
 
 d_new <- drop_na(d, any_of(c("logRS", "Migration", "relTarsus", "Migration", "Trophic.Level", "Primary.Lifestyle")))
 
@@ -104,15 +101,14 @@ m.avg
 m.avg <- summary(model.avg(mods, subset = cumsum(weight) <= 0.99, fit = TRUE)) # subset specifies which models to average coefficients for
 m.avg
 
-# Print nice table of select models
+# print nice table of select models
 models <- list(m_full, m2, m3, m4, m5, m6, m7, m_null)
-#specify model names
+# specify model names
 mod.names <- c("full", "m2", "m3", "m4", "m5", "m6",  "m7", "m_null")
 aictab(models, mod.names)
 
 library(naniar)
 library(skimr)
-library(tidyverse)
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/Mammal_lifehistories_v2.txt"
 d <- read_tsv(f, col_names = TRUE)
 d <- d |>
@@ -142,24 +138,22 @@ d <- d |> mutate(
   relMaxLife = residuals(relMaxLife),
   relAFR = residuals(relAFR))
 
-p <- ggplot(data = d, aes(x=order, y = relMaxLife)) +
-  geom_boxplot() +
-  theme(axis.text.x = element_text(angle = 45, hjust=1))
+skim(d)
 
-p <- ggplot(data = d, aes(x=order, y = relNewbornMass)) +
+(p <- ggplot(data = d, aes(x=order, y = relMaxLife)) +
   geom_boxplot() +
-  theme(axis.text.x = element_text(angle = 45, hjust=1))
+  theme(axis.text.x = element_text(angle = 45, hjust=1)))
 
-p <- ggplot(data = d, aes(x=order, y = relWeaningMass)) +
+(p <- ggplot(data = d, aes(x=order, y = relNewbornMass)) +
   geom_boxplot() +
-  theme(axis.text.x = element_text(angle = 45, hjust=1))
+  theme(axis.text.x = element_text(angle = 45, hjust=1)))
 
-p
+(p <- ggplot(data = d, aes(x=order, y = relWeaningMass)) +
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust=1)))
 
 d_new <- d |> drop_na(relGestation, relNewbornMass, relWeaningMass, `litters/year`, logMass)
 m_full <- lm(relMaxLife ~ relGestation + relNewbornMass + relWeaningMass + `litters/year` + logMass, data = d_new)
 summary(m_full)
 
-library(skimr)
-skim(d)
 hist(relMaxLife$residuals)

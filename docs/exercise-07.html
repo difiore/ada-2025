@@ -430,6 +430,12 @@ window.Quarto = {
  <span class="menu-text">Building Interactive Web Apps</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-using-packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working with and Managing Packages</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -878,7 +884,7 @@ window.Quarto = {
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 1.966759</code></pre>
+<pre><code>## [1] 1.6707</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># close to, but not the same, as the population mean</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(x))</span>
@@ -954,23 +960,23 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">ci.boot.quantiles</td>
-<td style="text-align: right;">1.471</td>
-<td style="text-align: right;">2.490</td>
+<td style="text-align: right;">1.011</td>
+<td style="text-align: right;">2.254</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ci.boot.theory</td>
-<td style="text-align: right;">1.455</td>
-<td style="text-align: right;">2.478</td>
+<td style="text-align: right;">1.041</td>
+<td style="text-align: right;">2.301</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ci.norm.theory</td>
-<td style="text-align: right;">1.428</td>
-<td style="text-align: right;">2.506</td>
+<td style="text-align: right;">1.007</td>
+<td style="text-align: right;">2.334</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ci.t.theory</td>
-<td style="text-align: right;">1.345</td>
-<td style="text-align: right;">2.589</td>
+<td style="text-align: right;">0.905</td>
+<td style="text-align: right;">2.436</td>
 </tr>
 </tbody>
 </table>

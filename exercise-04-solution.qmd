@@ -68,12 +68,12 @@ play_wordle <- function(solution, valid_list, num_guesses = 6, output_type = "te
     # display "keyboard"
     print(paste0(c("Letters left: ", letters_left), collapse = " "))
     # read in guess and confirm length and validity
-    guess <- readline(paste0("Enter guess ", i, ": ")) %>% toupper()
+    guess <- readline(paste0("Enter guess ", i, ": ")) |> toupper()
     while (nchar(guess) != word_length) {
-      guess <- readline(paste0("Guess must have ", word_length, " characters. Enter guess ", i, " again : " )) %>% toupper()
+      guess <- readline(paste0("Guess must have ", word_length, " characters. Enter guess ", i, " again : " )) |> toupper()
     }
     while (guess %nin% valid_list){
-      guess <- readline(paste0("Hmm, that word is not in my dictionary of valid words. Enter guess ", i, " again: ")) %>% toupper()
+      guess <- readline(paste0("Hmm, that word is not in my dictionary of valid words. Enter guess ", i, " again: ")) |> toupper()
     }
     guess <- str_split(guess, "")[[1]]
     # print(guess) # check output
@@ -90,11 +90,11 @@ play_wordle <- function(solution, valid_list, num_guesses = 6, output_type = "te
 
     if (output_type == "text") { ## THIS LINE CAN BE CUT IF GRAPHIC OUTPUT NOT NEEDED
       if (all(result == "*")) {
-        guess_history <- guess_history %>% na.omit()
-        result_history <- result_history %>% na.omit()
+        guess_history <- guess_history |> na.omit()
+        result_history <- result_history |> na.omit()
         print(paste0("You won in ", i, " guesses!"))
-        guess_history <- guess_history %>% unite(everything(), sep="", col="guess", remove=TRUE)
-        result_history <- result_history %>% unite(everything(), sep="", col="result", remove=TRUE)
+        guess_history <- guess_history |> unite(everything(), sep="", col="guess", remove=TRUE)
+        result_history <- result_history |> unite(everything(), sep="", col="result", remove=TRUE)
         history <- data.frame(
           guess = guess_history,
           result = result_history)
@@ -111,7 +111,7 @@ play_wordle <- function(solution, valid_list, num_guesses = 6, output_type = "te
     ## THIS WHOLE `if() {} else {}` BLOCK BELOW CAN BE CUT IF GRAPHIC OUTPUT IS NOT NEEDED
     if (output_type == "graphic") {
       if (all(background_color(result) == "#6BA964")) {
-        history <- result_history %>% na.omit()
+        history <- result_history |> na.omit()
         print(paste0("You won in ", i, " guesses!"))
         print(history, colnames = FALSE)
         return(invisible(history))
@@ -125,8 +125,8 @@ play_wordle <- function(solution, valid_list, num_guesses = 6, output_type = "te
   print(paste0("Sorry, you lost! Solution was ", paste0(solution, collapse = "")))
 
   if (output_type == "text"){ ## ## THIS LINE CAN BE CUT IF GRAPHIC OUTPUT NOT NEEDED 
-    guess_history <- guess_history %>% unite(everything(), sep="", col="guess", remove=TRUE)
-    result_history <- result_history %>% unite(everything(), sep="", col="result", remove=TRUE)
+    guess_history <- guess_history |> unite(everything(), sep="", col="guess", remove=TRUE)
+    result_history <- result_history |> unite(everything(), sep="", col="result", remove=TRUE)
     history <- data.frame(
       guess = guess_history,
       result = result_history)
@@ -156,9 +156,9 @@ evaluate_guess <- function(guess, solution, output_type) {
   text_result <- rep("-", word_length)
   # the next lines are an ugly hack to deal with repeat letters...
   # we first find the number of times letters in the guess appear in the solution because we will need to clear "extra" ones away
-  guess_count <- tibble(letter = guess) %>% group_by(letter) %>% summarize(n_in_guess = n())
-  solution_count <- tibble(letter = solution) %>% group_by(letter) %>% summarize(n_in_solution = n())
-  counts <- inner_join(guess_count, solution_count, by = "letter") %>% mutate(to_clear = n_in_guess - n_in_solution) %>% filter(to_clear > 0) %>% select(letter, to_clear)
+  guess_count <- tibble(letter = guess) |> group_by(letter) |> summarize(n_in_guess = n())
+  solution_count <- tibble(letter = solution) |> group_by(letter) |> summarize(n_in_solution = n())
+  counts <- inner_join(guess_count, solution_count, by = "letter") |> mutate(to_clear = n_in_guess - n_in_solution) |> filter(to_clear > 0) |> select(letter, to_clear)
 
   for (i in 1:word_length){
     # these `case_when()` lines are the workhorse of the function...
@@ -184,15 +184,15 @@ evaluate_guess <- function(guess, solution, output_type) {
   }
 
   # format for graphic output
-  graphic_result <- t(data.frame(guess)) %>%
-     as_huxtable() %>%
-     theme_bright()%>%
-     set_all_padding(10) %>%
-     set_text_color("#FFFFFF") %>%
-     set_align("center") %>%
-     set_bold(TRUE) %>%
-     set_all_borders(brdr(4, "solid", "white")) %>%
-     set_font("arial") %>%
+  graphic_result <- t(data.frame(guess)) |>
+     as_huxtable() |>
+     theme_bright() |>
+     set_all_padding(10) |>
+     set_text_color("#FFFFFF") |>
+     set_align("center") |>
+     set_bold(TRUE) |>
+     set_all_borders(brdr(4, "solid", "white")) |>
+     set_font("arial") |>
      set_font_size(18)
   for (i in 1:word_length){
      graphic_result <- set_background_color(
@@ -261,12 +261,12 @@ play_wordle <- function(solution, valid_list, num_guesses = 6) {
     # display "keyboard"
     print(paste0(c("Letters left: ", letters_left), collapse = " "))
     # read in guess and confirm length and validity
-    guess <- readline(paste0("Enter guess ", i, ": ")) %>% toupper()
+    guess <- readline(paste0("Enter guess ", i, ": ")) |> toupper()
     while (nchar(guess) != word_length) {
-      guess <- readline(paste0("Guess must have ", word_length, " characters. Enter guess ", i, " again : " )) %>% toupper()
+      guess <- readline(paste0("Guess must have ", word_length, " characters. Enter guess ", i, " again : " )) |> toupper()
     }
     while (guess %nin% valid_list){
-      guess <- readline(paste0("Hmm, that word is not in my dictionary of valid words. Enter guess ", i, " again: ")) %>% toupper()
+      guess <- readline(paste0("Hmm, that word is not in my dictionary of valid words. Enter guess ", i, " again: ")) |> toupper()
     }
     guess <- str_split(guess, "")[[1]]
     # print(guess) # check output
@@ -282,11 +282,11 @@ play_wordle <- function(solution, valid_list, num_guesses = 6) {
     result_history[i,] <- result
 
     if (all(result == "*")) {
-      guess_history <- guess_history %>% na.omit()
-      result_history <- result_history %>% na.omit()
+      guess_history <- guess_history |> na.omit()
+      result_history <- result_history |> na.omit()
       print(paste0("You won in ", i, " guesses!"))
-      guess_history <- guess_history %>% unite(everything(), sep="", col="guess", remove=TRUE)
-      result_history <- result_history %>% unite(everything(), sep="", col="result", remove=TRUE)
+      guess_history <- guess_history |> unite(everything(), sep="", col="guess", remove=TRUE)
+      result_history <- result_history |> unite(everything(), sep="", col="result", remove=TRUE)
       history <- data.frame(
         guess = guess_history,
         result = result_history)
@@ -302,8 +302,8 @@ play_wordle <- function(solution, valid_list, num_guesses = 6) {
   }
   print(paste0("Sorry, you lost! Solution was ", paste0(solution, collapse = "")))
 
-  guess_history <- guess_history %>% unite(everything(), sep="", col="guess", remove=TRUE)
-  result_history <- result_history %>% unite(everything(), sep="", col="result", remove=TRUE)
+  guess_history <- guess_history |> unite(everything(), sep="", col="guess", remove=TRUE)
+  result_history <- result_history |> unite(everything(), sep="", col="result", remove=TRUE)
   history <- data.frame(guess = guess_history,
       result = result_history)
   print(history)
@@ -316,17 +316,17 @@ evaluate_guess <- function(guess, solution) {
   text_result <- rep("-", word_length)
   # the next lines are an ugly hack to deal with repeat letters...
   # we first find the number of times letters in the guess appear in the solution because we will need to clear "extra" ones away
-  guess_count <- tibble(letter = guess) %>%
-    group_by(letter) %>%
+  guess_count <- tibble(letter = guess) |>
+    group_by(letter) |>
     summarize(n_in_guess = n())
-  solution_count <- tibble(letter = solution) %>%
-    group_by(letter) %>%
+  solution_count <- tibble(letter = solution) |>
+    group_by(letter) |>
     summarize(n_in_solution = n())
   counts <- inner_join(
     guess_count,
-    solution_count, by = "letter") %>%
-    mutate(to_clear = n_in_guess - n_in_solution) %>%
-    filter(to_clear > 0) %>%
+    solution_count, by = "letter") |>
+    mutate(to_clear = n_in_guess - n_in_solution) |>
+    filter(to_clear > 0) |>
     select(letter, to_clear)
 
   for (i in 1:word_length){

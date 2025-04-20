@@ -70,7 +70,9 @@ knitr::include_graphics("img/significant_final.png")
 
 ## Parametric Hypothesis Testing
 
-In traditional **parametric** statistics, we make the assumption that the sampling distribution of our statistic of interest (e.g., a mean) takes the form of a particular well-understood mathematical distribution (e.g., the normal), and we calculate a test statistic that basically summarizes the "location" of a summary statistic about our data relative to that implied, theoretical sampling distribution. The particular value of our test statistic is determined by both the **difference between the original sample statistic and the expected null value** (e.g., the difference between the mean of our sample and the expected population mean) and the **standard error of the sample statistic**. The value of our test statistic (i.e., the "distance" of that test statistic from what is expected) and the shape of the presumed sampling distribution for that statistic are the sole drivers of the smallness of the **p value**. The **p value** effectively represents the area under the sampling distribution associated with test statistic values **as or more extreme** than the one we observed.
+In traditional **parametric** statistics, we make the assumption that the sampling distribution of our statistic of interest (e.g., a mean) takes the form of a particular well-understood mathematical distribution (e.g., the normal), and we calculate a test statistic that basically summarizes the "location" of a summary statistic about our data relative to that implied, theoretical sampling distribution.
+
+The particular value of our test statistic is determined by both the **difference between the original sample statistic and the expected null value** (e.g., the difference between the mean of our sample and the expected population mean) and the **standard error of the sample statistic**. The value of our test statistic (i.e., the "distance" of that test statistic from what is expected) and the shape of the presumed sampling distribution for that statistic are the sole drivers of the smallness of the **p value**. The **p value** effectively represents the area under the sampling distribution associated with test statistic values **as or more extreme** than the one we observed.
 
 How do we calculate the **p value** for a parametric test?
 
@@ -79,6 +81,16 @@ How do we calculate the **p value** for a parametric test?
 - Specify the test statistic of interest and the form of the sampling distribution for that statistic (e.g., $Z$ or $T$ and a *standard normal* or *T* distribution).
 
 - Calculate the *tail probability*, i.e., the probability of obtaining a statistic (e.g., a mean) as or more extreme than was observed assuming that null distribution.
+
+### Important Comments on P Values
+
+- The **p value** is simply the probability of seeing some descriptive statistic (mean, median, regression coefficient, whatever) given the data you have and *given particular assumptions you make about the model generating the data*! The **p value** says nothing about effect size, biological meaning, or the accuracy of the model.
+
+- Statistical "significance", i.e., if some statistic you calculate has a low **p value**, does NOT mean the effect is strong is or biologically important!
+
+- There is no problem with *reporting* **p values**... but using **p values** as line for dichotomously classifying results into "significant" versus "not significant" (or for interpreting results in this way) **is** problematic and not good statistical practice!
+
+- Finally, it is  valuable, I believe, to contrast **p values** as estimated via the classical/Fisherian frequentist approaches where the "model" generating the data is one that is reasonably approximated by some well-characterized mathematical distribution (Gaussian, binomial, etc.) versus **p values** estimated based on permutation/resampling from the particular data we have collected (see [**Module 16**](#module-16). That latter approach is much more relevant for the situation that many of us in this class face, where we often do not have a good idea about what the data-generating model or the resultant distribution of the data is likely to be.
 
 ### Working with Means {.unnumbered}
 
@@ -721,7 +733,7 @@ Her netting success over the previous three seasons suggests that she should cat
 #| code-fold: true
 #| code-summary: "Show Code"
 #| attr.output: '.details summary="Show Output"'
-phat <- mean(v) # the mean of 0,1 variables yields the proportion!
+phat <- mean(v) # the mean of binomial 0,1 variables yields the proportion!
 phat
 pi <- 0.80
 n <- 30

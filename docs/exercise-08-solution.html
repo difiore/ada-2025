@@ -430,6 +430,12 @@ window.Quarto = {
  <span class="menu-text">Building Interactive Web Apps</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-using-packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working with and Managing Packages</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -1227,7 +1233,7 @@ window.Quarto = {
 </div>
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>(p.theory <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="fu">abs</span>(b1)<span class="sc">/</span>perm.se, <span class="at">df =</span> df, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 4.459691e-09</code></pre>
+<pre><code>## [1] 4.233342e-09</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the t statistic used in `pt()` to calculate the p values is `b1/se_b1`, where</span></span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="co"># `se_b1` is estimated as the standard deviation of the permutation</span></span>
@@ -1289,7 +1295,7 @@ window.Quarto = {
 <span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a>(CI.quantile <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">quantile</span>(boot.slope<span class="sc">$</span>stat, p.lower), <span class="fu">quantile</span>(boot.slope<span class="sc">$</span>stat, p.upper)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##     2.5%    97.5% 
-## 1.498257 3.261161</code></pre>
+## 1.535125 3.308821</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or...</span></span>
 <span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>(CI.quantile <span class="ot">&lt;-</span> <span class="fu">get_ci</span>(boot.slope, <span class="at">level =</span> <span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">type =</span> <span class="st">"percentile"</span>, <span class="at">point_estimate =</span> b1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1297,11 +1303,11 @@ window.Quarto = {
 <pre><code>## # A tibble: 1 × 2
 ##   lower_ci upper_ci
 ##      &lt;dbl&gt;    &lt;dbl&gt;
-## 1     1.50     3.26</code></pre>
+## 1     1.54     3.31</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>(CI.theory <span class="ot">&lt;-</span> b1 <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">qt</span>(p.upper, <span class="at">df =</span> df) <span class="sc">*</span> <span class="fu">sd</span>(boot.slope<span class="sc">$</span>stat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 1.567594 3.358549</code></pre>
+<pre><code>## [1] 1.573079 3.353064</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or...</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>(CI.theory <span class="ot">&lt;-</span> <span class="fu">get_ci</span>(boot.slope, <span class="at">level =</span> <span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">type =</span> <span class="st">"se"</span>, <span class="at">point_estimate =</span> b1))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1309,7 +1315,7 @@ window.Quarto = {
 <pre><code>## # A tibble: 1 × 2
 ##   lower_ci upper_ci
 ##      &lt;dbl&gt;    &lt;dbl&gt;
-## 1     1.57     3.35</code></pre>
+## 1     1.58     3.35</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note... the CI_theory values calculated with `get_ci()` differ very slightly</span></span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="co"># from those calculated by hand because {infer} seems to be using upper/lower</span></span>

@@ -7,8 +7,12 @@
 ## Preliminaries
 
 - Install and load these packages in ***R***: [{lme4}](https://cran.r-project.org/web/packages/lme4/lme4.pdf),
-[{redres}](https://cran.r-project.org/web/packages/redres/redres.pdf), and [{glmmTMB}](https://cran.r-project.org/web/packages/glmmTMB/glmmTMB.pdf)
-- Load {tidyverse}, {sjPlot}, and {effects}
+[{redres}](https://cran.r-project.org/web/packages/redres/redres.pdf),
+[{glmmTMB}](https://cran.r-project.org/web/packages/glmmTMB/glmmTMB.pdf), 
+[{sjPlot}](https://cran.r-project.org/web/packages/sjPlot/sjPlot.pdf),
+and
+[{mixedup}](https://github.com/m-clark/mixedup/)
+- Load {tidyverse} and {effects}
 - Be sure you have the packages {car}, {cowplot}, {lmtest}, and {MASS} installed
 
 ```{r}
@@ -213,7 +217,7 @@ We can see the separate intercepts, or "baseline" level of grooming received, as
 
 ### Visualizing Model Results
 
-As in earlier modules, we can use the `predictorEffect()` function from the {effects} to visualize our mixed model results in terms of how the response variable is expected to differ across levels of each predictor variable when the other predictor and the random effect of **subject** are controlled for.
+As in earlier modules, we can use the `predictorEffect()` function from the {effects} package to visualize our mixed model results in terms of how the response variable is expected to differ across levels of each predictor variable when the other predictor and the random effect of **subject** are controlled for.
 
 ```{r}
 plot(predictorEffects(m, partial.residuals = TRUE))
@@ -597,18 +601,24 @@ head(d)
 
 #### Step 2 {.unnumbered}
 
-- Create a new random variable to joins together the variables **zoo** and **trial**. This will be used as a random effect.
-- Create a new random variable that is simply an observation number or ID. This will also be used as a random effect.
-- Rename the variable **TotalSharebothharasspro** as **Shared**
-- Rename the variable **begreceived** as **BegReceived**
+- Create a new random variable, **trial**, that joins together the variables **zoo** and **trialorder**. This will be used as a random effect.
+- Create a new random variable, **obs**, that is simply an observation number. This will also be used as a random effect.
+
+> **HINT:** Check out the useful function `row_to_column_id()`
+
+- Rename the variable **TotalSharebothharasspro** as **Shared**.
+- Rename the variable **begreceived** as **BegRec**.
 
 ```{r}
 #| code-fold: true
 #| code-summary: "Show Code"
 #| attr.output: '.details summary="Show Output"'
-d <- d |> mutate(trial = paste0(zoo, trialorder))
+d <- d |>
+  mutate(trial = paste0(zoo, trialorder))
 d <- rowid_to_column(d, var = "obs")
-d <- d |> rename(Shared = TotalSharebothharasspro, BegRec = begreceived)
+d <- d |>
+  rename(Shared = TotalSharebothharasspro,
+         BegRec = begreceived)
 ```
 
 #### Step 3 {.unnumbered}
@@ -634,10 +644,10 @@ To test this, the researchers used a GLMM with Poisson error distribution to exa
 
 We also need to consider that the response variable, **Shared**, is implicitly expressed as a *rate*, i.e., it represents a count of the number of events that occured in over a particular length of time (the variable, **trial duration**). This allows the observation time to vary among records in the dataset. Our regression model, then, needs to contain time on the right-hand side of the regression formula in some way to acknowledge that counts are in some way dependent on the time over which they are collected (i.e., counts are expected to only increase with time).
 
-Additionally, recall that, in Poisson regression, given that our response variable is a *count*, what we are actually modeling as a function of our predictors is *log(response)*... so we need to include *log(time)* as what known as an *offset term* on the right-hand side of the formula. In ***R***, we use the function `offset()` to indicate this in our regression formula. The offset term is, essentially, modeled an additional fixed effect though we will not generate a coefficient for it.
+Additionally, recall that, in Poisson regression, given that our response variable is a *count* of events that occur within a given amount of time, what we are actually modeling as a function of our predictors is *log(count)*... so we need to include *log(time)* as what known as an *offset term* on the right-hand side of the formula. In ***R***, we use the function `offset()` to indicate this in our regression formula. The offset term is, essentially, modeled an additional fixed effect though we will not generate a coefficient for it.
 
 $$log(count) \sim offset(log(time))\ +\ ...\ other\ predictors$$
-Finally, the researchers included three random effects in their model: otter ID, trial, and an observation-level random effect.
+Finally, the researchers included three random effects in their model: otter ID, trial, and an observation-level random effect. The first of these appears in the author's data frame, and latter two are our variables **trial** and **obs**.
 
 > **NOTE**: To me, it makes little sense to include the third of these random effects as there is no variance associated with this term, but to replicate the researchers' model, we include it.
 
@@ -653,7 +663,7 @@ m1 <- glmer(
     (1|trial) +
     (1|obs),
   data = d,
-  family = poisson(link = log))
+  family = poisson(link = "log"))
 summary(m1)
 
 m2 <- glmer(
@@ -673,7 +683,7 @@ lmtest::lrtest(m1, m2)
 
 Looking at these results, we would conclude that the model with **BegRec** has a lower AIC, higher log likelihood, lower deviance than the model without **BegRec**, thus variance in the food sharing is associated with the amount of begging received. The coefficent for **BegRec** (~0.09) is positive, indicating that sharing increases with the amount of begging received.
 
-Again, the {mixedup} package allows us to cleanly extract summary information from mixed effects models.
+Again, the {mixedup} package allows us to neatly extract summary information from mixed effects models.
 
 ```{r}
 #| warning: false
@@ -695,7 +705,8 @@ m3 <- glmmTMB(
     (1|obs),
   data = d,
   family = poisson(link = "log"))
-summary(m3)
+
+mixedup::summarise_model(m3)
 
 m4 <- glmmTMB(
   Shared ~
@@ -747,4 +758,4 @@ detach(package:tidyverse)
 - Though we do not address it in this class, regression modeling can be extended further to consider NONLINEAR relationships among predictor variables
   - The ***R*** packages {lme4} and {nlme} include functions for performing for "nonlinear mixed effects modeling"
 
-The website [Mixed Models with R](https://m-clark.github.io/mixed-models-with-R/) is another good resource for information about mixed effects modeling.
+The website [Mixed Models with R](https://m-clark.github.io/mixed-models-with-R/) is great resource for information about mixed effects modeling.

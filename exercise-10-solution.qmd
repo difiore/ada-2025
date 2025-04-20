@@ -11,7 +11,7 @@ library(cowplot)
 library(broom)
 library(infer)
 library(mosaic)
-library(ggpubr)
+library(ggpubr) # for ggqqplot()
 
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/AVONETdataset1.csv"
 d <- read_csv(f, col_names = TRUE)

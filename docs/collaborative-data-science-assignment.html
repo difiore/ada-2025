@@ -399,6 +399,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Building Interactive Web Apps</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./99-using-packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Working with and Managing Packages</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -604,7 +610,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="objectives" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="objectives">Objectives</h2>
-<p>The objective of this assignment is to work with one of your classmates over the final weeks of the class to complete your choice of <strong>one</strong> of the following two options:</p>
+<p>The objective of this assignment is to work with one or two of your classmates over the final weeks of the class to complete your choice of <strong>one</strong> of the following options:</p>
 <section id="a-methods-exploration-project" class="level3">
 <h3 class="anchored" data-anchor-id="a-methods-exploration-project">A “Methods Exploration” Project</h3>
 <ul>
@@ -642,19 +648,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="what-to-do" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="what-to-do">What to Do</h2>
-<p>You and your partner will work together to develop a short (roughly 10-15 minute) presentation and associated HTML “vignette” that can be rendered from a “.qmd” or “.Rmd” document). Depending on which type of project you are doing, your vignette will first provide background on the <em>statistical method/topic/data visualization procedures</em> that you have chosen to explore, or on the <em>dataset and theory that you are exploring with your own data</em>. It should then take the user through a set of analyses either demonstrating the method being explored or applying approaches we have learned in class to your own data. Your module should be organized similarly to those that I have prepared for various other topics this semester, though need not be as long. The presentation can either be done from the module itself or as a PowerPoint/Keynote/Google Slides/R presentation/whatever slideshow.</p>
+<p>You and your groupmates will work together to develop a short (roughly 10-15 minute) but reasonably comprehensive presentation and associated HTML “vignette” that can be rendered from a “.qmd” or “.Rmd” document). Depending on which type of project you are doing, your vignette will <strong>provide background</strong> on the <em>statistical method/topic/data visualization procedures</em> that you have chosen to explore or on the <em>dataset and theory that you are exploring with your own data</em>. It should then take the user through a set of analyses either demonstrating the method being explored or applying approaches we have learned in class to your own data. Your module should be organized similarly to those that I have prepared for various other topics this semester, though need not be as long.</p>
+<p>The presentation can either be done from the module itself or as a PowerPoint/Keynote/Google Slides/R presentation/whatever slideshow.</p>
 <p>Thus, all groups will need to produce a “.qmd” or “.Rmd” file that will be the basis for a module <em>vignette</em> that you build and will bundle into a custom <strong><em>R</em></strong> package. Besides the vignette, your package should also bundle at least some of the data you are working with into one or more included <em>datasets</em> and should also bundle code for least two <em>functions</em> that are called in the vignette. The functions you include can be custom functions that you create, but it is also perfectly fine to use functions that you have copied from other packages and include into your own package. <strong>The important thing is that you are bundling them together with your dataset and vignette for easy distribution.</strong> You will want to create your own documentation for each function, as discussed in the <strong>Miscellany</strong> module on <a href="https://difiore.github.io/ada-2025/99-r-packages.html">Building Custom <strong><em>R</em></strong> Packages</a>. One of the main objectives for this exercise is to give you experience with tools for distributing shared data and code to other researchers <em>and</em> pull the curtain back a bit on just what producing an <strong><em>R</em></strong> package entails.</p>
 <p>Please be sure to divide up the work with your partner so that each of you are contributing more-or-less equally!</p>
 </section>
 <section id="what-to-turn-in" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="what-to-turn-in">What to Turn In</h2>
-<p>You will collectively take the class through your module during our final class periods. We will aim for 10 or 11 presentations total of ~15 minutes each with time for questions.</p>
+<p>You will collectively take the class through your presentation/module during our meeting final class meeting period. We will aim for 7-8 presentations total of ~15 minutes each with time for questions. I will record these video presentations and share them via the Canvas site.</p>
 <p>Your group’s work also should result in a custom <strong>R package</strong> that can be shared as a single file and loaded into an <strong><em>R</em></strong> workspace (e.g., using the <code>install.packages()</code> function. As noted above, that package should combine the following:</p>
 <ul>
-<li>A set of functions and associated function documentation appropriate to the topic you have chosen.</li>
-<li>One or more relevant datasets (either data you have simulated or, preferably, real data), that you use in a module vignette about your chosen topic,</li>
-<li>A vignette that walks users through demonstrations of relevant analyses,</li>
-<li>Appropriate METADATA for your package (e.g., information on dependencies, etc.),</li>
+<li>A <strong>set of functions and associated function documentation</strong> appropriate to the topic you have chosen.</li>
+<li>One or more relevant <strong>datasets</strong> (either data you have simulated or, preferably, real data), that you use in a module vignette about your chosen topic,</li>
+<li>A <strong>vignette</strong> that walks users through demonstrations of relevant analyses,</li>
+<li>Appropriate <strong>METADATA</strong> for your package (e.g., information on dependencies, etc.),</li>
 </ul>
 <blockquote class="blockquote">
 <p><strong>NOTE:</strong> The <strong>Miscellany</strong> module on <a href="https://difiore.github.io/ada-2025/99-r-packages.html">Building Custom <strong><em>R</em></strong> Packages</a> takes the user through all of the step of package development, so use it as a resource! We will work through this module during our one of our last class period.</p>
@@ -1124,7 +1131,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objectives {.unnumbered}</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>The objective of this assignment is to work with one of your classmates over the final weeks of the class to complete your choice of **one** of the following two options:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>The objective of this assignment is to work with one or two of your classmates over the final weeks of the class to complete your choice of **one** of the following options:</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">### A "Methods Exploration" Project</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
@@ -1160,28 +1167,30 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## What to Do {.unnumbered}</span></span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>You and your partner will work together to develop a short (roughly 10-15 minute) presentation and associated HTML "vignette" that can be rendered from a ".qmd" or ".Rmd" document). Depending on which type of project you are doing, your vignette will first provide background on the *statistical method/topic/data visualization procedures* that you have chosen to explore, or on the *dataset and theory that you are exploring with your own data*. It should then take the user through a set of analyses either demonstrating the method being explored or applying approaches we have learned in class to your own data. Your module should be organized similarly to those that I have prepared for various other topics this semester, though need not be as long. The presentation can either be done from the module itself or as a PowerPoint/Keynote/Google Slides/R presentation/whatever slideshow.</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>You and your groupmates will work together to develop a short (roughly 10-15 minute) but reasonably comprehensive presentation and associated HTML "vignette" that can be rendered from a ".qmd" or ".Rmd" document). Depending on which type of project you are doing, your vignette will **provide background** on the *statistical method/topic/data visualization procedures* that you have chosen to explore or on the *dataset and theory that you are exploring with your own data*. It should then take the user through a set of analyses either demonstrating the method being explored or applying approaches we have learned in class to your own data. Your module should be organized similarly to those that I have prepared for various other topics this semester, though need not be as long.</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>Thus, all groups will need to produce a ".qmd" or ".Rmd" file that will be the basis for a module *vignette* that you build and will bundle into a custom ***R*** package. Besides the vignette, your package should also bundle at least some of the data you are working with into one or more included *datasets* and should also bundle code for least two *functions* that are called in the vignette. The functions you include can be custom functions that you create, but it is also perfectly fine to use functions that you have copied from other packages and include into your own package. **The important thing is that you are bundling them together with your dataset and vignette for easy distribution.** You will want to create your own documentation for each function, as discussed in the **Miscellany** module on [Building Custom ***R*** Packages](https://difiore.github.io/ada-2025/99-r-packages.html). One of the main objectives for this exercise is to give you experience with tools for distributing shared data and code to other researchers *and* pull the curtain back a bit on just what producing an ***R*** package entails.</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>The presentation can either be done from the module itself or as a PowerPoint/Keynote/Google Slides/R presentation/whatever slideshow.</span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>Please be sure to divide up the work with your partner so that each of you are contributing more-or-less equally!</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>Thus, all groups will need to produce a ".qmd" or ".Rmd" file that will be the basis for a module *vignette* that you build and will bundle into a custom ***R*** package. Besides the vignette, your package should also bundle at least some of the data you are working with into one or more included *datasets* and should also bundle code for least two *functions* that are called in the vignette. The functions you include can be custom functions that you create, but it is also perfectly fine to use functions that you have copied from other packages and include into your own package. **The important thing is that you are bundling them together with your dataset and vignette for easy distribution.** You will want to create your own documentation for each function, as discussed in the **Miscellany** module on [Building Custom ***R*** Packages](https://difiore.github.io/ada-2025/99-r-packages.html). One of the main objectives for this exercise is to give you experience with tools for distributing shared data and code to other researchers *and* pull the curtain back a bit on just what producing an ***R*** package entails.</span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## What to Turn In {.unnumbered}</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>Please be sure to divide up the work with your partner so that each of you are contributing more-or-less equally!</span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>You will collectively take the class through your module during our final class periods. We will aim for 10 or 11 presentations total of ~15 minutes each with time for questions.</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## What to Turn In {.unnumbered}</span></span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>Your group's work also should result in a custom **R package** that can be shared as a single file and loaded into an ***R*** workspace (e.g., using the <span class="in">`install.packages()`</span> function. As noted above, that package should combine the following:</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>You will collectively take the class through your presentation/module during our meeting final class meeting period. We will aim for 7-8 presentations total of ~15 minutes each with time for questions. I will record these video presentations and share them via the Canvas site.</span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A set of functions and associated function documentation appropriate to the topic you have chosen.</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>One or more relevant datasets (either data you have simulated or, preferably, real data), that you use in a module vignette about your chosen topic,</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A vignette that walks users through demonstrations of relevant analyses,</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Appropriate METADATA for your package (e.g., information on dependencies, etc.),</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** The **Miscellany** module on [Building Custom ***R*** Packages](https://difiore.github.io/ada-2025/99-r-packages.html) takes the user through all of the step of package development, so use it as a resource! We will work through this module during our one of our last class period.</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>Your group's work also should result in a custom **R package** that can be shared as a single file and loaded into an ***R*** workspace (e.g., using the <span class="in">`install.packages()`</span> function. As noted above, that package should combine the following:</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A **set of functions and associated function documentation** appropriate to the topic you have chosen.</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>One or more relevant **datasets** (either data you have simulated or, preferably, real data), that you use in a module vignette about your chosen topic,</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A **vignette** that walks users through demonstrations of relevant analyses,</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Appropriate **METADATA** for your package (e.g., information on dependencies, etc.),</span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>Additionally, by the due date for this assignment - the last day of the formal final exam period - one group member should upload the final **R Package**'s bundled ".gz.tar" file to the **Canvas** site for the course, and your group should collectively upload your entire ***R Package*** project to a ***GitHub*** repository and share with me, via the assignment submission text field on Canvas, the URL to that repository.</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** The **Miscellany** module on [Building Custom ***R*** Packages](https://difiore.github.io/ada-2025/99-r-packages.html) takes the user through all of the step of package development, so use it as a resource! We will work through this module during our one of our last class period.</span></span>
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** I should be able to CLONE your repository and see all of the components associated with your package development.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>Additionally, by the due date for this assignment - the last day of the formal final exam period - one group member should upload the final **R Package**'s bundled ".gz.tar" file to the **Canvas** site for the course, and your group should collectively upload your entire ***R Package*** project to a ***GitHub*** repository and share with me, via the assignment submission text field on Canvas, the URL to that repository.</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **NOTE:** I should be able to CLONE your repository and see all of the components associated with your package development.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

@@ -168,10 +168,23 @@
 - **{cowplot}**: @R-cowplot
 - **{sjPlots}**: @R-sjPlot
 - **{MuMIn}**: @R-MuMIn
+- **{mixedup}**: @R-mixedup
 - **{glmmML}**: @R-glmmML
 - **{MASS}**: @R-MASS
 
-### Module 25 {.unnumbered}
+### Maximum Likelihood Estimation {.unnumbered}
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{mosaic}**: @R-mosaic, @mosaic2017
+- **{bbmle}:** @R-bbmle
+- **{maxLik}:** @R-maxLik
+
+### Using ***Python*** from ***R*** {.unnumbered}
+
+- **{tidyverse}**: @R-tidyverse, @tidyverse2019
+- **{broom}**: @R-broom
+- **{reticulate}**: @R-reticulate
+
+### Building Custom ***R*** Packages {.unnumbered}
 
 - **{tidyverse}**: @R-tidyverse, @tidyverse2019
 - **{devtools}**: @R-devtools
@@ -180,17 +193,17 @@
 - **{withr}**: @R-withr
 - **{manipulate}**: @R-manipulate
 
-### Module 26 {.unnumbered}
+### Building Interactive Web Apps {.unnumbered}
 
 - **{tidyverse}**: @R-tidyverse, @tidyverse2019
 - **{shiny}**: @R-shiny
 - **{DT}**: @R-DT
 
-### Module 27 {.unnumbered}
-
-- **{tidyverse}**: @R-tidyverse, @tidyverse2019
-- **{broom}**: @R-broom
-- **{reticulate}**: @R-reticulate
+### Working with and Managing Packages {.unnumbered}
+- **{easypackages}**
+- **{pacman}**
+- **{librarian}**
+- **{Require}**
 
 <hr>
 
@@ -216,6 +229,7 @@
 
 - **{AICcmodavg}**: @R-AICcmodavg
 - **{BBmisc}**: @R-BBmisc
+- **{bbmle}**: @R-bbmle
 - **{blastula}**: @R-blastula
 - **{boot}**: @R-boot, @boot1997
 - **{broom}**: @R-broom
@@ -254,15 +268,19 @@
 - **{jtools}**: @R-jtools
 - **{kableExtra}**: @R-kableExtra
 - **{knitr}**: @R-knitr, @knitr2014, @knitr2015
+- **{librarian}**:
 - **{lme4}**: @R-lme4, @lme42015
 - **{lmodel2}**: @R-lmodel2
 - **{lmtest}**: @R-lmtest, @lmtest2002
 - **{magrittr}**: @R-magrittr
 - **{manipulate}**: @R-manipulate
 - **{MASS}**: @R-MASS, @MASS2002
+- **{maxLik}**: @R-maxLik, @maxLik2011
+- **{mixedup}**: @R-mixedup
 - **{moments}**: @R-moments
 - **{mosaic}**: @R-mosaic, @mosaic2017
 - **{MuMIn}**: @R-MuMIn
+- **{pacman}**:
 - **{pastecs}**: @R-pastecs
 - **{patchwork}**: @R-patchwork
 - **{permuco}**: @R-permuco
@@ -274,6 +292,7 @@
 - **{redres}**: @R-redres
 - **{readxl}**: @R-readxl
 - **{repmis}**: @R-repmis
+- **{Require}**:
 - **{reticulate}**: @R-reticulate
 - **{roxygen2}**: @R-roxygen2
 - **{scales}**: @R-scales

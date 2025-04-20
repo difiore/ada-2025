@@ -1,9 +1,4 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-# Exercise 12 Solution {.unnumbered}
+# Exercise 11 Solution {.unnumbered}
 
 # • Solution {.unnumbered}
 
@@ -54,6 +49,15 @@ d[d==-999] <- NA # using base ***R***
 d <- d |> select(-c("litter size", "refs"))
 ```
 
+- Rename the variable **max. life(mo)** to **maxlife(mo)**.
+- Rename the variable **wean mass(g)** to **weanmass(g)**.
+
+```{r}
+d <- d |>
+  rename(`maxlife(mo)` = `max. life(mo)`) |>
+  rename(`weanmass(g)` = `wean mass(g)`)
+```
+
 ### Step 3 {.unnumbered}
 
 - Log transform all of the other numeric variables.
@@ -62,30 +66,30 @@ d <- d |> select(-c("litter size", "refs"))
 d <- d |> mutate(across(where(is.numeric), log))
 
 # OR
-# vars <- c("mass(g)", "gestation(mo)", "newborn(g)", "weaning(mo)", "wean mass(g)", "AFR(mo)", "max. life(mo)", "litters/year")
+# vars <- c("mass(g)", "gestation(mo)", "newborn(g)", "weaning(mo)", "weanmass(g)", "AFR(mo)", "maxlife(mo)", "litters/year")
 # d <- d |>mutate(across(all_of(vars), log))
 ```
 
 ### Step 4 {.unnumbered}
 
-- Regress the (now log transformed) *age* [**gestation(mo)**, **weaning(mo)**, **AFR(mo)** (i.e., age at first reproduction), and **max. life(mo)** (i.e., maximum lifespan)] and *mass* [**newborn(g)** and **wean mass(g)**] variables on (now log transformed) overall body **mass(g)** and add the residuals to the dataframe as new variables [**relGest**, **relWean**, **relAFR**, **relLife**, **relNewbornMass**, and **relWeaningMass**].
+- Regress the (now log transformed) *age* [**gestation(mo)**, **weaning(mo)**, **AFR(mo)** (i.e., age at first reproduction), and **maxlife(mo)** (i.e., maximum lifespan)] and *mass* [**newborn(g)** and **weanmass(g)**] variables on (now log transformed) overall body **mass(g)** and add the residuals to the dataframe as new variables [**relGest**, **relWean**, **relAFR**, **relLife**, **relNewbornMass**, and **relWeaningMass**].
 
 ```{r}
 d$relGest <- resid(lm(`gestation(mo)` ~ `mass(g)`, data = d, na.action=na.exclude))
 d$relWean <- resid(lm(`weaning(mo)` ~ `mass(g)`, data = d,na.action=na.exclude))
 d$relAFR <- resid(lm(`AFR(mo)` ~ `mass(g)`, data = d, na.action=na.exclude))
-d$relLife <- resid(lm(`max. life(mo)` ~ `mass(g)`, data = d, na.action=na.exclude))
+d$relLife <- resid(lm(`maxlife(mo)` ~ `mass(g)`, data = d, na.action=na.exclude))
 d$relNewbornMass <- resid(lm(`newborn(g)` ~ `mass(g)`, data = d, na.action=na.exclude))
-d$relWeaningMass <- resid(lm(`wean mass(g)` ~ `mass(g)`, data = d, na.action=na.exclude))
+d$relWeaningMass <- resid(lm(`weanmass(g)` ~ `mass(g)`, data = d, na.action=na.exclude))
 
 # OR
 # d <- d |> mutate(
 #   relGest = resid(lm(`gestation(mo)` ~ `mass(g)`, data = d, na.action=na.exclude)),
 #   relWean = resid(lm(`weaning(mo)` ~ `mass(g)`, data = d,na.action=na.exclude)),
 #   relAFR = resid(lm(`AFR(mo)` ~ `mass(g)`, data = d, na.action=na.exclude)),
-#   relLife = resid(lm(`max. life(mo)` ~ `mass(g)`, data = d, na.action=na.exclude)),
+#   relLife = resid(lm(`maxlife(mo)` ~ `mass(g)`, data = d, na.action=na.exclude)),
 #   relNewbornMass = resid(lm(`newborn(g)` ~ `mass(g)`, data = d, na.action=na.exclude)),
-#   relWeaningMass = resid(lm(`wean mass(g)` ~ `mass(g)`, data = d, na.action=na.exclude))
+#   relWeaningMass = resid(lm(`weanmass(g)` ~ `mass(g)`, data = d, na.action=na.exclude))
 # )
 ```
 
@@ -121,42 +125,42 @@ plot_grid(p1, p2, p3, nrow = 3)
 
 ### Step 6 {.unnumbered}
 
-- Run models and a model selection process to evaluate what (now log transformed) variables best predict each of the two response variables, **max. life(mo)** and **AFR(mo)**, from the set of the following predictors: **gestation(mo)**, **newborn(g)**, **weaning(mo)**, **wean mass(g)**, **litters/year**, and overall body **mass(g)**.
+- Run models and a model selection process to evaluate what (now log transformed) variables best predict each of the two response variables, **maxlife(mo)** and **AFR(mo)**, from the set of the following predictors: **gestation(mo)**, **newborn(g)**, **weaning(mo)**, **weanmass(g)**, **litters/year**, and overall body **mass(g)**.
 
 #### Maximum Lifespan
 
 ##### Using Stepwise Model Selection
 
 ```{r}
-d1 <- d |> drop_na(c("max. life(mo)", "gestation(mo)", "newborn(g)", "weaning(mo)", "wean mass(g)", "litters/year", "mass(g)"))
-ML_full <- lm(`max. life(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, data = d1, na.action = na.fail)
+d1 <- d |> drop_na(c("maxlife(mo)", "gestation(mo)", "newborn(g)", "weaning(mo)", "weanmass(g)", "litters/year", "mass(g)"))
+ML_full <- lm(`maxlife(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `weanmass(g)` + `litters/year` + `mass(g)`, data = d1, na.action = na.fail)
 summary(ML_full)
-ML_null <- lm(`max. life(mo)` ~ 1, data = d1, na.action = na.fail)
+ML_null <- lm(`maxlife(mo)` ~ 1, data = d1, na.action = na.fail)
 
 # using backwards selection
 drop1(ML_full, test = "F")
-b2 <- update(ML_full, .~. - `wean mass(g)`)
+b2 <- update(ML_full, .~. - `weanmass(g)`)
 drop1(b2, test = "F")
 b3 <- update(b2, .~. - `newborn(g)`)
 drop1(b3, test = "F")
 # no more to drop
 
 # using forward selection
-add1(ML_null, .~. + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+add1(ML_null, .~. + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `weanmass(g)` + `litters/year` + `mass(g)`, test = "F")
 f2 <- update(ML_null, .~. + `gestation(mo)`)
-add1(f2, .~. + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+add1(f2, .~. + `newborn(g)` + `weaning(mo)` + `weanmass(g)` + `litters/year` + `mass(g)`, test = "F")
 f3 <- update(f2, .~. + `litters/year`)
-add1(f3, .~. + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+add1(f3, .~. + `newborn(g)` + `weaning(mo)` + `weanmass(g)` + `mass(g)`, test = "F")
 f4 <- update(f3, .~. + `mass(g)`)
-add1(f4, .~. + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+add1(f4, .~. + `newborn(g)` + `weaning(mo)` + `weanmass(g)`, test = "F")
 f5 <- update(f4, .~. + `weaning(mo)`)
-add1(f5, .~. + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+add1(f5, .~. + `newborn(g)` + `weanmass(g)`, test = "F")
 # no more to add
 ```
 
-Both forward and backward selection using F ratio tests yield the same best model...
+Note that forward and backward selection using F ratio tests yield the same best model...
 
-$$max. life(mo) \sim gestation(mo) + weaning(mo) + litters/year + mass(g)$$
+$$maxlife(mo) \sim gestation(mo) + litters/year + mass(g) + weaning(mo)$$
 
 ##### Using AICc
 
@@ -168,7 +172,7 @@ head(coef(ML_mods), 10) # top 10 models
 
 - What is the best model overall based on AICc and how many models have a delta AICc of 4 or less?
 
-The best model overall is `max. life(mo) ~ gestation(mo) + weaning(mo) + litters/year + mass(g)`, the same as identified by both forward and backwards selection. Five models have a delta AICc of < 4.
+The best model overall is `maxlife(mo) ~ gestation(mo) + litters/year + mass(g) + weaning(mo)`, the same as identified by both forward and backwards selection. Five models have a delta AICc of < 4.
 
 - What variables, if any, appear in all of this set of “top” models?
 
@@ -188,33 +192,37 @@ Based on the plot, we can again see that set of top models includes four predict
 ##### Using Stepwise Model Selection
 
 ```{r}
-d2 <- d |> drop_na(c("AFR(mo)", "gestation(mo)", "newborn(g)", "weaning(mo)", "wean mass(g)", "litters/year", "mass(g)"))
-AFR_full <- lm(`AFR(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, data = d2, na.action = na.fail)
+d2 <- d |> drop_na(c("AFR(mo)", "gestation(mo)", "newborn(g)", "weaning(mo)", "weanmass(g)", "litters/year", "mass(g)"))
+AFR_full <- lm(`AFR(mo)` ~ `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `weanmass(g)` + `litters/year` + `mass(g)`, data = d2, na.action = na.fail)
 AFR_null <- lm(`AFR(mo)` ~ 1, data = d2, na.action = na.fail)
 
 # using backwards selection
 drop1(AFR_full, test = "F")
-b2 <- update(AFR_full, .~. - `wean mass(g)`)
+b2 <- update(AFR_full, .~. - `weanmass(g)`)
 drop1(b2, test = "F")
 b3 <- update(b2, .~. - `newborn(g)`)
 drop1(b3, test = "F")
 # no more to drop
 
 # forward selection
-add1(AFR_null, .~. + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+add1(AFR_null, .~. + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `weanmass(g)` + `litters/year` + `mass(g)`, test = "F")
 f2 <- update(AFR_null, .~. + `litters/year`)
-add1(f2, .~. + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+add1(f2, .~. + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `weanmass(g)` + `mass(g)`, test = "F")
 f3 <- update(f2, .~. + `gestation(mo)`)
-add1(f3, .~. + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
-f4 <- update(f3, .~. + `wean mass(g)`)
-add1(f4, .~. + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+add1(f3, .~. + `newborn(g)` + `weaning(mo)` + `weanmass(g)` + `mass(g)`, test = "F")
+f4 <- update(f3, .~. + `weanmass(g)`)
+add1(f4, .~. + `newborn(g)` + `weaning(mo)` + `mass(g)`, test = "F")
 f5 <- update(f4, .~. + `weaning(mo)`)
-add1(f5, .~. + `gestation(mo)` + `newborn(g)` + `weaning(mo)` + `wean mass(g)` + `litters/year` + `mass(g)`, test = "F")
+add1(f5, .~. + `newborn(g)` + `mass(g)`, test = "F")
+# no more to add
 ```
 
-Again, both forward and backward selection using F ratio tests yield the same best model...
+Here, forward and backward selection using F ratio tests yield slightly different models...
 
-$$max. life(mo) \sim gestation(mo) + weaning(mo) + litters/year + mass(g)$$
+BACKWARD:
+$$AFR(mo) \sim gestation(mo) + litters/year + mass(g) + weaning(mo)$$
+BACKWARD:
+$$AFR(mo) \sim gestation(mo) + litters/year + weaning(mo) + weanmass(g)$$
 
 ##### Using AICc
 
@@ -226,11 +234,11 @@ head(coef(AFR_mods), 10) # top 10 models
 
 - What is the best model overall based on AICc and how many models have a delta AICc of 4 or less?
 
-Again, the best model overall is `max. life(mo) ~ gestation(mo) + weaning(mo) + litters/year + mass(g)`, the same as identified by both forward and backwards selection. Seven models have a delta AICc of < 4.
+The best model overall is `AFR(mo) ~ gestation(mo) + litters/year + mass(g) + weaning(mo)`, the same as identified via backward selection. Seven models have a delta AICc of < 4.
 
 - What variables, if any, appear in all of this set of “top” models?
 
-Here, only three variables - **gestation(mo)**, **litters/year**, and **weaning(mo)** - appear in all of the models with delta AICc of ≤ 4. The variable **mass(g)** appears in 3 of the top 6 models, while the variables **newborn(g)** and **wean mass(g)** each appear in 4.
+Here, only three variables - **gestation(mo)**, **litters/year**, and **weaning(mo)** - appear in all of the models with delta AICc of ≤ 4. The variables **mass(g)** and **newborn(g)** each appears in 4 of the top 6 models, while the variable **weanmass(g)** appears in 3.
 
 - Calculate and plot the model-averaged coefficients and their CIs across this set of top models.
 

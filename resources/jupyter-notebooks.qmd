@@ -1,8 +1,4 @@
----
-title: Applied Data Analysis with JupyterLab
----
-
-# Applied Data Analysis with ***Jupyter*** and ***JupyterLab***
+# Using ***Jupyter*** and ***JupyterLab***
 
 ***JupyterLab*** is an open-source interactive development environment  (IDE) for notebooks, code, and data. The IDE can be run either as a web-based application or a desktop application. The original [***Jupyter*** project](https://en.wikipedia.org/wiki/Project_Jupyter) spun off from an earlier "notebook" project for the ***python*** computing language called ***IPython***.
 
@@ -140,9 +136,9 @@ You can install new ***Julia*** packages from a ***Julia*** code cell or console
 
 The command `Pkg.status()` can be used to list installed ***Julia*** packages.
 
-You can install the Quarto JupyterLab extension one of two ways:
+You can install the ***Quarto JupyterLab*** extension one of two ways:
 
-In the JupyterLab UI: Search for ‘Quarto’ in the Extension Manager and install the jupyterlab-quarto extension. You’ll be prompted to refresh the page when complete.
+- In the ***JupyterLab*** UI - Search for 'Quarto' in the Extension Manager and install the "jupyterlab-quarto" extension. You will be prompted to refresh the page when installation is completed.
 
 Screenshot of the Jupyter Lab Extension Manager with 'quarto' typed in the search box, and one Search Result with the name 'jupyterlab-quarto'.
 

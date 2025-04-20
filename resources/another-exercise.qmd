@@ -1,15 +1,69 @@
- ---
+---
 title: "Another Exercise"
 ---
 
-In the ADA datasets repository, there are two new datafiles... [data9b_w.txt](https://raw.githubusercontent.com/difiore/ada-datasets/main/data9b_m.txt) and [data9b_m.txt](https://raw.githubusercontent.com/difiore/ada-datasets/main/data9b_m.txt).
+In the ADA datasets repository, there are two new datafiles... [data9b_w.txt](https://raw.githubusercontent.com/difiore/ada-datasets/main/data9b_w.txt) and [data9b_m.txt](https://raw.githubusercontent.com/difiore/ada-datasets/main/data9b_m.txt).
 
 Each row in both files contains, for one person (women in "data9b_w.txt", men in "data9b_m.txt9") the *number of steps* that this person took on a particular day (**steps**) and their body mass index (**bmi**).
 
-Assume that both traits are normally distributed for both men and women. Men and women are presumed to be different in aspects of their physiology that could influence how their bodies use energy. Thus, it seems plausible that they may differ in how **bmi** varies in relationship to the exercise they do. Examine the dataset and the data to evaluate the following predictions:
+Assume that both traits are normally distributed for both men and women. Examine the data. What do you notice? What conclusions can you draw from the data?
+
+Men and women are presumed to be different in aspects of their physiology that could influence how their bodies use energy. Thus, it seems plausible that they may differ in how **bmi** varies in relationship to the exercise they do. Examine the dataset and the data to evaluate the following predictions:
 
 - There is a difference in the mean number of steps taken daily between women and men.
 - The correlation coefficient between **steps** and **bmi** is negative for women.
 - The correlation coefficient between **steps** and **bmi** is positive for men.
 
 > **HINT**: These are tab-separated value files, thus you will want to use the `read_tsv()` function rather than `read_csv()` to load them.
+
+```{r}
+library(tidyverse)
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/data9b_m.txt"
+dm <- read_tsv(f, col_names = TRUE)
+dm$sex <- "M"
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/data9b_w.txt"
+df <- read_tsv(f, col_names = TRUE)
+df$sex <- "F"
+
+cor(df$bmi, df$steps)
+cor(dm$bmi, dm$steps)
+
+d <- bind_rows(dm, df)
+plot(d$steps, d$bmi)
+hist(df$steps)
+library(datasauRus)
+glimpse(datasaurus_dozen)
+summary <- datasaurus_dozen |>
+  group_by(dataset) |>
+  summarize(count = n(),
+            mean_x = mean(x),
+            sd_x = sd(x),
+            mean_y = mean(y),
+            sd_y = sd(y),
+            cor_xy = cor(x, y))
+
+(p <- ggplot(data = datasaurus_dozen, aes(x = x, y = y)) +
+  facet_wrap(~dataset, nrow = 3) +
+  theme(legend.position = "none") +
+  geom_smooth(
+    method = "lm",
+    formula=y~x))
+
+(p <- p +
+  geom_point(aes(color = factor(dataset))))
+
+
+f <- "https://raw.githubusercontent.com/difiore/ada-datasets/refs/heads/main/BovetAndRaymondData.csv"
+d <- read_csv(f, col_names = TRUE)
+
+ggplot(data = d |> filter(Century > 5), aes(x = Century, y = `Corrected WHR`)) +
+  geom_point() +
+  facet_grid(~Subject) +
+  geom_smooth(
+    method = "lm")
+
+m <- lm(data = d |> filter(Century > 5), `Corrected WHR`~ Century)
+summary(m)
+plot(m$fitted.values, m$residuals)
+plot(m)
+```

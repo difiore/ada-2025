@@ -2,7 +2,7 @@
 
 ## Objectives {.unnumbered}
 
-The objective of this assignment is to work with one of your classmates over the final weeks of the class to complete your choice of **one** of the following two options:
+The objective of this assignment is to work with one or two of your classmates over the final weeks of the class to complete your choice of **one** of the following options:
 
 ### A "Methods Exploration" Project
 
@@ -38,7 +38,9 @@ The objective of this assignment is to work with one of your classmates over the
 
 ## What to Do {.unnumbered}
 
-You and your partner will work together to develop a short (roughly 10-15 minute) presentation and associated HTML "vignette" that can be rendered from a ".qmd" or ".Rmd" document). Depending on which type of project you are doing, your vignette will first provide background on the *statistical method/topic/data visualization procedures* that you have chosen to explore, or on the *dataset and theory that you are exploring with your own data*. It should then take the user through a set of analyses either demonstrating the method being explored or applying approaches we have learned in class to your own data. Your module should be organized similarly to those that I have prepared for various other topics this semester, though need not be as long. The presentation can either be done from the module itself or as a PowerPoint/Keynote/Google Slides/R presentation/whatever slideshow.
+You and your groupmates will work together to develop a short (roughly 10-15 minute) but reasonably comprehensive presentation and associated HTML "vignette" that can be rendered from a ".qmd" or ".Rmd" document). Depending on which type of project you are doing, your vignette will **provide background** on the *statistical method/topic/data visualization procedures* that you have chosen to explore or on the *dataset and theory that you are exploring with your own data*. It should then take the user through a set of analyses either demonstrating the method being explored or applying approaches we have learned in class to your own data. Your module should be organized similarly to those that I have prepared for various other topics this semester, though need not be as long.
+
+The presentation can either be done from the module itself or as a PowerPoint/Keynote/Google Slides/R presentation/whatever slideshow.
 
 Thus, all groups will need to produce a ".qmd" or ".Rmd" file that will be the basis for a module *vignette* that you build and will bundle into a custom ***R*** package. Besides the vignette, your package should also bundle at least some of the data you are working with into one or more included *datasets* and should also bundle code for least two *functions* that are called in the vignette. The functions you include can be custom functions that you create, but it is also perfectly fine to use functions that you have copied from other packages and include into your own package. **The important thing is that you are bundling them together with your dataset and vignette for easy distribution.** You will want to create your own documentation for each function, as discussed in the **Miscellany** module on [Building Custom ***R*** Packages](https://difiore.github.io/ada-2025/99-r-packages.html). One of the main objectives for this exercise is to give you experience with tools for distributing shared data and code to other researchers *and* pull the curtain back a bit on just what producing an ***R*** package entails.
 
@@ -46,14 +48,14 @@ Please be sure to divide up the work with your partner so that each of you are c
 
 ## What to Turn In {.unnumbered}
 
-You will collectively take the class through your module during our final class periods. We will aim for 10 or 11 presentations total of ~15 minutes each with time for questions.
+You will collectively take the class through your presentation/module during our meeting final class meeting period. We will aim for 7-8 presentations total of ~15 minutes each with time for questions. I will record these video presentations and share them via the Canvas site.
 
 Your group's work also should result in a custom **R package** that can be shared as a single file and loaded into an ***R*** workspace (e.g., using the `install.packages()` function. As noted above, that package should combine the following:
 
-- A set of functions and associated function documentation appropriate to the topic you have chosen.
-- One or more relevant datasets (either data you have simulated or, preferably, real data), that you use in a module vignette about your chosen topic,
-- A vignette that walks users through demonstrations of relevant analyses,
-- Appropriate METADATA for your package (e.g., information on dependencies, etc.),
+- A **set of functions and associated function documentation** appropriate to the topic you have chosen.
+- One or more relevant **datasets** (either data you have simulated or, preferably, real data), that you use in a module vignette about your chosen topic,
+- A **vignette** that walks users through demonstrations of relevant analyses,
+- Appropriate **METADATA** for your package (e.g., information on dependencies, etc.),
 
 > **NOTE:** The **Miscellany** module on [Building Custom ***R*** Packages](https://difiore.github.io/ada-2025/99-r-packages.html) takes the user through all of the step of package development, so use it as a resource! We will work through this module during our one of our last class period.
 

@@ -27,6 +27,8 @@
 #### Step 2 {.unnumbered}
 
 - Drop the variables **litter size** and **refs**.
+- Rename the variable **max. life(mo)** to **maxlife(mo)**.
+- Rename the variable **wean mass(g)** to **weanmass(g)**.
 
 #### Step 3 {.unnumbered}
 
@@ -36,7 +38,7 @@
 
 #### Step 4 {.unnumbered}
 
-- Regress the (now log transformed) *age* [**gestation(mo)**, **weaning(mo)**, **AFR(mo)** (i.e., age at first reproduction), and **max. life(mo)** (i.e., maximum lifespan)] and *mass* [**newborn(g)** and **wean mass(g)**] variables on (now log transformed) overall body **mass(g)** and add the residuals to the dataframe as new variables [**relGest**, **relWean**, **relAFR**, **relLife**, **relNewbornMass**, and **relWeaningMass**].
+- Regress the (now log transformed) *age* [**gestation(mo)**, **weaning(mo)**, **AFR(mo)** (i.e., age at first reproduction), and **maxlife(mo)** (i.e., maximum lifespan)] and *mass* [**newborn(g)** and **weanmass(g)**] variables on (now log transformed) overall body **mass(g)** and add the residuals to the dataframe as new variables [**relGest**, **relWean**, **relAFR**, **relLife**, **relNewbornMass**, and **relWeaningMass**].
 
 > **HINT:** Use "na.action=na.exclude" in your`lm()` calls. With this argument set, the residuals will be padded to the correct length by inserting NAs for cases with missing data. To access these correctly, however, where the length of the vector of residuals is equal in length to the length of your original vector (i.e., where missing residuals are padded out as NAs) you will need to call the `resid(m)` function on the model object (assuming the model is named **m**) rather than by calling `m$residuals`. The former function returns a vector of residuals with "NA" for cases where the value of one of the formula variables is missing, while the latter returns a vector with the NAs dropped, which may be shorter than the length of the original data frame!
 
@@ -50,7 +52,7 @@
 
 #### Step 6 {.unnumbered}
 
-- Run models and a model selection process to evaluate what (now log transformed) variables best predict each of the two response variables, **max. life(mo)** and **AFR(mo)**, from the set of the following predictors: **gestation(mo)**, **newborn(g)**, **weaning(mo)**, **wean mass(g)**, **litters/year**, and overall body **mass(g)**.
+- Run models and a model selection process to evaluate what (now log transformed) variables best predict each of the two response variables, **maxlife(mo)** and **AFR(mo)**, from the set of the following predictors: **gestation(mo)**, **newborn(g)**, **weaning(mo)**, **weanmass(g)**, **litters/year**, and overall body **mass(g)**.
 
 > **HINT:** Before running models, winnow your dataset to drop rows that are missing the respective response variable or any of the predictors, e.g., by using `drop_na()`.
 

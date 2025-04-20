@@ -60,6 +60,7 @@ book:
       # - 99-geospatial-data.qmd
       - 99-r-packages.qmd
       - 99-shiny.qmd
+      - 99-using-packages.qmd
     - part: "Exercises"
       chapters:
       - exercise-01.qmd

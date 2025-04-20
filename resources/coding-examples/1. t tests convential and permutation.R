@@ -1,11 +1,13 @@
-# One Sample T Test
+# T tests
+# libraries
 library(tidyverse)
 library(mosaic)
+library(infer)
+
+# one sample
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/woolly-weights.csv"
 d <- read_csv(f, col_names = TRUE)
 head(d)
-
-# One Sample
 mu <- 7.2
 m <- mean(d$weight)
 s <- sd(d$weight)
@@ -32,7 +34,7 @@ t_stat
 
 t.test(x = d$weight, mu = mu, alternative = "two.sided")
 
-# Two Sample
+# two sample
 f <- "https://raw.githubusercontent.com/difiore/ada-datasets/main/tbs-2006-2008-ranges.csv"
 d <- read_csv(f, col_names = TRUE)
 head(d)
@@ -58,7 +60,7 @@ females <- d |>
 (mean_f <- females |>
   summarize(mean = mean(kernel95)))
 
-# Bootstrapping
+# bootstrapping for CIs
 n_boot <- 10000
 boot_m <- do(n_boot) * mean (sample(males$kernel95, length(males$kernel95), replace = TRUE))
 (ci_m <- quantile(boot_m$mean, probs = c(0.025, 0.975)))
@@ -120,7 +122,7 @@ u <- pt(1 * abs(t_stat), df, lower.tail = FALSE)
 
 t.test(x = males$kernel95, y = females$kernel95, alternative = "two.sided", var.equal = TRUE)
 
-# Permutation-Based T Test
+# permutation-based T tests
 d <- d |>
   select(id, sex, kernel95)
 
@@ -163,8 +165,7 @@ hist(perm)
 # two-tailed p value
 (p <- sum(perm < -1 * abs(obs) | perm > abs(obs))/reps)
 
-# Permutation Using {infer} - much faster
-library(infer)
+# permutation using {infer} - much faster
 test <- d |> specify(formula = kernel95 ~ sex)
 test <- test |> hypothesize(null = "independence")
 perm <- test |> generate(reps = reps, type = "permute")
