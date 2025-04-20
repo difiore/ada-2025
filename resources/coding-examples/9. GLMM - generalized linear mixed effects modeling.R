@@ -34,8 +34,8 @@ glmer <- glmer(
   data = d,
   family = poisson(link = "log"))
 summary(glmer)
-# to get the beta coefficients...
-glmer@beta # this is an S4 data structure, so it uses `@` for slots
+# for a tidy table of beta coefficients...
+broom.mixed::tidy(glmer)
 
 glmer_null <- glmer(
   Shared ~ offset(log(trialduration/60)) +
@@ -43,7 +43,6 @@ glmer_null <- glmer(
   data = d,
   family = poisson(link = "log"))
 summary(glmer_null)
-
 lrtest(glmer_null, glmer)
 
 # using {glmmTMB}
@@ -58,6 +57,7 @@ tmb <- glmmTMB(
   data = d,
   family = poisson(link = "log"))
 summary(tmb)
+broom.mixed::tidy(tmb)
 
 # using {MASS}
 library(MASS)
@@ -67,9 +67,25 @@ pql <- glmmPQL(
   random = list(ID = ~1, trial = ~1),
   data = d,
   family = poisson(link = "log"))
+summary(pql)
+broom.mixed::tidy(pql)
+
+# using {glmmADMB}
+library(glmmADMB)
+
+admb <- glmmadmb(
+  Shared ~ BegRec +
+    offset(log(trialduration/60)) +
+    (1|ID) +
+    (1|trial) +
+    (1|obs),
+  data = d,
+  family = "poisson")
+summary(admb)
+broom.mixed::tidy(admb)
 
 library(sjPlot)
-plot_summs(glmer, tmb, pql)
+plot_summs(glmer, tmb, pql, admb, model.names = list( "glmer", "tmb", "pql", "adbm"))
 
 # using {brms} and STAN
 library(brms)
@@ -83,6 +99,7 @@ brm <- brm(
   iter = 20000,
   family = poisson(link = "log"))
 brm
+broom.mixed::tidy(brm)
 
 # using {rstanarm} and STAN
 library(rstanarm)
@@ -96,13 +113,14 @@ stan <- stan_glmer(
   iter = 20000,
   family = poisson(link = "log"))
 stan
+broom.mixed::tidy(stan)
 
 # using {MCMCglmm}
 library(MCMCglmm)
 prior <- list(R = list(V = 1, nu = 0.002),
               G = list(G1 = list(V = 1e+08, fix = 1)))
 mcmc <- MCMCglmm(
-  Shared ~ BegRec + offset(log(trialduration/60)),
+  Shared ~ BegRec + log(trialduration/60),
   random = ~ ID + trial + obs,
   nitt = 20000,
   thin = 1,
@@ -110,31 +128,20 @@ mcmc <- MCMCglmm(
   family = "poisson",
   verbose = TRUE)
 summary(mcmc)
+broom.mixed::tidy(mcmc)
 
-lattice::xyplot(as.mcmc(mcmc$Sol))
-lattice::xyplot(as.mcmc(mcmc$VCV))
-lattice::densityplot(as.mcmc(mcmc$Sol))
-lattice::densityplot(as.mcmc(mcmc$VCV))
+
+lattice::xyplot(mcmc$Sol)
+plotMCMC::plotTrace(mcmc$Sol)
+lattice::xyplot(mcmc$VCV)
+plotMCMC::plotTrace(mcmc$VCV)
+lattice::densityplot(mcmc$Sol)
+plotMCMC::plotDens(mcmc$Sol)
+lattice::densityplot(mcmc$VCV)
+plotMCMC::plotDens(mcmc$VCV)
 
 library(bayesplot)
 posterior <- as.array(brm)
-mcmc_scatter(brm)
-mcmc_intervals(posterior)
-
-# using {glmmADMB}
-library(glmmADMB)
-
-admb <- glmmadmb(
-  Shared ~ BegRec +
-    offset(log(trialduration/60)) +
-    (1|ID) +
-    (1|trial) +
-    (1|obs),
-  data = d,
-  family = "poisson")
-
-admb
-
 
 mixedup::extract_fixed_effects(glmer)
 mixedup::extract_fixed_effects(brm)
@@ -142,3 +149,4 @@ mixedup::extract_fixed_effects(stan)
 conditional_effects(brm)
 pp_check(brm)
 pp_check(stan)
+
