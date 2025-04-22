@@ -518,6 +518,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Exercise 11</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercise-11-solution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 11 Solution</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -645,15 +651,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(f, <span class="at">col_names =</span> <span class="cn">TRUE</span>)  <span class="co"># creates a 'tibble'</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## # A tibble: 6 × 44
-##   Scientific_Name             Family        Genus Species Brain_Size_Species_M…¹
-##   &lt;chr&gt;                       &lt;chr&gt;         &lt;chr&gt; &lt;chr&gt;                    &lt;dbl&gt;
-## 1 Allenopithecus_nigroviridis Cercopitheci… Alle… nigrov…                   58.0
-## 2 Allocebus_trichotis         Cercopitheci… Allo… tricho…                   NA  
-## 3 Alouatta_belzebul           Atelidae      Alou… belzeb…                   52.8
-## 4 Alouatta_caraya             Atelidae      Alou… caraya                    52.6
-## 5 Alouatta_guariba            Atelidae      Alou… guariba                   51.7
-## 6 Alouatta_palliata           Atelidae      Alou… pallia…                   49.9
+<pre><code>## # A tibble: 6 × 45
+##   Scientific_Name        Superfamily Family Genus Species Brain_Size_Species_M…¹
+##   &lt;chr&gt;                  &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                    &lt;dbl&gt;
+## 1 Allenopithecus_nigrov… Cercopithe… Cerco… Alle… nigrov…                   58.0
+## 2 Allocebus_trichotis    Cercopithe… Cerco… Allo… tricho…                   NA  
+## 3 Alouatta_belzebul      Ceboidea    Ateli… Alou… belzeb…                   52.8
+## 4 Alouatta_caraya        Ceboidea    Ateli… Alou… caraya                    52.6
+## 5 Alouatta_guariba       Ceboidea    Ateli… Alou… guariba                   51.7
+## 6 Alouatta_palliata      Ceboidea    Ateli… Alou… pallia…                   49.9
 ## # ℹ abbreviated name: ¹​Brain_Size_Species_Mean
 ## # ℹ 39 more variables: Brain_Size_Female_Mean &lt;dbl&gt;, Brain_size_Ref &lt;chr&gt;,
 ## #   Body_mass_male_mean &lt;dbl&gt;, Body_mass_female_mean &lt;dbl&gt;,
@@ -700,12 +706,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">filter</span>(d, Family <span class="sc">==</span> <span class="st">"Hominidae"</span> <span class="sc">&amp;</span> Mass_Dimorphism <span class="sc">&gt;</span> <span class="dv">2</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## # A tibble: 3 × 44
-##   Scientific_Name Family    Genus   Species  Brain_Size_Species_Mean
-##   &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;                      &lt;dbl&gt;
-## 1 Gorilla_gorilla Hominidae Gorilla gorilla                     490.
-## 2 Pongo_abelii    Hominidae Pongo   abelii                      390.
-## 3 Pongo_pygmaeus  Hominidae Pongo   pygmaeus                    377.
+<pre><code>## # A tibble: 3 × 45
+##   Scientific_Name Superfamily Family    Genus   Species  Brain_Size_Species_Mean
+##   &lt;chr&gt;           &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;                      &lt;dbl&gt;
+## 1 Gorilla_gorilla Hominoidea  Hominidae Gorilla gorilla                     490.
+## 2 Pongo_abelii    Hominoidea  Hominidae Pongo   abelii                      390.
+## 3 Pongo_pygmaeus  Hominoidea  Hominidae Pongo   pygmaeus                    377.
 ## # ℹ 39 more variables: Brain_Size_Female_Mean &lt;dbl&gt;, Brain_size_Ref &lt;chr&gt;,
 ## #   Body_mass_male_mean &lt;dbl&gt;, Body_mass_female_mean &lt;dbl&gt;,
 ## #   Mass_Dimorphism &lt;dbl&gt;, Mass_Ref &lt;chr&gt;, MeanGroupSize &lt;dbl&gt;,
@@ -777,22 +783,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">arrange</span>(d, Family, Genus, Body_mass_male_mean)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## # A tibble: 6 × 44
-##   Scientific_Name    Family   Genus    Species   Brain_Size_Species_Mean
-##   &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;                       &lt;dbl&gt;
-## 1 Alouatta_guariba   Atelidae Alouatta guariba                      51.7
-## 2 Alouatta_caraya    Atelidae Alouatta caraya                       52.6
-## 3 Alouatta_seniculus Atelidae Alouatta seniculus                    55.2
-## 4 Alouatta_palliata  Atelidae Alouatta palliata                     49.9
-## 5 Alouatta_belzebul  Atelidae Alouatta belzebul                     52.8
-## 6 Alouatta_pigra     Atelidae Alouatta pigra                        51.1
+<pre><code>## # A tibble: 6 × 45
+##   Scientific_Name    Superfamily Family   Genus   Species Brain_Size_Species_M…¹
+##   &lt;chr&gt;              &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                    &lt;dbl&gt;
+## 1 Alouatta_guariba   Ceboidea    Atelidae Alouat… guariba                   51.7
+## 2 Alouatta_caraya    Ceboidea    Atelidae Alouat… caraya                    52.6
+## 3 Alouatta_seniculus Ceboidea    Atelidae Alouat… senicu…                   55.2
+## 4 Alouatta_palliata  Ceboidea    Atelidae Alouat… pallia…                   49.9
+## 5 Alouatta_belzebul  Ceboidea    Atelidae Alouat… belzeb…                   52.8
+## 6 Alouatta_pigra     Ceboidea    Atelidae Alouat… pigra                     51.1
+## # ℹ abbreviated name: ¹​Brain_Size_Species_Mean
 ## # ℹ 39 more variables: Brain_Size_Female_Mean &lt;dbl&gt;, Brain_size_Ref &lt;chr&gt;,
 ## #   Body_mass_male_mean &lt;dbl&gt;, Body_mass_female_mean &lt;dbl&gt;,
 ## #   Mass_Dimorphism &lt;dbl&gt;, Mass_Ref &lt;chr&gt;, MeanGroupSize &lt;dbl&gt;,
 ## #   AdultMales &lt;dbl&gt;, AdultFemale &lt;dbl&gt;, AdultSexRatio &lt;dbl&gt;,
 ## #   Social_Organization_Ref &lt;chr&gt;, InterbirthInterval_d &lt;dbl&gt;, Gestation &lt;dbl&gt;,
-## #   WeaningAge_d &lt;dbl&gt;, MaxLongevity_m &lt;dbl&gt;, LitterSz &lt;dbl&gt;,
-## #   Life_History_Ref &lt;chr&gt;, GR_MidRangeLat_dd &lt;dbl&gt;, Precip_Mean_mm &lt;dbl&gt;, …</code></pre>
+## #   WeaningAge_d &lt;dbl&gt;, MaxLongevity_m &lt;dbl&gt;, LitterSz &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
 <p>We can also specify the direction in which we want the data frame to be sorted:</p>
@@ -801,15 +807,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">arrange</span>(d, <span class="fu">desc</span>(Family), Genus, Species, <span class="fu">desc</span>(Body_mass_male_mean))</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(s)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## # A tibble: 6 × 44
-##   Scientific_Name         Family      Genus      Species  Brain_Size_Species_M…¹
-##   &lt;chr&gt;                   &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;                     &lt;dbl&gt;
-## 1 Tarsius_bancanus        Tarsiidae   Tarsius    bancanus                   3.16
-## 2 Tarsius_dentatus        Tarsiidae   Tarsius    dentatus                  NA   
-## 3 Tarsius_syrichta        Tarsiidae   Tarsius    syrichta                   3.36
-## 4 Cacajao_calvus          Pitheciidae Cacajao    calvus                    76   
-## 5 Cacajao_melanocephalus  Pitheciidae Cacajao    melanoc…                  68.8 
-## 6 Callicebus_donacophilus Pitheciidae Callicebus donacop…                  NA   
+<pre><code>## # A tibble: 6 × 45
+##   Scientific_Name        Superfamily Family Genus Species Brain_Size_Species_M…¹
+##   &lt;chr&gt;                  &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt;                    &lt;dbl&gt;
+## 1 Tarsius_bancanus       Tarsioidea  Tarsi… Tars… bancan…                   3.16
+## 2 Tarsius_dentatus       Tarsioidea  Tarsi… Tars… dentat…                  NA   
+## 3 Tarsius_syrichta       Tarsioidea  Tarsi… Tars… syrich…                   3.36
+## 4 Cacajao_calvus         Ceboidea    Pithe… Caca… calvus                   76   
+## 5 Cacajao_melanocephalus Ceboidea    Pithe… Caca… melano…                  68.8 
+## 6 Callicebus_donacophil… Ceboidea    Pithe… Call… donaco…                  NA   
 ## # ℹ abbreviated name: ¹​Brain_Size_Species_Mean
 ## # ℹ 39 more variables: Brain_Size_Female_Mean &lt;dbl&gt;, Brain_size_Ref &lt;chr&gt;,
 ## #   Body_mass_male_mean &lt;dbl&gt;, Body_mass_female_mean &lt;dbl&gt;,
@@ -1222,22 +1228,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">avgF =</span> <span class="fu">mean</span>(Body_mass_female_mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## # A tibble: 6 × 44
-##   Scientific_Name    Family   Genus    Species   Brain_Size_Species_Mean
-##   &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;                       &lt;dbl&gt;
-## 1 Alouatta_belzebul  Atelidae Alouatta belzebul                     52.8
-## 2 Alouatta_caraya    Atelidae Alouatta caraya                       52.6
-## 3 Alouatta_guariba   Atelidae Alouatta guariba                      51.7
-## 4 Alouatta_palliata  Atelidae Alouatta palliata                     49.9
-## 5 Alouatta_pigra     Atelidae Alouatta pigra                        51.1
-## 6 Alouatta_seniculus Atelidae Alouatta seniculus                    55.2
+<pre><code>## # A tibble: 6 × 45
+##   Scientific_Name    Superfamily Family   Genus   Species Brain_Size_Species_M…¹
+##   &lt;chr&gt;              &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                    &lt;dbl&gt;
+## 1 Alouatta_belzebul  Ceboidea    Atelidae Alouat… belzeb…                   52.8
+## 2 Alouatta_caraya    Ceboidea    Atelidae Alouat… caraya                    52.6
+## 3 Alouatta_guariba   Ceboidea    Atelidae Alouat… guariba                   51.7
+## 4 Alouatta_palliata  Ceboidea    Atelidae Alouat… pallia…                   49.9
+## 5 Alouatta_pigra     Ceboidea    Atelidae Alouat… pigra                     51.1
+## 6 Alouatta_seniculus Ceboidea    Atelidae Alouat… senicu…                   55.2
+## # ℹ abbreviated name: ¹​Brain_Size_Species_Mean
 ## # ℹ 39 more variables: Brain_Size_Female_Mean &lt;dbl&gt;, Brain_size_Ref &lt;chr&gt;,
 ## #   Body_mass_male_mean &lt;dbl&gt;, Body_mass_female_mean &lt;dbl&gt;,
 ## #   Mass_Dimorphism &lt;dbl&gt;, Mass_Ref &lt;chr&gt;, MeanGroupSize &lt;dbl&gt;,
 ## #   AdultMales &lt;dbl&gt;, AdultFemale &lt;dbl&gt;, AdultSexRatio &lt;dbl&gt;,
 ## #   Social_Organization_Ref &lt;chr&gt;, InterbirthInterval_d &lt;dbl&gt;, Gestation &lt;dbl&gt;,
-## #   WeaningAge_d &lt;dbl&gt;, MaxLongevity_m &lt;dbl&gt;, LitterSz &lt;dbl&gt;,
-## #   Life_History_Ref &lt;chr&gt;, GR_MidRangeLat_dd &lt;dbl&gt;, Precip_Mean_mm &lt;dbl&gt;, …</code></pre>
+## #   WeaningAge_d &lt;dbl&gt;, MaxLongevity_m &lt;dbl&gt;, LitterSz &lt;dbl&gt;, …</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>s</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

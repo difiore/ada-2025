@@ -547,6 +547,12 @@ window.Quarto = {
  <span class="menu-text">Exercise 11</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercise-11-solution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 11 Solution</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -1315,12 +1321,12 @@ window.Quarto = {
 ## # A tibble: 6 × 2
 ##   replicate     stat
 ##       &lt;int&gt;    &lt;dbl&gt;
-## 1         1  0.00267
-## 2         2 -0.00662
-## 3         3 -0.00155
-## 4         4  0.00902
-## 5         5 -0.00604
-## 6         6 -0.00860</code></pre>
+## 1         1 -0.00188
+## 2         2  0.0103 
+## 3         3 -0.00929
+## 4         4 -0.00655
+## 5         5  0.00198
+## 6         6  0.0208</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create confidence intervals</span></span>
 <span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1336,9 +1342,9 @@ window.Quarto = {
 <span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>permuted.slope.summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>## # A tibble: 1 × 6
-##     estimate std.error   lower  upper perm.lower perm.upper
-##        &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-## 1 -0.0000146   0.00737 -0.0145 0.0144    -0.0146     0.0144</code></pre>
+##    estimate std.error   lower  upper perm.lower perm.upper
+##       &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+## 1 0.0000549   0.00742 -0.0145 0.0146    -0.0137     0.0139</code></pre>
 </div>
 </div>
 <p>The <code>get_ci()</code> function from {infer} can be used to return these different types of confidence intervals, too… i.e., either based on the standard error of the permutation distribution or actual quantiles from that distribution.</p>
@@ -1348,7 +1354,7 @@ window.Quarto = {
 <pre><code>## # A tibble: 1 × 2
 ##   lower_ci upper_ci
 ##      &lt;dbl&gt;    &lt;dbl&gt;
-## 1  -0.0146   0.0144</code></pre>
+## 1  -0.0137   0.0139</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_ci</span>(permuted.slope, <span class="at">level =</span> <span class="dv">1</span> <span class="sc">-</span> alpha, <span class="at">type =</span> <span class="st">"se"</span>, <span class="at">point_estimate =</span> <span class="fu">pull</span>(permuted.slope.summary,</span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>    estimate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1356,7 +1362,7 @@ window.Quarto = {
 <pre><code>## # A tibble: 1 × 2
 ##   lower_ci upper_ci
 ##      &lt;dbl&gt;    &lt;dbl&gt;
-## 1  -0.0145   0.0144</code></pre>
+## 1  -0.0145   0.0146</code></pre>
 </div>
 </div>
 <p>We can also visualize the null distribution of slope coefficients based on permutation and superimpose our actual slope coefficient.</p>
@@ -1433,12 +1439,12 @@ window.Quarto = {
 ## # A tibble: 6 × 2
 ##   replicate  stat
 ##       &lt;int&gt; &lt;dbl&gt;
-## 1         1 0.190
-## 2         2 0.196
-## 3         3 0.189
-## 4         4 0.189
-## 5         5 0.196
-## 6         6 0.196</code></pre>
+## 1         1 0.188
+## 2         2 0.197
+## 3         3 0.197
+## 4         4 0.200
+## 5         5 0.197
+## 6         6 0.198</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create confidence intervals for regression coefficients</span></span>
 <span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1455,7 +1461,7 @@ window.Quarto = {
 <pre><code>## # A tibble: 1 × 6
 ##   estimate std.error lower upper boot.lower boot.upper
 ##      &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-## 1    0.195   0.00415 0.187 0.203      0.187      0.203</code></pre>
+## 1    0.195   0.00397 0.187 0.203      0.187      0.203</code></pre>
 </div>
 </div>
 <p>Again, the <code>get_ci()</code> function from {infer} can be used to return these different types of confidence intervals…</p>

@@ -547,6 +547,12 @@ window.Quarto = {
  <span class="menu-text">Exercise 11</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./exercise-11-solution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exercise 11 Solution</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -1094,28 +1100,29 @@ window.Quarto = {
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(f, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>##  [1] "Scientific_Name"         "Family"                 
-##  [3] "Genus"                   "Species"                
-##  [5] "Brain_Size_Species_Mean" "Brain_Size_Female_Mean" 
-##  [7] "Brain_size_Ref"          "Body_mass_male_mean"    
-##  [9] "Body_mass_female_mean"   "Mass_Dimorphism"        
-## [11] "Mass_Ref"                "MeanGroupSize"          
-## [13] "AdultMales"              "AdultFemale"            
-## [15] "AdultSexRatio"           "Social_Organization_Ref"
-## [17] "InterbirthInterval_d"    "Gestation"              
-## [19] "WeaningAge_d"            "MaxLongevity_m"         
-## [21] "LitterSz"                "Life_History_Ref"       
-## [23] "GR_MidRangeLat_dd"       "Precip_Mean_mm"         
-## [25] "Temp_Mean_degC"          "AET_Mean_mm"            
-## [27] "PET_Mean_mm"             "Climate_Ref"            
-## [29] "HomeRange_km2"           "HomeRangeRef"           
-## [31] "DayLength_km"            "DayLengthRef"           
-## [33] "Territoriality"          "Fruit"                  
-## [35] "Leaves"                  "Fauna"                  
-## [37] "DietRef1"                "Canine_Dimorphism"      
-## [39] "Canine_Dimorphism_Ref"   "Feed"                   
-## [41] "Move"                    "Rest"                   
-## [43] "Social"                  "Activity_Budget_Ref"</code></pre>
+<pre><code>##  [1] "Scientific_Name"         "Superfamily"            
+##  [3] "Family"                  "Genus"                  
+##  [5] "Species"                 "Brain_Size_Species_Mean"
+##  [7] "Brain_Size_Female_Mean"  "Brain_size_Ref"         
+##  [9] "Body_mass_male_mean"     "Body_mass_female_mean"  
+## [11] "Mass_Dimorphism"         "Mass_Ref"               
+## [13] "MeanGroupSize"           "AdultMales"             
+## [15] "AdultFemale"             "AdultSexRatio"          
+## [17] "Social_Organization_Ref" "InterbirthInterval_d"   
+## [19] "Gestation"               "WeaningAge_d"           
+## [21] "MaxLongevity_m"          "LitterSz"               
+## [23] "Life_History_Ref"        "GR_MidRangeLat_dd"      
+## [25] "Precip_Mean_mm"          "Temp_Mean_degC"         
+## [27] "AET_Mean_mm"             "PET_Mean_mm"            
+## [29] "Climate_Ref"             "HomeRange_km2"          
+## [31] "HomeRangeRef"            "DayLength_km"           
+## [33] "DayLengthRef"            "Territoriality"         
+## [35] "Fruit"                   "Leaves"                 
+## [37] "Fauna"                   "DietRef1"               
+## [39] "Canine_Dimorphism"       "Canine_Dimorphism_Ref"  
+## [41] "Feed"                    "Move"                   
+## [43] "Rest"                    "Social"                 
+## [45] "Activity_Budget_Ref"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">select</span>(d, <span class="at">WeaningAge =</span> <span class="st">"WeaningAge_d"</span>, <span class="at">FemaleBodyMass =</span> <span class="st">"Body_mass_female_mean"</span>)</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="co"># keep select columns</span></span>
@@ -1281,28 +1288,29 @@ window.Quarto = {
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(f, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>##  [1] "Scientific_Name"         "Family"                 
-##  [3] "Genus"                   "Species"                
-##  [5] "Brain_Size_Species_Mean" "Brain_Size_Female_Mean" 
-##  [7] "Brain_size_Ref"          "Body_mass_male_mean"    
-##  [9] "Body_mass_female_mean"   "Mass_Dimorphism"        
-## [11] "Mass_Ref"                "MeanGroupSize"          
-## [13] "AdultMales"              "AdultFemale"            
-## [15] "AdultSexRatio"           "Social_Organization_Ref"
-## [17] "InterbirthInterval_d"    "Gestation"              
-## [19] "WeaningAge_d"            "MaxLongevity_m"         
-## [21] "LitterSz"                "Life_History_Ref"       
-## [23] "GR_MidRangeLat_dd"       "Precip_Mean_mm"         
-## [25] "Temp_Mean_degC"          "AET_Mean_mm"            
-## [27] "PET_Mean_mm"             "Climate_Ref"            
-## [29] "HomeRange_km2"           "HomeRangeRef"           
-## [31] "DayLength_km"            "DayLengthRef"           
-## [33] "Territoriality"          "Fruit"                  
-## [35] "Leaves"                  "Fauna"                  
-## [37] "DietRef1"                "Canine_Dimorphism"      
-## [39] "Canine_Dimorphism_Ref"   "Feed"                   
-## [41] "Move"                    "Rest"                   
-## [43] "Social"                  "Activity_Budget_Ref"</code></pre>
+<pre><code>##  [1] "Scientific_Name"         "Superfamily"            
+##  [3] "Family"                  "Genus"                  
+##  [5] "Species"                 "Brain_Size_Species_Mean"
+##  [7] "Brain_Size_Female_Mean"  "Brain_size_Ref"         
+##  [9] "Body_mass_male_mean"     "Body_mass_female_mean"  
+## [11] "Mass_Dimorphism"         "Mass_Ref"               
+## [13] "MeanGroupSize"           "AdultMales"             
+## [15] "AdultFemale"             "AdultSexRatio"          
+## [17] "Social_Organization_Ref" "InterbirthInterval_d"   
+## [19] "Gestation"               "WeaningAge_d"           
+## [21] "MaxLongevity_m"          "LitterSz"               
+## [23] "Life_History_Ref"        "GR_MidRangeLat_dd"      
+## [25] "Precip_Mean_mm"          "Temp_Mean_degC"         
+## [27] "AET_Mean_mm"             "PET_Mean_mm"            
+## [29] "Climate_Ref"             "HomeRange_km2"          
+## [31] "HomeRangeRef"            "DayLength_km"           
+## [33] "DayLengthRef"            "Territoriality"         
+## [35] "Fruit"                   "Leaves"                 
+## [37] "Fauna"                   "DietRef1"               
+## [39] "Canine_Dimorphism"       "Canine_Dimorphism_Ref"  
+## [41] "Feed"                    "Move"                   
+## [43] "Rest"                    "Social"                 
+## [45] "Activity_Budget_Ref"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keep select columns</span></span>
 <span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">select</span>(d, <span class="at">WeaningAge =</span> <span class="st">"WeaningAge_d"</span>, <span class="at">FemaleBodyMass =</span> <span class="st">"Body_mass_female_mean"</span>)</span>
