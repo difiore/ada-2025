@@ -864,7 +864,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>For example, replace this line in your <code>ui</code> code…</p>
 <p><code>h4("This is really cool.")</code></p>
 <p>with…</p>
-<p><code>h4("This is really cool.", style="color:blue; text-align:center")</code></p>
+<p><code>h4("This is really cool.", style = "color:blue; text-align:center")</code></p>
 <p>… and then rerun your app.</p>
 <p>To insert an image into your webpage, you can use the <code>img()</code> function and give the name of your image file as the “src” argument (e.g., <code>img(src = "my_image.png")</code>). You must spell out this argument since <code>img()</code> passes your input to an HTML tag, and “src”is what the tag expects.</p>
 <p>You can also include other HTML-friendly parameters for your image such as <code>height=</code> and <code>width=</code> - e.g., <code>img(src = "my_image.png", height = 72, width = 72)</code>, where height and width numbers will refer to pixels.</p>
@@ -876,7 +876,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Insert an image into the <code>sidebarPanel()</code> of your app, replacing the existing text. Also pass a “style” to the HTML element to center it.</li>
 </ul>
 <p>Replace the sidebar panel line with…</p>
-<p><code>sidebarPanel(img(src="pvz-zombie1.png", width=100), style="text-align:center")</code></p>
+<p><code>sidebarPanel(img(src = "pvz-zombie1.png", width = 100), style = "text-align:center")</code></p>
 <p>… and then rerun your app.</p>
 </section>
 <section id="adding-control-widgets" class="level3 unnumbered">
@@ -896,7 +896,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Each widget function requires several arguments. The first two arguments for each widget are:</p>
 <ul>
 <li>A <strong>name</strong> for the widget:The user will not see this name, but you can use it to access the widget’s value. The name should be a character string.</li>
-<li>A <strong>label</strong>: This label will appear with the widget in your app. It should be a character string, but it can be an empty string ““, e.g., <code>label=""</code>.</li>
+<li>A <strong>label</strong>: This label will appear with the widget in your app. It should be a character string, but it can be an empty string ““, e.g., <code>label = ""</code>.</li>
 </ul>
 <p>In this example, the name is “submit” and the label is “SUBMIT”:</p>
 <p><code>actionButton("submit", label = "SUBMIT")</code></p>
@@ -909,11 +909,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>NOTE:</strong> To get your button to show up BELOW the image, you will need to also add one or more <code>br()</code> (line break) elements to the <code>sidebarPanel()</code> element.</p>
 </blockquote>
 <p>Replace the sidebar panel line with…</p>
-<pre><code>sidebarPanel(img(src="pvz-zombie1.png", width=100), style="text-align:center"),
+<pre><code>sidebarPanel(img(src = "pvz-zombie1.png", width = 100), style = "text-align:center"),
     br(),
     br(),
     actionButton("submit", "SUBMIT"),
-    style="text-align:center")</code></pre>
+    style = "text-align:center")</code></pre>
 <p>… and then rerun your app.</p>
 <p>The <a href="http://shiny.rstudio.com/gallery/widget-gallery.html">Shiny Widgets Gallery</a> provides templates that you can use to quickly add widgets to your {shiny} apps.</p>
 <p>To use a template, visit the gallery. The gallery displays each of {shiny}‘s widgets, and demonstrates how the widgets’ values change in response to your input.</p>
@@ -1861,7 +1861,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-169"><a href="#cb24-169" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb24-170"><a href="#cb24-170" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
 <span id="cb24-171"><a href="#cb24-171" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Show Code"</span></span>
-<span id="cb24-172"><a href="#cb24-172" aria-hidden="true" tabindex="-1"></a><span class="co">#| attr.output: '.details summary="Show Output"'</span></span>
+<span id="cb24-172"><a href="#cb24-172" aria-hidden="true" tabindex="-1"></a><span class="co">#| attr.output: '.details summary = "Show Output"'</span></span>
 <span id="cb24-173"><a href="#cb24-173" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
 <span id="cb24-174"><a href="#cb24-174" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
 <span id="cb24-175"><a href="#cb24-175" aria-hidden="true" tabindex="-1"></a></span>
@@ -1895,7 +1895,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-203"><a href="#cb24-203" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-204"><a href="#cb24-204" aria-hidden="true" tabindex="-1"></a>with...</span>
 <span id="cb24-205"><a href="#cb24-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-206"><a href="#cb24-206" aria-hidden="true" tabindex="-1"></a><span class="in">`h4("This is really cool.", style="color:blue; text-align:center")`</span></span>
+<span id="cb24-206"><a href="#cb24-206" aria-hidden="true" tabindex="-1"></a><span class="in">`h4("This is really cool.", style = "color:blue; text-align:center")`</span></span>
 <span id="cb24-207"><a href="#cb24-207" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-208"><a href="#cb24-208" aria-hidden="true" tabindex="-1"></a>... and then rerun your app.</span>
 <span id="cb24-209"><a href="#cb24-209" aria-hidden="true" tabindex="-1"></a></span>
@@ -1911,7 +1911,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-219"><a href="#cb24-219" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-220"><a href="#cb24-220" aria-hidden="true" tabindex="-1"></a>Replace the sidebar panel line with...</span>
 <span id="cb24-221"><a href="#cb24-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-222"><a href="#cb24-222" aria-hidden="true" tabindex="-1"></a><span class="in">`sidebarPanel(img(src="pvz-zombie1.png", width=100), style="text-align:center")`</span></span>
+<span id="cb24-222"><a href="#cb24-222" aria-hidden="true" tabindex="-1"></a><span class="in">`sidebarPanel(img(src = "pvz-zombie1.png", width = 100), style = "text-align:center")`</span></span>
 <span id="cb24-223"><a href="#cb24-223" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-224"><a href="#cb24-224" aria-hidden="true" tabindex="-1"></a>... and then rerun your app.</span>
 <span id="cb24-225"><a href="#cb24-225" aria-hidden="true" tabindex="-1"></a></span>
@@ -1932,7 +1932,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-242"><a href="#cb24-242" aria-hidden="true" tabindex="-1"></a>Each widget function requires several arguments. The first two arguments for each widget are:</span>
 <span id="cb24-243"><a href="#cb24-243" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-244"><a href="#cb24-244" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A **name** for the widget:The user will not see this name, but you can use it to access the widget's value. The name should be a character string.</span>
-<span id="cb24-245"><a href="#cb24-245" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A **label**: This label will appear with the widget in your app. It should be a character string, but it can be an empty string "", e.g., <span class="in">`label=""`</span>.</span>
+<span id="cb24-245"><a href="#cb24-245" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A **label**: This label will appear with the widget in your app. It should be a character string, but it can be an empty string "", e.g., <span class="in">`label = ""`</span>.</span>
 <span id="cb24-246"><a href="#cb24-246" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-247"><a href="#cb24-247" aria-hidden="true" tabindex="-1"></a>In this example, the name is "submit" and the label is "SUBMIT":</span>
 <span id="cb24-248"><a href="#cb24-248" aria-hidden="true" tabindex="-1"></a></span>
@@ -1949,11 +1949,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-259"><a href="#cb24-259" aria-hidden="true" tabindex="-1"></a>Replace the sidebar panel line with...</span>
 <span id="cb24-260"><a href="#cb24-260" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-261"><a href="#cb24-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb24-262"><a href="#cb24-262" aria-hidden="true" tabindex="-1"></a><span class="in">sidebarPanel(img(src="pvz-zombie1.png", width=100), style="text-align:center"),</span></span>
+<span id="cb24-262"><a href="#cb24-262" aria-hidden="true" tabindex="-1"></a><span class="in">sidebarPanel(img(src = "pvz-zombie1.png", width = 100), style = "text-align:center"),</span></span>
 <span id="cb24-263"><a href="#cb24-263" aria-hidden="true" tabindex="-1"></a><span class="in">    br(),</span></span>
 <span id="cb24-264"><a href="#cb24-264" aria-hidden="true" tabindex="-1"></a><span class="in">    br(),</span></span>
 <span id="cb24-265"><a href="#cb24-265" aria-hidden="true" tabindex="-1"></a><span class="in">    actionButton("submit", "SUBMIT"),</span></span>
-<span id="cb24-266"><a href="#cb24-266" aria-hidden="true" tabindex="-1"></a><span class="in">    style="text-align:center")</span></span>
+<span id="cb24-266"><a href="#cb24-266" aria-hidden="true" tabindex="-1"></a><span class="in">    style = "text-align:center")</span></span>
 <span id="cb24-267"><a href="#cb24-267" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-268"><a href="#cb24-268" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-269"><a href="#cb24-269" aria-hidden="true" tabindex="-1"></a>... and then rerun your app.</span>
@@ -2222,7 +2222,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-540"><a href="#cb24-540" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
 <span id="cb24-541"><a href="#cb24-541" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
 <span id="cb24-542"><a href="#cb24-542" aria-hidden="true" tabindex="-1"></a>    mod <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb24-543"><a href="#cb24-543" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (input<span class="sc">$</span>response<span class="sc">==</span><span class="st">""</span> <span class="sc">|</span> <span class="fu">length</span>(input<span class="sc">$</span>predictors)<span class="sc">==</span><span class="dv">0</span>){<span class="fu">return</span>(mod)}</span>
+<span id="cb24-543"><a href="#cb24-543" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (input<span class="sc">$</span>response <span class="sc">==</span> <span class="st">""</span> <span class="sc">|</span> <span class="fu">length</span>(input<span class="sc">$</span>predictors) <span class="sc">==</span> <span class="dv">0</span>){<span class="fu">return</span>(mod)}</span>
 <span id="cb24-544"><a href="#cb24-544" aria-hidden="true" tabindex="-1"></a>    mod <span class="ot">&lt;-</span> <span class="fu">paste0</span>(input<span class="sc">$</span>response,<span class="st">" ~ "</span>, input<span class="sc">$</span>predictors[<span class="dv">1</span>])</span>
 <span id="cb24-545"><a href="#cb24-545" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">length</span>(input<span class="sc">$</span>predictors) <span class="sc">&gt;</span> <span class="dv">1</span>){</span>
 <span id="cb24-546"><a href="#cb24-546" aria-hidden="true" tabindex="-1"></a>      <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(input<span class="sc">$</span>predictors)){</span>
@@ -2251,7 +2251,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb24-573"><a href="#cb24-573" aria-hidden="true" tabindex="-1"></a>      <span class="fu">names</span>(res) <span class="ot">&lt;-</span> <span class="st">"Beta"</span></span>
 <span id="cb24-574"><a href="#cb24-574" aria-hidden="true" tabindex="-1"></a>      res</span>
 <span id="cb24-575"><a href="#cb24-575" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb24-576"><a href="#cb24-576" aria-hidden="true" tabindex="-1"></a>  }, <span class="at">width=</span><span class="st">"100%"</span>, <span class="at">rownames =</span> <span class="cn">TRUE</span>, <span class="at">striped =</span> <span class="cn">TRUE</span>, <span class="at">spacing =</span> <span class="st">"s"</span>, <span class="at">bordered =</span> <span class="cn">TRUE</span>, <span class="at">align =</span> <span class="st">"c"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb24-576"><a href="#cb24-576" aria-hidden="true" tabindex="-1"></a>  }, <span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">rownames =</span> <span class="cn">TRUE</span>, <span class="at">striped =</span> <span class="cn">TRUE</span>, <span class="at">spacing =</span> <span class="st">"s"</span>, <span class="at">bordered =</span> <span class="cn">TRUE</span>, <span class="at">align =</span> <span class="st">"c"</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span>
 <span id="cb24-577"><a href="#cb24-577" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb24-578"><a href="#cb24-578" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-579"><a href="#cb24-579" aria-hidden="true" tabindex="-1"></a>Finally, the last code chunk uses {ggplot2} to graph the relationship between the variables we have selected as <span class="in">`input$response`</span> and <span class="in">`input$predictors`</span>.</span>

@@ -954,7 +954,7 @@ window.Quarto = {
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d[d <span class="sc">==</span> <span class="sc">-</span><span class="dv">999</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span>  <span class="co"># using base ***R***</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># OR library(naniar) d &lt;- d %&gt;% replace_with_na_all(condition = ~.x == -999)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># OR library(naniar) d &lt;- d |&gt; replace_with_na_all(condition = ~.x == -999)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-2" class="level3 unnumbered">
@@ -2116,7 +2116,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb64-46"><a href="#cb64-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-47"><a href="#cb64-47" aria-hidden="true" tabindex="-1"></a><span class="co"># OR</span></span>
 <span id="cb64-48"><a href="#cb64-48" aria-hidden="true" tabindex="-1"></a><span class="co"># library(naniar)</span></span>
-<span id="cb64-49"><a href="#cb64-49" aria-hidden="true" tabindex="-1"></a><span class="co"># d &lt;- d %&gt;% replace_with_na_all(condition = ~.x == -999)</span></span>
+<span id="cb64-49"><a href="#cb64-49" aria-hidden="true" tabindex="-1"></a><span class="co"># d &lt;- d |&gt; replace_with_na_all(condition = ~.x == -999)</span></span>
 <span id="cb64-50"><a href="#cb64-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb64-51"><a href="#cb64-51" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-52"><a href="#cb64-52" aria-hidden="true" tabindex="-1"></a><span class="fu">### Step 2 {.unnumbered}</span></span>

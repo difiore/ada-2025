@@ -38,7 +38,7 @@ d[d==-999] <- NA # using base ***R***
 
 # OR
 # library(naniar)
-# d <- d %>% replace_with_na_all(condition = ~.x == -999)
+# d <- d |> replace_with_na_all(condition = ~.x == -999)
 ```
 
 ### Step 2 {.unnumbered}

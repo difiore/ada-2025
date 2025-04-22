@@ -157,7 +157,7 @@ To place a text element of one of these types in your app, pass the appropriate 
 ```{r}
 #| code-fold: true
 #| code-summary: "Show Code"
-#| attr.output: '.details summary="Show Output"'
+#| attr.output: '.details summary = "Show Output"'
 #| eval: false
 library(shiny)
 
@@ -191,7 +191,7 @@ For example, replace this line in your `ui` code...
 
 with...
 
-`h4("This is really cool.", style="color:blue; text-align:center")`
+`h4("This is really cool.", style = "color:blue; text-align:center")`
 
 ... and then rerun your app.
 
@@ -207,7 +207,7 @@ The `img()` function from {shiny} looks for your image file **in a specific plac
 
 Replace the sidebar panel line with...
 
-`sidebarPanel(img(src="pvz-zombie1.png", width=100), style="text-align:center")`
+`sidebarPanel(img(src = "pvz-zombie1.png", width = 100), style = "text-align:center")`
 
 ... and then rerun your app.
 
@@ -228,7 +228,7 @@ You can add widgets to your webpage in the same way that you added other types o
 Each widget function requires several arguments. The first two arguments for each widget are:
 
 - A **name** for the widget:The user will not see this name, but you can use it to access the widget's value. The name should be a character string.
-- A **label**: This label will appear with the widget in your app. It should be a character string, but it can be an empty string "", e.g., `label=""`.
+- A **label**: This label will appear with the widget in your app. It should be a character string, but it can be an empty string "", e.g., `label = ""`.
 
 In this example, the name is "submit" and the label is "SUBMIT":
 
@@ -245,11 +245,11 @@ Add a button labeled "SUBMIT" to the `sidebarPanel` of your app below the image 
 Replace the sidebar panel line with...
 
 ```
-sidebarPanel(img(src="pvz-zombie1.png", width=100), style="text-align:center"),
+sidebarPanel(img(src = "pvz-zombie1.png", width = 100), style = "text-align:center"),
     br(),
     br(),
     actionButton("submit", "SUBMIT"),
-    style="text-align:center")
+    style = "text-align:center")
 ```
 
 ... and then rerun your app.
@@ -518,7 +518,7 @@ The first code chunk creates a reactive variable, `m()`, the value of which will
 #| eval: false
   m <- reactive({
     mod <- NULL
-    if (input$response=="" | length(input$predictors)==0){return(mod)}
+    if (input$response == "" | length(input$predictors) == 0){return(mod)}
     mod <- paste0(input$response," ~ ", input$predictors[1])
     if (length(input$predictors) > 1){
       for (i in 2:length(input$predictors)){
@@ -547,7 +547,7 @@ Code chunk 3 outputs a table of coefficients resulting from the linear model for
       names(res) <- "Beta"
       res
     }
-  }, width="100%", rownames = TRUE, striped = TRUE, spacing = "s", bordered = TRUE, align = "c", digits = 3)
+  }, width = "100%", rownames = TRUE, striped = TRUE, spacing = "s", bordered = TRUE, align = "c", digits = 3)
 ```
 
 Finally, the last code chunk uses {ggplot2} to graph the relationship between the variables we have selected as `input$response` and `input$predictors`.
