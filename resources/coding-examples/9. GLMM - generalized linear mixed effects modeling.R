@@ -22,7 +22,9 @@ d <- d |>
          trial = factor(trial),
          obs = factor(obs))
 
-class(d)
+ggplot(data = d, aes(x=BegRec, y=Shared)) +
+  geom_point() +
+  geom_jitter()
 
 # MCMCglmm (and maybe other packages?) expects the data frame to have "data.frame" as the only class, so we need to convert tibble to data frame
 d <- as.data.frame(d)
@@ -33,9 +35,14 @@ glmer <- glmer(
     (1|ID) + (1|trial) + (1|obs),
   data = d,
   family = poisson(link = "log"))
+
 summary(glmer)
 # for a tidy table of beta coefficients...
 broom.mixed::tidy(glmer)
+# or, prettier...
+mixedup::extract_fixed_effects(glmer)
+# plus we can extract random effects coefficients
+mixedup::extract_random_effects(glmer)
 
 glmer_null <- glmer(
   Shared ~ offset(log(trialduration/60)) +
@@ -57,7 +64,8 @@ tmb <- glmmTMB(
   data = d,
   family = poisson(link = "log"))
 summary(tmb)
-broom.mixed::tidy(tmb)
+mixedup::extract_fixed_effects(tmb)
+mixedup::extract_random_effects(tmb)
 
 # using {MASS}
 library(MASS)
@@ -68,11 +76,11 @@ pql <- glmmPQL(
   data = d,
   family = poisson(link = "log"))
 summary(pql)
-broom.mixed::tidy(pql)
+mixedup::extract_fixed_effects(pql)
+mixedup::extract_random_effects(pql)
 
 # using {glmmADMB}
 library(glmmADMB)
-
 admb <- glmmadmb(
   Shared ~ BegRec +
     offset(log(trialduration/60)) +
@@ -83,9 +91,11 @@ admb <- glmmadmb(
   family = "poisson")
 summary(admb)
 broom.mixed::tidy(admb)
+class(admb)
+# model class glmmadmb is not supported by {mixedup} functions
 
 library(sjPlot)
-plot_summs(glmer, tmb, pql, admb, model.names = list( "glmer", "tmb", "pql", "adbm"))
+plot_summs(glmer, tmb, pql, admb, model.names = list( "glmer", "tmb", "pql", "admb"))
 
 # using {brms} and STAN
 library(brms)
@@ -99,7 +109,32 @@ brm <- brm(
   iter = 20000,
   family = poisson(link = "log"))
 brm
-broom.mixed::tidy(brm)
+mixedup::extract_fixed_effects(brm)
+mixedup::extract_random_effects(brm)
+conditional_effects(brm)
+pp_check(brm)
+
+brm_null <- brm(
+  Shared ~
+    offset(log(trialduration/60)) +
+    (1|ID) +
+    (1|trial) +
+    (1|obs),
+  data = d,
+  iter = 20000,
+  family = poisson(link = "log"))
+brm_null
+pp_check(brm_null)
+mixedup::extract_fixed_effects(brm_null)
+
+library(bayesplot)
+bayesplot_grid(
+  pp_check(brm), pp_check(brm_null),
+  xlim = c(0,1),
+  ylim = c(0,4),
+  titles = c("BegRec", "Null"),
+  grid_args = list(ncol = 2)
+)
 
 # using {rstanarm} and STAN
 library(rstanarm)
@@ -113,8 +148,10 @@ stan <- stan_glmer(
   iter = 20000,
   family = poisson(link = "log"))
 stan
-broom.mixed::tidy(stan)
+mixedup::extract_fixed_effects(stan)
+mixedup::extract_random_effects(stan)
 
+# not implemented yet!
 # using {MCMCglmm}
 library(MCMCglmm)
 prior <- list(R = list(V = 1, nu = 0.002),
@@ -130,7 +167,6 @@ mcmc <- MCMCglmm(
 summary(mcmc)
 broom.mixed::tidy(mcmc)
 
-
 lattice::xyplot(mcmc$Sol)
 plotMCMC::plotTrace(mcmc$Sol)
 lattice::xyplot(mcmc$VCV)
@@ -139,14 +175,3 @@ lattice::densityplot(mcmc$Sol)
 plotMCMC::plotDens(mcmc$Sol)
 lattice::densityplot(mcmc$VCV)
 plotMCMC::plotDens(mcmc$VCV)
-
-library(bayesplot)
-posterior <- as.array(brm)
-
-mixedup::extract_fixed_effects(glmer)
-mixedup::extract_fixed_effects(brm)
-mixedup::extract_fixed_effects(stan)
-conditional_effects(brm)
-pp_check(brm)
-pp_check(stan)
-
