@@ -763,17 +763,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(ci_boot <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">quantile</span>(boot, <span class="fl">0.025</span>), <span class="fu">quantile</span>(boot, <span class="fl">0.975</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##     2.5%    97.5% 
-## 393.9703 465.5657</code></pre>
+## 394.8270 464.4522</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(ci_theory <span class="ot">&lt;-</span> <span class="fu">mean</span>(s<span class="sc">$</span>kernel95) <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> se)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 393.6753 465.8061</code></pre>
+<pre><code>## [1] 394.4529 465.0285</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>(ci_theory <span class="ot">&lt;-</span> <span class="fu">mean</span>(s<span class="sc">$</span>kernel95) <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="sc">*</span> se)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 393.6753 465.8061</code></pre>
+<pre><code>## [1] 394.4529 465.0285</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ladd</span>(<span class="fu">panel.abline</span>(<span class="at">v =</span> ci_boot, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>))</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -843,7 +843,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> (<span class="fu">sum</span>(permuted_diff <span class="sc">&gt;=</span> <span class="fu">abs</span>(actual_diff)) <span class="sc">+</span> <span class="fu">sum</span>(permuted_diff <span class="sc">&lt;=</span> <span class="sc">-</span><span class="fu">abs</span>(actual_diff)))<span class="sc">/</span>n_perm</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>## [1] 6e-04</code></pre>
+<pre><code>## [1] 8e-04</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ladd</span>(<span class="fu">panel.abline</span>(<span class="at">v =</span> actual_diff, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -880,7 +880,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>## # A tibble: 1 × 1
 ##   p_value
 ##     &lt;dbl&gt;
-## 1  0.0004</code></pre>
+## 1  0.0006</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_distribution) <span class="sc">+</span> <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> actual_diff, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="fl">0.5</span>,</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"#c0c0c0"</span>, <span class="at">direction =</span> <span class="st">"both"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

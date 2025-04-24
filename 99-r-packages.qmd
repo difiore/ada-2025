@@ -648,7 +648,7 @@ install.packages("~/Development/Repos/powerplot_0.0.1.0.tar.gz",
 
 ## An Example with Vignette and Data {.unnumbered}
 
-For your group project, you may find that you do not need to write your own custom functions, but you will still need to create a vignette and a dataset to distribute, and I do want you to include at least two functions in your vignetter to make sure you get experience with including those in a package. Here, I demonstrate creating such a package based on [**Module 21**](#module-21) on multiple regression and ANCOVA.
+For your group project, you may find that you do not need to write your own custom functions, but you will still need to create a vignette and a dataset to distribute... and I **do** want you to include at least two functions in your vignette to make sure you get experience with including those in a package. Here, I demonstrate creating such a package based on [**Module 21**](#module-21) on multiple regression and ANCOVA.
 
 ### Create the Package Directory {.unnumbered}
 
