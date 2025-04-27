@@ -123,7 +123,7 @@ filters:
   - fold_results.lua
 
 comments:
-  hypothesis: true
+  hypothesis: false
 
 bibliography:
   - bib/book.bib

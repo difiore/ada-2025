@@ -102,12 +102,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script async="" src="https://hypothes.is/embed.js"></script>
-<script>
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    document.body.classList.add('hypothesis-enabled');
-  });
-</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -918,15 +912,15 @@ window.Quarto = {
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>## 
-## 6 message(s): boundary (singular) fit: see help('isSingular')</code></pre>
+## 8 message(s): boundary (singular) fit: see help('isSingular')</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##                        2.5 %    97.5 %
-## .sig01              5.572309  42.08077
-## .sigma             24.362843  33.71719
-## (Intercept)       104.349288 161.67522
-## reproconditionPOP   7.309043  32.72370
-## parityP            60.767427 153.18672</code></pre>
+## .sig01              5.487574  40.29990
+## .sigma             24.976942  33.86394
+## (Intercept)       103.943092 163.37933
+## reproconditionPOP  10.269535  31.98414
+## parityP            70.263987 150.62310</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -1349,16 +1343,16 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m, <span class="at">level =</span> <span class="fl">0.95</span>, <span class="at">method =</span> <span class="st">"boot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>##                           2.5 %    97.5 %
-## .sig01             0.0000000000  19.43270
+## .sig01             0.0000000000  19.66290
 ## .sig02            -1.0000000000   1.00000
-## .sig03             0.0001369894  18.09739
-## .sig04             0.0000000000  41.80216
+## .sig03             0.0001650544  18.04298
+## .sig04             0.0000000000  40.50267
 ## .sig05            -1.0000000000   0.00000
-## .sig06             0.0001117494  41.80220
-## .sigma            23.4551326821  32.88254
-## (Intercept)       99.9179309438 164.33631
-## reproconditionPOP  8.2265274751  32.94338
-## parityP           75.8504618046 146.06348</code></pre>
+## .sig06             0.0003883994  40.41846
+## .sigma            23.1246426566  32.62857
+## (Intercept)       97.9868021375 165.80294
+## reproconditionPOP  8.3643030584  32.85792
+## parityP           78.2581517047 146.12287</code></pre>
 </div>
 </div>
 <p>Finally, effects plots of how the expected amount of grooming received varies with the fixed effects (<strong>reprocondition</strong> and <strong>parity</strong>) under our new random slope model is the same as that under the random intercept model.</p>
