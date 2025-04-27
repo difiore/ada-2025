@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
   echo = TRUE, # render output of code chunks
   warning = TRUE, # do not suppress "warnings"
   message = TRUE, # do not suppress "messages"
-  comment = "##", # prefix for comment lines
+  comment = "##", # prefix for output lines
   prompt = ">", # prefix for code lines
   tidy = TRUE,
   tidy.opts = list(blank = FALSE, width.cutoff = 75),
