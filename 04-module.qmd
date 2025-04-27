@@ -1,5 +1,9 @@
 # Fundamentals of the ***R*** Language {#module-04}
 
+## Preliminaries
+
+- Install this package in ***R***: [{renv}](https://cran.r-project.org/web/packages/easypackages/renv.pdf)
+
 ## Objectives
 
 > The goal of this module is review important conceptual aspects of the ***R*** language as well as practices for updating ***R*** components of interest.
@@ -366,24 +370,41 @@ A second hidden file, ".Rhistory", will also be stored in the same directory, wh
     - To ensure that your packages work with your shiny new version of ***R***, you need to:
 
         - Move the packages from your old ***R*** installation into the new one.
-        - On MacOS, this typically means moving all library folders from "/Library/Frameworks/R.framework/Versions/3.5/Resources/library" to "/Library/Frameworks/R.framework/Versions/4.3/Resources/library"
+        - On MacOS, this typically means moving all library folders from "/Library/Frameworks/R.framework/Versions/3.x/Resources/library" to "/Library/Frameworks/R.framework/Versions/4.x/Resources/library"
 
-> **NOTE:** You should replace "3.5" and "4.3" with whatever versions you are upgrading from and to, respectively.
+> **NOTE:** You should replace "3.x" and "4.x" with whatever versions you are upgrading from and to, respectively.
 
-- On Windows, this typically means moving all library folders from "C:\\Program Files\\R\\R-3.5\\library" to "C:\\Program Files\\R\\R-4.3\\library" (if your packages are installed at the *system* level) or from "C:\\Users\\\<user name\>\\R\\win-library\\3.5\\" to "C:\\Users\\\<user name\>\\R\\win-library\\4.3\\" (if your packages are installed at the *user* level)
+- On Windows, this typically means moving all library folders from "C:\\Program Files\\R\\R-3.x\\library" to "C:\\Program Files\\R\\R-4.x\\library" (if your packages are installed at the *system* level) or from "C:\\Users\\\<user name\>\\R\\win-library\\3.x\\" to "C:\\Users\\\<user name\>\\R\\win-library\\4.x\\" (if your packages are installed at the *user* level)
 
 > **NOTE:** You only need to copy whatever packages are not already in the destination directory, i.e., you do not need to overwrite your new {base} package, etc., with your old one.
 
 - If those paths do not work for you, try using `installed.packages()` to find the proper path names. These may vary on your system, depending on where you installed ***R***
-- Now you can update your packages by typing `update.packages()` in your ***RStudio*** console, and answering "y" to all of the prompts.
+- Once you have moved your library folders, you should now can update all your packages by typing `update.packages()` in your ***RStudio*** console and answering "y" to all of the prompts or by going to the *Packages* tab, pressing the "Update" button, and then "Select All" and "Install Updates" to refresh all of your installed packages.
 - Finally, to reassure yourself that you have done everything correctly, type these two commands in the ***RStudio*** console to see what you've got in terms of what version of ***R*** you are running, the number of packages you have installed, and what packages you have loaded:
 
 ```{r}
 #| eval: false
-version
-packageStatus()
-(.packages())
+version # shows R version
+packageStatus() # shows number of installed packages
+(.packages()) # shows which packages are loaded
 ```
+
+If you want to save a dataframe of all your installed packages, you can run...
+
+```{r}
+my_packages <- as.data.frame(installed.packages())
+write.csv(my_packages, "~/Desktop/my_packages.csv")
+```
+
+Often, packages build for an earlier version of ***R*** will work fine following an upgrade to a new version, but sometimes they do not. In that case, you can use the `rebuild()` function from the {renv} package to recompile each of your packages (and, by default, their dependencies)
+
+```{r}
+#| eval: false
+library(renv)
+rebuild(packages = my_packages$Package)
+```
+
+> **NOTE:** With lots of installed packages, this can take some time! You can specify, instead, a single package or a shorter vector of packages using the `packages =` argument.
 
 ---
 
@@ -392,4 +413,4 @@ packageStatus()
 - Characteristics of ***R*** objects: `class()`, `mode()`, `typeof()`, `str()`, `attributes()`, `dplyr::glimpse()`
 - Using scripts: `source()`
 - ".RData" and ".Rhistory" files
-- Updating ***R*** and packages
+- Updating ***R*** and installed packages

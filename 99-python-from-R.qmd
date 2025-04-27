@@ -367,8 +367,6 @@ matplotlib.pyplot.clf()
 p = seaborn.boxplot(x="gender", y="height", data=z)
 # plot the active plot object
 matplotlib.pyplot.show(p)
-# run `exit` to exit the code chunk
-exit
 ```
 ````
 
@@ -395,8 +393,6 @@ matplotlib.pyplot.clf()
 p = seaborn.boxplot(x="gender", y="height", data=z)
 # plot the active plot object
 matplotlib.pyplot.show(p)
-# run `exit` to exit the code chunk
-exit
 ```
 
 ### Importing and Using Modules {.unnumbered}
@@ -423,7 +419,6 @@ Because there is sometimes some awkwardness with using the {matplotlib} ***Pytho
 import matplotlib
 # plot the active plot object created with the R code above
 matplotlib.pyplot.show(p)
-exit
 ```
 ````
 
@@ -432,7 +427,6 @@ exit
 import matplotlib
 # plot the active plot object created with the R code above
 matplotlib.pyplot.show(p)
-exit
 ```
 
 ### Sourcing a ***Python*** Script {.unnumbered}
@@ -451,7 +445,6 @@ As above, we switch to a {python} chunk to print out the figures created...
 import matplotlib
 # plot the active plot object created with the sourced python code
 matplotlib.pyplot.show(p)
-exit
 ```
 ````
 
@@ -460,7 +453,6 @@ exit
 import matplotlib
 # plot the active plot object created with the sourced python code
 matplotlib.pyplot.show(p)
-exit
 ```
 
 ### Using ***Python*** Interactively {.unnumbered}
@@ -483,7 +475,7 @@ z = pandas.read_csv(f)
 print(z.head())
 seaborn.lmplot(x="weight", y="height", data=z)
 matplotlib.pyplot.show()
-exit
+exit()
 ````
 
 ## Converting Data Objects {.unnumbered}
@@ -506,7 +498,6 @@ import pandas
 f = "https://raw.githubusercontent.com/difiore/ada-datasets/main/woollydata.csv"
 d = pandas.read_csv(f)
 print(d.head())
-exit
 ```
 ````
 
@@ -516,7 +507,6 @@ import pandas
 f = "https://raw.githubusercontent.com/difiore/ada-datasets/main/woollydata.csv"
 d = pandas.read_csv(f)
 print(d.head())
-exit
 ```
 
 ... then we run an {r} chunk that accesses and uses the ***Python*** object created in the chunk above, after which we load a different data set from the web and run a linear model on it using ***R***...
@@ -545,7 +535,6 @@ import statsmodels.formula.api as smf
 # regression of height ~ weight with intercept
 m = smf.ols(formula = 'height ~ weight', data=r.z)
 print(m.fit().summary())
-exit
 ```
 ````
 
@@ -558,7 +547,6 @@ import statsmodels.formula.api as smf
 # regression of height ~ weight with intercept
 m = smf.ols(formula = 'height ~ weight', data=r.z)
 print(m.fit().summary())
-exit
 ```
 
 ```{r include=FALSE}

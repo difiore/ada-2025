@@ -6,6 +6,10 @@
 
 - **{easypackages}**: @R-easypackages
 
+### Module 04 {.unnumbered}
+
+- **{renv}**: @R-renv
+
 ### Module 05 {.unnumbered}
 
 - **{usethis}**: @R-usethis
@@ -200,10 +204,10 @@
 - **{DT}**: @R-DT
 
 ### Working with and Managing Packages {.unnumbered}
-- **{easypackages}**
-- **{pacman}**
-- **{librarian}**
-- **{Require}**
+- **{easypackages}**: @R-easypackages
+- **{pacman}**: @R-pacman
+- **{librarian}**: @R-librarian
+- **{Require}**: @R-Require
 
 <hr>
 
@@ -268,7 +272,7 @@
 - **{jtools}**: @R-jtools
 - **{kableExtra}**: @R-kableExtra
 - **{knitr}**: @R-knitr, @knitr2014, @knitr2015
-- **{librarian}**:
+- **{librarian}**: @R-librarian
 - **{lme4}**: @R-lme4, @lme42015
 - **{lmodel2}**: @R-lmodel2
 - **{lmtest}**: @R-lmtest, @lmtest2002
@@ -280,7 +284,7 @@
 - **{moments}**: @R-moments
 - **{mosaic}**: @R-mosaic, @mosaic2017
 - **{MuMIn}**: @R-MuMIn
-- **{pacman}**:
+- **{pacman}**: @R-pacman
 - **{pastecs}**: @R-pastecs
 - **{patchwork}**: @R-patchwork
 - **{permuco}**: @R-permuco
@@ -291,8 +295,9 @@
 - **{readr}**: @R-readr
 - **{redres}**: @R-redres
 - **{readxl}**: @R-readxl
+- **{renv}**: @R-renv
 - **{repmis}**: @R-repmis
-- **{Require}**:
+- **{Require}**: @R-Require
 - **{reticulate}**: @R-reticulate
 - **{roxygen2}**: @R-roxygen2
 - **{scales}**: @R-scales
